@@ -495,8 +495,13 @@ void AKUSetViewSize ( int width, int height ) {
 
 //----------------------------------------------------------------//
 int AKUSetWorkingDirectory ( char const* path ) {
-
+#ifdef MOAI_OS_ANDROID
+	bool result = USFileSys::SetCurrentPath ( path );
+	MOAILuaRuntime::Get ().SetPath ( path );
+	return result;
+#else
 	return zl_chdir ( path );
+#endif
 }
 
 //----------------------------------------------------------------//
