@@ -159,7 +159,24 @@ bool MOAITimer::ApplyAttrOp ( u32 attrID, MOAIAttrOp& attrOp, u32 op ) {
 		attrID = UNPACK_ATTR ( attrID );
 		
 		if ( attrID == ATTR_TIME ) {
-			attrOp.Apply ( this->GetTime (), op, MOAIAttrOp::ATTR_READ );
+			this->mTime = attrOp.Apply ( this->GetTime (), op, MOAIAttrOp::ATTR_READ_WRITE );
+			if ( ( this->mMode == CONTINUE ) || ( this->mMode == CONTINUE_REVERSE )) {
+				float length = this->mEndTime - this->mStartTime;
+				this->mTime = this->mTime - (length * this->mCycle);
+			}
+			//float newTime = attrOp.Apply ( this->GetTime (), op, MOAIAttrOp::ATTR_READ_WRITE ); // changed from ATTR_READ
+			/*
+			if (op & MOAIAttrOp::ATTR_WRITE) {
+				// reverse changes maded with GetTime()
+				if ( ( this->mMode == CONTINUE ) || ( this->mMode == CONTINUE_REVERSE )) {
+					float length = this->mEndTime - this->mStartTime;
+					this->mTime = newTime - (length * this->mCycle);
+				}
+				else{
+					this->mTime = newTime;
+				}
+			}
+			*/
 			return true;
 		}
 	}
