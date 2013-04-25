@@ -140,6 +140,7 @@ int MOAITimerCoroutine::_run ( lua_State* L ) {
 
 	return 0;
 }
+
 //----------------------------------------------------------------//
 /**	@name	setCurve
  @text	Set or clear the curve to use for event generation.
@@ -188,6 +189,23 @@ int MOAITimerCoroutine::_setSpan ( lua_State* L ) {
 		
 		self->SetSpan ( span );
 	}
+	return 0;
+}
+//----------------------------------------------------------------//
+/**	@name	setTime
+ @text	Manually set the current time. This will be wrapped
+ into the current span.
+ 
+ @in		MOAITimer self
+ @opt	number time			Default value is 0.
+ @out	nil
+ */
+int MOAITimerCoroutine::_setTime ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAITimerCoroutine, "U" )
+	
+	float time = state.GetValue < float >( 2, 0.0f );
+	self->SetTime ( time );
+	
 	return 0;
 }
 //----------------------------------------------------------------//
@@ -256,6 +274,7 @@ void MOAITimerCoroutine::RegisterLuaFuncs ( MOAILuaState& state ) {
 	luaL_Reg regTable [] = {
 		{ "run",			_run},
 		{ "setSpan",		_setSpan},
+		{ "setTime",		_setTime},
 		{ NULL, NULL }
 	};
 	
@@ -349,4 +368,18 @@ void MOAITimerCoroutine::OnUpdate ( float step ) {
 bool MOAITimerCoroutine::IsDone () {
 	
 	return ( this->mRef == false );
+}
+
+//----------------------------------------------------------------//
+void MOAITimerCoroutine::SetTime ( float time ) {
+	
+	time = USFloat::Clamp ( time, this->mStartTime, this->mEndTime );
+	this->mTime = time;
+
+	
+	if ( this->mTime + EPSILON > time && this->mTime - EPSILON < time ) {
+		this->mTime = time;
+	}
+	
+	this->ScheduleUpdate ();
 }

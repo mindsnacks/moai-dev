@@ -46,6 +46,7 @@ public:
 	static int		_run					( lua_State* L );
 	static int		_setSpan			( lua_State* L );
 	static int		_setCurve			( lua_State* L );
+	static int		_setTime			( lua_State* L );
 
 	//----------------------------------------------------------------//
 	bool			ApplyAttrOp			( u32 attrID, MOAIAttrOp& attrOp, u32 op );
@@ -57,6 +58,7 @@ public:
 	void			SetSpan				( float startTime, float endTime );
 	void			GenerateKeyframeCallbacks	( float t0, float t1, bool end );
 	void			OnKeyframe					( u32 idx, float time, float value );
+	void			SetTime				( float time );
 	
 	MOAITimerCoroutine			();
 	~MOAITimerCoroutine			();
