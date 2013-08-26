@@ -100,6 +100,7 @@ int	MOAIFreeTypeFont::_load(lua_State *L){
 	self->Init ( filename );
 	return 0;
 }
+
 //----------------------------------------------------------------//
 /** @name	newMultiLine
 	@text
@@ -1278,6 +1279,17 @@ float MOAIFreeTypeFont::OptimalSize(cc8 *text, float width, float height, float 
 void MOAIFreeTypeFont::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "DEFAULT_FLAGS",			( u32 )DEFAULT_FLAGS );
 	state.SetField ( -1, "FONT_AUTOLOAD_KERNING",	( u32 )FONT_AUTOLOAD_KERNING );
+	
+	luaL_Reg regTable [] = {
+		{ "newMultiLine",				_newMultiLine },
+		{ "newMultiLineFitted",			_newMultiLineFitted },
+		{ "newSingleLine",				_newSingleLine },
+		{ "newSingleLineFitted",		_newSingleLineFitted },
+		{NULL, NULL}
+	};
+	
+	luaL_register( state, 0, regTable);
+	
 }
 
 //----------------------------------------------------------------//
