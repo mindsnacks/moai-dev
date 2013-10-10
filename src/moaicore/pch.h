@@ -10,6 +10,7 @@
 	//#include <GL/glew.h>
 	#include <OpenGL/gl.h>
 	#include <OpenGL/glext.h>
+	#undef USE_CURL
 #endif
 
 

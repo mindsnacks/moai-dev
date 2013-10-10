@@ -35,20 +35,20 @@ using namespace std;
 #include <sstream>
 
 //----------------------------------------------------------------//
-typedef unsigned int			uint;
-typedef unsigned long			uintptr;
-typedef long					sintptr;
+typedef uint32_t			uint;
+typedef size_t				uintptr;
+typedef long				sintptr;
 
-typedef const char				cc8;
+typedef const char			cc8;
 
-typedef unsigned char			u8;
-typedef unsigned short			u16;
-typedef unsigned int			u32;
-typedef unsigned long long		u64;
+typedef u_int8_t			u8;
+typedef u_int16_t			u16;
+typedef u_int32_t			u32;
+typedef u_int64_t			u64;
 
-typedef signed char				s8;
-typedef signed short			s16;
-typedef signed int				s32;
-typedef signed long long		s64;
+typedef int8_t				s8;
+typedef int16_t				s16;
+typedef int32_t				s32;
+typedef int64_t				s64;
 
 #endif

@@ -42,7 +42,7 @@ void RTTIRecord::Complete() {
 }
 
 //----------------------------------------------------------------//
-void RTTIRecord::Inherit ( RTTIRecord& record, void* ptr, s32 offset ) {
+void RTTIRecord::Inherit ( RTTIRecord& record, void* ptr, sintptr offset ) {
 	
 	if ( this != &record ) {
 	

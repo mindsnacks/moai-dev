@@ -144,11 +144,6 @@
 		03240C2813564CB0000ADC60 /* prime.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A7513564CAF000ADC60 /* prime.h */; };
 		03240C2913564CB0000ADC60 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A7713564CAF000ADC60 /* utf8.c */; };
 		03240C2A13564CB0000ADC60 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A7813564CAF000ADC60 /* utf8.h */; };
-		03240C2B13564CB0000ADC60 /* curl.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A7B13564CAF000ADC60 /* curl.h */; };
-		03240C2C13564CB0000ADC60 /* curl_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A7C13564CAF000ADC60 /* curl_config.h */; };
-		03240C2D13564CB0000ADC60 /* curlbuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A7D13564CAF000ADC60 /* curlbuild.h */; };
-		03240C2E13564CB0000ADC60 /* curlrules.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A7E13564CAF000ADC60 /* curlrules.h */; };
-		03240C2F13564CB0000ADC60 /* curlver.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A7F13564CAF000ADC60 /* curlver.h */; };
 		03240C3013564CB0000ADC60 /* easy.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A8013564CAF000ADC60 /* easy.h */; };
 		03240C3113564CB0000ADC60 /* mprintf.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A8113564CAF000ADC60 /* mprintf.h */; };
 		03240C3213564CB0000ADC60 /* multi.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A8213564CAF000ADC60 /* multi.h */; };
@@ -163,19 +158,6 @@
 		03240C3B13564CB0000ADC60 /* content_encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A8C13564CAF000ADC60 /* content_encoding.h */; };
 		03240C3C13564CB0000ADC60 /* cookie.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A8D13564CAF000ADC60 /* cookie.c */; };
 		03240C3D13564CB0000ADC60 /* cookie.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A8E13564CAF000ADC60 /* cookie.h */; };
-		03240C3E13564CB0000ADC60 /* curl_addrinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A8F13564CAF000ADC60 /* curl_addrinfo.c */; };
-		03240C3F13564CB0000ADC60 /* curl_addrinfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9013564CAF000ADC60 /* curl_addrinfo.h */; };
-		03240C4013564CB0000ADC60 /* curl_base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9113564CAF000ADC60 /* curl_base64.h */; };
-		03240C4113564CB0000ADC60 /* curl_ldap.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9213564CAF000ADC60 /* curl_ldap.h */; };
-		03240C4213564CB0000ADC60 /* curl_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9313564CAF000ADC60 /* curl_md5.h */; };
-		03240C4313564CB0000ADC60 /* curl_memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9413564CAF000ADC60 /* curl_memory.h */; };
-		03240C4413564CB0000ADC60 /* curl_memrchr.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A9513564CAF000ADC60 /* curl_memrchr.c */; };
-		03240C4513564CB0000ADC60 /* curl_memrchr.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9613564CAF000ADC60 /* curl_memrchr.h */; };
-		03240C4613564CB0000ADC60 /* curl_rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A9713564CAF000ADC60 /* curl_rand.c */; };
-		03240C4713564CB0000ADC60 /* curl_rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9813564CAF000ADC60 /* curl_rand.h */; };
-		03240C4813564CB0000ADC60 /* curl_sspi.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A9913564CAF000ADC60 /* curl_sspi.c */; };
-		03240C4913564CB0000ADC60 /* curl_sspi.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9A13564CAF000ADC60 /* curl_sspi.h */; };
-		03240C4A13564CB0000ADC60 /* curlx.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9B13564CAF000ADC60 /* curlx.h */; };
 		03240C4B13564CB0000ADC60 /* dict.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A9C13564CAF000ADC60 /* dict.c */; };
 		03240C4C13564CB0000ADC60 /* dict.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240A9D13564CAF000ADC60 /* dict.h */; };
 		03240C4D13564CB0000ADC60 /* easy.c in Sources */ = {isa = PBXBuildFile; fileRef = 03240A9E13564CAF000ADC60 /* easy.c */; };
@@ -1989,7 +1971,6 @@
 		CD218F8B13A7FD6E008337E7 /* luasql.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8513A7FD6E008337E7 /* luasql.c */; };
 		CD218F8C13A7FD6E008337E7 /* luasql.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F8613A7FD6E008337E7 /* luasql.h */; };
 		CD218F8E13A7FD89008337E7 /* luacurl.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8D13A7FD89008337E7 /* luacurl.c */; };
-		CD218F8F13A7FD89008337E7 /* luacurl.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8D13A7FD89008337E7 /* luacurl.c */; };
 		CD218FA013A7FDBA008337E7 /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9113A7FDBA008337E7 /* dump.c */; };
 		CD218FA113A7FDBA008337E7 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9213A7FDBA008337E7 /* error.c */; };
 		CD218FA213A7FDBA008337E7 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9313A7FDBA008337E7 /* hashtable.c */; };
@@ -10137,11 +10118,6 @@
 				03240C2713564CB0000ADC60 /* cpVect.h in Headers */,
 				03240C2813564CB0000ADC60 /* prime.h in Headers */,
 				03240C2A13564CB0000ADC60 /* utf8.h in Headers */,
-				03240C2B13564CB0000ADC60 /* curl.h in Headers */,
-				03240C2C13564CB0000ADC60 /* curl_config.h in Headers */,
-				03240C2D13564CB0000ADC60 /* curlbuild.h in Headers */,
-				03240C2E13564CB0000ADC60 /* curlrules.h in Headers */,
-				03240C2F13564CB0000ADC60 /* curlver.h in Headers */,
 				03240C3013564CB0000ADC60 /* easy.h in Headers */,
 				03240C3113564CB0000ADC60 /* mprintf.h in Headers */,
 				03240C3213564CB0000ADC60 /* multi.h in Headers */,
@@ -10152,15 +10128,6 @@
 				03240C3913564CB0000ADC60 /* connect.h in Headers */,
 				03240C3B13564CB0000ADC60 /* content_encoding.h in Headers */,
 				03240C3D13564CB0000ADC60 /* cookie.h in Headers */,
-				03240C3F13564CB0000ADC60 /* curl_addrinfo.h in Headers */,
-				03240C4013564CB0000ADC60 /* curl_base64.h in Headers */,
-				03240C4113564CB0000ADC60 /* curl_ldap.h in Headers */,
-				03240C4213564CB0000ADC60 /* curl_md5.h in Headers */,
-				03240C4313564CB0000ADC60 /* curl_memory.h in Headers */,
-				03240C4513564CB0000ADC60 /* curl_memrchr.h in Headers */,
-				03240C4713564CB0000ADC60 /* curl_rand.h in Headers */,
-				03240C4913564CB0000ADC60 /* curl_sspi.h in Headers */,
-				03240C4A13564CB0000ADC60 /* curlx.h in Headers */,
 				03240C4C13564CB0000ADC60 /* dict.h in Headers */,
 				03240C4E13564CB0000ADC60 /* easyif.h in Headers */,
 				03240C5013564CB0000ADC60 /* escape.h in Headers */,
@@ -12226,10 +12193,6 @@
 				03240C3813564CB0000ADC60 /* connect.c in Sources */,
 				03240C3A13564CB0000ADC60 /* content_encoding.c in Sources */,
 				03240C3C13564CB0000ADC60 /* cookie.c in Sources */,
-				03240C3E13564CB0000ADC60 /* curl_addrinfo.c in Sources */,
-				03240C4413564CB0000ADC60 /* curl_memrchr.c in Sources */,
-				03240C4613564CB0000ADC60 /* curl_rand.c in Sources */,
-				03240C4813564CB0000ADC60 /* curl_sspi.c in Sources */,
 				03240C4B13564CB0000ADC60 /* dict.c in Sources */,
 				03240C4D13564CB0000ADC60 /* easy.c in Sources */,
 				03240C4F13564CB0000ADC60 /* escape.c in Sources */,
@@ -12361,7 +12324,6 @@
 				03240D5013564CB0000ADC60 /* tinyxmlparser.cpp in Sources */,
 				CD218F8A13A7FD6E008337E7 /* ls_sqlite3.c in Sources */,
 				CD218F8B13A7FD6E008337E7 /* luasql.c in Sources */,
-				CD218F8F13A7FD89008337E7 /* luacurl.c in Sources */,
 				CD218FAF13A7FDBA008337E7 /* dump.c in Sources */,
 				CD218FB013A7FDBA008337E7 /* error.c in Sources */,
 				CD218FB113A7FDBA008337E7 /* hashtable.c in Sources */,
@@ -14390,8 +14352,8 @@
 		0324E2AD1356485F000ADC60 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_PREFIX_HEADER = "../../3rdparty/untz/src/native/ios/Untz-Prefix.pch";
+				ARCHS = "$(ARCHS_STANDARD)";
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -14427,9 +14389,9 @@
 		0324E2AE1356485F000ADC60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREFIX_HEADER = "../../3rdparty/untz/src/native/ios/Untz-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -14466,7 +14428,7 @@
 		0324E2B91356485F000ADC60 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -14481,7 +14443,7 @@
 		0324E2BA1356485F000ADC60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -14631,7 +14593,6 @@
 					USE_OPENSSL,
 					USE_SSLEAY,
 					USE_SSL,
-					BUILDING_LIBCURL,
 					POSIX,
 					SQLITE_ENABLE_COLUMN_METADATA,
 					TIXML_USE_STL,
@@ -15365,7 +15326,6 @@
 					USE_OPENSSL,
 					USE_SSLEAY,
 					USE_SSL,
-					BUILDING_LIBCURL,
 					_DEBUG,
 					DEBUG,
 					POSIX,
@@ -15491,7 +15451,7 @@
 		CD04AE7D1472557F009C20E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -15507,7 +15467,7 @@
 		CD04AE7E1472557F009C20E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -15589,7 +15549,7 @@
 		CD07C4E313A1918600C9386C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -15625,7 +15585,7 @@
 		CD07C4E413A1918600C9386C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -15875,7 +15835,7 @@
 		CDD06D85139882D900AB0420 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -15911,7 +15871,7 @@
 		CDD06D86139882D900AB0420 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16095,7 +16055,7 @@
 		CDDD30A11574AE0F00C410A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16135,7 +16095,7 @@
 		CDDD30A21574AE0F00C410A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16175,7 +16135,7 @@
 		CDDD30A31574AE0F00C410A0 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16215,7 +16175,7 @@
 		CDDD30A41574AE0F00C410A0 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16255,7 +16215,7 @@
 		CDE8A7FE155E42EF00C2DFF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16295,7 +16255,7 @@
 		CDE8A7FF155E42EF00C2DFF5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16335,7 +16295,7 @@
 		CDE8A800155E42EF00C2DFF5 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16375,7 +16335,7 @@
 		CDE8A801155E42EF00C2DFF5 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16430,7 +16390,6 @@
 					USE_OPENSSL,
 					USE_SSLEAY,
 					USE_SSL,
-					BUILDING_LIBCURL,
 					POSIX,
 					SQLITE_ENABLE_COLUMN_METADATA,
 					TIXML_USE_STL,
@@ -16733,7 +16692,7 @@
 		E90D02C614D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16753,9 +16712,9 @@
 		E90D02C714D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREFIX_HEADER = "../../3rdparty/untz/src/native/ios/Untz-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16792,7 +16751,7 @@
 		E90D02C814D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16828,7 +16787,7 @@
 		E90D02C914D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -16864,7 +16823,7 @@
 		E90D02CA14D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -17027,7 +16986,6 @@
 					USE_OPENSSL,
 					USE_SSLEAY,
 					USE_SSL,
-					BUILDING_LIBCURL,
 					POSIX,
 					SQLITE_ENABLE_COLUMN_METADATA,
 					TIXML_USE_STL,
@@ -17394,7 +17352,7 @@
 		E9C405CE150D999200C7AB04 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -17409,9 +17367,9 @@
 		E9C405CF150D999200C7AB04 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREFIX_HEADER = "../../3rdparty/untz/src/native/ios/Untz-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -17448,7 +17406,7 @@
 		E9C405D0150D999200C7AB04 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -17484,7 +17442,7 @@
 		E9C405D1150D999200C7AB04 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -17520,7 +17478,7 @@
 		E9C405D2150D999200C7AB04 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
