@@ -110,17 +110,8 @@ void MOAINodeMgr::Update () {
 	MOAINode* node = this->mUpdateListHead;
 	for ( ; node ; node = node->mNext ) {
 		node->DepNodeUpdate ();
-	}
-	
-	// TODO: fix this up later
-	node = this->mUpdateListHead;
-	while ( node ) {
-		
-		MOAINode* temp = node;
-		node = node->mNext;
-		
-		temp->mState = MOAINode::STATE_IDLE;
-		temp->Release ();
+		node->mState = MOAINode::STATE_IDLE;
+		node->Release ();
 	}
 	
 	this->mUpdateListHead = 0;
