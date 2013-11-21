@@ -39,7 +39,9 @@ int MOAIAnimCurve::_getValueAtTime ( lua_State* L ) {
 	@in		number time				Location of the key frame along the curve.
 	@in		number value			Value of the curve at time.
 	@opt	number mode				The ease mode. One of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
-									MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
+									MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH,
+									MOAIEaseType.BACK_EASE_IN, MOAIEaseType.BACK_EASE_OUT, MOAIEaseType.BACK_SMOOTH, MOAIEaseType.SINE_EASE_IN,
+									MOAIEaseType.SINE_EASE_OUT, or MOAIEaseType.SINE_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
 	@opt	number weight			Blends between chosen ease type (of any) and a linear transition. Defaults to 1.
 	@out	nil
 */
@@ -71,7 +73,7 @@ void MOAIAnimCurve::ApplyValueAttrOp ( MOAIAttrOp& attrOp, u32 op ) {
 }
 
 //----------------------------------------------------------------//
-void MOAIAnimCurve::Draw ( u32 resolution ) const {
+void MOAIAnimCurve::Draw ( u32 resolution ) {
 
 	// TODO: this isn't entirely correct. the value of each key frame should be drawn
 	// and then the spans between keys should be filled in with an approximation of
@@ -113,7 +115,7 @@ float MOAIAnimCurve::GetCurveDelta () const {
 }
 
 //----------------------------------------------------------------//
-void MOAIAnimCurve::GetDelta ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span0, const MOAIAnimKeySpan& span1 ) const {
+void MOAIAnimCurve::GetDelta ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span0, const MOAIAnimKeySpan& span1 ) {
 
 	float v0 = this->GetValue ( span0 );
 	float v1 = this->GetValue ( span1 );
@@ -131,14 +133,14 @@ float MOAIAnimCurve::GetSample ( u32 id ) {
 }
 
 //----------------------------------------------------------------//
-float MOAIAnimCurve::GetValue ( float time ) const {
+float MOAIAnimCurve::GetValue ( float time ) {
 
 	MOAIAnimKeySpan span = this->GetSpan ( time );
 	return this->GetValue ( span );
 }
 
 //----------------------------------------------------------------//
-float MOAIAnimCurve::GetValue ( const MOAIAnimKeySpan& span ) const {
+float MOAIAnimCurve::GetValue ( const MOAIAnimKeySpan& span ) {
 
 	MOAIAnimKey& key = this->mKeys [ span.mKeyID ];
 	float v0 = this->mSamples [ span.mKeyID ];
@@ -150,7 +152,7 @@ float MOAIAnimCurve::GetValue ( const MOAIAnimKeySpan& span ) const {
 }
 
 //----------------------------------------------------------------//
-void MOAIAnimCurve::GetValue ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span ) const {
+void MOAIAnimCurve::GetValue ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span ) {
 
 	attrOp.SetValue < float >( this->GetValue ( span ));
 }

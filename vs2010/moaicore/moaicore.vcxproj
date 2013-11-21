@@ -83,7 +83,7 @@
     <ClCompile>
       <AdditionalOptions>/vmg %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\src;..\..\src\config;..\..\src\config-default;..\..\3rdparty\lua-5.1.3\src;..\..\3rdparty;..\..\3rdparty\glew-1.5.6\include;..\..\3rdparty\zlib-1.2.3;..\..\3rdparty\sqlite-3.6.16;..\..\3rdparty\tinyxml;..\..\3rdparty\openssl-1.0.0d\include-win32;..\..\3rdparty\curl-7.19.7\include;..\..\3rdparty\jpeg-8c;..\..\3rdparty\lpng140;..\..\3rdparty\expat-2.0.1\lib;..\..\3rdparty\jansson-2.1\src;..\..\3rdparty\freetype-2.4.4\include;..\..\3rdparty\box2d-2.2.1;..\..\3rdparty\chipmunk-5.3.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src;..\..\src\config;..\..\src\config-default;..\..\3rdparty;..\..\3rdparty\sfmt-1.4;..\..\3rdparty\lua-5.1.3\src;..\..\3rdparty\glew-1.5.6\include;..\..\3rdparty\zlib-1.2.3;..\..\3rdparty\sqlite-3.6.16;..\..\3rdparty\tinyxml;..\..\3rdparty\openssl-1.0.0d\include-win32;..\..\3rdparty\curl-7.19.7\include;..\..\3rdparty\jpeg-8c;..\..\3rdparty\lpng140;..\..\3rdparty\expat-2.0.1\lib;..\..\3rdparty\jansson-2.1\src;..\..\3rdparty\freetype-2.4.4\include;..\..\3rdparty\box2d-2.2.1;..\..\3rdparty\chipmunk-5.3.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;AKU_STATIC;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
@@ -159,7 +159,7 @@
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>false</OmitFramePointers>
-      <AdditionalIncludeDirectories>..\..\src;..\..\src\config;..\..\src\config-default;..\..\3rdparty\lua-5.1.3\src;..\..\3rdparty;..\..\3rdparty\glew-1.5.6\include;..\..\3rdparty\zlib-1.2.3;..\..\3rdparty\sqlite-3.6.16;..\..\3rdparty\tinyxml;..\..\3rdparty\openssl-1.0.0d\include-win32;..\..\3rdparty\curl-7.19.7\include;..\..\3rdparty\jpeg-8c;..\..\3rdparty\lpng140;..\..\3rdparty\expat-2.0.1\lib;..\..\3rdparty\jansson-2.1\src;..\..\3rdparty\freetype-2.4.4\include;..\..\3rdparty\box2d-2.2.1;..\..\3rdparty\chipmunk-5.3.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src;..\..\src\config;..\..\src\config-default;..\..\3rdparty;..\..\3rdparty\sfmt-1.4;..\..\3rdparty\lua-5.1.3\src;..\..\3rdparty\glew-1.5.6\include;..\..\3rdparty\zlib-1.2.3;..\..\3rdparty\sqlite-3.6.16;..\..\3rdparty\tinyxml;..\..\3rdparty\openssl-1.0.0d\include-win32;..\..\3rdparty\curl-7.19.7\include;..\..\3rdparty\jpeg-8c;..\..\3rdparty\lpng140;..\..\3rdparty\expat-2.0.1\lib;..\..\3rdparty\jansson-2.1\src;..\..\3rdparty\freetype-2.4.4\include;..\..\3rdparty\box2d-2.2.1;..\..\3rdparty\chipmunk-5.3.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_LIB;_USE_32BIT_TIME_T;_CRT_SECURE_NO_WARNINGS;AKU_STATIC;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -288,6 +288,7 @@
     <ClCompile Include="..\..\src\moaicore\MOAIFoo.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIFooMgr.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIFrameBuffer.cpp" />
+    <ClCompile Include="..\..\src\moaicore\MOAIFrameBufferTexture.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIFreeTypeFontReader.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIGfxDevice.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIGfxQuad2D.cpp" />
@@ -323,6 +324,7 @@
     <ClCompile Include="..\..\src\moaicore\MOAILuaRuntime.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAILuaState.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAILuaStateHandle.cpp" />
+    <ClCompile Include="..\..\src\moaicore\MOAIMath.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIMemStream.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIMesh.cpp" />
     <ClCompile Include="..\..\src\moaicore\MOAIMotionSensor.cpp" />
@@ -480,6 +482,7 @@
     <ClInclude Include="..\..\src\moaicore\MOAIFoo.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIFooMgr.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIFrameBuffer.h" />
+    <ClInclude Include="..\..\src\moaicore\MOAIFrameBufferTexture.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIFreeTypeFontReader.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIGfxDevice.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIGfxQuad2D.h" />
@@ -516,6 +519,7 @@
     <ClInclude Include="..\..\src\moaicore\MOAILuaState-impl.h" />
     <ClInclude Include="..\..\src\moaicore\MOAILuaState.h" />
     <ClInclude Include="..\..\src\moaicore\MOAILuaStateHandle.h" />
+    <ClInclude Include="..\..\src\moaicore\MOAIMath.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIMemStream.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIMesh.h" />
     <ClInclude Include="..\..\src\moaicore\MOAIMotionSensor.h" />
@@ -674,6 +678,9 @@
     </ProjectReference>
     <ProjectReference Include="..\lua-lib\lua-lib.vcxproj">
       <Project>{e8571557-09c8-4176-b89b-d69da3028faf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\sfmt\sfmt.vcxproj">
+      <Project>{1dc6bd91-b45f-442a-ae6c-88ab5dcf0ce2}</Project>
     </ProjectReference>
     <ProjectReference Include="..\sqlite\sqlite.vcxproj">
       <Project>{a9935050-2e54-4674-80f8-cfc45a2c106a}</Project>

@@ -85,7 +85,10 @@ void AKUIphoneInit ( UIApplication* application ) {
 	REGISTER_LUA_CLASS ( MOAIMoviePlayerIOS )
 	REGISTER_LUA_CLASS ( MOAISafariIOS )
 	REGISTER_LUA_CLASS ( MOAIWebViewIOS )
-	REGISTER_LUA_CLASS ( MOAITwitterIOS )
+
+	#ifndef DISABLE_TWITTER
+		REGISTER_LUA_CLASS ( MOAITwitterIOS )
+	#endif
 	
 	#ifndef DISABLE_TAPJOY
 		REGISTER_LUA_CLASS ( MOAITapjoyIOS )
@@ -170,8 +173,8 @@ void AKUSetConnectionType ( long type ) {
 	}
 }
 
-//-----------------------------------------------------------------//
-void AKUSetDefaultFrameBuffer ( GLuint frameBuffer ) {
 
-	MOAIGfxDevice::Get ().SetDefaultFrameBuffer ( frameBuffer );
+//-----------------------------------------------------------------//
+void AKUSetFrameBuffer ( GLuint frameBuffer ) {
+	MOAIGfxDevice::Get ().GetDefaultBuffer ()->SetGLFrameBufferID (frameBuffer);
 }

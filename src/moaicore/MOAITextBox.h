@@ -133,12 +133,12 @@ public:
 			takes the form of <c:XXX> where 'XXX' is a hexadecimal
 			number representing a color value. The hexadecimal number
 			may be have from one up to eight digits, excluding five
-			digit numbers. One and two digit numbers correspong to grayscale
-			values of 16 and 256 bits of precision respectively. Three
+			digit numbers. One and two digit numbers correspond to grayscale
+			values of 4 and 8 bits of precision (16 or 256 levels) respectively. Three
 			and four digit numbers represent RGB and RGBA colors at
-			16 bit precision. Six digits is RGB at 256 bits of precision.
-			Seven digits is RGBA with 256 bits for RGB and 16 bits for A.
-			Eight digits is RGBA with 256 bits for each component.</p>
+			4 bit precision. Six digits is RGB at 8 bits of precision.
+			Seven digits is RGBA with 8 bits for RGB and 4 bits for A.
+			Eight digits is RGBA with 8 bits for each component.</p>
 			
 			<p>The final text escapes ends the current escape. It takes the
 			form of </>. Including any additional text in this kind of escape
@@ -212,6 +212,8 @@ private:
 
 	friend class MOAITextDesigner;
 	friend class MOAITextStyler;
+		
+	friend class MOAIFont; // added
 
 	static const u32 REVEAL_ALL = 0xffffffff;
 	static const float DEFAULT_SPOOL_SPEED;
@@ -332,6 +334,7 @@ public:
 	enum {
 		WORD_BREAK_NONE,
 		WORD_BREAK_CHAR,
+		WORD_BREAK_HYPHEN,
 	};
 
 	DECL_LUA_FACTORY ( MOAITextBox )

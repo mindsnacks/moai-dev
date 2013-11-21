@@ -51,7 +51,9 @@ int MOAIAnimCurveQuat::_getValueAtTime ( lua_State* L ) {
 	@in		number yRot				Y rotation at time.
 	@in		number zRot				Z rotation at time.
 	@opt	number mode				The ease mode. One of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
-									MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
+									MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH,
+									MOAIEaseType.BACK_EASE_IN, MOAIEaseType.BACK_EASE_OUT, MOAIEaseType.BACK_SMOOTH, MOAIEaseType.SINE_EASE_IN,
+									MOAIEaseType.SINE_EASE_OUT, or MOAIEaseType.SINE_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
 	@opt	number weight			Blends between chosen ease type (of any) and a linear transition. Defaults to 1.
 	@out	nil
 */
@@ -99,7 +101,7 @@ USQuaternion MOAIAnimCurveQuat::GetCurveDelta () const {
 }
 
 //----------------------------------------------------------------//
-void MOAIAnimCurveQuat::GetDelta ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span0, const MOAIAnimKeySpan& span1 ) const {
+void MOAIAnimCurveQuat::GetDelta ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span0, const MOAIAnimKeySpan& span1 ) {
 
 	USQuaternion v0 = this->GetValue ( span0 );
 	USQuaternion v1 = this->GetValue ( span1 );
@@ -110,14 +112,14 @@ void MOAIAnimCurveQuat::GetDelta ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& sp
 }
 
 //----------------------------------------------------------------//
-USQuaternion MOAIAnimCurveQuat::GetValue ( float time ) const {
+USQuaternion MOAIAnimCurveQuat::GetValue ( float time ) {
 
 	MOAIAnimKeySpan span = this->GetSpan ( time );
 	return this->GetValue ( span );
 }
 
 //----------------------------------------------------------------//
-USQuaternion MOAIAnimCurveQuat::GetValue ( const MOAIAnimKeySpan& span ) const {
+USQuaternion MOAIAnimCurveQuat::GetValue ( const MOAIAnimKeySpan& span ) {
 
 	MOAIAnimKey& key = this->mKeys [ span.mKeyID ];
 	USQuaternion v0 = this->mSamples [ span.mKeyID ];
@@ -138,7 +140,7 @@ USQuaternion MOAIAnimCurveQuat::GetValue ( const MOAIAnimKeySpan& span ) const {
 }
 
 //----------------------------------------------------------------//
-void MOAIAnimCurveQuat::GetValue ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span ) const {
+void MOAIAnimCurveQuat::GetValue ( MOAIAttrOp& attrOp, const MOAIAnimKeySpan& span ) {
 
 	attrOp.SetValue < USQuaternion >( this->GetValue ( span ));
 }

@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include <moaicore/MOAIDataBuffer.h>
-#include <moaicore/MOAIFrameBuffer.h>
+#include <moaicore/MOAIFrameBufferTexture.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIImage.h>
 #include <moaicore/MOAILogMessages.h>
@@ -83,9 +83,11 @@ int MOAITextureBase::_setFilter ( lua_State* L ) {
 int MOAITextureBase::_setWrap ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAITextureBase, "UB" )
 	
-	bool wrap = state.GetValue < bool >( 2, false );
+	bool wrapS = state.GetValue < bool >( 2, false );
+	bool wrapT = state.GetValue < bool >( 3, wrapS );
 	
-	self->mWrap = wrap ? GL_REPEAT : GL_CLAMP_TO_EDGE;
+	self->mWrapS = wrapS ? GL_REPEAT : GL_CLAMP_TO_EDGE;
+	self->mWrapT = wrapT ? GL_REPEAT : GL_CLAMP_TO_EDGE;
 
 	return 0;
 }
@@ -236,8 +238,6 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 	UNUSED ( data );
 	UNUSED ( size );
 
-	#ifdef MOAI_TEST_PVR
-
 		if ( !MOAIGfxDevice::Get ().GetHasContext ()) return;
 		MOAIGfxDevice::Get ().ClearErrors ();
 
@@ -294,7 +294,7 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 				this->mGLInternalFormat = GL_LUMINANCE_ALPHA;
 				this->mGLPixelType = GL_UNSIGNED_BYTE;
 				break;
-			
+			#ifdef MOAI_TEST_PVR
 			case MOAIPvrHeader::OGL_PVRTC2:
 				compressed = true;
 				this->mGLInternalFormat = hasAlpha ? GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG : GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
@@ -304,7 +304,9 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 				compressed = true;
 				this->mGLInternalFormat = hasAlpha ? GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG : GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
 				break;
-			
+			#endif
+
+			#ifndef MOAI_OS_ANDROID
 			case MOAIPvrHeader::OGL_BGRA_8888:
 				compressed = false;
 				this->mGLInternalFormat = GL_BGRA;
@@ -316,6 +318,7 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 				this->mGLInternalFormat = GL_ALPHA;
 				this->mGLPixelType = GL_UNSIGNED_BYTE;
 				break;
+			#endif
 		}
 		
 		
@@ -375,7 +378,7 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 			this->mIsDirty = true;
 		}
 
-	#endif
+	
 }
 
 //----------------------------------------------------------------//
@@ -413,7 +416,8 @@ MOAITextureBase::MOAITextureBase () :
 	mHeight ( 0 ),
 	mMinFilter ( GL_LINEAR ),
 	mMagFilter ( GL_NEAREST ),
-	mWrap ( GL_CLAMP_TO_EDGE ),
+	mWrapS ( GL_CLAMP_TO_EDGE ),
+	mWrapT ( GL_CLAMP_TO_EDGE ),
 	mTextureSize ( 0 ),
 	mIsDirty ( false ) {
 	
@@ -443,9 +447,9 @@ void MOAITextureBase::OnBind () {
 				glTexEnvf ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
 			}
 		#endif
-		
-		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->mWrap );
-		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this->mWrap );
+
+		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->mWrapS );
+		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this->mWrapT );
 		
 		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this->mMinFilter );
 		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this->mMagFilter );
@@ -552,9 +556,10 @@ void MOAITextureBase::SetFilter ( int min, int mag ) {
 }
 
 //----------------------------------------------------------------//
-void MOAITextureBase::SetWrap ( int wrap ) {
+void MOAITextureBase::SetWrap ( int wrapS, int wrapT ) {
 
-	this->mWrap = wrap;
+	this->mWrapS = wrapS;
+	this->mWrapT = wrapT;
 	this->mIsDirty = true;
 }
 

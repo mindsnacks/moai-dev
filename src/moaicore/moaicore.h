@@ -20,6 +20,7 @@
 #include <moaicore/MOAIAnimCurveBase.h>
 #include <moaicore/MOAIAnimCurveQuat.h>
 #include <moaicore/MOAIAnimCurveVec.h>
+#include <moaicore/MOAIAnimCurveCustom.h>
 #include <moaicore/MOAIAttrOp.h>
 #include <moaicore/MOAIBitmapFontReader.h>
 #include <moaicore/MOAIBlendMode.h>
@@ -52,6 +53,8 @@
 #include <moaicore/MOAIFont.h>
 #include <moaicore/MOAIFontReader.h>
 #include <moaicore/MOAIFrameBuffer.h>
+#include <moaicore/MOAIFrameBufferTexture.h>
+#include <moaicore/MOAIFreeTypeFont.h>
 #include <moaicore/MOAIFreeTypeFontReader.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIGfxQuad2D.h>
@@ -82,6 +85,7 @@
 #include <moaicore/MOAILocationSensor.h>
 #include <moaicore/MOAILogMgr.h>
 #include <moaicore/MOAILogMessages.h>
+#include <moaicore/MOAIMath.h>
 #include <moaicore/MOAIMemStream.h>
 #include <moaicore/MOAIMesh.h>
 #include <moaicore/MOAIMotionSensor.h>
@@ -151,6 +155,7 @@
 #include <moaicore/MOAITileDeck2D.h>
 #include <moaicore/MOAITileFlags.h>
 #include <moaicore/MOAITimer.h>
+#include <moaicore/MOAITimerCoroutine.h>
 #include <moaicore/MOAITouchSensor.h>
 #include <moaicore/MOAITransform.h>
 #include <moaicore/MOAITransformBase.h>

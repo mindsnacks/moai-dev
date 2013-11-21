@@ -19,7 +19,7 @@ class MOAILayer;
 	@attr	ATTR_R_COL
 	@attr	ATTR_G_COL
 	@attr	ATTR_B_COL
-	@attr	ATTR_A_COL
+	@attr	ATTR_OPACITY
 	
 	@attr	INHERIT_COLOR
 	@attr	COLOR_TRAIT
@@ -32,9 +32,10 @@ protected:
 	USColorVec	mColor;
 	
 	//----------------------------------------------------------------//
-	static int		_moveColor			( lua_State* L );
-	static int		_seekColor			( lua_State* L );
+	static int		_getColor			( lua_State* L );
+	static int		_getOpacity			( lua_State* L );
 	static int		_setColor			( lua_State* L );
+	static int		_setOpacity			( lua_State* L );
 	static int		_setParent			( lua_State* L );
 
 public:
@@ -46,10 +47,11 @@ public:
 		ATTR_R_COL,
 		ATTR_G_COL,
 		ATTR_B_COL,
-		ATTR_A_COL,
+		ATTR_OPACITY,
 		
 		ADD_COLOR,
 		INHERIT_COLOR,
+		INHERIT_COLOR_RAW,
 		COLOR_TRAIT,
 		
 		TOTAL_ATTR,

@@ -12,6 +12,7 @@ class MOAIFontReader;
 class MOAIGlyph;
 class MOAIGlyphCacheBase;
 class MOAITextureBase;
+class MOAITexture;
 
 #define DPI 72
 #define POINTS_TO_PIXELS(points,dpi) (( points * dpi ) / DPI )
@@ -78,11 +79,13 @@ protected:
 	float mDefaultSize;
 
 	//----------------------------------------------------------------//
+	 static int			_getDefaultSize         ( lua_State* L );
 	static int			_getFilename			( lua_State* L );
 	static int			_getFlags				( lua_State* L );
 	static int			_getImage				( lua_State* L );
 	static int			_load					( lua_State* L );
 	static int			_loadFromBMFont			( lua_State* L );
+	static int			_optimalSize			( lua_State* L ); // added
 	static int			_preloadGlyphs			( lua_State* L );
 	static int			_rebuildKerningTables	( lua_State* L );
 	static int			_setCache				( lua_State* L );
@@ -106,6 +109,8 @@ public:
 	
 	GET ( cc8*, Filename, mFilename );
 	GET ( MOAIGlyphCacheBase*, Cache, mCache );
+
+	GET ( float, DefaultSize, mDefaultSize );
 	
 	enum {
 		FONT_AUTOLOAD_KERNING		= 0x01,
@@ -115,15 +120,16 @@ public:
 	
 	//----------------------------------------------------------------//
 	void				AffirmGlyph				( float size, u32 c );
-	MOAIGlyphSet&		AffirmGlyphSet			( float size );
+    MOAIGlyphSet&		AffirmGlyphSet			( float size );
 	MOAIGlyphSet*		GetGlyphSet				( float size );
 	MOAITextureBase*	GetGlyphTexture			( MOAIGlyph& glyph );
 	void				Init					( cc8* filename );
-	void				InitWithBMFont			( cc8* filename );
+	void				InitWithBMFont			( cc8* filename, const u32 numPreloadedTextures, MOAITexture** preloadedTextures );
 	static bool			IsControl				( u32 c );
 	static bool			IsWhitespace			( u32 c );
 						MOAIFont				();
 						~MOAIFont				();
+	float				OptimalSize				(cc8* text, float width, float height, float minSize, float maxSize, bool allowMultiLine);
 	void				ProcessGlyphs			();
 	void				RebuildKerning			();
 	void				RebuildKerning			( float size );

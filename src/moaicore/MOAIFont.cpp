@@ -14,10 +14,25 @@
 #include <moaicore/MOAILogMessages.h>
 #include <moaicore/MOAIStaticGlyphCache.h>
 #include <moaicore/MOAITextureBase.h>
+#include <moaicore/MOAITextBox.h>
+#include <moaicore/MOAITextStyle.h>
 
 //================================================================//
 // local
 //================================================================//
+
+//----------------------------------------------------------------//
+/**	@name	getDefaultSize
+	@text	Requests the font's default size
+	
+	@in		MOAIFont self
+	@out	float default size
+*/
+int MOAIFont::_getDefaultSize ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIFont, "U" )
+	state.Push ( self->mDefaultSize );
+	return 1;
+}
 
 //----------------------------------------------------------------//
 /**	@name	getFilename
@@ -92,15 +107,83 @@ int MOAIFont::_load ( lua_State* L ) {
  
 	@in		MOAIFont self
 	@in		string filename			The path to the BMFont file to load.
+	@opt	table textures			Table of preloaded textures.
 	@out	nil
 */
 int	MOAIFont::_loadFromBMFont ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIFont, "US" )
 	
 	cc8* filename	= state.GetValue < cc8* >( 2, "" );
-	self->InitWithBMFont ( filename );
+	
+	// Check if there are preloaded textures
+	MOAITexture** preloadedTextures = 0;
+	u16 numPreloadedTextures = ( u16 )lua_objlen ( state, 3 );
+
+	if ( numPreloadedTextures > 0 ) {
+
+		preloadedTextures = new MOAITexture* [ numPreloadedTextures ];
+		memset ( preloadedTextures, 0, sizeof ( MOAITexture* ) * numPreloadedTextures );
+		
+		// Get all the preloaded textures
+		for ( u16 i=0; i<numPreloadedTextures; i++ ) {
+			lua_pushinteger ( state, i + 1 );
+			lua_gettable ( state, -2 );
+			
+			MOAITexture* texture = state.GetLuaObject < MOAITexture >( -1, true );
+			preloadedTextures [i] = texture;
+
+			lua_pop ( state, 1 );
+		}
+	}
+
+	self->InitWithBMFont ( filename, numPreloadedTextures, preloadedTextures );
+
+	delete [] preloadedTextures;
+
 	return 0;
 }
+//----------------------------------------------------------------//
+/**	@name	optimalSize
+	@text   Determines the optimal size of the font for a text box of the given dimensions and font size constraints.
+	@in		string text
+	@in		number width				The width of the text box
+	@in		number height				The height of the text box
+	@opt	number minSize				The minimum font size to allow (default zero)
+	@opt	number maxSize				The maximum font size to allow (default to min(width, height) * 2.0)
+	@opt	boolean allowMultiline		Whether to allow the text to span multiple lines (default true)
+	@out    number optimalSize			nil when unable to determine.
+ */
+int MOAIFont::_optimalSize ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIFont, "USNN" ); // "USNN"
+	
+	cc8* text = state.GetValue < cc8* >( 2, "" );
+	float width = state.GetValue < float >( 3, 0.0f );
+	float height   = state.GetValue < float >( 4, 0.0f );
+	float minSize = 0.0f;
+	float maxSize = ( width > height ) ? width * 2 : height * 2;
+	bool allowMultiline = true;
+	
+	if (state.GetTop () >= 5) {
+		minSize = state.GetValue < float > ( 5, 0.0f );
+	}
+	if (state.GetTop () >= 6) {
+		maxSize = state.GetValue < float > ( 6, 0.0f );
+	}
+	if (state.GetTop() >= 7) {
+		allowMultiline = state.GetValue < bool > ( 7, true );
+	}
+	
+	
+	float optSize = self->OptimalSize(text, width, height, minSize, maxSize, allowMultiline);
+	//if (optSize >= 0.0f) {
+		lua_pushnumber(L, optSize);
+		return 1;
+	//}
+	
+	lua_pushnumber(L, optSize);
+	return 1;
+}
+
 
 //----------------------------------------------------------------//
 /**	@name	preloadGlyphs
@@ -445,7 +528,7 @@ MOAITextureBase* MOAIFont::GetGlyphTexture ( MOAIGlyph& glyph ) {
 //----------------------------------------------------------------//
 void MOAIFont::Init ( cc8* filename ) {
 
-	if ( MOAILogMessages::CheckFileExists ( filename )) {
+	if ( USFileSys::CheckFileExists ( filename )) {
 		this->mFilename = USFileSys::GetAbsoluteFilePath ( filename );
 	}
 }
@@ -484,6 +567,299 @@ MOAIFont::~MOAIFont () {
 
 	this->mReader.Set ( *this, 0 );
 	this->mCache.Set ( *this, 0 );
+}
+//----------------------------------------------------------------//
+float MOAIFont::OptimalSize (cc8* text, float width, float height, float minSize, float maxSize, bool allowMultiLine){
+	float optimumSize = 0.0f;
+	
+	// if either width or height are negative, multiply by -1
+	if ( width < 0.0f ) {
+		width *= -1.0f;
+	}
+	if ( height < 0.0f ) {
+		height *= -1.0f;
+	}
+	
+	if ( height == 0.0f || width == 0.0f ) {
+		return -1.0f;
+	}
+	
+	int textLength = strlen( text );
+	if ( textLength == 0 ) {
+		return -2.0f;
+	}
+	
+	// sanity checks for minSize and maxSize
+	if ( minSize < 0.0f ) {
+		minSize = 0.0f;
+	}
+	if ( maxSize < minSize ) {
+		maxSize = minSize;
+	}
+	
+	// create a temporary text box and text style
+	MOAITextStyle *style = new MOAITextStyle ();
+	
+	style->SetFont ( this );
+	style->SetSize ( maxSize );
+	style->ScheduleUpdate ();
+	
+	
+	MOAITextBox *textBox = new MOAITextBox ();
+	
+	// set the dimensions of the text box to have one corner at (0, 0) with dimensions large enough to contain the entire string on one line.  I used 20 to be sure, but I think 2 works as well in most cases.
+	const float FONT_SIZE_MULTIPLIER = 20.0f;
+	textBox -> SetRect(0.0f, 0.0f, textLength * maxSize * FONT_SIZE_MULTIPLIER, maxSize * FONT_SIZE_MULTIPLIER);
+	
+	
+	textBox->SetText ( text );
+	textBox->SetStyle ( style );
+	textBox->ResetStyleMap (); // private methods that I called in previous implementation
+	textBox->ScheduleLayout ();
+	//textBox->mNeedsLayout = true;
+	//textBox -> ScheduleUpdate();
+	
+	USRect boxRect;
+	boxRect.Init ( 0.0f, 0.0f, 0.0f, 0.0f );
+	if ( !textBox->GetBoundsForRange ( 0, textLength, boxRect ) ) {
+		//textBox->Release();
+		//style->Release();
+		return -4.0f;
+	}
+	
+	float boxWidth = boxRect.Width();
+	float boxHeight = boxRect.Height();
+	if ( boxWidth == 0.0f ) {
+		//textBox->Release();
+		//style->Release();
+		return -5.0f;
+	}
+	if ( boxHeight == 0.0f ) {
+		//textBox->Release();
+		//style->Release();
+		return -6.0f;
+	}
+	if ( allowMultiLine ) {
+		float wRatio = width / boxWidth;
+		float hRatio = height / boxHeight;
+		//float minRatio = (wRatio < hRatio) ? wRatio : hRatio;
+		
+		float maxVSize = hRatio * maxSize;
+		// make sure the calculated size is less than or equal to maxSize
+		float calcSize = (maxVSize < maxSize)?maxVSize : maxSize; 
+		
+		
+		// calculate the number of lines needed at the maximum font size that can fit in the box's height.
+		//float lines = 1.0f;
+		
+		// calculate the new width of the box by multiplying by the ratio of the calculated size to the maximum size parameter
+		float calcWidth = boxWidth * (calcSize / maxSize);
+		
+		// find out number of lines needed at the calculated size
+		float hLines = ceilf(calcWidth / width);
+		// make sure that this does not exceed the number of characters in the string
+		if ( hLines > (float)textLength ){
+			hLines = textLength;
+		}
+		
+		// calculate vertical line capacity of text box at calculated size (should be at least one)
+		float calcHeight = boxHeight * ( calcSize / maxSize );
+		float vLines = floorf( height / calcHeight );
+		
+		
+		// if this number is less than or equal to the line capacity at the calculated size
+		if ( hLines <= vLines ) {
+			// use this font size as the optimal size
+			optimumSize = calcSize; 
+			
+			
+			style->SetFont ( this );
+			style->SetSize ( optimumSize );
+			style->ScheduleUpdate ();
+			
+			textBox -> SetRect( 0.0f, 0.0f, width, height );
+			
+			textBox->SetText( text );
+			textBox->SetStyle( style );
+			textBox->ResetStyleMap(); // private methods that I called in previous implementation
+			textBox->ScheduleLayout();
+			
+			if ( !textBox->GetBoundsForRange ( 0, textLength, boxRect ) ) {
+				return -7.0f;
+			}
+			boxWidth = boxRect.Width ();
+			boxHeight = boxRect.Height ();
+			if ( boxWidth == 0.0f ) {
+				return -8.0f;
+			}
+			if ( boxHeight == 0.0f ) {
+				return -9.0f;
+			}
+			
+			wRatio = width / boxWidth;
+			hRatio = height / boxHeight;
+			float minRatio = ( wRatio < hRatio ) ? wRatio : hRatio;
+			
+			optimumSize = minRatio * optimumSize;
+		}
+		else {
+			// else, try finding a new calculated size that fits
+			
+			// start at calcSize and go down by 1% or one font size, whichever is greater
+			textBox->SetRect( 0.0f, 0.0f, width, height );
+			
+			float testSize = calcSize;
+			bool lastCharacterDidRender = false;
+			bool allCharactersDidRender = true;
+			USRect testRect, lastRect;
+			do {
+				// set up style and text box
+				style->SetSize ( testSize );
+				style->ScheduleUpdate ();
+				
+				textBox->ResetStyleMap ();
+				textBox->ScheduleLayout ();
+				
+				// find out if last character renders
+				lastCharacterDidRender = textBox->GetBoundsForRange(textLength - 1, 1, testRect);
+				if (lastCharacterDidRender) {
+					// check the other characters in the string too starting with the second to last character
+					allCharactersDidRender = true;
+					int charIdx = textLength - 2;
+					while (charIdx >= 0 && allCharactersDidRender) {
+						// set lastRect's members to those of testRect
+						lastRect.Init(testRect.mXMin, testRect.mYMin, testRect.mXMax, testRect.mYMax);
+						
+						// get the character at charIdx
+						cc8 ch = text[charIdx];
+						
+						// get the bounds for the character at charIdx
+						allCharactersDidRender = textBox->GetBoundsForRange(charIdx, 1, testRect);
+						
+						// test to make sure the character is not whitespace, control character, or part of Unicode sequence
+						// the 
+						bool isPrintChar = !MOAIFont::IsControl(ch) && !MOAIFont::IsWhitespace(ch) && ch < 0x80;
+						
+						// if it passes the above condition, the character rendered if at least one member of testRect is different from the corresponding member of lastRect
+						if (isPrintChar && allCharactersDidRender) {
+							allCharactersDidRender = !(testRect.mXMin == lastRect.mXMin &&
+													   testRect.mXMax == lastRect.mXMax &&
+													   testRect.mYMin == lastRect.mYMin &&
+													   testRect.mYMax == lastRect.mYMax);
+						}
+						
+						
+						charIdx -= 1;
+					}
+					
+					if (allCharactersDidRender) {
+						break;
+					}
+				}
+				
+				// reduce size and try again
+				testSize *= 0.99f;
+				testSize = floorf( testSize );
+			} while ( testSize > minSize );
+			
+			optimumSize = testSize;
+			
+			
+			// remember that cutting font size in half will quadruple text box capacity.
+			
+		}
+		
+	} else {
+	
+		float wRatio = width / boxWidth;
+		float hRatio = height / boxHeight;
+		float minRatio = ( wRatio < hRatio ) ? wRatio : hRatio;
+		
+		// get optimumSize by multiplying the maximum size by the smaller of the two ratios
+		optimumSize = maxSize * minRatio;
+		
+		
+		
+		// get the one-line height at the original optimumSize
+		
+		style->SetFont(this);
+		style->SetSize(optimumSize);
+		style->ScheduleUpdate();
+		
+		textBox -> SetRect(0.0f, 0.0f, maxSize * FONT_SIZE_MULTIPLIER, maxSize * FONT_SIZE_MULTIPLIER);
+		
+		textBox -> SetText(text);
+		textBox -> SetStyle(style);
+		textBox -> ResetStyleMap(); // private methods that I called in previous implementation
+		textBox -> ScheduleLayout();
+		
+		if (! textBox -> GetBoundsForRange(0, textLength, boxRect)) {
+			return -7.0f;
+		}
+		
+		
+		boxWidth = boxRect.Width();
+		boxHeight = boxRect.Height(); // one-line height
+		
+		float oldBoxHeight = boxHeight;
+		float decrement = 0.01 * optimumSize;
+		
+		do {
+			style->SetFont(this);
+			style->SetSize(optimumSize);
+			style->ScheduleUpdate();
+			
+			// Make the text box have a width equal to that passed in as a parameter and a height large enough to be sure the whole string fits.
+			const float VERTICAL_MULTIPLIER = 5.0f;
+			textBox -> SetRect(0.0f, 0.0f, width, maxSize * FONT_SIZE_MULTIPLIER * VERTICAL_MULTIPLIER);
+			
+			textBox -> SetText(text);
+			textBox -> SetStyle(style);
+			textBox -> ResetStyleMap(); // private methods that I called in previous implementation
+			textBox -> ScheduleLayout();
+			
+			if (! textBox -> GetBoundsForRange(0, textLength, boxRect)) {
+				return -7.0f;
+			}
+			boxWidth = boxRect.Width();
+			boxHeight = boxRect.Height();
+			
+			// if the new box height is the same or smaller than the one-line height, exit the loop
+			if (boxHeight <= oldBoxHeight) {
+				break;
+			}
+			
+			// reduce the size of optimum size by 1 percent and try again
+			optimumSize -= decrement;
+			
+		}
+		while (boxHeight > oldBoxHeight && optimumSize > minSize);
+		
+	}
+	
+	// use the floor function to make optimumSize an integer if not already
+	optimumSize = floorf(optimumSize);
+	
+	// make sure return value is between minSize and maxSize
+	if ( optimumSize < minSize ) {
+		optimumSize = minSize;
+	}
+	if ( optimumSize > maxSize ) {
+		optimumSize = maxSize;
+	}
+	
+	
+	// clean-up
+	// TODO: find a way to clean-up the objects without getting errors.
+	// Perhaps it is done automatically for all MOAIObjects or MOAILuaObjects.
+	//delete textBox;
+	//delete style;
+	
+	//textBox->Release();
+	//style->Release();
+	
+	
+	return optimumSize;
 }
 
 //----------------------------------------------------------------//
@@ -623,11 +999,13 @@ void MOAIFont::RegisterLuaClass ( MOAILuaState& state ) {
 void MOAIFont::RegisterLuaFuncs ( MOAILuaState& state ) {
 	
 	luaL_Reg regTable [] = {
+		{ "getDefaultSize",				_getDefaultSize },
 		{ "getFlags",					_getFlags },
 		{ "getFilename",				_getFilename },
 		{ "getImage",					_getImage },
 		{ "load",						_load },
 		{ "loadFromBMFont",				_loadFromBMFont },
+		{ "optimalSize",				_optimalSize }, // added
 		{ "preloadGlyphs",				_preloadGlyphs },	
 		{ "rebuildKerningTables",		_rebuildKerningTables },
 		{ "setCache",					_setCache },
@@ -683,4 +1061,3 @@ void MOAIFont::SerializeOut ( MOAILuaState& state, MOAISerializer& serializer ) 
 	}
 	lua_setfield ( state, -2, "mGlyphSets" );
 }
-
