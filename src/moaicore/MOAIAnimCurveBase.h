@@ -7,6 +7,7 @@
 #include <moaicore/MOAILua.h>
 #include <moaicore/MOAINode.h>
 #include <moaicore/MOAIWeakPtr.h>
+#include <moaicore/MOAIEase.h>
 
 //================================================================//
 // MOAIAnimKey
@@ -25,6 +26,8 @@ public:
 	bool operator > ( const MOAIAnimKey &rhs ) const {
 		return mTime > rhs.mTime;
 	}
+		
+	MOAIWeakPtr <MOAIEase>		mEase;
 };
 
 //================================================================//
@@ -109,6 +112,7 @@ public:
 	void				RegisterLuaFuncs		( MOAILuaState& state );
 	void				ReserveKeys				( u32 total );
 	void				SetKey					( u32 id, float time, u32 mode, float weight = 1.0f );
+	void				SetKey					( u32 id, float time, MOAIEase *ease, float weight = 1.0f );
 	u32					Size					() const;
 	float				WrapTime				( float t, float &repeat ) const;
 };

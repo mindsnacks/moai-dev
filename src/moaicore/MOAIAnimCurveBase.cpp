@@ -240,6 +240,17 @@ void MOAIAnimCurveBase::SetKey ( u32 id, float time, u32 mode, float weight ) {
 		this->mKeys [ id ].mTime = time;
 		this->mKeys [ id ].mMode = mode;
 		this->mKeys [ id ].mWeight = weight;
+		this->mKeys [ id ].mEase = 0;
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIAnimCurveBase::SetKey(u32 id, float time, MOAIEase *ease, float weight ) {
+	if ( id < this->mKeys.Size ()) {
+		this->mKeys [ id ].mTime = time;
+		this->mKeys [ id ].mMode = 0;
+		this->mKeys [ id ].mEase = ease;
+		this->mKeys [ id ].mWeight = weight;
 	}
 }
 

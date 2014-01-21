@@ -38,7 +38,7 @@ int MOAIEaseDriver::_reserveLinks ( lua_State* L ) {
 		@in		MOAINode target			Target node.
 		@in		number attrID			Index of the attribute to be driven.
 		@opt	number value			Value for attribute at the end of the ease. Default is 0.
-		@opt	number mode				The ease mode. One of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
+		@opt	number mode				The ease mode. A MOAIEase or one of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
 										MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH. Defaults to MOAIEaseType.LINEAR.
 		@out	nil
 	

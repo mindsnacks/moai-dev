@@ -33,17 +33,18 @@ int MOAIAnimCurve::_getValueAtTime ( lua_State* L ) {
 /**	@name	setKey
 	@text	Initialize a key frame at a given time with a give value. Also set the transition type between
 			the specified key frame and the next key frame.
-	
+ 
 	@in		MOAIAnimCurve self
 	@in		number index			Index of the keyframe.
 	@in		number time				Location of the key frame along the curve.
 	@in		number value			Value of the curve at time.
-	@opt	number mode				The ease mode. One of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
+	@opt	number mode				The ease mode. A MOAIEase or one of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
 									MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH,
 									MOAIEaseType.BACK_EASE_IN, MOAIEaseType.BACK_EASE_OUT, MOAIEaseType.BACK_SMOOTH, MOAIEaseType.SINE_EASE_IN,
 									MOAIEaseType.SINE_EASE_OUT, or MOAIEaseType.SINE_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
 	@opt	number weight			Blends between chosen ease type (of any) and a linear transition. Defaults to 1.
 	@out	nil
+ 
 */
 int MOAIAnimCurve::_setKey ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIAnimCurve, "UNN" );
@@ -51,13 +52,23 @@ int MOAIAnimCurve::_setKey ( lua_State* L ) {
 	u32 index		= state.GetValue < u32 >( 2, 1 ) - 1;
 	float time		= state.GetValue < float >( 3, 0.0f );
 	float value		= state.GetValue < float >( 4, 0.0f );
-	u32 mode		= state.GetValue < u32 >( 5, USInterpolate::kSmooth );
+	
 	float weight	= state.GetValue < float >( 6, 1.0f );
 	
-	if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
-	
-		self->SetKey ( index, time, mode, weight );
+	MOAIEase *ease = state.GetLuaObject< MOAIEase >( 5, true );
+	if (ease){
+		self->SetKey ( index, time, ease, weight );
 		self->SetSample ( index, value );
+	}
+	else{
+		u32 mode		= state.GetValue < u32 >( 5, USInterpolate::kSmooth );
+		
+		
+		if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
+		
+			self->SetKey ( index, time, mode, weight );
+			self->SetSample ( index, value );
+		}
 	}
 	return 0;
 }
@@ -144,9 +155,18 @@ float MOAIAnimCurve::GetValue ( const MOAIAnimKeySpan& span ) {
 
 	MOAIAnimKey& key = this->mKeys [ span.mKeyID ];
 	float v0 = this->mSamples [ span.mKeyID ];
+	float v1 = this->mSamples [ span.mKeyID + 1 ];
 	
 	if ( span.mTime > 0.0f ) {
-		v0 = USInterpolate::Interpolate ( key.mMode, v0, this->mSamples [ span.mKeyID + 1 ], span.mTime, key.mWeight );
+		if (key.mEase) {
+			float v0a = USInterpolate::Interpolate(USInterpolate::kLinear, v0, v1, span.mTime);
+			float v0b = v0 + ((v1 - v0) * key.mEase->DistortedTime(span.mTime)) ;
+			
+			v0 = USInterpolate::Interpolate ( USInterpolate::kLinear, v0a, v0b, key.mWeight );
+		}
+		else{
+			v0 = USInterpolate::Interpolate ( key.mMode, v0, v1, span.mTime, key.mWeight );
+		}
 	}
 	return v0 + ( this->GetCurveDelta () * span.mCycle );
 }
