@@ -57,8 +57,10 @@ int MOAIAnimCurve::_setKey ( lua_State* L ) {
 	
 	MOAIEase *ease = state.GetLuaObject< MOAIEase >( 5, true );
 	if (ease){
-		self->SetKey ( index, time, ease, weight );
-		self->SetSample ( index, value );
+		if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
+			self->SetKey ( index, time, ease, weight );
+			self->SetSample ( index, value );
+		}
 	}
 	else{
 		u32 mode		= state.GetValue < u32 >( 5, USInterpolate::kSmooth );
