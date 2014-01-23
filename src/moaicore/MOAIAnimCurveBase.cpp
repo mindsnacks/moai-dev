@@ -151,18 +151,8 @@ MOAIAnimKeySpan MOAIAnimCurveBase::GetSpan ( float time ) const {
 	u32 endID = total - 1;
 	assert ( total );
 	
-	int q = 0;
-	if (time > 4.00f && time < 4.01f) {
-		q = q + 1;
-	}
-	
 	float wrapTime = this->WrapTime ( time, span.mCycle );
 	span.mKeyID = this->FindKeyID ( wrapTime );
-	
-	bool indexFound = true;
-	if (span.mKeyID > endID) {
-		indexFound = false;
-	}
 
 	if ( span.mKeyID == endID ) {
 		return span;
@@ -313,8 +303,26 @@ float MOAIAnimCurveBase::WrapTime ( float t, float &repeat ) const {
 
 	wrappedT = wrappedT * length + startTime;
 	
-	if ( wrappedT + EPSILON > t && wrappedT - EPSILON < t ) { 
-		wrappedT = t; 
+	 
+	if ( wrappedT + EPSILON > t && wrappedT - EPSILON < t ) {
+		
+		// Make sure wrappedT stays within bounds under CLAMP mode.
+		// Fix for a previous edge case that gives a return value out of bounds which
+		// causes problems for indexing later on.
+		if ( mWrapMode == CLAMP ){
+			float maxT = length + startTime;
+			
+			float minT = startTime;
+			
+			wrappedT = ( t < maxT ) ? t : maxT;
+			wrappedT = ( wrappedT > minT ) ? wrappedT : minT;
+			
+		}
+		else{
+		
+			wrappedT = t;
+		}
+		
 	}
 
 	return wrappedT;
