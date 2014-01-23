@@ -7,6 +7,7 @@
 #include <moaicore/MOAILua.h>
 #include <moaicore/MOAINode.h>
 #include <moaicore/MOAIWeakPtr.h>
+//#include <moaicore/MOAISharedPtr.h>
 #include <moaicore/MOAIEase.h>
 
 //================================================================//
@@ -28,6 +29,12 @@ public:
 	}
 		
 	MOAIWeakPtr <MOAIEase>		mEase;
+		
+		
+	~MOAIAnimKey(){
+		this->mEase = 0;
+	}
+	
 };
 
 //================================================================//

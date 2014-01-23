@@ -151,14 +151,24 @@ MOAIAnimKeySpan MOAIAnimCurveBase::GetSpan ( float time ) const {
 	u32 endID = total - 1;
 	assert ( total );
 	
+	int q = 0;
+	if (time > 4.00f && time < 4.01f) {
+		q = q + 1;
+	}
+	
 	float wrapTime = this->WrapTime ( time, span.mCycle );
 	span.mKeyID = this->FindKeyID ( wrapTime );
+	
+	bool indexFound = true;
+	if (span.mKeyID > endID) {
+		indexFound = false;
+	}
 
 	if ( span.mKeyID == endID ) {
 		return span;
 	}
 	
-	MOAIAnimKey k0 = this->mKeys [ span.mKeyID ];
+	MOAIAnimKey& k0 = this->mKeys [ span.mKeyID ];
 	
 	if ( k0.mMode == USInterpolate::kFlat ) {
 		return span;
@@ -168,7 +178,7 @@ MOAIAnimKeySpan MOAIAnimCurveBase::GetSpan ( float time ) const {
 		return span;
 	}
 	
-	MOAIAnimKey k1 = this->mKeys [ span.mKeyID + 1 ];
+	MOAIAnimKey& k1 = this->mKeys [ span.mKeyID + 1 ];
 	
 	if ( k1.mTime > k0.mTime ) {
 		span.mTime = ( wrapTime - k0.mTime ) / ( k1.mTime - k0.mTime );

@@ -45,7 +45,7 @@ int MOAIAnimCurveVec::_getValueAtTime ( lua_State* L ) {
 	@in		number x				X component at time.
 	@in		number y				Y component at time.
 	@in		number z				Z component at time.
-	@opt	number mode				The ease mode. One of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
+	@opt	number mode				The ease mode. A MOAIEase or one of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
 									MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH,
 									MOAIEaseType.BACK_EASE_IN, MOAIEaseType.BACK_EASE_OUT, MOAIEaseType.BACK_SMOOTH, MOAIEaseType.SINE_EASE_IN,
 									MOAIEaseType.SINE_EASE_OUT, or MOAIEaseType.SINE_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
@@ -58,13 +58,25 @@ int MOAIAnimCurveVec::_setKey ( lua_State* L ) {
 	u32 index		= state.GetValue < u32 >( 2, 1 ) - 1;
 	float time		= state.GetValue < float >( 3, 0.0f );
 	USVec3D value	= state.GetVec3D < float >( 4 );
-	u32 mode		= state.GetValue < u32 >( 7, USInterpolate::kSmooth );
+	
 	float weight	= state.GetValue < float >( 8, 1.0f );
 	
-	if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
-		
-		self->SetKey ( index, time, mode, weight );
-		self->SetSample ( index, value );
+	MOAIEase *ease = state.GetLuaObject < MOAIEase >(7, true);
+	
+	if ( ease ){
+		if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
+			self->SetKey( index, time, ease, weight );
+			self->SetSample( index, value );
+		}
+	}
+	else{
+		u32 mode = state.GetValue < u32 >( 7, USInterpolate::kSmooth );
+	
+		if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
+			
+			self->SetKey ( index, time, mode, weight );
+			self->SetSample ( index, value );
+		}
 	}
 	return 0;
 }
@@ -122,10 +134,26 @@ USVec3D MOAIAnimCurveVec::GetValue ( const MOAIAnimKeySpan& span ) {
 	if ( span.mTime > 0.0f ) {
 	
 		USVec3D v1 = this->mSamples [ span.mKeyID + 1 ];
-	
-		v0.mX = USInterpolate::Interpolate ( key.mMode, v0.mX, v1.mX, span.mTime, key.mWeight );
-		v0.mY = USInterpolate::Interpolate ( key.mMode, v0.mY, v1.mY, span.mTime, key.mWeight );
-		v0.mZ = USInterpolate::Interpolate ( key.mMode, v0.mZ, v1.mZ, span.mTime, key.mWeight );
+		
+		if (key.mEase){
+			USVec3D v0a, v0b;
+			v0a.mX = USInterpolate::Interpolate(USInterpolate::kLinear, v0.mX, v1.mX, span.mTime);
+			v0a.mY = USInterpolate::Interpolate(USInterpolate::kLinear, v0.mY, v1.mY, span.mTime);
+			v0a.mZ = USInterpolate::Interpolate(USInterpolate::kLinear, v0.mZ, v1.mZ, span.mTime);
+			
+			v0b.mX = v0.mX + ((v1.mX - v0.mX) * key.mEase->DistortedTime(span.mTime));
+			v0b.mY = v0.mY + ((v1.mY - v0.mY) * key.mEase->DistortedTime(span.mTime));
+			v0b.mZ = v0.mZ + ((v1.mZ - v0.mZ) * key.mEase->DistortedTime(span.mTime));
+			
+			v0.mX = USInterpolate::Interpolate ( USInterpolate::kLinear, v0a.mX, v0b.mX, key.mWeight );
+			v0.mY = USInterpolate::Interpolate ( USInterpolate::kLinear, v0a.mY, v0b.mY, key.mWeight );
+			v0.mZ = USInterpolate::Interpolate ( USInterpolate::kLinear, v0a.mZ, v0b.mZ, key.mWeight );
+		}
+		else{
+			v0.mX = USInterpolate::Interpolate ( key.mMode, v0.mX, v1.mX, span.mTime, key.mWeight );
+			v0.mY = USInterpolate::Interpolate ( key.mMode, v0.mY, v1.mY, span.mTime, key.mWeight );
+			v0.mZ = USInterpolate::Interpolate ( key.mMode, v0.mZ, v1.mZ, span.mTime, key.mWeight );
+		}
 	}
 	
 	if ( span.mCycle != 0.0f ) {
