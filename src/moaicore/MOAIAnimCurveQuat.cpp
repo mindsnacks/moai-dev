@@ -5,6 +5,7 @@
 #include <moaicore/MOAIAnimCurveQuat.h>
 #include <moaicore/MOAILogMessages.h>
 #include <uslscore/USBinarySearch.h>
+#include <moaicore/MOAIEase.h>
 
 //================================================================//
 // local
@@ -127,8 +128,17 @@ USQuaternion MOAIAnimCurveQuat::GetValue ( const MOAIAnimKeySpan& span ) {
 	if ( span.mTime > 0.0f ) {
 	
 		USQuaternion v1 = this->mSamples [ span.mKeyID + 1 ];
+		float t;
+		if (key.mEase) {
+			t = key.mEase->DistortedTime( span.mTime );
+			t = USInterpolate::Interpolate( USInterpolate::kLinear, span.mTime, t, key.mWeight);
+		}
+		else{
+			t = USInterpolate::Curve ( key.mMode, span.mTime, key.mWeight );
+		}
 		
-		v0.Slerp ( v0, v1, USInterpolate::Curve ( key.mMode, span.mTime, key.mWeight ));
+		
+		v0.Slerp ( v0, v1, t);
 	}
 	
 	if ( span.mCycle != 0.0f ) {
