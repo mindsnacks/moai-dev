@@ -51,7 +51,7 @@ int MOAIAnimCurveQuat::_getValueAtTime ( lua_State* L ) {
 	@in		number xRot				X rotation at time.
 	@in		number yRot				Y rotation at time.
 	@in		number zRot				Z rotation at time.
-	@opt	number mode				The ease mode. One of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
+	@opt	number mode				The ease mode. A MOAIEase or one of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
 									MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH,
 									MOAIEaseType.BACK_EASE_IN, MOAIEaseType.BACK_EASE_OUT, MOAIEaseType.BACK_SMOOTH, MOAIEaseType.SINE_EASE_IN,
 									MOAIEaseType.SINE_EASE_OUT, or MOAIEaseType.SINE_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
@@ -64,13 +64,23 @@ int MOAIAnimCurveQuat::_setKey ( lua_State* L ) {
 	u32 index		= state.GetValue < u32 >( 2, 1 ) - 1;
 	float time		= state.GetValue < float >( 3, 0.0f );
 	USVec3D value	= state.GetVec3D < float >( 4 );
-	u32 mode		= state.GetValue < u32 >( 7, USInterpolate::kSmooth );
+	
+	MOAIEase *ease  = state.GetLuaObject < MOAIEase >( 7, true );
 	float weight	= state.GetValue < float >( 8, 1.0f );
 	
-	if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
+	if (ease && MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )){
+		self->SetKey(index, time, ease, weight);
+		self->SetSample(index, value.mX, value.mY, value.mZ);
+	}
+	else{
+		u32 mode		= state.GetValue < u32 >( 7, USInterpolate::kSmooth );
 		
-		self->SetKey ( index, time, mode, weight );
-		self->SetSample ( index, value.mX, value.mY, value.mZ );
+		
+		if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
+			
+			self->SetKey ( index, time, mode, weight );
+			self->SetSample ( index, value.mX, value.mY, value.mZ );
+		}
 	}
 	return 0;
 }
