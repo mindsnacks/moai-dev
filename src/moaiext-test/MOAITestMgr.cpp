@@ -10,6 +10,12 @@
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/** @name beginTest
+	@text 
+ 
+	@in		string  testName
+	@out	nil
+ */
 int MOAITestMgr::_beginTest ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -22,6 +28,13 @@ int MOAITestMgr::_beginTest ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name checkFilter
+ @text
+ 
+ @in	nil
+ @out	bool
+ 
+ */
 int MOAITestMgr::_checkFilter ( lua_State* L ) {
 	MOAILuaState state ( L );
 
@@ -31,6 +44,13 @@ int MOAITestMgr::_checkFilter ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name comment
+ @text
+ 
+ @in	string comment
+ @out	nil
+ 
+ */
 int MOAITestMgr::_comment ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -43,6 +63,13 @@ int MOAITestMgr::_comment ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name	endTest
+ @text
+ 
+ @in	bool result
+ @out	nil
+ 
+ */
 int MOAITestMgr::_endTest ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -53,6 +80,14 @@ int MOAITestMgr::_endTest ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name failure
+ @text
+ 
+ @in	string type
+ @in	string detail
+ @out	nil
+ 
+ */
 int MOAITestMgr::_failure ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -79,6 +114,13 @@ int MOAITestMgr::_finish ( lua_State *L ){
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name getTestList
+ @text	Returns a table containing the current tests??
+ 
+ @in	nil
+ @out	table	testList
+ 
+ */
 int MOAITestMgr::_getTestList ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -87,7 +129,7 @@ int MOAITestMgr::_getTestList ( lua_State* L ) {
 }
 //----------------------------------------------------------------//
 /** @name runScript
- @text
+ @text		Run the Lua test with the given file name.
  
  @in		string filename
  @out	nil
@@ -101,9 +143,9 @@ int MOAITestMgr::_runScript ( lua_State *L ){
 
 //----------------------------------------------------------------//
 /** @name runTest
- @text
+ @text		Run the C++ test with the given test name.
  
- @in		string testname
+ @in		string testName
  @out	nil
  */
 int MOAITestMgr::_runTest ( lua_State *L ) {
@@ -116,6 +158,12 @@ int MOAITestMgr::_runTest ( lua_State *L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/** @name setFilter
+ @text  Add the keyword to the filter list.
+	
+ @in	string		keyword
+ @out	nil
+*/
 int MOAITestMgr::_setFilter ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -125,9 +173,10 @@ int MOAITestMgr::_setFilter ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 /** @name setResultsFile
- @text
+ @text	Set the file name for the text log output for the current test.  If running multiple tests,
+		this should be set to a different file name for each test as the file will be overwritten otherwise.
  
- @in		string filename
+ @in	string filename
  @out	nil
  */
 int MOAITestMgr::_setResultsFile ( lua_State *L ) {
@@ -141,7 +190,7 @@ int MOAITestMgr::_setResultsFile ( lua_State *L ) {
 /** @name	setStaging
  @text	Set the staging flag.
  
- @in		boolean staging
+ @in	boolean staging
  @out	nil
  */
 int MOAITestMgr::_setStaging ( lua_State* L ) {
@@ -153,6 +202,13 @@ int MOAITestMgr::_setStaging ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name setStagingFunc
+ @text	Set the function to run when in staging mode.
+ 
+ @in	function	stagingFunc
+ @out	nil
+ 
+ */
 int MOAITestMgr::_setStagingFunc ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -162,6 +218,13 @@ int MOAITestMgr::_setStagingFunc ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name setTestFunc
+ @text	Set the function to run when in test mode.
+ 
+ @in	function	testFunc
+ @out	nil
+ 
+ */
 int MOAITestMgr::_setTestFunc ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -171,7 +234,7 @@ int MOAITestMgr::_setTestFunc ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 /** @name setXmlResultsFile
- @text
+ @text	Set the path of the XML results file for writing.
  
  @in		string filename
  @out	nil
@@ -185,6 +248,13 @@ int MOAITestMgr::_setXmlResultsFile ( lua_State *L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name staging
+ @text	Not sure what this was intended to do.
+ 
+ @in	nil
+ @out	boolean		Always returns true.
+ 
+ */
 int MOAITestMgr::_staging ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -194,6 +264,13 @@ int MOAITestMgr::_staging ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+/**	@name success
+ @text	Mark a successful result in the log files.
+ 
+ @in	string detail   
+ @out	nil
+ 
+ */
 int MOAITestMgr::_success ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
