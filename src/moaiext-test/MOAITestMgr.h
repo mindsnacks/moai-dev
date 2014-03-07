@@ -71,6 +71,7 @@ public:
 	//----------------------------------------------------------------//
 	void		BeginTest				( cc8* testName );
 	bool		CheckFilter				();
+	bool		CheckFilter				( cc8* testName );
 	void		Comment					( cc8* comment );
 	void		EndTest					( bool result );
 	void		Failure					( cc8* type, cc8* detail );

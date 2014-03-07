@@ -29,16 +29,20 @@ int MOAITestMgr::_beginTest ( lua_State* L ) {
 //----------------------------------------------------------------//
 // TODO: doxygen
 /**	@name checkFilter
- @text
+ @text  Compares the words in the filter with those in the filter file.
+		Returns true if a match is found.
  
- @in	nil
+ @in	string testName	or nil
  @out	bool
  
  */
 int MOAITestMgr::_checkFilter ( lua_State* L ) {
 	MOAILuaState state ( L );
-
-	state.Push ( MOAITestMgr::Get ().CheckFilter ());
+	
+	cc8* testName = state.GetValue < cc8* >( 1, 0 );
+	
+	
+	state.Push ( MOAITestMgr::Get ().CheckFilter ( testName ));
 	return 1;
 }
 
@@ -322,6 +326,57 @@ bool MOAITestMgr::CheckFilter () {
 	return false;
 }
 
+
+bool MOAITestMgr::CheckFilter ( cc8* testName ) {
+	if (!testName || !testName[0]) {
+		return this->CheckFilter();
+	}
+	
+	if ( !this->mFilterFilename || !this->mFilterFilename[0] ) return true; // no filter file
+	
+	// TODO: find out if testName has the suffix ".lua"
+	bool isLua = true;
+	bool testRan = false;
+	
+	if (isLua) {
+		// run Lua file
+		if ( !USFileSys::CheckFileExists ( testName )) return false;
+		MOAILuaStateHandle state = MOAILuaRuntime::Get ().State ();
+		int status = luaL_loadfile ( state, testName );
+		
+		if ( status ) {
+			state.PrintErrors ( USLog::CONSOLE, status );
+		}
+		else {
+			state.DebugCall ( 0, 0 );
+		}
+	}
+	else {
+		// run C++ test
+		MOAITest* test = this->mFactory.Create ( testName );
+		if (test){
+			// it should call other things.
+			test->Staging( *this );
+		}
+	}
+	
+	if ( testRan ){
+		if ( this->mFilter.size () == 0 ) return true; // no filter present in the test
+		// open the file stream
+		USFileStream fileStream;
+		if ( fileStream.OpenRead ( this->mFilterFilename )){
+			STLSet < STLString > keywords;
+			MOAITestMgr::ParseKeywords ( fileStream, keywords );
+			
+			STLSet < STLString >::iterator itr;
+			for ( itr = this->mFilter.begin (); itr != this->mFilter.end (); ++itr ) {
+				if ( keywords.contains ( *itr )) return true;
+			}
+		}
+	}
+	
+	return false;
+}
 //----------------------------------------------------------------//
 void MOAITestMgr::Comment ( cc8* comment ) {
 
