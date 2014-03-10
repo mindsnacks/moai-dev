@@ -332,7 +332,7 @@ bool MOAITestMgr::CheckFilter ( cc8* testName ) {
 		return this->CheckFilter();
 	}
 	
-	if ( !this->mFilterFilename || !this->mFilterFilename[0] ) return true; // no filter file
+	if ( !this->mFilterFilename || !this->mFilterFilename.peek(0) ) return true; // no filter file
 	
 	// TODO: find out if testName has the suffix ".lua"
 	bool isLua = true;
@@ -636,7 +636,6 @@ void MOAITestMgr::SetFilter ( cc8* filter, cc8* next, ... ) {
 		va_list args;
 		va_start ( args, next );
 		
-		bool more = true;
 		while ( next ) {
 			next = va_arg ( args, cc8* );
 			this->ExtendFilter ( next );
