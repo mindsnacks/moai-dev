@@ -49,6 +49,7 @@ private:
 	static int		_runScript			( lua_State* L );
 	static int		_runTest			( lua_State* L );
 	static int		_setFilter			( lua_State* L );
+	static int		_setFilterFile		( lua_State* L );
 	static int		_setResultsFile		( lua_State* L );
 	static int		_setStaging			( lua_State* L );
 	static int		_setStagingFunc		( lua_State* L );

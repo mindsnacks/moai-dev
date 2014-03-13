@@ -176,6 +176,20 @@ int MOAITestMgr::_setFilter ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/** @name setFilterFile
+	@text	Set the file from which to grab the keyword filter list.
+ 
+	@in		string filename
+	@out	nil
+ */
+int MOAITestMgr::_setFilterFile ( lua_State* L ) {
+	MOAILuaState state ( L );
+	
+	MOAITestMgr::Get ().SetFilterFile ( state.GetValue < cc8* >( 1, "" ));
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /** @name setResultsFile
  @text	Set the file name for the text log output for the current test.  If running multiple tests,
 		this should be set to a different file name for each test as the file will be overwritten otherwise.
@@ -337,7 +351,7 @@ bool MOAITestMgr::CheckFilter ( cc8* testName ) {
 	// find out if testName has the suffix ".lua"
 	size_t testStringLength = strlen( testName );
 	const size_t SUFFIX_LENGTH = 4;
-	size_t startPos = (testStringLength - SUFFIX_LENGTH) - 1;
+	size_t startPos = (testStringLength - SUFFIX_LENGTH);
 	STLString testString(testName, startPos, SUFFIX_LENGTH);
 
 	bool isLua = strcmp(testString, ".lua") == 0;
@@ -354,6 +368,7 @@ bool MOAITestMgr::CheckFilter ( cc8* testName ) {
 		}
 		else {
 			state.DebugCall ( 0, 0 );
+			testRan = true;
 		}
 	}
 	else {
@@ -362,6 +377,7 @@ bool MOAITestMgr::CheckFilter ( cc8* testName ) {
 		if (test){
 			// it should call other things.
 			test->Staging( *this );
+			testRan = true;
 		}
 	}
 	
@@ -552,6 +568,7 @@ void MOAITestMgr::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "runScript",				_runScript },
 		{ "runTest",				_runTest },
 		{ "setFilter",				_setFilter },
+		{ "setFilterFile",			_setFilterFile },
 		{ "setResultsFile",			_setResultsFile },
 		{ "setStaging",				_setStaging },
 		{ "setStagingFunc",			_setStagingFunc },
