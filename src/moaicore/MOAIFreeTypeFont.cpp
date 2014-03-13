@@ -1509,7 +1509,7 @@ void MOAIFreeTypeFont::RenderLines(FT_Int imageWidth, FT_Int imageHeight, int hA
 
 MOAITexture* MOAIFreeTypeFont::RenderTexture(cc8 *text, float size, float width, float height,
 											 int hAlignment, int vAlignment, int wordbreak,
-											 bool autoFit, bool returnGlyphBounds, float lineSpacing, MOAILuaState& state){
+											 bool autoFit, bool returnGlyphBounds, float lineSpacing, MOAILuaState& state) {
 	UNUSED(autoFit);
 	
 	// initialize library and face
@@ -1545,6 +1545,7 @@ MOAITexture* MOAIFreeTypeFont::RenderTexture(cc8 *text, float size, float width,
 	// create a texture from the image
 	MOAITexture *texture = new MOAITexture();
 	texture->Init(bitmapImg, "");
+	texture->SetFilter(GL_LINEAR, GL_LINEAR);
 	
 	// clean up the glyph array
 	deleteGlyphArray(this->mGlyphArray, glyphArraySize);
@@ -1664,6 +1665,7 @@ MOAITexture* MOAIFreeTypeFont::RenderTextureSingleLine(cc8 *text, float fontSize
 	// create a texture from the image
 	MOAITexture *texture = new MOAITexture();
 	texture->Init(bitmapImg, "");
+	texture->SetFilter(GL_LINEAR, GL_LINEAR);
 	return texture;
 }
 
