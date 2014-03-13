@@ -334,8 +334,13 @@ bool MOAITestMgr::CheckFilter ( cc8* testName ) {
 	
 	if ( !this->mFilterFilename || !this->mFilterFilename.peek(0) ) return true; // no filter file
 	
-	// TODO: find out if testName has the suffix ".lua"
-	bool isLua = true;
+	// find out if testName has the suffix ".lua"
+	size_t testStringLength = strlen( testName );
+	const size_t SUFFIX_LENGTH = 4;
+	size_t startPos = (testStringLength - SUFFIX_LENGTH) - 1;
+	STLString testString(testName, startPos, SUFFIX_LENGTH);
+
+	bool isLua = strcmp(testString, ".lua") == 0;
 	bool testRan = false;
 	
 	if (isLua) {
