@@ -748,6 +748,63 @@ void MOAIParticlePexPlugin::_renderRadialScript( float* particle, float* registe
 
 }
 
+#define TRY_INTERPRETING_AS_NUMERIC(PROPERTY_NAME, MEMBER_NAME) \
+if (strcmp(name, #PROPERTY_NAME) == 0) { \
+	MEMBER_NAME = (typeof(MEMBER_NAME))state.GetValue < float >( 3, 0 ); \
+}
+
+#define TRY_INTERPRETING_AS_COLOR(PROPERTY_NAME, MEMBER_NAME, DEFAULT_ALPHA_VALUE) \
+if (strcmp(name, #PROPERTY_NAME) == 0) { \
+	MEMBER_NAME[0] = (float)state.GetValue < float >( 3, 0 ); \
+	MEMBER_NAME[1] = (float)state.GetValue < float >( 4, 0 ); \
+	MEMBER_NAME[2] = (float)state.GetValue < float >( 5, 0 ); \
+	MEMBER_NAME[3] = (float)state.GetValue < float >( 6, DEFAULT_ALPHA_VALUE ); \
+}
+
+#define TRY_INTERPRETING_AS_COORD(PROPERTY_NAME, MEMBER_NAME) \
+if (strcmp(name, #PROPERTY_NAME) == 0) { \
+	MEMBER_NAME[0] = (float)state.GetValue < float >( 3, 0 ); \
+	MEMBER_NAME[1] = (float)state.GetValue < float >( 4, 0 ); \
+}
+
+void MOAIParticlePexPlugin::SetProperty	(cc8* name, MOAILuaState &state)
+{
+	TRY_INTERPRETING_AS_NUMERIC      (angle,                      mAngle)
+	else TRY_INTERPRETING_AS_NUMERIC (angleVariance,              mAngleVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (blendFuncSource,            mBlendFuncSrc)
+	else TRY_INTERPRETING_AS_NUMERIC (blendFuncDestination,       mBlendFuncDst)
+	else TRY_INTERPRETING_AS_NUMERIC (duration,                   mDuration)
+	else TRY_INTERPRETING_AS_NUMERIC (emitterType,                mEmitterType)
+	else TRY_INTERPRETING_AS_COLOR   (finishColor,                mFinishColor, 1)
+	else TRY_INTERPRETING_AS_COLOR   (finishColorVariance,        mFinishColorVariance, 0)
+	else TRY_INTERPRETING_AS_NUMERIC (finishParticleSize,         mFinishSize)
+	else TRY_INTERPRETING_AS_NUMERIC (FinishParticleSizeVariance, mFinishSizeVariance)
+	else TRY_INTERPRETING_AS_COORD   (gravity,                    mGravity)
+	else TRY_INTERPRETING_AS_NUMERIC (maxParticles,               mNumParticles)
+	else TRY_INTERPRETING_AS_NUMERIC (maxRadius,                  mMaxRadius)
+	else TRY_INTERPRETING_AS_NUMERIC (maxRadiusVariance,          mMaxRadiusVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (minRadius,                  mMinRadius)
+	else TRY_INTERPRETING_AS_NUMERIC (particleLifeSpan,           mLifespan)
+	else TRY_INTERPRETING_AS_NUMERIC (particleLifespanVariance,   mLifespanVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (radialAcceleration,         mRadialAcceleration)
+	else TRY_INTERPRETING_AS_NUMERIC (radialAccelVariance,        mRadialAccelVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (rotatePerSecond,            mRotPerSecond)
+	else TRY_INTERPRETING_AS_NUMERIC (rotatePerSecondVariance,    mRotPerSecondVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (rotationEnd,                mRotEnd)
+	else TRY_INTERPRETING_AS_NUMERIC (rotationEndVariance,        mRotEndVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (rotationStart,              mRotStart)
+	else TRY_INTERPRETING_AS_COORD   (sourcePosition,             mSourcePos)
+	else TRY_INTERPRETING_AS_COORD   (sourcePositionVariance,     mSourcePosVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (speed,                      mSpeed)
+	else TRY_INTERPRETING_AS_NUMERIC (speedVariance,              mSpeedVariance)
+	else TRY_INTERPRETING_AS_COLOR   (startColor,                 mStartColor, 1)
+	else TRY_INTERPRETING_AS_COLOR   (startColorVariance,         mStartColorVariance, 0)
+	else TRY_INTERPRETING_AS_NUMERIC (startParticleSize,          mStartSize)
+	else TRY_INTERPRETING_AS_NUMERIC (startParticleSizeVariance,  mStartSizeVariance)
+	else TRY_INTERPRETING_AS_NUMERIC (tangentialAcceleration,     mTanAccel)
+	else TRY_INTERPRETING_AS_NUMERIC (tangentialAccelVariance,    mTanAccelVariance)
+}
+
 void  MOAIParticlePexPlugin::OnInit ( float* particle, float* registers)
 {
 	if(mEmitterType == EMITTER_GRAVITY)

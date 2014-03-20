@@ -21,7 +21,18 @@ protected:
 
 	//----------------------------------------------------------------//
 	static int		_getSize			( lua_State* L );
+	static int		_setProperty		( lua_State* L );
 
+	//----------------------------------------------------------------//
+	/**	@name	SetProperty
+	 @text	Sets a property's value. Subclasses may implement this if they wish.
+	        Property values must be fetched from the LUA state.
+
+	 @in	string name		Name of the property to set
+	 @in	state			The current LUA state
+	 @out	nil
+	 */
+	virtual void	SetProperty			(__unused cc8* name, __unused MOAILuaState &state) {}
 public:
 	
 	//----------------------------------------------------------------//

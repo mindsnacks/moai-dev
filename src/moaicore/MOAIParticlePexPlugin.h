@@ -129,6 +129,8 @@ private:
 	void			_renderGravityScript		( float* particle, float* registers, AKUParticleSprite* sprite, float t0, float t1,  float term );
 	void			_renderRadialScript		    ( float* particle, float* registers, AKUParticleSprite* sprite, float t0, float t1,  float term );
 
+	virtual void	SetProperty			(__unused cc8* name, __unused MOAILuaState &value);
+
 public:
 	
 	friend class MOAIParticleState;
