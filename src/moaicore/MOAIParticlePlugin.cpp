@@ -24,6 +24,24 @@ int MOAIParticlePlugin::_getSize ( lua_State* L ) {
 	return 1;
 }
 
+//----------------------------------------------------------------//
+/**	@name	setProperty
+ @text	Sets a property's value.
+
+ @in	MOAIFont self
+ @in	string name		Name of the property to set
+ @in	value			The value to set it to
+ @out	nil
+ */
+int MOAIParticlePlugin::_setProperty ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIParticlePlugin, "US" )
+
+	cc8* name	= state.GetValue < cc8* >( 2, "" );
+
+	self->SetProperty(name, state);
+	return 0;
+}
+
 //================================================================//
 // MOAIParticlePlugin
 //================================================================//
@@ -49,6 +67,7 @@ void MOAIParticlePlugin::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 	luaL_Reg regTable[] = {
 		{ "getSize",			_getSize },
+		{ "setProperty",		_setProperty },
 		{ NULL, NULL }
 	};
 
