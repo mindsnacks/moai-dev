@@ -4,5 +4,8 @@ VALID_ARCHS = i386 x86_64 armv7 armv7s arm64
 SDKROOT = iphoneos
 IPHONEOS_DEPLOYMENT_TARGET = 5.0
 
+CLANG_CXX_LANGUAGE_STANDARD = gnu++0x
+CLANG_CXX_LIBRARY = libc++
+
 // Disable some noisy warnings
 GCC_WARN_64_TO_32_BIT_CONVERSION = NO
