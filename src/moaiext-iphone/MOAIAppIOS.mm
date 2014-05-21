@@ -29,14 +29,14 @@
 int MOAIAppIOS::_takeCamera( lua_State* L ) {
 	
 	int x, y, width, height = 0;
-	NSUInteger sourceType;
+	UIImagePickerControllerSourceType sourceType;
 	
 	MOAILuaState state ( L );
 	if ( state.IsType ( 1, LUA_TFUNCTION )) {
 		MOAIAppIOS::Get ().mOnTakeCameraCallback.SetStrongRef ( state, 1 );
 	}
 	
-	sourceType = state.GetValue < NSUInteger >( 2, 0 );
+	sourceType = (UIImagePickerControllerSourceType)state.GetValue < NSUInteger >( 2, 0 );
 	x = state.GetValue < int >( 3, 0 );
 	y = state.GetValue < int >( 4, 0 );
 	width = state.GetValue < int >( 5, 0 );
@@ -85,7 +85,7 @@ int MOAIAppIOS::_getDirectoryInDomain ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	u32 dirCode = state.GetValue<u32>( 1, 0 ); 
+	NSSearchPathDirectory dirCode = (NSSearchPathDirectory)state.GetValue<u32>( 1, 0 );
 	
 	if( dirCode == 0 ) {
 		
