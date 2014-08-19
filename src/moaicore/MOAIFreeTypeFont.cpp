@@ -1410,6 +1410,7 @@ void MOAIFreeTypeFont::RegisterLuaFuncs(MOAILuaState &state){
 	luaL_Reg regTable [] = {
 		{ "dimensionsOfLine",			_dimensionsOfLine },
 		{ "dimensionsWithMaxWidth",		_dimensionsWithMaxWidth },
+		{ "dimensionsOfGlyph",			_dimensionsOfGlyph },
 		{ "getDefaultSize",				_getDefaultSize },
 		{ "getFilename",				_getFilename },
 		{ "load",						_load },
