@@ -67,16 +67,16 @@ protected:
 	FT_Vector* mAdvanceArray;
 		
 	//----------------------------------------------------------------//
-	static int			_dimensionsOfLine		( lua_State* L );
-	static int			_dimensionsWithMaxWidth	( lua_State* L );
-	static int			_dimensionsOfGlyph		( lua_State* L );
-	static int			_getDefaultSize         ( lua_State* L );
-	static int			_getFilename			( lua_State* L );
-	static int			_load					( lua_State* L );
-	static int			_optimalSize			( lua_State* L );
-	static int			_renderTexture			( lua_State* L );
-	static int			_renderTextureSingleLine( lua_State* L );
-	static int			_setDefaultSize			( lua_State* L );
+	static int			_dimensionsOfLine				( lua_State* L );
+	static int			_dimensionsWithMaxWidth			( lua_State* L );
+	static int			_getGlyphMetrics				( lua_State* L );
+	static int			_getDefaultSize					( lua_State* L );
+	static int			_getFilename					( lua_State* L );
+	static int			_load							( lua_State* L );
+	static int			_optimalSize					( lua_State* L );
+	static int			_renderTexture					( lua_State* L );
+	static int			_renderTextureSingleLine		( lua_State* L );
+	static int			_setDefaultSize					( lua_State* L );
 		
 	//----------------------------------------------------------------//
 	void				BuildLine				(u32* buffer, size_t buf_len, int pen_x,

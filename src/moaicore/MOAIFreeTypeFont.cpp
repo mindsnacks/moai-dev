@@ -124,6 +124,43 @@ int MOAIFreeTypeFont::_dimensionsWithMaxWidth(lua_State *L){
 }
 
 //----------------------------------------------------------------//
+/** @name	getGlyphMetrics
+ @text	Returns the xOffset and xAdvance values used for positioning
+		a glyph a the given font size.
+ 
+ @in	MOAIFont	self
+ @in	string		character			The character whose glyph metrics will be returned
+ @in	number		fontSize
+ @out	number		width
+ @out	number		height
+ @out	table		glyphTable
+ 
+ */
+int MOAIFreeTypeFont::_getGlyphMetrics(lua_State *L){
+	MOAI_LUA_SETUP( MOAIFreeTypeFont, "USN");
+	
+	cc8* text = state.GetValue < cc8* > (2, "");
+	float fontSize = state.GetValue < float > (3, self->mDefaultSize);
+	
+	// initialize the font
+	FT_Face face = self->AffirmFreeTypeFace();
+	
+	// set character size
+	self->SetCharacterSize(fontSize);
+	
+	FT_Error error = FT_Load_Char(face, *text, FT_LOAD_DEFAULT);
+	CHECK_ERROR(error);
+	
+	FT_Int xOffset = (FT_Int)(face->glyph->metrics.horiBearingX >> 6);
+	FT_Int xAdvance = (FT_Int)(face->glyph->metrics.horiAdvance >> 6);
+	
+	state.Push(xOffset);
+	state.Push(xAdvance);
+	
+	return 2;
+}
+
+//----------------------------------------------------------------//
 /**	@name	getDefaultSize
 	@text	Requests the font's default size
  
@@ -136,6 +173,7 @@ int MOAIFreeTypeFont::_getDefaultSize(lua_State *L){
 	state.Push( self->mDefaultSize );
 	return 1;
 }
+
 //----------------------------------------------------------------//
 /**	@name	getFilename
 	@text	Returns the filename of the font.
@@ -1410,9 +1448,9 @@ void MOAIFreeTypeFont::RegisterLuaFuncs(MOAILuaState &state){
 	luaL_Reg regTable [] = {
 		{ "dimensionsOfLine",			_dimensionsOfLine },
 		{ "dimensionsWithMaxWidth",		_dimensionsWithMaxWidth },
-		{ "dimensionsOfGlyph",			_dimensionsOfGlyph },
 		{ "getDefaultSize",				_getDefaultSize },
 		{ "getFilename",				_getFilename },
+		{ "getGlyphMetrics",			_getGlyphMetrics },
 		{ "load",						_load },
 		{ "optimalSize",				_optimalSize },
 		{ "renderTexture",				_renderTexture },
