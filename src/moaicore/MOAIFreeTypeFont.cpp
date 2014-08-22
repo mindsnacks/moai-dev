@@ -125,15 +125,16 @@ int MOAIFreeTypeFont::_dimensionsWithMaxWidth(lua_State *L){
 
 //----------------------------------------------------------------//
 /** @name	getGlyphMetrics
- @text	Returns the xOffset and xAdvance values used for positioning
-		a glyph a the given font size.
+ @text	Returns the xOffset, xAdvance, lineHeight, and baselineY
+		values used for positioning a glyph a the given font size.
  
  @in	MOAIFont	self
  @in	string		character			The character whose glyph metrics will be returned
  @in	number		fontSize
- @out	number		width
- @out	number		height
- @out	table		glyphTable
+ @out	number		xOffset
+ @out	number		xAdvance
+  @out	number		baselineY
+ @out	number		lineHeight
  
  */
 int MOAIFreeTypeFont::_getGlyphMetrics(lua_State *L){
@@ -153,11 +154,15 @@ int MOAIFreeTypeFont::_getGlyphMetrics(lua_State *L){
 	
 	FT_Int xOffset = (FT_Int)(face->glyph->metrics.horiBearingX >> 6);
 	FT_Int xAdvance = (FT_Int)(face->glyph->metrics.horiAdvance >> 6);
+	FT_Int lineHeight = (FT_Int)(face->size->metrics.height >> 6);
+	FT_Int baselineY = (FT_Int)(face->glyph->metrics.vertAdvance >> 6);
 	
 	state.Push(xOffset);
 	state.Push(xAdvance);
+	state.Push(lineHeight);
+	state.Push(baselineY);
 	
-	return 2;
+	return 4;
 }
 
 //----------------------------------------------------------------//
