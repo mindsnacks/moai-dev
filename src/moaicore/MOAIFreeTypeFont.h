@@ -81,7 +81,7 @@ protected:
 	void				BuildLine				(u32* buffer, size_t buf_len, int pen_x,
 												 u32 lastChar, u32 startIndex);
 	void				BuildLine				(u32* buffer, size_t bufferLength, u32 startIndex);
-	int					ComputeLineStart		(FT_UInt unicode, int lineIndex,
+	int					ComputeLineStart		(FT_UInt unicode, size_t lineIndex,
 												 int alignment, FT_Int imageWidth);
 	int					ComputeLineStartY		(int textHeight, FT_Int imageHeight, int vAlign);
 	USRect				DimensionsOfLine		(cc8* text, float fontSize, FT_Vector **glyphPositions,
@@ -94,11 +94,12 @@ protected:
 	void				GenerateLines			( FT_Int imageWidth, cc8* text, int wordBreak);
 	void				InitBitmapData			( u32 width, u32 height );
 	static int			NewPropFromFittedTexture( MOAILuaState& state, bool singleLine);
-	static void			PushRectAndBaselineToLuaTable	(USRect rect, int *baseline, u32 index, MOAILuaState &state);
+	static void			PushRectAndBaselineToLuaTable	(USRect rect, int *baseline, u32 index, MOAILuaState &state, u32 wideChar = 0);
 	void				RenderLines				( FT_Int imageWidth, FT_Int imageHeight, int hAlign,
 												 int vAlign, bool returnGlyphBounds, float lineSpacing,
 												 MOAILuaState& state);
 	void				ResetBitmapData			();
+	void				StoreGlyphAndAdvanceAtIndex		(size_t index);
 	int					WidthOfString			(u32* buffer, size_t bufferLength, u32 startIndex = 0);
 	
 	
