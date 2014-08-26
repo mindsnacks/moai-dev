@@ -76,6 +76,7 @@ public:
 	void		Comment					( cc8* comment );
 	void		EndTest					( bool result );
 	void		Failure					( cc8* type, cc8* detail );
+	bool		GetStaging				();
 				MOAITestMgr				();
 				~MOAITestMgr			();
 	void		PushTestList			( MOAILuaState& state );
