@@ -527,6 +527,9 @@ void MOAITestMgr::PrintResult ( cc8* format, ... ) {
 	va_list args;
 	va_start ( args, format );
 	vfprintf ( this->mResultsFile, format, args );
+	va_end ( args );
+	
+	va_start ( args, format );
 	vfprintf ( stdout, format, args );
 	va_end ( args );
 }
