@@ -8239,7 +8239,6 @@
 					"\"../../3rdparty/facebookiOS-3.0.6.b/src\"",
 					"../../3rdparty/sfmt-1.4/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = (
 					"-include",
 					"\"zlcore/zl_replace.h\"",
@@ -8445,7 +8444,6 @@
 					"\"../../3rdparty/facebookiOS-3.0.6.b/src\"",
 					"../../3rdparty/sfmt-1.4/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-include",

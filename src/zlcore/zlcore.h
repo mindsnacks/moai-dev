@@ -31,7 +31,7 @@ typedef struct zl_stat {
 //================================================================//
 
 typedef void ZLDIR;
-typedef void ZLFILE;
+typedef FILE ZLFILE;
 typedef void ZL_TLSF_POOL;
 
 extern ZLFILE* zl_stderr;
