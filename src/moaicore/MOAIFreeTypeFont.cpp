@@ -1186,7 +1186,7 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 							 !MOAIFont::IsWhitespace(wordBreakCharacter)){
 						// test to see if the word break character is being cut off
 						if (unicode == wordBreakCharacter && n == tokenIndex) {
-							return -1;
+							goto failed;
 						}
 						
 					}
@@ -1231,8 +1231,7 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 					}
 					else{
 						// we don't words broken up when calculating optimal size
-						// return a failure code that is less than zero
-						return -1;
+						goto failed;
 					}
 				}
 			}
@@ -1254,7 +1253,12 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 		this->BuildLine(textBuffer, textLength, startIndex);
 		free(textBuffer);
 	}
-	
+
+	goto success;
+
+failed:
+	numberOfLines = -1; // a return value < 0 indicates an error condition.
+success:
 	// clean up the glyph array
 	deleteGlyphArray(this->mGlyphArray, glyphArraySize);
 
