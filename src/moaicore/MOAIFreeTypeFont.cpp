@@ -1064,6 +1064,13 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 	size_t glyphArrayIndex = 0;
 	int rewindCount = 0;
 	
+	// initialize mGlyphArray
+	size_t glyphArraySize = glyphsInText(text);
+	this->mGlyphArray = new FT_Glyph [ glyphArraySize ];
+
+	// initialize mAdvanceArray
+	this->mAdvanceArray = new FT_Vector [ glyphArraySize ];
+
 	u32* textBuffer = NULL;
 	if (generateLines) {
 		textBuffer = (u32 *) calloc(strlen(text), sizeof(u32));
@@ -1248,6 +1255,16 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 		free(textBuffer);
 	}
 	
+	// clean up the glyph array
+	deleteGlyphArray(this->mGlyphArray, glyphArraySize);
+
+	// clean up the advance array
+	delete [] this->mAdvanceArray;
+
+	// set member variable arrays to NULL
+	this->mGlyphArray = NULL;
+	this->mAdvanceArray = NULL;
+
 	return numberOfLines;
 }
 
