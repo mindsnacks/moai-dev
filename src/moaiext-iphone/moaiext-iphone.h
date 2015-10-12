@@ -1,16 +1,16 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#import <moaiext-iphone/MOAIAdColonyIOS.h>
+//#import <moaiext-iphone/MOAIAdColonyIOS.h>
 #import <moaiext-iphone/MOAIAppIOS.h>
-#import <moaiext-iphone/MOAICrittercismIOS.h>
-#import <moaiext-iphone/MOAIDialogIOS.h>
-#import <moaiext-iphone/MOAIGameCenterIOS.h>
-#import <moaiext-iphone/MOAIKeyboardIOS.h>
-#import <moaiext-iphone/MOAIMoviePlayerIOS.h>
-#import <moaiext-iphone/MOAINotificationsIOS.h>
-#import <moaiext-iphone/MOAIWebViewDelegate.h>
-#import <moaiext-iphone/MOAIWebViewIOS.h>
+//#import <moaiext-iphone/MOAICrittercismIOS.h>
+//#import <moaiext-iphone/MOAIDialogIOS.h>
+//#import <moaiext-iphone/MOAIGameCenterIOS.h>
+//#import <moaiext-iphone/MOAIKeyboardIOS.h>
+//#import <moaiext-iphone/MOAIMoviePlayerIOS.h>
+//#import <moaiext-iphone/MOAINotificationsIOS.h>
+//#import <moaiext-iphone/MOAIWebViewDelegate.h>
+//#import <moaiext-iphone/MOAIWebViewIOS.h>
 
 #import <moaiext-iphone/NSArray+MOAILib.h>
 #import <moaiext-iphone/NSData+MOAILib.h>

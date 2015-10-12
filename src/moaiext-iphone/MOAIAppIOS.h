@@ -5,13 +5,13 @@
 #define	MOAIAPPIOS_H
 
 #import <Foundation/Foundation.h>
-#import <MessageUI/MFMailComposeViewController.h>
+//#import <MessageUI/MFMailComposeViewController.h>
 #import <UIKit/UIKit.h>
 
 #import <moaicore/moaicore.h>
 
-@class MoaiMailComposeDelegate;
-@class MOAITakeCameraListener;
+//@class MoaiMailComposeDelegate;
+//@class MOAITakeCameraListener;
 
 //================================================================//
 // MOAIAppIOS
@@ -32,14 +32,14 @@ class MOAIAppIOS :
 	public MOAIGlobalClass < MOAIAppIOS, MOAILuaObject > {
 private:
 
-	MoaiMailComposeDelegate* mMailDelegate;
+//	MoaiMailComposeDelegate* mMailDelegate;
 		
 	//----------------------------------------------------------------//
-	static int	_getDirectoryInDomain	( lua_State* L );
-	static int	_getUTCTime				( lua_State* L );
-	static int	_sendMail				( lua_State* L );
-	static int	_setListener			( lua_State* L );
-	static int  _takeCamera             ( lua_State* L );
+//	static int	_getDirectoryInDomain	( lua_State* L );
+//	static int	_getUTCTime				( lua_State* L );
+//	static int	_sendMail				( lua_State* L );
+//	static int	_setListener			( lua_State* L );
+//	static int  _takeCamera             ( lua_State* L );
 		
 public:
 	
@@ -63,8 +63,8 @@ public:
 	UIApplication*			mApplication;
 	MOAILuaRef				mListeners [ TOTAL ];
 	MOAILuaRef				mOnTakeCameraCallback;
-	MOAITakeCameraListener* mTakeCameraListener;
-	UIPopoverController*	mImagePickerPopover;
+//	MOAITakeCameraListener* mTakeCameraListener;
+//	UIPopoverController*	mImagePickerPopover;
 
 			MOAIAppIOS			();
 			~MOAIAppIOS			();
@@ -79,9 +79,9 @@ public:
 //================================================================//
 // MoaiMailComposeDelegate
 //================================================================//
-@interface MoaiMailComposeDelegate : NSObject < MFMailComposeViewControllerDelegate > {
-@private
-}
-@end
+//@interface MoaiMailComposeDelegate : NSObject < MFMailComposeViewControllerDelegate > {
+//@private
+//}
+//@end
 
 #endif

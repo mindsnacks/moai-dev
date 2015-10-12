@@ -4,8 +4,8 @@
 #import <aku/AKU-iphone.h>
 #import <moaiext-iphone/moaiext-iphone.h>
 
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <CoreTelephony/CTCarrier.h>
+//#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+//#import <CoreTelephony/CTCarrier.h>
 
 //-----------------------------------------------------------------//
 void AKUAppDidStartSession ( bool resumed ) {
@@ -45,27 +45,27 @@ void AKUIphoneInit ( UIApplication* application ) {
 			
 	// MOAI
 	REGISTER_LUA_CLASS ( MOAIAppIOS )
-	REGISTER_LUA_CLASS ( MOAIDialogIOS )
-	REGISTER_LUA_CLASS ( MOAIGameCenterIOS )
-	REGISTER_LUA_CLASS ( MOAIKeyboardIOS )
-	REGISTER_LUA_CLASS ( MOAIMoviePlayerIOS )
-	REGISTER_LUA_CLASS ( MOAIWebViewIOS )
+//	REGISTER_LUA_CLASS ( MOAIDialogIOS )
+//	REGISTER_LUA_CLASS ( MOAIGameCenterIOS )
+//	REGISTER_LUA_CLASS ( MOAIKeyboardIOS )
+//	REGISTER_LUA_CLASS ( MOAIMoviePlayerIOS )
+//	REGISTER_LUA_CLASS ( MOAIWebViewIOS )
 
-	#ifndef DISABLE_TWITTER
-		REGISTER_LUA_CLASS ( MOAITwitterIOS )
-	#endif
-	
-	#ifndef DISABLE_TAPJOY
-		REGISTER_LUA_CLASS ( MOAITapjoyIOS )
-	#endif
-
-	#ifndef DISABLE_NOTIFICATIONS
-		REGISTER_LUA_CLASS ( MOAINotificationsIOS )
-	#endif
-
-	#ifndef DISABLE_CRITTERCISM
-		REGISTER_LUA_CLASS ( MOAICrittercismIOS )
-	#endif
+//	#ifndef DISABLE_TWITTER
+//		REGISTER_LUA_CLASS ( MOAITwitterIOS )
+//	#endif
+//	
+//	#ifndef DISABLE_TAPJOY
+//		REGISTER_LUA_CLASS ( MOAITapjoyIOS )
+//	#endif
+//
+//	#ifndef DISABLE_NOTIFICATIONS
+//		REGISTER_LUA_CLASS ( MOAINotificationsIOS )
+//	#endif
+//
+//	#ifndef DISABLE_CRITTERCISM
+//		REGISTER_LUA_CLASS ( MOAICrittercismIOS )
+//	#endif
 	
 	// Device properties
 	MOAIEnvironment& environment = MOAIEnvironment::Get ();
@@ -90,43 +90,43 @@ void AKUIphoneInit ( UIApplication* application ) {
 }
 
 //----------------------------------------------------------------//
-void AKUNotifyLocalNotificationReceived ( UILocalNotification* notification ) {
-	
-#ifndef DISABLE_NOTIFICATIONS
-	MOAINotificationsIOS::Get ().NotifyLocalNotificationReceived ( notification );
-#endif
-}
+//void AKUNotifyLocalNotificationReceived ( UILocalNotification* notification ) {
+//	
+//#ifndef DISABLE_NOTIFICATIONS
+//	MOAINotificationsIOS::Get ().NotifyLocalNotificationReceived ( notification );
+//#endif
+//}
 
 //----------------------------------------------------------------//
-void AKUNotifyRemoteNotificationReceived ( NSDictionary* notification ) {
-
-#ifndef DISABLE_NOTIFICATIONS
-	MOAINotificationsIOS::Get ().NotifyRemoteNotificationReceived ( notification );
-#endif
-}
+//void AKUNotifyRemoteNotificationReceived ( NSDictionary* notification ) {
+//
+//#ifndef DISABLE_NOTIFICATIONS
+//	MOAINotificationsIOS::Get ().NotifyRemoteNotificationReceived ( notification );
+//#endif
+//}
 
 //----------------------------------------------------------------//
-void AKUNotifyRemoteNotificationRegistrationComplete ( NSData* deviceToken ) {
-
-#ifndef DISABLE_NOTIFICATIONS
-	MOAINotificationsIOS::Get ().NotifyRemoteRegistrationComplete ( deviceToken );
-#endif
-}
+//void AKUNotifyRemoteNotificationRegistrationComplete ( NSData* deviceToken ) {
+//
+//#ifndef DISABLE_NOTIFICATIONS
+//	MOAINotificationsIOS::Get ().NotifyRemoteRegistrationComplete ( deviceToken );
+//#endif
+//}
 
 //-----------------------------------------------------------------//
-void AKUSetConnectionType ( long type ) {
-	
-	MOAIEnvironment& environment = MOAIEnvironment::Get ();
-	environment.SetValue ( MOAI_ENV_connectionType, ( int )type );
-	
-	// If we have a cellualr connection, get carrier information
-	if ( type == CONNECTION_TYPE_WWAN ) {
-	
-		CTCarrier* carrierInfo = [[[ CTTelephonyNetworkInfo alloc ] init ] subscriberCellularProvider ];
-		
-		environment.SetValue ( MOAI_ENV_carrierISOCountryCode,		[ carrierInfo.isoCountryCode UTF8String ]);
-		environment.SetValue ( MOAI_ENV_carrierMobileCountryCode,	[[carrierInfo mobileCountryCode ] UTF8String ]);
-		environment.SetValue ( MOAI_ENV_carrierName,				[[carrierInfo carrierName ] UTF8String ]);
-		environment.SetValue ( MOAI_ENV_carrierMobileNetworkCode,	[[carrierInfo mobileNetworkCode ] UTF8String ]);
-	}
-}
+//void AKUSetConnectionType ( long type ) {
+//	
+//	MOAIEnvironment& environment = MOAIEnvironment::Get ();
+//	environment.SetValue ( MOAI_ENV_connectionType, ( int )type );
+//	
+//	// If we have a cellualr connection, get carrier information
+//	if ( type == CONNECTION_TYPE_WWAN ) {
+//	
+//		CTCarrier* carrierInfo = [[[ CTTelephonyNetworkInfo alloc ] init ] subscriberCellularProvider ];
+//		
+//		environment.SetValue ( MOAI_ENV_carrierISOCountryCode,		[ carrierInfo.isoCountryCode UTF8String ]);
+//		environment.SetValue ( MOAI_ENV_carrierMobileCountryCode,	[[carrierInfo mobileCountryCode ] UTF8String ]);
+//		environment.SetValue ( MOAI_ENV_carrierName,				[[carrierInfo carrierName ] UTF8String ]);
+//		environment.SetValue ( MOAI_ENV_carrierMobileNetworkCode,	[[carrierInfo mobileNetworkCode ] UTF8String ]);
+//	}
+//}

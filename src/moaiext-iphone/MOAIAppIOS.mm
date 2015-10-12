@@ -9,7 +9,7 @@
 #import <moaiext-iphone/NSDictionary+MOAILib.h>
 #import <moaiext-iphone/NSError+MOAILib.h>
 #import <moaiext-iphone/NSString+MOAILib.h>
-#import <moaiext-iphone/MOAITakeCameraListener.h>
+//#import <moaiext-iphone/MOAITakeCameraListener.h>
 
 //================================================================//
 // lua
@@ -26,52 +26,52 @@
 
  */
  
-int MOAIAppIOS::_takeCamera( lua_State* L ) {
-	
-	int x, y, width, height = 0;
-	NSUInteger sourceType;
-	
-	MOAILuaState state ( L );
-	if ( state.IsType ( 1, LUA_TFUNCTION )) {
-		MOAIAppIOS::Get ().mOnTakeCameraCallback.SetStrongRef ( state, 1 );
-	}
-	
-	sourceType = state.GetValue < NSUInteger >( 2, 0 );
-	x = state.GetValue < int >( 3, 0 );
-	y = state.GetValue < int >( 4, 0 );
-	width = state.GetValue < int >( 5, 0 );
-	height = state.GetValue < int >( 6, 0 );
-	
-	UIImagePickerController *ipc = [[UIImagePickerController alloc]
-									init]; 
-	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	UIViewController* rootVC = [ window rootViewController ];
+//int MOAIAppIOS::_takeCamera( lua_State* L ) {
+//	
+//	int x, y, width, height = 0;
+//	NSUInteger sourceType;
+//	
+//	MOAILuaState state ( L );
+//	if ( state.IsType ( 1, LUA_TFUNCTION )) {
+//		MOAIAppIOS::Get ().mOnTakeCameraCallback.SetStrongRef ( state, 1 );
+//	}
+//	
+//	sourceType = state.GetValue < NSUInteger >( 2, 0 );
+//	x = state.GetValue < int >( 3, 0 );
+//	y = state.GetValue < int >( 4, 0 );
+//	width = state.GetValue < int >( 5, 0 );
+//	height = state.GetValue < int >( 6, 0 );
+//	
+////	UIImagePickerController *ipc = [[UIImagePickerController alloc]
+////									init]; 
+//	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+//	UIViewController* rootVC = [ window rootViewController ];
+//
+////	ipc.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
+////	ipc.sourceType = sourceType;
+//	
+////	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+////		MOAIAppIOS::Get().mImagePickerPopover = [[UIPopoverController alloc]
+////												   initWithContentViewController: ipc];
+////		[MOAIAppIOS::Get ().mTakeCameraListener setPopover:MOAIAppIOS::Get().mImagePickerPopover];
+////		MOAIAppIOS::Get().mImagePickerPopover.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
+////		CGRect rect = CGRectMake(x,y,10,10);
+////		[MOAIAppIOS::Get().mImagePickerPopover presentPopoverFromRect:rect inView:[rootVC view] 
+////						  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+//
+////	} else {
+////		[rootVC presentModalViewController:ipc animated:YES];
+////	}
+//	
+//	return 0;
+//}
 
-	ipc.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
-	ipc.sourceType = sourceType;
-	
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-		MOAIAppIOS::Get().mImagePickerPopover = [[UIPopoverController alloc] 
-												   initWithContentViewController: ipc];
-		[MOAIAppIOS::Get ().mTakeCameraListener setPopover:MOAIAppIOS::Get().mImagePickerPopover];
-		MOAIAppIOS::Get().mImagePickerPopover.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
-		CGRect rect = CGRectMake(x,y,10,10);
-		[MOAIAppIOS::Get().mImagePickerPopover presentPopoverFromRect:rect inView:[rootVC view] 
-						  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-
-	} else {
-		[rootVC presentModalViewController:ipc animated:YES];
-	}
-	
-	return 0;
-}
-
-void MOAIAppIOS::callTakeCameraLuaCallback (NSString *imagePath) {
-	MOAILuaRef& callback = MOAIAppIOS::Get ().mOnTakeCameraCallback;
-	MOAILuaStateHandle state = callback.GetSelf ();
-	state.Push ([imagePath UTF8String]);
-	state.DebugCall ( 1, 0 );
-}
+//void MOAIAppIOS::callTakeCameraLuaCallback (NSString *imagePath) {
+//	MOAILuaRef& callback = MOAIAppIOS::Get ().mOnTakeCameraCallback;
+//	MOAILuaStateHandle state = callback.GetSelf ();
+//	state.Push ([imagePath UTF8String]);
+//	state.DebugCall ( 1, 0 );
+//}
 
 //----------------------------------------------------------------//
 /**	@name	getDirectoryInDomain
@@ -81,38 +81,38 @@ void MOAIAppIOS::callTakeCameraLuaCallback (NSString *imagePath) {
 	@in		string domain		The domain to search.
 	@out	string directory	The directory associated with the given domain.
 */
-int MOAIAppIOS::_getDirectoryInDomain ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	u32 dirCode = state.GetValue<u32>( 1, 0 ); 
-	
-	if( dirCode == 0 ) {
-		
-		lua_pushstring ( L, "" );
-	}
-	else {
-	
-		NSString *dir = [ NSSearchPathForDirectoriesInDomains ( dirCode, NSUserDomainMask, YES ) lastObject ];
-
-		if ( ![[ NSFileManager defaultManager ] fileExistsAtPath:dir ]) {
-			
-			NSError *error;
-			if ( ![[ NSFileManager defaultManager ] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:&error ]) {
-				
-				NSLog ( @"Error creating directory %@: %@", dir, error );
-
-				lua_pushstring ( L, "" );
-
-				return 1;
-			}
-		}
-	
-		[ dir toLua:L ];
-	}
-	
-	return 1;
-}
+//int MOAIAppIOS::_getDirectoryInDomain ( lua_State* L ) {
+//	
+//	MOAILuaState state ( L );
+//	
+//	u32 dirCode = state.GetValue<u32>( 1, 0 ); 
+//	
+//	if( dirCode == 0 ) {
+//		
+//		lua_pushstring ( L, "" );
+//	}
+//	else {
+//	
+//		NSString *dir = [ NSSearchPathForDirectoriesInDomains ( dirCode, NSUserDomainMask, YES ) lastObject ];
+//
+//		if ( ![[ NSFileManager defaultManager ] fileExistsAtPath:dir ]) {
+//			
+//			NSError *error;
+//			if ( ![[ NSFileManager defaultManager ] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:&error ]) {
+//				
+//				NSLog ( @"Error creating directory %@: %@", dir, error );
+//
+//				lua_pushstring ( L, "" );
+//
+//				return 1;
+//			}
+//		}
+//	
+//		[ dir toLua:L ];
+//	}
+//	
+//	return 1;
+//}
 
 //----------------------------------------------------------------//
 /**	@name	getUTCTime
@@ -121,14 +121,14 @@ int MOAIAppIOS::_getDirectoryInDomain ( lua_State* L ) {
  @in	nil
  @out	num UTC time in seconds
  */
-int MOAIAppIOS::_getUTCTime ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-
-	lua_pushnumber ( state, [[ NSDate date ] timeIntervalSince1970 ]);
-
-	return 1;
-}
+//int MOAIAppIOS::_getUTCTime ( lua_State* L ) {
+//	
+//	MOAILuaState state ( L );
+//
+//	lua_pushnumber ( state, [[ NSDate date ] timeIntervalSince1970 ]);
+//
+//	return 1;
+//}
 
 //----------------------------------------------------------------//
 /**	@name	sendMail
@@ -139,47 +139,47 @@ int MOAIAppIOS::_getUTCTime ( lua_State* L ) {
  @in	string message
  @out	nil
  */
-int MOAIAppIOS::_sendMail ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	cc8* recipient = state.GetValue < cc8* >( 1, "" );
-	cc8* subject = state.GetValue < cc8* >( 1, "" );
-	cc8* message = state.GetValue < cc8* >( 1, "" );
-	
-	MFMailComposeViewController* controller = [[ MFMailComposeViewController alloc ] init ];
-	controller.mailComposeDelegate = MOAIAppIOS::Get ().mMailDelegate;
-	
-	NSArray* to = [[ NSArray alloc ] arrayByAddingObject:[[ NSString alloc ] initWithUTF8String:recipient ]];
-	
-	[ controller setToRecipients:to ];
-	[ controller setSubject:[[ NSString alloc ] initWithUTF8String:subject ]];
-	[ controller setMessageBody:[[ NSString alloc ] initWithUTF8String:message ] isHTML:NO ]; 
-	
-	if (controller) {
-				
-		UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-		UIViewController* rootVC = [ window rootViewController ];	
-		[ rootVC presentModalViewController:controller animated:YES];
-	}
-		
-	return 1;
-}
+//int MOAIAppIOS::_sendMail ( lua_State* L ) {
+//	
+//	MOAILuaState state ( L );
+//	
+//	cc8* recipient = state.GetValue < cc8* >( 1, "" );
+//	cc8* subject = state.GetValue < cc8* >( 1, "" );
+//	cc8* message = state.GetValue < cc8* >( 1, "" );
+//	
+//	MFMailComposeViewController* controller = [[ MFMailComposeViewController alloc ] init ];
+//	controller.mailComposeDelegate = MOAIAppIOS::Get ().mMailDelegate;
+//	
+//	NSArray* to = [[ NSArray alloc ] arrayByAddingObject:[[ NSString alloc ] initWithUTF8String:recipient ]];
+//	
+//	[ controller setToRecipients:to ];
+//	[ controller setSubject:[[ NSString alloc ] initWithUTF8String:subject ]];
+//	[ controller setMessageBody:[[ NSString alloc ] initWithUTF8String:message ] isHTML:NO ]; 
+//	
+//	if (controller) {
+//				
+//		UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+//		UIViewController* rootVC = [ window rootViewController ];	
+//		[ rootVC presentModalViewController:controller animated:YES];
+//	}
+//		
+//	return 1;
+//}
 
 //----------------------------------------------------------------//
-int MOAIAppIOS::_setListener ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	u32 idx = state.GetValue < u32 >( 1, TOTAL );
-	
-	if ( idx < TOTAL ) {
-		
-		MOAIAppIOS::Get ().mListeners [ idx ].SetStrongRef ( state, 2 );
-	}
-	
-	return 0;
-}
+//int MOAIAppIOS::_setListener ( lua_State* L ) {
+//	
+//	MOAILuaState state ( L );
+//	
+//	u32 idx = state.GetValue < u32 >( 1, TOTAL );
+//	
+//	if ( idx < TOTAL ) {
+//		
+//		MOAIAppIOS::Get ().mListeners [ idx ].SetStrongRef ( state, 2 );
+//	}
+//	
+//	return 0;
+//}
 
 //================================================================//
 // MOAIAppIOS
@@ -190,8 +190,8 @@ MOAIAppIOS::MOAIAppIOS () {
 
 	RTTI_SINGLE ( MOAILuaObject )
 	
-	mMailDelegate = [ MoaiMailComposeDelegate alloc ];
-	this->mTakeCameraListener = [MOAITakeCameraListener alloc];
+//	mMailDelegate = [ MoaiMailComposeDelegate alloc ];
+//	this->mTakeCameraListener = [MOAITakeCameraListener alloc];
 }
 
 //----------------------------------------------------------------//
@@ -211,11 +211,11 @@ void MOAIAppIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "DOMAIN_CACHES",		( u32 )DOMAIN_CACHES );
 	
 	luaL_Reg regTable [] = {
-		{ "getDirectoryInDomain",	_getDirectoryInDomain },
-		{ "getUTCTime",				_getUTCTime },
-		{ "sendMail",				_sendMail },
-		{ "setListener",			_setListener },
-		{ "takeCamera",             _takeCamera },
+//		{ "getDirectoryInDomain",	_getDirectoryInDomain },
+//		{ "getUTCTime",				_getUTCTime },
+//		{ "sendMail",				_sendMail },
+//		{ "setListener",			_setListener },
+//		{ "takeCamera",             _takeCamera },
 		{ NULL, NULL }
 	};
 
@@ -268,26 +268,26 @@ void MOAIAppIOS::WillEndSession ( ) {
 //================================================================//
 // MoaiMailComposeDelegate
 //================================================================//
-@implementation MoaiMailComposeDelegate
+//@implementation MoaiMailComposeDelegate
+//
+////================================================================//
+//#pragma mark -
+//#pragma mark Protocol MoaiMailComposeDelegate
+////================================================================//
+//
+//- (void)mailComposeController:(MFMailComposeViewController*)controller  
+//          didFinishWithResult:(MFMailComposeResult)result 
+//                        error:(NSError*)error {
+//	UNUSED ( controller );
+//	UNUSED ( result );
+//	UNUSED ( error );
+//	
+//	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+//	UIViewController* rootVC = [ window rootViewController ];
+//	
+//	if ( rootVC ) {
+//		[ rootVC dismissModalViewControllerAnimated:YES ];
+//	}
+//}
 
-//================================================================//
-#pragma mark -
-#pragma mark Protocol MoaiMailComposeDelegate
-//================================================================//
-
-- (void)mailComposeController:(MFMailComposeViewController*)controller  
-          didFinishWithResult:(MFMailComposeResult)result 
-                        error:(NSError*)error {
-	UNUSED ( controller );
-	UNUSED ( result );
-	UNUSED ( error );
-	
-	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	UIViewController* rootVC = [ window rootViewController ];
-	
-	if ( rootVC ) {
-		[ rootVC dismissModalViewControllerAnimated:YES ];
-	}
-}
-
-@end
+//@end

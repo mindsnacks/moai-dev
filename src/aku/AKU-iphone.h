@@ -28,8 +28,8 @@ void			AKUAppWillEndSession							();
 const char*		AKUGetGUID										();
 void			AKUIphoneInit									( UIApplication* application );
 //void			AKUNotifyLocalNotificationReceived				( UILocalNotification* notification );
-void			AKUNotifyRemoteNotificationReceived				( NSDictionary* notification );
-void			AKUNotifyRemoteNotificationRegistrationComplete	( NSData* deviceToken );
+//void			AKUNotifyRemoteNotificationReceived				( NSDictionary* notification );
+//void			AKUNotifyRemoteNotificationRegistrationComplete	( NSData* deviceToken );
 void			AKUSetConnectionType							( long type );
 void			AKUViewDidRotateFromInterfaceOrientation		( UIInterfaceOrientation orientation );
 

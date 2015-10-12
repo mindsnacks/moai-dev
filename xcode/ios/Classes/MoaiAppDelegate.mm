@@ -37,7 +37,7 @@
 	//----------------------------------------------------------------//
 	-( void ) application:( UIApplication* )application didFailToRegisterForRemoteNotificationsWithError:( NSError* )error {
 	
-		AKUNotifyRemoteNotificationRegistrationComplete ( nil );
+		//AKUNotifyRemoteNotificationRegistrationComplete ( nil );
 	}
 
 	//----------------------------------------------------------------//
@@ -87,13 +87,13 @@
 	//----------------------------------------------------------------//
 	-( void ) application:( UIApplication* )application didReceiveRemoteNotification:( NSDictionary* )pushBundle {
 		
-		AKUNotifyRemoteNotificationReceived ( pushBundle );
+//		AKUNotifyRemoteNotificationReceived ( pushBundle );
 	}
 	
 	//----------------------------------------------------------------//
 	-( void ) application:( UIApplication* )application didRegisterForRemoteNotificationsWithDeviceToken:( NSData* )deviceToken {
 	
-		AKUNotifyRemoteNotificationRegistrationComplete ( deviceToken );
+//		AKUNotifyRemoteNotificationRegistrationComplete ( deviceToken );
 	}
 	
 	//----------------------------------------------------------------//

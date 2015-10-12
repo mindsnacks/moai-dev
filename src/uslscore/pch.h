@@ -28,10 +28,10 @@ extern "C" {
 using namespace std;
 
 // stream
-#include <fstream>
+//#include <fstream>
 #include <iostream>
 #include <iomanip>
-#include <fstream>
+//#include <fstream>
 #include <sstream>
 
 //----------------------------------------------------------------//
