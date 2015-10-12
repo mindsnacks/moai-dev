@@ -43,11 +43,11 @@
 	//----------------------------------------------------------------//
 	-( BOOL ) application:( UIApplication* )application didFinishLaunchingWithOptions:( NSDictionary* )launchOptions {
 		
-		[ application setStatusBarHidden:true ];
+//		[ application setStatusBarHidden:true ];
 		
 		mMoaiView = [[ MoaiView alloc ] initWithFrame:[ UIScreen mainScreen ].bounds ];
 		[ mMoaiView setUserInteractionEnabled:YES ];
-		[ mMoaiView setMultipleTouchEnabled:YES ];
+//		[ mMoaiView setMultipleTouchEnabled:YES ];
 		[ mMoaiView setOpaque:YES ];
 		[ mMoaiView setAlpha:1.0f ];
 
@@ -56,7 +56,7 @@
 		
 		mWindow = [[ UIWindow alloc ] initWithFrame:[ UIScreen mainScreen ].bounds ];
 		[ mWindow setUserInteractionEnabled:YES ];
-		[ mWindow setMultipleTouchEnabled:YES ];
+//		[ mWindow setMultipleTouchEnabled:YES ];
 		[ mWindow setOpaque:YES ];
 		[ mWindow setAlpha:1.0f ];
 		[ mWindow addSubview:mMoaiView ];
@@ -73,11 +73,11 @@
 		[ mMoaiView run:@"main.lua" ];
 		
         // check to see if the app was lanuched from a remote notification
-        NSDictionary* pushBundle = [ launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey ];
-        if ( pushBundle != NULL ) {
-            
-            AKUNotifyRemoteNotificationReceived ( pushBundle );
-        }
+//        NSDictionary* pushBundle = [ launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey ];
+//        if ( pushBundle != NULL ) {
+//            
+//            AKUNotifyRemoteNotificationReceived ( pushBundle );
+//        }
 		
 		// return
 		return true;

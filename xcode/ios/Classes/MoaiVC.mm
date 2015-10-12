@@ -64,21 +64,21 @@
 	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation {
 		
-		MoaiView* view = ( MoaiView* )self.view;        
-		
-		if (( orientation == UIInterfaceOrientationPortrait ) || ( orientation == UIInterfaceOrientationPortraitUpsideDown )) {
-            
-            if ([ view akuInitialized ] != 0 ) {
-                AKUSetOrientation ( AKU_ORIENTATION_PORTRAIT );
-                AKUSetViewSize (( int )view.width, ( int )view.height );
-            }
-		}
-		else if (( orientation == UIInterfaceOrientationLandscapeLeft ) || ( orientation == UIInterfaceOrientationLandscapeRight )) {
-            if ([ view akuInitialized ] != 0 ) {
-                AKUSetOrientation ( AKU_ORIENTATION_LANDSCAPE );
-                AKUSetViewSize (( int )view.height, ( int )view.width);
-            }
-		}
+//		MoaiView* view = ( MoaiView* )self.view;        
+//		
+//		if (( orientation == UIInterfaceOrientationPortrait ) || ( orientation == UIInterfaceOrientationPortraitUpsideDown )) {
+//            
+//            if ([ view akuInitialized ] != 0 ) {
+//                AKUSetOrientation ( AKU_ORIENTATION_PORTRAIT );
+//                AKUSetViewSize (( int )view.width, ( int )view.height );
+//            }
+//		}
+//		else if (( orientation == UIInterfaceOrientationLandscapeLeft ) || ( orientation == UIInterfaceOrientationLandscapeRight )) {
+//            if ([ view akuInitialized ] != 0 ) {
+//                AKUSetOrientation ( AKU_ORIENTATION_LANDSCAPE );
+//                AKUSetViewSize (( int )view.height, ( int )view.width);
+//            }
+//		}
 	}
 	
 @end

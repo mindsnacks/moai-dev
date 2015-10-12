@@ -18,7 +18,7 @@
 //================================================================//
 // MoaiView
 //================================================================//
-@interface MoaiView : OpenGLView < UIAccelerometerDelegate > {
+@interface MoaiView : OpenGLView {
 @private
 	
 	AKUContextID					mAku;

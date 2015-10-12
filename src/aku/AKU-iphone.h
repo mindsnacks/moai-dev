@@ -27,7 +27,7 @@ void			AKUAppOpenFromURL								( NSURL* url );
 void			AKUAppWillEndSession							();
 const char*		AKUGetGUID										();
 void			AKUIphoneInit									( UIApplication* application );
-void			AKUNotifyLocalNotificationReceived				( UILocalNotification* notification );
+//void			AKUNotifyLocalNotificationReceived				( UILocalNotification* notification );
 void			AKUNotifyRemoteNotificationReceived				( NSDictionary* notification );
 void			AKUNotifyRemoteNotificationRegistrationComplete	( NSData* deviceToken );
 void			AKUSetConnectionType							( long type );

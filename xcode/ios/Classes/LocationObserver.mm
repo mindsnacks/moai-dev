@@ -79,8 +79,9 @@ static double _getSpeed ( CLLocation* location1, CLLocation* location2 ) {
 
 	//----------------------------------------------------------------//
 	-( BOOL ) headingAvailable {
-	
-		return [ CLLocationManager headingAvailable ];
+        
+        return NO;
+		// return [ CLLocationManager headingAvailable ];
 	}
 
 	//----------------------------------------------------------------//
@@ -140,21 +141,21 @@ static double _getSpeed ( CLLocation* location1, CLLocation* location2 ) {
 	//----------------------------------------------------------------//
 	-( void ) start {
 		
-		[ mLocMgr startUpdatingLocation ];
-		
-		if ([ CLLocationManager headingAvailable ]) {
-			[ mLocMgr startUpdatingHeading ];
-		}
+//		[ mLocMgr startUpdatingLocation ];
+//		
+//		if ([ CLLocationManager headingAvailable ]) {
+//			[ mLocMgr startUpdatingHeading ];
+//		}
 	}
 	
 	//----------------------------------------------------------------//
 	-( void ) stop {
 		
-		[ mLocMgr stopUpdatingLocation ];
-		
-		if ([ CLLocationManager headingAvailable ]) {
-			[ mLocMgr stopUpdatingHeading ];
-		}
+//		[ mLocMgr stopUpdatingLocation ];
+//		
+//		if ([ CLLocationManager headingAvailable ]) {
+//			[ mLocMgr stopUpdatingHeading ];
+//		}
 	}
 
 	//================================================================//

@@ -75,17 +75,17 @@ namespace MoaiInputDeviceSensorID {
     SYNTHESIZE	( GLint, height, Height );
 
 	//----------------------------------------------------------------//
-	-( void ) accelerometer:( UIAccelerometer* )acel didAccelerate:( UIAcceleration* )acceleration {
-		( void )acel;
-		
-		AKUEnqueueLevelEvent (
-			MoaiInputDeviceID::DEVICE,
-			MoaiInputDeviceSensorID::LEVEL,
-			( float )acceleration.x,
-			( float )acceleration.y,
-			( float )acceleration.z
-		);
-	}
+//	-( void ) accelerometer:( UIAccelerometer* )acel didAccelerate:( UIAcceleration* )acceleration {
+//		( void )acel;
+//		
+//		AKUEnqueueLevelEvent (
+//			MoaiInputDeviceID::DEVICE,
+//			MoaiInputDeviceSensorID::LEVEL,
+//			( float )acceleration.x,
+//			( float )acceleration.y,
+//			( float )acceleration.z
+//		);
+//	}
 
     //----------------------------------------------------------------//
     -( AKUContextID ) akuInitialized {
@@ -127,7 +127,7 @@ namespace MoaiInputDeviceSensorID {
 			AKUEnqueueTouchEvent (
 				MoaiInputDeviceID::DEVICE,
 				MoaiInputDeviceSensorID::TOUCH,
-				( int )touch, // use the address of the touch as a unique id
+				( long )touch, // use the address of the touch as a unique id
 				down,
 				p.x * [[ UIScreen mainScreen ] scale ],
 				p.y * [[ UIScreen mainScreen ] scale ]
@@ -218,9 +218,9 @@ namespace MoaiInputDeviceSensorID {
 		[ mLocationObserver setHeadingDelegate:self :@selector ( onUpdateHeading: )];
 		[ mLocationObserver setLocationDelegate:self :@selector ( onUpdateLocation: )];
 		
-		UIAccelerometer* accel = [ UIAccelerometer sharedAccelerometer ];
-		accel.delegate = self;
-		accel.updateInterval = mAnimInterval / 60;
+//		UIAccelerometer* accel = [ UIAccelerometer sharedAccelerometer ];
+//		accel.delegate = self;
+//		accel.updateInterval = mAnimInterval / 60;
 		
 		// init aku
 		AKUIphoneInit ( application );
