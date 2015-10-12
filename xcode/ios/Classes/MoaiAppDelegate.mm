@@ -66,11 +66,11 @@
 		[ mMoaiView moaiInit:application ];
 		
 		// select product folder
-		NSString* luaFolder = [[[ NSBundle mainBundle ] resourcePath ] stringByAppendingString:@"/lua" ];
+		NSString* luaFolder = [[[ NSBundle mainBundle ] resourcePath ] stringByAppendingString:@"/shared_source" ];
 		AKUSetWorkingDirectory ([ luaFolder UTF8String ]);
 		
 		// run scripts
-		[ mMoaiView run:@"main.lua" ];
+		[ mMoaiView run:@"buzz_main.lua" ];
 		
         // check to see if the app was lanuched from a remote notification
 //        NSDictionary* pushBundle = [ launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey ];
