@@ -123,18 +123,21 @@ namespace MoaiInputDeviceSensorID {
 		for ( UITouch* touch in touches ) {
 			
 			CGPoint p = [ touch locationInView:self ];
+            
+            float x = p.x;
+            float y = p.y;
 			
 			AKUEnqueueTouchEvent (
 				MoaiInputDeviceID::DEVICE,
 				MoaiInputDeviceSensorID::TOUCH,
-				( long )touch, // use the address of the touch as a unique id
+				(int)(long)touch, // use the address of the touch as a unique id
 				down,
-				p.x * [[ UIScreen mainScreen ] scale ],
-				p.y * [[ UIScreen mainScreen ] scale ]
+				x,
+				y
 			);
 		}
 	}
-	
+
 	//----------------------------------------------------------------//
 	-( id )init {
 		
@@ -324,7 +327,7 @@ namespace MoaiInputDeviceSensorID {
 	//----------------------------------------------------------------//
 	-( void )touchesBegan:( NSSet* )touches withEvent:( UIEvent* )event {
 		( void )event;
-		
+        
 		[ self handleTouches :touches :YES ];
 	}
 	
