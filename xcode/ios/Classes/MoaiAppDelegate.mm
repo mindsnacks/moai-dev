@@ -53,6 +53,7 @@
 
 		mMoaiVC = [[ MoaiVC alloc ]	init ];
 		[ mMoaiVC setView:mMoaiView ];
+        [mMoaiVC addSwipeGestureRecognizer];
 		
 		mWindow = [[ UIWindow alloc ] initWithFrame:[ UIScreen mainScreen ].bounds ];
 		[ mWindow setUserInteractionEnabled:YES ];

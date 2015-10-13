@@ -12,8 +12,14 @@
 // MoaiVC ()
 //================================================================//
 @interface MoaiVC ()
+{
+    UISwipeGestureRecognizer *_leftSwipeGestureRecognizer;
+    UISwipeGestureRecognizer *_rightSwipeGestureRecognizer;
+    UISwipeGestureRecognizer *_upSwipeGestureRecognizer;
+    UISwipeGestureRecognizer *_downSwipeGestureRecognizer;
+}
 
-	//----------------------------------------------------------------//	
+	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation;
 
 @end
@@ -34,7 +40,7 @@
 	
 		self = [ super init ];
 		if ( self ) {
-		
+            
 		}
 		return self;
 	}
@@ -80,5 +86,47 @@
 //            }
 //		}
 	}
+
+- (void)addSwipeGestureRecognizer {
+    _leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipeFrom:)];
+    [_leftSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:_leftSwipeGestureRecognizer];
+    
+    _rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipeFrom:)];
+    [_rightSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:_rightSwipeGestureRecognizer];
+    
+    _upSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpSwipeFrom:)];
+    [_upSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [self.view addGestureRecognizer:_upSwipeGestureRecognizer];
+    
+    _downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleDownSwipeFrom:)];
+    [_downSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [self.view addGestureRecognizer:_downSwipeGestureRecognizer];
+}
+
+- (void)sendSwipeSignalWithSensorId:(MoaiInputDeviceSensorId)sensorId {
+    bool buttonPressed = true;
+    AKUEnqueueButtonEvent(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, sensorId, buttonPressed);
+    buttonPressed = false;
+    AKUEnqueueButtonEvent(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, sensorId, buttonPressed);
+}
+
+- (void)handleLeftSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+    [self sendSwipeSignalWithSensorId:MoaiInputDeviceSensorIdSwipeLeft];
+}
+
+- (void)handleRightSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+    [self sendSwipeSignalWithSensorId:MoaiInputDeviceSensorIdSwipeRight];
+}
+
+- (void)handleUpSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+    [self sendSwipeSignalWithSensorId:MoaiInputDeviceSensorIdSwipeUp];
+}
+
+- (void)handleDownSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+    [self sendSwipeSignalWithSensorId:MoaiInputDeviceSensorIdSwipeDown];
+}
+
 	
 @end

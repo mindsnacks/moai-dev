@@ -33,22 +33,24 @@
 #import "LocationObserver.h"
 #import "MoaiView.h"
 
-namespace MoaiInputDeviceID {
-	enum {
-		DEVICE,
-		TOTAL,
-	};
-}
+#import "MoaiVC.h"
 
-namespace MoaiInputDeviceSensorID {
-	enum {
-		COMPASS,
-		LEVEL,
-		LOCATION,
-		TOUCH,
-		TOTAL,
-	};
-}
+//namespace MoaiInputDeviceID {
+//	enum {
+//		DEVICE,
+//		TOTAL,
+//	};
+//}
+
+//namespace MoaiInputDeviceSensorID {
+//	enum {
+//		COMPASS,
+//		LEVEL,
+//		LOCATION,
+//		TOUCH,
+//		TOTAL,
+//	};
+//}
 
 //================================================================//
 // MoaiView ()
@@ -58,9 +60,10 @@ namespace MoaiInputDeviceSensorID {
 	//----------------------------------------------------------------//
 	-( void )	drawView;
 	-( void )	handleTouches		:( NSSet* )touches :( BOOL )down;
+- (void)handlePresses:(NSSet *)presses down:(BOOL)down;
 	-( void )	onUpdateAnim;
-	-( void )	onUpdateHeading		:( LocationObserver* )observer;
-	-( void )	onUpdateLocation	:( LocationObserver* )observer;
+//	-( void )	onUpdateHeading		:( LocationObserver* )observer;
+//	-( void )	onUpdateLocation	:( LocationObserver* )observer;
 	-( void )	startAnimation;
 	-( void )	stopAnimation;
     -( void )   dummyFunc;
@@ -127,14 +130,14 @@ namespace MoaiInputDeviceSensorID {
             float x = p.x;
             float y = p.y;
 			
-			AKUEnqueueTouchEvent (
-				MoaiInputDeviceID::DEVICE,
-				MoaiInputDeviceSensorID::TOUCH,
-				(int)(long)touch, // use the address of the touch as a unique id
-				down,
-				x,
-				y
-			);
+            AKUEnqueueTouchEvent(
+                                 MoaiInputDeviceId::MoaiInputDeviceIdTvRemote,
+                                 MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdTouch,
+                                 (int)(unsigned long)touch, // use the address of the touch as a unique id
+                                 down,
+                                 x,
+                                 y
+                                 );
 		}
 	}
 
@@ -193,15 +196,36 @@ namespace MoaiInputDeviceSensorID {
         
 		AKUSetInputConfigurationName ( "iPhone" );
 
-		AKUReserveInputDevices			( MoaiInputDeviceID::TOTAL );
-		AKUSetInputDevice				( MoaiInputDeviceID::DEVICE, "device" );
-		
-		AKUReserveInputDeviceSensors	( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOTAL );
-		AKUSetInputDeviceCompass		( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::COMPASS,		"compass" );
-		AKUSetInputDeviceLevel			( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::LEVEL,		"level" );
-		AKUSetInputDeviceLocation		( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::LOCATION,		"location" );
-		AKUSetInputDeviceTouch			( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOUCH,		"touch" );
-		
+//		AKUReserveInputDevices			( MoaiInputDeviceID::TOTAL );
+//		AKUSetInputDevice				( MoaiInputDeviceID::DEVICE, "device" );
+//		
+//		AKUReserveInputDeviceSensors	( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOTAL );
+//		AKUSetInputDeviceCompass		( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::COMPASS,		"compass" );
+//		AKUSetInputDeviceLevel			( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::LEVEL,		"level" );
+//		AKUSetInputDeviceLocation		( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::LOCATION,		"location" );
+//		AKUSetInputDeviceTouch			( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOUCH,		"touch" );
+        
+        AKUReserveInputDevices(MoaiInputDeviceId::MoaiInputDeviceIdTotal);
+        AKUSetInputDevice(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, "tv_remote");
+        
+        AKUReserveInputDeviceSensors(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdTotal);
+        AKUSetInputDeviceTouch(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdTouch, "touch");
+        
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdSelectButton, "select_button");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdMenuButton, "menu_button");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdPlayPauseButton, "play_pause_button");
+        
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdSwipeLeft, "swipe_left");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdSwipeRight, "swipe_right");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdSwipeUp, "swipe_up");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdSwipeDown, "swipe_down");
+        
+		AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdLeftArrow, "left_arrow");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdRightArrow, "right_arrow");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdUpArrow, "up_arrow");
+        AKUSetInputDeviceButton(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdDownArrow, "down_arrow");
+        
+        
 		CGRect screenRect = [[ UIScreen mainScreen ] bounds ];
 		CGFloat scale = [[ UIScreen mainScreen ] scale ];
 		CGFloat screenWidth = screenRect.size.width * scale;
@@ -262,30 +286,30 @@ namespace MoaiInputDeviceSensorID {
 	}
 	
 	//----------------------------------------------------------------//
-	-( void ) onUpdateHeading :( LocationObserver* )observer {
-	
-		AKUEnqueueCompassEvent (
-			MoaiInputDeviceID::DEVICE,
-			MoaiInputDeviceSensorID::COMPASS,
-			( float )[ observer heading ]
-		);
-	}
-	
+//	-( void ) onUpdateHeading :( LocationObserver* )observer {
+//	
+//		AKUEnqueueCompassEvent (
+//			MoaiInputDeviceID::DEVICE,
+//			MoaiInputDeviceSensorID::COMPASS,
+//			( float )[ observer heading ]
+//		);
+//	}
+
 	//----------------------------------------------------------------//
-	-( void ) onUpdateLocation :( LocationObserver* )observer {
-	
-		AKUEnqueueLocationEvent (
-			MoaiInputDeviceID::DEVICE,
-			MoaiInputDeviceSensorID::LOCATION,
-			[ observer longitude ],
-			[ observer latitude ],
-			[ observer altitude ],
-			( float )[ observer hAccuracy ],
-			( float )[ observer vAccuracy ],
-			( float )[ observer speed ]
-		);
-	}
-	
+//	-( void ) onUpdateLocation :( LocationObserver* )observer {
+//	
+//		AKUEnqueueLocationEvent (
+//			MoaiInputDeviceID::DEVICE,
+//			MoaiInputDeviceSensorID::LOCATION,
+//			[ observer longitude ],
+//			[ observer latitude ],
+//			[ observer altitude ],
+//			( float )[ observer hAccuracy ],
+//			( float )[ observer vAccuracy ],
+//			( float )[ observer speed ]
+//		);
+//	}
+
 	//----------------------------------------------------------------//
 	-( void ) pause :( BOOL )paused {
 	
@@ -336,7 +360,8 @@ namespace MoaiInputDeviceSensorID {
 		( void )touches;
 		( void )event;
 		
-		AKUEnqueueTouchEventCancel ( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOUCH );
+        AKUEnqueueTouchEventCancel(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdTouch);
+//		AKUEnqueueTouchEventCancel ( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOUCH );
 	}
 	
 	//----------------------------------------------------------------//
@@ -352,5 +377,44 @@ namespace MoaiInputDeviceSensorID {
 		
 		[ self handleTouches :touches :YES ];
 	}
+
++ (MoaiInputDeviceSensorId)sensorIdForPressType:(UIPressType)pressType {
+    if (pressType == UIPressTypeSelect) {
+        return MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdSelectButton;
+    } else if (pressType == UIPressTypeMenu) {
+        return MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdMenuButton;
+    } else if (pressType == UIPressTypePlayPause) {
+        return MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdPlayPauseButton;
+    } else if (pressType == UIPressTypeLeftArrow) {
+        return MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdLeftArrow;
+    } else if (pressType == UIPressTypeRightArrow) {
+        return MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdRightArrow;
+    } else if (pressType == UIPressTypeUpArrow) {
+        return MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdUpArrow;
+    } else if (pressType == UIPressTypeDownArrow) {
+        return MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdDownArrow;
+    } else {
+        NSAssert(NO, @"Unhandled press type");
+    }
+}
+
+- (void)handlePresses:(NSSet *)presses down:(BOOL)down {
+    for (UIPress *press in presses) {
+        MoaiInputDeviceSensorId sensorId = [MoaiView sensorIdForPressType:press.type];
+        AKUEnqueueButtonEvent(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, sensorId, down);
+    }
+}
+
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [self handlePresses:presses down:YES];
+}
+
+- (void)pressesCancelled:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [self handlePresses:presses down:NO]; // Should probably handle this more like when touches are canceled.
+}
+
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [self handlePresses:presses down:NO];
+}
 	
 @end
