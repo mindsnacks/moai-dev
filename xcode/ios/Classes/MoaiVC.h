@@ -34,9 +34,9 @@ typedef enum MoaiInputDeviceId {
 @interface MoaiVC : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate> {
 }
 
-@property (strong, nonatomic) CBCentralManager *centralManager;
-@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
-@property (strong, nonatomic) NSMutableData *data;
+//@property (strong, nonatomic) CBCentralManager *centralManager;
+//@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
+//@property (strong, nonatomic) NSMutableData *data;
 
 - (void)addSwipeGestureRecognizer;
 - (void)addBluetoothStuff;
