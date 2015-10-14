@@ -8,6 +8,9 @@
 #import "MoaiVC.h"
 #import "MoaiView.h"
 
+#define TRANSFER_SERVICE_UUID @"F457370D-61BC-47A5-8272-99A5584FC554"
+#define TRANSFER_CHARACTERISTIC_UUID @"38224EC1-942E-419D-8068-985ED77392D2"
+
 //================================================================//
 // MoaiVC ()
 //================================================================//
@@ -87,6 +90,8 @@
 //		}
 	}
 
+#pragma mark - Swipe Gestures
+
 - (void)addSwipeGestureRecognizer {
     _leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipeFrom:)];
     [_leftSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -127,6 +132,149 @@
 - (void)handleDownSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
     [self sendSwipeSignalWithSensorId:MoaiInputDeviceSensorIdSwipeDown];
 }
+
+#pragma mark - Bluetooth
+
+- (void)addBluetoothStuff {
+    _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    _data = [[NSMutableData alloc] init];
+}
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+    if (central.state != CBCentralManagerStatePoweredOn) {
+        return;
+    }
+    
+    //Scan for devices
+    [_centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]] options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @YES}];
+    NSLog(@"Scanning started...");
+}
+
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
+    NSLog(@"Discovered %@ at %@", peripheral.name, RSSI);
+    if (_discoveredPeripheral != peripheral) {
+        //Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it.
+        _discoveredPeripheral = peripheral;
+        
+        //Add connect
+        NSLog(@"Connecting to peripheral %@", peripheral);
+        [_centralManager connectPeripheral:peripheral options:nil];
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    NSLog(@"Failed to conenct.");
+    [self cleanupBluetooth];
+}
+
+- (void)cleanupBluetooth {
+    // See if we are subscribed to a characteristic on the peripheral
+    if (_discoveredPeripheral.services != nil) {
+        for (CBService *service in _discoveredPeripheral.services) {
+            if (service.characteristics != nil) {
+                for (CBCharacteristic *characteristic in service.characteristics) {
+                    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]]) {
+                        if (characteristic.isNotifying) {
+                            [_discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    [_centralManager cancelPeripheralConnection:_discoveredPeripheral];
+}
+
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
+    NSLog(@"Connected");
+    
+    [_centralManager stopScan];
+    NSLog(@"Scanning stopped");
+    
+    [_data setLength:0];
+    
+    peripheral.delegate = self;
+    
+    [peripheral discoverServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]]];
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
+    if (error) {
+        [self cleanupBluetooth];
+        return;
+    }
+    
+    for (CBService *service in peripheral.services) {
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]] forService:service];
+    }
+    
+    // Discover other characteristics
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
+    if (error) {
+        [self cleanupBluetooth];
+        return;
+    }
+    
+    for (CBCharacteristic *characteristic in service.characteristics) {
+        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]]) {
+            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+        }
+    }
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    if (error) {
+        NSLog(@"Error");
+        return;
+    }
+    
+    NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    
+    // Have we got everything we need?
+    if ([stringFromData isEqualToString:@"EOM"]) {
+        // HERE IS WHERE WE DO SOMETHING WITH THE TEXT
+        NSLog(@"%@", [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]);
+        
+        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+        
+        [_centralManager cancelPeripheralConnection:peripheral];
+    }
+    
+    [_data appendData:characteristic.value];
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    if (![characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]]) {
+        return;
+    }
+    
+    if (characteristic.isNotifying) {
+        NSLog(@"Notification began on %@", characteristic);
+    } else {
+        //Notification has stopped
+        [_centralManager cancelPeripheralConnection:peripheral];
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
+    _discoveredPeripheral = nil;
+    
+    [_centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]] options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @YES}];
+}
+
+// We also nee to tell the centralManager to stop scanning when the view disappears...
+// But Moai's view controller seems to be set up in an outdated/nonstandard way, so I'm not
+// bothering with it for now.  Hummm.
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [_centralManager stopScan];
+//    
+//    [super viewDidDisappear:animated];
+//}
+
 
 	
 @end

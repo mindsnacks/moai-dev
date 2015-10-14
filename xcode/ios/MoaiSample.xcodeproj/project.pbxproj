@@ -30,8 +30,9 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		665383F3160A798F003D5529 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 665383F2160A798F003D5529 /* FacebookSDKResources.bundle */; };
-		EB6026011BCC218300879013 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6026001BCC218300879013 /* CoreLocation.framework */; };
 		EB6026051BCC32CD00879013 /* shared_source in Resources */ = {isa = PBXBuildFile; fileRef = EB6026041BCC32CD00879013 /* shared_source */; };
+		EB7A63881BCDD39E00AC76A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7A63871BCDD39E00AC76A1 /* CoreBluetooth.framework */; };
+		EB7A63891BCDE1A900AC76A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6026001BCC218300879013 /* CoreLocation.framework */; };
 		EBEF21481BC88D05008D0B2F /* liblibmoai-tvos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEF213B1BC88CCC008D0B2F /* liblibmoai-tvos.a */; };
 		EBEF21491BC88D0D008D0B2F /* liblibmoai-tvos-3rdparty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEF213D1BC88CCC008D0B2F /* liblibmoai-tvos-3rdparty.a */; };
 		EBEF214A1BC88D13008D0B2F /* liblibmoai-tvos-luaext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEF213F1BC88CCC008D0B2F /* liblibmoai-tvos-luaext.a */; };
@@ -195,6 +196,7 @@
 		665383F6160A8466003D5529 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		EB6026001BCC218300879013 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		EB6026041BCC32CD00879013 /* shared_source */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared_source; path = ../../../wonder_content/ahu/shared_source; sourceTree = "<group>"; };
+		EB7A63871BCDD39E00AC76A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		EBEF1CC41BC8883F008D0B2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EBEF1CC61BC8883F008D0B2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EBEF1CC71BC8883F008D0B2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -210,7 +212,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB6026011BCC218300879013 /* CoreLocation.framework in Frameworks */,
+				EB7A63891BCDE1A900AC76A1 /* CoreLocation.framework in Frameworks */,
+				EB7A63881BCDD39E00AC76A1 /* CoreBluetooth.framework in Frameworks */,
 				EBEF21481BC88D05008D0B2F /* liblibmoai-tvos.a in Frameworks */,
 				EBEF21491BC88D0D008D0B2F /* liblibmoai-tvos-3rdparty.a in Frameworks */,
 				EBEF214A1BC88D13008D0B2F /* liblibmoai-tvos-luaext.a in Frameworks */,
@@ -329,6 +332,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB7A63871BCDD39E00AC76A1 /* CoreBluetooth.framework */,
 				EB6026001BCC218300879013 /* CoreLocation.framework */,
 				03CC910B13B3C48400B2724C /* AudioToolbox.framework */,
 				03CC910313B3C47600B2724C /* CoreAudio.framework */,

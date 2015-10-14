@@ -5,6 +5,7 @@
 //----------------------------------------------------------------//
 
 #import <UIKit/UIKit.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
 typedef enum MoaiInputDeviceSensorId {
     MoaiInputDeviceSensorIdTouch,
@@ -30,9 +31,14 @@ typedef enum MoaiInputDeviceId {
 //================================================================//
 // MoaiVC
 //================================================================//
-@interface MoaiVC : UIViewController {
+@interface MoaiVC : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate> {
 }
 
+@property (strong, nonatomic) CBCentralManager *centralManager;
+@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
+@property (strong, nonatomic) NSMutableData *data;
+
 - (void)addSwipeGestureRecognizer;
+- (void)addBluetoothStuff;
 
 @end
