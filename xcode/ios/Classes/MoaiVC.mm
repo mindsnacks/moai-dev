@@ -11,6 +11,17 @@
 #define TRANSFER_SERVICE_UUID @"F457370D-61BC-47A5-8272-99A5584FC554"
 #define TRANSFER_CHARACTERISTIC_UUID @"38224EC1-942E-419D-8068-985ED77392D2"
 
+const UInt8 BLUETOOTH_CODE_SWIPE_UP = 1;
+const UInt8 BLUETOOTH_CODE_SWIPE_DOWN = 2;
+const UInt8 BLUETOOTH_CODE_SWIPE_LEFT = 3;
+const UInt8 BLUETOOTH_CODE_SWIPE_RIGHT = 4;
+const UInt8 BLUETOOTH_CODE_SELECT_BUTTON = 5;
+const UInt8 BLUETOOTH_CODE_MENU_BUTTON = 6;
+const UInt8 BLUETOOTH_CODE_PLAY_PAUSE_BUTTON = 7;
+const UInt8 BLUETOOTH_CODE_DISCONNECT = 253;
+const UInt8 BLUETOOTH_CODE_UNSET = 254;
+
+
 //================================================================//
 // MoaiVC ()
 //================================================================//
@@ -24,7 +35,7 @@
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
 @property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
-@property (strong, nonatomic) NSMutableData *data;
+//@property (strong, nonatomic) NSMutableData *data;
 
 	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation;
@@ -144,7 +155,8 @@
     _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
     // And somewhere to store the incoming data
-    _data = [[NSMutableData alloc] init];
+//    _data = [[NSMutableData alloc] init];
+//    _data = [NSMutableData dataWithBytes:&BLUETOOTH_CODE_UNSET length:sizeof(BLUETOOTH_CODE_UNSET)];
 }
 
 //We *should* stop scanning when the view disappears... but Moai.
@@ -235,7 +247,7 @@
     NSLog(@"Scanning stopped");
     
     // Clear the data that we may already have
-    [self.data setLength:0];
+//    [self.data setLength:0];
     
     // Make sure we get the discovery callbacks
     peripheral.delegate = self;
@@ -290,34 +302,54 @@
 
 /** This callback lets us know more data has arrived via notification on the characteristic
  */
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
+//- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+//{
+//    if (error) {
+//        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+//        return;
+//    }
+//    
+//    NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+//    
+//    // Have we got everything we need?
+//    if ([stringFromData isEqualToString:@"EOM"]) {
+//        
+//        // We have, so show the data,
+////        [self.textview setText:[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]];
+//        NSLog(@"TEE HEE. %@", [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]);
+//        
+//        // Cancel our subscription to the characteristic
+//        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+//        
+//        // and disconnect from the peripehral
+//        [self.centralManager cancelPeripheralConnection:peripheral];
+//    }
+//    
+//    // Otherwise, just add the data on to what we already have
+//    [self.data appendData:characteristic.value];
+//    
+//    // Log it
+//    NSLog(@"Received: %@", stringFromData);
+//}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     if (error) {
         NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
-        return;
     }
     
-    NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+//    const UInt8 *receivedBytes = [characteristic.value bytes];//[self.data bytes];
+//    UInt8 signalByte = receivedBytes[0];
     
-    // Have we got everything we need?
-    if ([stringFromData isEqualToString:@"EOM"]) {
-        
-        // We have, so show the data,
-//        [self.textview setText:[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]];
-        NSLog(@"TEE HEE. %@", [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]);
-        
-        // Cancel our subscription to the characteristic
+    UInt8 receivedBytes[1];
+    [characteristic.value getBytes:&receivedBytes length:1];
+    UInt8 signalByte = receivedBytes[0];
+    NSLog(@"IT GOT A BYTE: %d", signalByte);
+    
+    if (signalByte == BLUETOOTH_CODE_DISCONNECT) {
+        NSLog(@"Got disconnect byte.  Disconnecting...");
         [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-        
-        // and disconnect from the peripehral
         [self.centralManager cancelPeripheralConnection:peripheral];
     }
-    
-    // Otherwise, just add the data on to what we already have
-    [self.data appendData:characteristic.value];
-    
-    // Log it
-    NSLog(@"Received: %@", stringFromData);
 }
 
 /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
@@ -338,12 +370,13 @@
         NSLog(@"Notification began on %@", characteristic);
     }
     
-    // Notification has stopped
-    else {
-        // so disconnect from the peripheral
-        NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
-        [self.centralManager cancelPeripheralConnection:peripheral];
-    }
+//    // Notification has stopped
+//    else
+//    {
+//        // so disconnect from the peripheral
+//        NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
+//        [self.centralManager cancelPeripheralConnection:peripheral];
+//    }
 }
 
 /** Once the disconnection happens, we need to clean up our local copy of the peripheral
