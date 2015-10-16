@@ -34,8 +34,8 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 }
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
-@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
-//@property (strong, nonatomic) NSMutableData *data;
+//@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
+@property (strong, nonatomic) NSMutableArray *discoveredPeripherals;
 
 	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation;
@@ -151,6 +151,8 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 #pragma mark - Newer Bluetooth
 
 - (void)addBluetoothStuff {
+    self.discoveredPeripherals = [NSMutableArray array];
+    
     // Start up the CBCentralManager
     _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
@@ -217,10 +219,14 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     NSLog(@"Discovered %@ at %@", peripheral.name, RSSI);
     
     // Ok, it's in range - have we already seen it?
-    if (self.discoveredPeripheral != peripheral) {
+//    if (self.discoveredPeripheral != peripheral) {
+    if (![self.discoveredPeripherals containsObject:peripheral]) {
         
+        
+    
         // Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
-        self.discoveredPeripheral = peripheral;
+//        self.discoveredPeripheral = peripheral;
+        [self.discoveredPeripherals addObject:peripheral];
         
         // And connect
         NSLog(@"Connecting to peripheral %@", peripheral);
@@ -243,8 +249,8 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     NSLog(@"Peripheral Connected");
     
     // Stop scanning
-    [self.centralManager stopScan];
-    NSLog(@"Scanning stopped");
+//    [self.centralManager stopScan];
+//    NSLog(@"Scanning stopped");
     
     // Make sure we get the discovery callbacks
     peripheral.delegate = self;
@@ -339,32 +345,28 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     NSLog(@"Peripheral Disconnected");
-    self.discoveredPeripheral = nil;
+//    self.discoveredPeripheral = nil;
+    [self.discoveredPeripherals removeObject:peripheral];
     
     // We're disconnected, so start scanning again
-    [self scan];
+//    [self scan];
 }
 
-/** Call this when things either go wrong, or you're done with the connection.
- *  This cancels any subscriptions if there are any, or straight disconnects if not.
- *  (didUpdateNotificationStateForCharacteristic will cancel the connection if a subscription is involved)
- */
-- (void)cleanup
-{
+- (void)cleanupPeripheral:(CBPeripheral *)discoveredPeripheral {
     // Don't do anything if we're not connected
-    if (self.discoveredPeripheral.state != CBPeripheralStateConnected) {
+    if (discoveredPeripheral.state != CBPeripheralStateConnected) {
         return;
     }
     
     // See if we are subscribed to a characteristic on the peripheral
-    if (self.discoveredPeripheral.services != nil) {
-        for (CBService *service in self.discoveredPeripheral.services) {
+    if (discoveredPeripheral.services != nil) {
+        for (CBService *service in discoveredPeripheral.services) {
             if (service.characteristics != nil) {
                 for (CBCharacteristic *characteristic in service.characteristics) {
                     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]]) {
                         if (characteristic.isNotifying) {
                             // It is notifying, so unsubscribe
-                            [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
+                            [discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
                             
                             // And we're done.
                             return;
@@ -376,7 +378,21 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     }
     
     // If we've got this far, we're connected, but we're not subscribed, so we just disconnect
-    [self.centralManager cancelPeripheralConnection:self.discoveredPeripheral];
+    [self.centralManager cancelPeripheralConnection:discoveredPeripheral];
+}
+
+/** Call this when things either go wrong, or you're done with the connection.
+ *  This cancels any subscriptions if there are any, or straight disconnects if not.
+ *  (didUpdateNotificationStateForCharacteristic will cancel the connection if a subscription is involved)
+ */
+- (void)cleanup
+{
+    for (CBPeripheral *peripheral in self.discoveredPeripherals) {
+        [self cleanupPeripheral:peripheral];
+    }
+    
+    //Do we need this?
+//    [self.discoveredPeripherals removeAllObjects];
 }
 
 	
