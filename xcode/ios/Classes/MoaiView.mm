@@ -7,16 +7,18 @@
 #import <QuartzCore/QuartzCore.h>
 #import <OpenGLES/EAGLDrawable.h>
 
-//extern "C" {
-//	#include <lua.h>
-//	#include <lauxlib.h>
-//	#include <lualib.h>
-//}
+
 
 #import <aku/AKU-iphone.h>
 #import <aku/AKU-luaext.h>
 #import <aku/AKU-audiosampler.h>
 #import <lua-headers/moai_lua.h>
+
+extern "C" {
+	#include <lua.h>
+	#include <lauxlib.h>
+	#include <lualib.h>
+}
 
 #ifdef USE_UNTZ
 #import <aku/AKU-untz.h>
@@ -35,22 +37,6 @@
 
 #import "MoaiVC.h"
 
-//namespace MoaiInputDeviceID {
-//	enum {
-//		DEVICE,
-//		TOTAL,
-//	};
-//}
-
-//namespace MoaiInputDeviceSensorID {
-//	enum {
-//		COMPASS,
-//		LEVEL,
-//		LOCATION,
-//		TOUCH,
-//		TOTAL,
-//	};
-//}
 
 //================================================================//
 // MoaiView ()
@@ -251,6 +237,9 @@
 		
 		// init aku
 		AKUIphoneInit ( application );
+        
+//        [self addBuzzerManager];
+        
         AKURunString( moai_lua_code );
 	}
 	
@@ -416,5 +405,18 @@
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
     [self handlePresses:presses down:NO];
 }
+
+//# pragma mark Bluetooth
+//
+//- (void)addBuzzerManager {
+//    lua_State *l = AKUGetLuaState();
+//    
+//    //create BuzzerManager
+//    lua_newtable(l);
+//    
+//    lua_setglobal(l, "BuzzerManager");
+//    
+//}
+
 	
 @end

@@ -8,6 +8,12 @@
 #import "MoaiVC.h"
 #import "MoaiView.h"
 
+extern "C" {
+    #include <lua.h>
+    #include <lauxlib.h>
+    #include <lualib.h>
+}
+
 #define TRANSFER_SERVICE_UUID @"F457370D-61BC-47A5-8272-99A5584FC554"
 #define TRANSFER_CHARACTERISTIC_UUID @"38224EC1-942E-419D-8068-985ED77392D2"
 
@@ -222,15 +228,19 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //    if (self.discoveredPeripheral != peripheral) {
     if (![self.discoveredPeripherals containsObject:peripheral]) {
         
-        
-    
-        // Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
-//        self.discoveredPeripheral = peripheral;
-        [self.discoveredPeripherals addObject:peripheral];
-        
-        // And connect
-        NSLog(@"Connecting to peripheral %@", peripheral);
-        [self.centralManager connectPeripheral:peripheral options:nil];
+        NSInteger connectionIndex = [self nextAvailableBuzzerIndex];
+        BOOL buzzerManagerAcceptedConnection = (connectionIndex > 0);
+        if (buzzerManagerAcceptedConnection) {
+            [self notifyBuzzerManagerDeviceConnected:peripheral.identifier.UUIDString onConnectionIndex:connectionIndex];
+            
+            // Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
+    //        self.discoveredPeripheral = peripheral;
+            [self.discoveredPeripherals addObject:peripheral];
+            
+            // And connect
+            NSLog(@"Connecting to peripheral %@", peripheral);
+            [self.centralManager connectPeripheral:peripheral options:nil];
+        }
     }
 }
 
@@ -345,6 +355,8 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     NSLog(@"Peripheral Disconnected");
+    [self notifyBuzzerManagerDeviceDisconnected:peripheral.identifier.UUIDString];
+    
 //    self.discoveredPeripheral = nil;
     [self.discoveredPeripherals removeObject:peripheral];
     
@@ -395,5 +407,48 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //    [self.discoveredPeripherals removeAllObjects];
 }
 
+- (NSInteger)nextAvailableBuzzerIndex {
+    lua_State *l = AKUGetLuaState();
+    
+    lua_getglobal(l, "BuzzerManager");
+    lua_getfield(l, -1, "getNextAvailableConnectionIndex");
+    
+    unsigned int argumentsCount = 0;
+    unsigned int returnedValuesCount = 1;
+    lua_pcall(l, argumentsCount, returnedValuesCount, 0);
+    
+    long availableIndex = lua_tointeger(l, -1);
+    lua_pop(l, 2);
+    
+    return availableIndex;
+}
+
+- (void)notifyBuzzerManagerDeviceConnected:(NSString *)deviceName onConnectionIndex:(NSInteger)connectionIndex {
+    lua_State *l = AKUGetLuaState();
+    
+    lua_getglobal(l, "BuzzerManager");
+    lua_getfield(l, -1, "onBuzzerIosConnected");
+    
+    unsigned int argumentsCount = 2;
+    lua_pushstring(l, [deviceName UTF8String]);
+    lua_pushnumber(l, connectionIndex);
+    
+    lua_pcall(l, argumentsCount, 0, 0);
+    
+    lua_pop(l, 1);
+}
+
+- (void)notifyBuzzerManagerDeviceDisconnected:(NSString *)deviceName {
+    lua_State *l = AKUGetLuaState();
+    
+    lua_getglobal(l, "BuzzerManager");
+    lua_getfield(l, -1, "onBuzzerIosDisconnected");
+    
+    unsigned int argumentsCount = 1;
+    lua_pushstring(l, [deviceName UTF8String]);
+    
+    lua_pcall(l, argumentsCount, 0, 0);
+    lua_pop(l, 1);
+}
 	
 @end
