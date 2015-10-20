@@ -7,6 +7,12 @@
 #import <aku/AKU.h>
 #import <aku/AKU-iphone.h>
 
+extern "C" {
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
+}
+
 #import "MoaiAppDelegate.h"
 #import "LocationObserver.h"
 #import "MoaiVC.h"
@@ -70,6 +76,13 @@
 		// select product folder
 		NSString* luaFolder = [[[ NSBundle mainBundle ] resourcePath ] stringByAppendingString:@"/shared_source" ];
 		AKUSetWorkingDirectory ([ luaFolder UTF8String ]);
+        
+        [self setupLuaAssetsTable];
+        
+        NSString *assetsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/assets"];
+        [self addAssetsPath:assetsPath];
+        
+//        [self addSourcePath:sourcePath];
 		
 		// run scripts
 		[ mMoaiView run:@"buzz_main.lua" ];
@@ -85,7 +98,39 @@
 		return true;
 	}
 
-		
+- (void)addSourcePath:(NSString *)pathToAppend {
+    lua_State *l = AKUGetLuaState();
+    lua_getglobal(l, "package");
+    lua_getfield(l, -1, "path");
+    NSString *originalPath = [NSString stringWithUTF8String:lua_tostring(l, -1)];
+    NSString *extendedPath = [NSString stringWithFormat:@"%@;%@/?.lua", originalPath, pathToAppend];
+    lua_pop(l, 1);
+    lua_pushstring(l, [extendedPath UTF8String]);
+    lua_setfield(l, -2, "path");
+    lua_pop(l, 1);
+}
+
+- (void)setupLuaAssetsTable {
+    lua_State *l = AKUGetLuaState();
+    lua_newtable(l);
+    lua_pushstring(l, "");
+    lua_setfield(l, -2, "path");
+    lua_setglobal(l, "asset");
+}
+
+- (void)addAssetsPath:(NSString *)pathToAppend {
+    lua_State *l = AKUGetLuaState();
+    lua_getglobal(l, "asset");
+    lua_getfield(l, -1, "path");
+    NSString *originalPath = [NSString stringWithUTF8String:lua_tostring(l, -1)];
+    NSString *extendedPath = [NSString stringWithFormat:@"%@;%@", originalPath, pathToAppend];
+    lua_pop(l, 1);
+    lua_pushstring(l, [extendedPath UTF8String]);
+    lua_setfield(l, -2, "path");
+    lua_pop(l, 1);
+}
+
+
 	//----------------------------------------------------------------//
 	-( void ) application:( UIApplication* )application didReceiveRemoteNotification:( NSDictionary* )pushBundle {
 		
