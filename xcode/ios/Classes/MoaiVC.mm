@@ -324,6 +324,8 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
         NSLog(@"Got disconnect byte.  Disconnecting...");
         [peripheral setNotifyValue:NO forCharacteristic:characteristic];
         [self.centralManager cancelPeripheralConnection:peripheral];
+    } else {
+        [self notifyBuzzPeripheralManagerPeripheral:peripheral sentInput:signalByte];
     }
 }
 
@@ -430,6 +432,20 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     
     unsigned int argumentsCount = 1;
     lua_pushstring(l, [peripheral.identifier.UUIDString UTF8String]);
+    
+    lua_pcall(l, argumentsCount, 0, 0);
+    lua_pop(l, 1);
+}
+
+- (void)notifyBuzzPeripheralManagerPeripheral:(CBPeripheral *)peripheral sentInput:(NSInteger)bluetoothCode {
+    lua_State *l = AKUGetLuaState();
+    
+    lua_getglobal(l, "BuzzPeripheralManager");
+    lua_getfield(l, -1, "onPeripheralSentInput");
+    
+    unsigned int argumentsCount = 2;
+    lua_pushstring(l, [peripheral.identifier.UUIDString UTF8String]);
+    lua_pushinteger(l, bluetoothCode);
     
     lua_pcall(l, argumentsCount, 0, 0);
     lua_pop(l, 1);
