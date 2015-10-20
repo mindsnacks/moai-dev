@@ -74,18 +74,21 @@ extern "C" {
 		[ mMoaiView moaiInit:application ];
 		
 		// select product folder
-		NSString* luaFolder = [[[ NSBundle mainBundle ] resourcePath ] stringByAppendingString:@"/shared_source" ];
-		AKUSetWorkingDirectory ([ luaFolder UTF8String ]);
+		NSString *gameSourceDirectory = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"buzz"];
+		AKUSetWorkingDirectory([gameSourceDirectory UTF8String]);
+        
+        NSString *sharedSourceDirectory = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"shared_source"];
+        [self addSourcePath:sharedSourceDirectory];
         
         [self setupLuaAssetsTable];
         
-        NSString *assetsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/assets"];
+        NSString *assetsPath = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"assets"];
         [self addAssetsPath:assetsPath];
         
 //        [self addSourcePath:sourcePath];
 		
 		// run scripts
-		[ mMoaiView run:@"buzz_main.lua" ];
+		[mMoaiView run:@"buzz_main.lua"];
 		
         // check to see if the app was lanuched from a remote notification
 //        NSDictionary* pushBundle = [ launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey ];

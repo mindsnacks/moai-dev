@@ -30,6 +30,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		665383F3160A798F003D5529 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 665383F2160A798F003D5529 /* FacebookSDKResources.bundle */; };
+		EB596F3F1BD7042600583FC1 /* buzz in Resources */ = {isa = PBXBuildFile; fileRef = EB596F3E1BD7042600583FC1 /* buzz */; };
+		EB596F411BD7044C00583FC1 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = EB596F401BD7044C00583FC1 /* assets */; };
 		EB6026051BCC32CD00879013 /* shared_source in Resources */ = {isa = PBXBuildFile; fileRef = EB6026041BCC32CD00879013 /* shared_source */; };
 		EB7A63881BCDD39E00AC76A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7A63871BCDD39E00AC76A1 /* CoreBluetooth.framework */; };
 		EB7A63891BCDE1A900AC76A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6026001BCC218300879013 /* CoreLocation.framework */; };
@@ -194,6 +196,8 @@
 		32CA4F630368D1EE00C91783 /* MoaiSample_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoaiSample_Prefix.pch; sourceTree = "<group>"; };
 		665383F2160A798F003D5529 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = "../../3rdparty/facebookiOS-3.0.6.b/FacebookSDKResources.bundle"; sourceTree = "<group>"; };
 		665383F6160A8466003D5529 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		EB596F3E1BD7042600583FC1 /* buzz */ = {isa = PBXFileReference; lastKnownFileType = folder; name = buzz; path = ../../../game_source/buzz; sourceTree = "<group>"; };
+		EB596F401BD7044C00583FC1 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../built/games/buzz/assets; sourceTree = "<group>"; };
 		EB6026001BCC218300879013 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		EB6026041BCC32CD00879013 /* shared_source */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared_source; path = ../../../wonder_content/ahu/shared_source; sourceTree = "<group>"; };
 		EB7A63871BCDD39E00AC76A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
@@ -256,7 +260,9 @@
 		03E2806113C7CC4800EE3B0D /* build */ = {
 			isa = PBXGroup;
 			children = (
+				EB596F3E1BD7042600583FC1 /* buzz */,
 				EB6026041BCC32CD00879013 /* shared_source */,
+				EB596F401BD7044C00583FC1 /* assets */,
 			);
 			name = build;
 			sourceTree = "<group>";
@@ -541,7 +547,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CC905813B3C1B700B2724C /* Icon-72.png in Resources */,
+				EB596F3F1BD7042600583FC1 /* buzz in Resources */,
 				EB6026051BCC32CD00879013 /* shared_source in Resources */,
+				EB596F411BD7044C00583FC1 /* assets in Resources */,
 				03CC905913B3C1B700B2724C /* Icon-Small-50.png in Resources */,
 				03CC905A13B3C1B700B2724C /* Icon-Small.png in Resources */,
 				03CC905B13B3C1B700B2724C /* Icon-Small@2x.png in Resources */,
