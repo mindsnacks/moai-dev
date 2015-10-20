@@ -228,11 +228,8 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //    if (self.discoveredPeripheral != peripheral) {
     if (![self.discoveredPeripherals containsObject:peripheral]) {
         
-        NSInteger sensorIndex = [self nextAvailableSensorIndex];
-        BOOL buzzPeripheralManagerAcceptedConnection = (sensorIndex > 0);
+        BOOL buzzPeripheralManagerAcceptedConnection = [self notifyBuzzPeripheralManagerPeripheralConnected:peripheral];
         if (buzzPeripheralManagerAcceptedConnection) {
-            [self notifyBuzzPeripheralManagerPeripheralConnected:peripheral onSensorIndex:sensorIndex];
-            
             // Save a local copy of the peripheral, so CoreBluetooth doesn't get rid of it
     //        self.discoveredPeripheral = peripheral;
             [self.discoveredPeripherals addObject:peripheral];
@@ -407,35 +404,22 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //    [self.discoveredPeripherals removeAllObjects];
 }
 
-- (NSInteger)nextAvailableSensorIndex {
-    lua_State *l = AKUGetLuaState();
-    
-    lua_getglobal(l, "BuzzPeripheralManager");
-    lua_getfield(l, -1, "getNextAvailableSensorIndex");
-    
-    unsigned int argumentsCount = 0;
-    unsigned int returnedValuesCount = 1;
-    lua_pcall(l, argumentsCount, returnedValuesCount, 0);
-    
-    long availableIndex = lua_tointeger(l, -1);
-    lua_pop(l, 2);
-    
-    return availableIndex;
-}
-
-- (void)notifyBuzzPeripheralManagerPeripheralConnected:(CBPeripheral *)peripheral onSensorIndex:(NSInteger)sensorIndex {
+- (BOOL)notifyBuzzPeripheralManagerPeripheralConnected:(CBPeripheral *)peripheral {
     lua_State *l = AKUGetLuaState();
     
     lua_getglobal(l, "BuzzPeripheralManager");
     lua_getfield(l, -1, "onPeripheralConnected");
     
-    unsigned int argumentsCount = 2;
+    unsigned int argumentsCount = 1;
     lua_pushstring(l, [peripheral.identifier.UUIDString UTF8String]);
-    lua_pushnumber(l, sensorIndex);
     
-    lua_pcall(l, argumentsCount, 0, 0);
+    unsigned int returnedValuesCount = 1;
+    lua_pcall(l, argumentsCount, returnedValuesCount, 0);
     
-    lua_pop(l, 1);
+    bool buzzPeripheralManagerAcceptedConnection = lua_toboolean(l, -1);
+    lua_pop(l, 2);
+    
+    return buzzPeripheralManagerAcceptedConnection;
 }
 
 - (void)notifyBuzzPeripheralManagerPeripheralDisconnected:(CBPeripheral *)peripheral {
