@@ -18,6 +18,8 @@ extern "C" {
 #import "MoaiVC.h"
 #import "MoaiView.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 //================================================================//
 // AppDelegate
 //================================================================//
@@ -85,6 +87,8 @@ extern "C" {
         NSString *assetsPath = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"assets"];
         [self addAssetsPath:assetsPath];
         
+        [self setupSoundCallbacks];
+        
 //        [self addSourcePath:sourcePath];
 		
 		// run scripts
@@ -131,6 +135,124 @@ extern "C" {
     lua_pushstring(l, [extendedPath UTF8String]);
     lua_setfield(l, -2, "path");
     lua_pop(l, 1);
+}
+
+#define PUSH_LUA_CALLBACK_HANDLER(l, callbackName, handler) lua_pushlightuserdata(l, this); lua_pushcclosure(l, handler, 1);
+
+- (void)loadSoundAtPath:(NSString *)path {
+    NSError *error = nil;
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:path] error:&error];
+    
+    NSAssert(error == nil, @"There was an error loading a sound.");
+    
+    self.audioPlayer = player;
+    
+    [self.audioPlayer prepareToPlay];
+    
+    return 0;
+}
+
+- (int)playSoundAtPath:(NSString *)path volume:(double)volume pitch:(double)pitch pan:(double)pan looping:(BOOL)looping {
+    NSError *error = nil;
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:path] error:&error];
+    
+    NSAssert(error == nil, @"There was an error playing a sound.");
+    
+    self.audioPlayer = player;
+    
+    [self.audioPlayer prepareToPlay];
+    [self.audioPlayer play];
+    
+    return 0;
+}
+
+
+static std::string _ms_lua_to_string(lua_State *const l, int index)
+{
+    const char * const result = lua_tostring(l, index);
+    //    MSCAssert(result, "NULL string");
+    
+    return result;
+}
+
+static int _MSMOAIPlaySoundHandler(lua_State *l)
+{
+    //    MOAIIntegration *integration = getMOAIIntegration(l);
+    
+    int args = lua_gettop(l);
+    
+    if (args == 0) lua_error(l);
+    
+    const std::string &effect = _ms_lua_to_string(l, -args);
+    
+    printf("%s", effect.c_str());
+    
+    float volume = 1.0f;
+    float pitch = 1.0f;
+    float pan = 0.0f;
+    bool looping = false;
+    
+    if (args > 1) volume  = lua_tonumber(l, -args + 1);
+    if (args > 2) pitch   = lua_tonumber(l, -args + 2);
+    if (args > 3) pan     = lua_tonumber(l, -args + 3);
+    if (args > 4) looping = lua_toboolean(l, -args + 4);
+    
+    
+    //    if (integration->getDelegate() != NULL)
+    //    {
+    MoaiAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    int audioID = [delegate playSoundAtPath:[NSString stringWithUTF8String:effect.c_str()] volume:volume pitch:pitch pan:pan looping:looping];
+    //        long audioID = integration->getDelegate()->moaiIntegrationPlaySoundAtPath(effect, volume, pitch, pan, looping);
+    lua_pushinteger(l, audioID);
+    return 1;
+    //    }
+    //    else
+    //    {
+    //        return 0;
+    //    }
+}
+
+static int _MSMOAILoadSoundHandler(lua_State *l)
+{
+//    MOAIIntegration *integration = getMOAIIntegration(l);
+    
+    int args = lua_gettop(l);
+    if (args == 0) return 0;
+    const std::string &path = _ms_lua_to_string(l, -1);
+    
+    MoaiAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate loadSoundAtPath:[NSString stringWithUTF8String:path.c_str()]];
+//    if (integration->getDelegate() != NULL)
+//    {
+//        integration->getDelegate()->moaiIntegrationLoadSoundAtPath(path);
+//    }
+    
+    return 0;
+}
+
+
+- (void)setupSoundCallbacks {
+    lua_State *l = AKUGetLuaState();
+    
+    // create Host
+    lua_newtable(l);
+    
+//    lua_pushlightuserdata(l, &soundIntegration);
+//    lua_pushcclosure(l, SoundIntegration::_MSMOAIPlaySoundHandler, 1);
+    
+    lua_pushcfunction(l, _MSMOAIPlaySoundHandler);
+    lua_setfield(l, -2, "playSound");
+    
+    lua_pushcfunction(l, _MSMOAILoadSoundHandler);
+    lua_setfield(l, -2, "loadSound");
+    
+//    lua_register(l, "playSound", _MSMOAIPlaySoundHandler);
+    
+//    PUSH_LUA_CALLBACK_HANDLER(l, playSound, _MSMOAIPlaySoundHandler);
+//    lua_setfield(l, -2, "playSound");
+    
+    // set Host
+    lua_setglobal(l, "Host");
 }
 
 
