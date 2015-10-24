@@ -185,8 +185,6 @@ static int _MSMOAIPlaySoundHandler(lua_State *l)
     
     const std::string &effect = _ms_lua_to_string(l, -args);
     
-    printf("%s", effect.c_str());
-    
     float volume = 1.0f;
     float pitch = 1.0f;
     float pan = 0.0f;
