@@ -31,10 +31,10 @@ typedef enum MoaiInputDeviceId {
 //================================================================//
 // MoaiVC
 //================================================================//
-@interface MoaiVC : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate> {
+@interface MoaiVC : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate, UIGestureRecognizerDelegate> {
 }
 
-- (void)addSwipeGestureRecognizer;
+- (void)addSwipeAndTapGestureRecognizers;
 - (void)addBluetoothStuff;
 
 @end

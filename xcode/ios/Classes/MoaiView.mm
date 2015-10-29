@@ -54,6 +54,10 @@ extern "C" {
 	-( void )	stopAnimation;
     -( void )   dummyFunc;
 
+//- (void)handleTapFrom:(UITapGestureRecognizer *)recognizer;
+
+//@property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
+
 @end
 
 //================================================================//
@@ -108,13 +112,15 @@ extern "C" {
 
 	//----------------------------------------------------------------//
 	-( void ) handleTouches :( NSSet* )touches :( BOOL )down {
-	
+        
 		for ( UITouch* touch in touches ) {
-			
-			CGPoint p = [ touch locationInView:self ];
             
-            float x = p.x;
-            float y = p.y;
+			CGPoint p = [ touch locationInView:nil ];
+            
+            CGSize frameSize = self.frame.size;
+            
+            float x = (p.x / frameSize.width) - 0.5f;
+            float y = -((p.y / frameSize.height) - 0.5f);
 			
             AKUEnqueueTouchEvent(
                                  MoaiInputDeviceId::MoaiInputDeviceIdTvRemote,
@@ -126,6 +132,7 @@ extern "C" {
                                  );
 		}
 	}
+
 
 	//----------------------------------------------------------------//
 	-( id )init {
@@ -179,6 +186,13 @@ extern "C" {
         #endif
         
 		AKUAudioSamplerInit ();
+        
+        ///
+//        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+//        self.tapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeLeftArrow), @(UIPressTypeRightArrow)];
+//        self.tapGestureRecognizer.cancelsTouchesInView = NO;
+//        [self addGestureRecognizer:self.tapGestureRecognizer];
+        ///
         
 		AKUSetInputConfigurationName ( "iPhone" );
 
@@ -337,35 +351,35 @@ extern "C" {
         mDisplayLink = nil;
 	}
 	
-	//----------------------------------------------------------------//
-	-( void )touchesBegan:( NSSet* )touches withEvent:( UIEvent* )event {
-		( void )event;
-        
-		[ self handleTouches :touches :YES ];
-	}
-	
-	//----------------------------------------------------------------//
-	-( void )touchesCancelled:( NSSet* )touches withEvent:( UIEvent* )event {
-		( void )touches;
-		( void )event;
-		
-        AKUEnqueueTouchEventCancel(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdTouch);
-//		AKUEnqueueTouchEventCancel ( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOUCH );
-	}
-	
-	//----------------------------------------------------------------//
-	-( void )touchesEnded:( NSSet* )touches withEvent:( UIEvent* )event {
-		( void )event;
-		
-		[ self handleTouches :touches :NO ];
-	}
-
-	//----------------------------------------------------------------//
-	-( void )touchesMoved:( NSSet* )touches withEvent:( UIEvent* )event {
-		( void )event;
-		
-		[ self handleTouches :touches :YES ];
-	}
+//	//----------------------------------------------------------------//
+//	-( void )touchesBegan:( NSSet* )touches withEvent:( UIEvent* )event {
+//		( void )event;
+//        
+//		[ self handleTouches :touches :YES ];
+//	}
+//	
+//	//----------------------------------------------------------------//
+//	-( void )touchesCancelled:( NSSet* )touches withEvent:( UIEvent* )event {
+//		( void )touches;
+//		( void )event;
+//		
+//        AKUEnqueueTouchEventCancel(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, MoaiInputDeviceSensorId::MoaiInputDeviceSensorIdTouch);
+////		AKUEnqueueTouchEventCancel ( MoaiInputDeviceID::DEVICE, MoaiInputDeviceSensorID::TOUCH );
+//	}
+//	
+//	//----------------------------------------------------------------//
+//	-( void )touchesEnded:( NSSet* )touches withEvent:( UIEvent* )event {
+//		( void )event;
+//		
+//		[ self handleTouches :touches :NO ];
+//	}
+//
+//	//----------------------------------------------------------------//
+//	-( void )touchesMoved:( NSSet* )touches withEvent:( UIEvent* )event {
+//		( void )event;
+//		
+//		[ self handleTouches :touches :YES ];
+//	}
 
 + (MoaiInputDeviceSensorId)sensorIdForPressType:(UIPressType)pressType {
     if (pressType == UIPressTypeSelect) {
@@ -406,16 +420,11 @@ extern "C" {
     [self handlePresses:presses down:NO];
 }
 
-//# pragma mark Bluetooth
-//
-//- (void)addBuzzerManager {
-//    lua_State *l = AKUGetLuaState();
+//- (void)handleTapFrom:(UITapGestureRecognizer *)recognizer {
 //    
-//    //create BuzzerManager
-//    lua_newtable(l);
+////    CGPoint *point = [recognizer locationOfTouch:recognizer. inView:self];
 //    
-//    lua_setglobal(l, "BuzzerManager");
-//    
+//    NSLog(@"It's handling a tap.");
 //}
 
 	

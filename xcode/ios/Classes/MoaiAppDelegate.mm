@@ -61,7 +61,8 @@ extern "C" {
 
 		mMoaiVC = [[ MoaiVC alloc ]	init ];
 		[ mMoaiVC setView:mMoaiView ];
-        [mMoaiVC addSwipeGestureRecognizer];
+        [mMoaiVC addSwipeAndTapGestureRecognizers];
+//        [mMoaiVC addSwipeGestureRecognizer];
         [mMoaiVC addBluetoothStuff];
 		
 		mWindow = [[ UIWindow alloc ] initWithFrame:[ UIScreen mainScreen ].bounds ];
