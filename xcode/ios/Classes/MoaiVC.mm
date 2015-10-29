@@ -17,13 +17,15 @@ extern "C" {
 #define TRANSFER_SERVICE_UUID @"F457370D-61BC-47A5-8272-99A5584FC554"
 #define TRANSFER_CHARACTERISTIC_UUID @"38224EC1-942E-419D-8068-985ED77392D2"
 
-const UInt8 BLUETOOTH_CODE_SWIPE_UP = 1;
-const UInt8 BLUETOOTH_CODE_SWIPE_DOWN = 2;
-const UInt8 BLUETOOTH_CODE_SWIPE_LEFT = 3;
-const UInt8 BLUETOOTH_CODE_SWIPE_RIGHT = 4;
-const UInt8 BLUETOOTH_CODE_SELECT_BUTTON = 5;
-const UInt8 BLUETOOTH_CODE_MENU_BUTTON = 6;
-const UInt8 BLUETOOTH_CODE_PLAY_PAUSE_BUTTON = 7;
+const UInt8 BLUETOOTH_CODE_TOUCH_DOWN = 1;
+const UInt8 BLUETOOTH_CODE_TOUCH_UP = 2;
+const UInt8 BLUETOOTH_CODE_SWIPE_UP = 3;
+const UInt8 BLUETOOTH_CODE_SWIPE_DOWN = 4;
+const UInt8 BLUETOOTH_CODE_SWIPE_LEFT = 5;
+const UInt8 BLUETOOTH_CODE_SWIPE_RIGHT = 6;
+const UInt8 BLUETOOTH_CODE_SELECT_BUTTON = 7;
+const UInt8 BLUETOOTH_CODE_MENU_BUTTON = 8;
+const UInt8 BLUETOOTH_CODE_PLAY_PAUSE_BUTTON = 9;
 const UInt8 BLUETOOTH_CODE_DISCONNECT = 253;
 const UInt8 BLUETOOTH_CODE_HELLO = 254;
 
@@ -49,10 +51,10 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //@property (strong, nonatomic) UITapGestureRecognizer *upTapGestureRecognizer;
 //@property (strong, nonatomic) UITapGestureRecognizer *downTapGestureRecognizer;
 
-@property (strong, nonatomic) UITapGestureRecognizer *leftTapGestureRecognizer;
-@property (strong, nonatomic) UITapGestureRecognizer *rightTapGestureRecognizer;
-@property (strong, nonatomic) UITapGestureRecognizer *upTapGestureRecognizer;
-@property (strong, nonatomic) UITapGestureRecognizer *downTapGestureRecognizer;
+//@property (strong, nonatomic) UITapGestureRecognizer *leftTapGestureRecognizer;
+//@property (strong, nonatomic) UITapGestureRecognizer *rightTapGestureRecognizer;
+//@property (strong, nonatomic) UITapGestureRecognizer *upTapGestureRecognizer;
+//@property (strong, nonatomic) UITapGestureRecognizer *downTapGestureRecognizer;
 
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
@@ -63,10 +65,10 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation;
 
-- (void)handleLeftTapFrom:(UITapGestureRecognizer *)recognizer;
-- (void)handleRightTapFrom:(UITapGestureRecognizer *)recognizer;
-- (void)handleUpTapFrom:(UITapGestureRecognizer *)recognizer;
-- (void)handleDownTapFrom:(UITapGestureRecognizer *)recognizer;
+//- (void)handleLeftTapFrom:(UITapGestureRecognizer *)recognizer;
+//- (void)handleRightTapFrom:(UITapGestureRecognizer *)recognizer;
+//- (void)handleUpTapFrom:(UITapGestureRecognizer *)recognizer;
+//- (void)handleDownTapFrom:(UITapGestureRecognizer *)recognizer;
 
 @end
 
@@ -152,33 +154,33 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     [self.downSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [self.view addGestureRecognizer:self.downSwipeGestureRecognizer];
     
-    self.leftTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftTapFrom:)];
-    self.leftTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeLeftArrow)];
-    self.leftTapGestureRecognizer.cancelsTouchesInView = NO;
-//    self.leftTapGestureRecognizer.delaysTouchesBegan = YES;
-//    self.leftTapGestureRecognizer.delaysTouchesEnded = NO;
-    [self.view addGestureRecognizer:self.leftTapGestureRecognizer];
-    
-    self.rightTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightTapFrom:)];
-    self.rightTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeRightArrow)];
-    self.rightTapGestureRecognizer.cancelsTouchesInView = NO;
-//    self.rightTapGestureRecognizer.delaysTouchesBegan = YES;
-//    self.rightTapGestureRecognizer.delaysTouchesEnded = NO;
-    [self.view addGestureRecognizer:self.rightTapGestureRecognizer];
-    
-    self.upTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpTapFrom:)];
-    self.upTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeUpArrow)];
-    self.upTapGestureRecognizer.cancelsTouchesInView = NO;
-//    self.upTapGestureRecognizer.delaysTouchesBegan = YES;
-//    self.upTapGestureRecognizer.delaysTouchesEnded = NO;
-    [self.view addGestureRecognizer:self.upTapGestureRecognizer];
-    
-    self.downTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDownTapFrom:)];
-    self.downTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeDownArrow)];
-    self.downTapGestureRecognizer.cancelsTouchesInView = NO;
-//    self.downTapGestureRecognizer.delaysTouchesBegan = YES;
-//    self.downTapGestureRecognizer.delaysTouchesEnded = NO;
-    [self.view addGestureRecognizer:self.downTapGestureRecognizer];
+//    self.leftTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftTapFrom:)];
+//    self.leftTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeLeftArrow)];
+//    self.leftTapGestureRecognizer.cancelsTouchesInView = NO;
+////    self.leftTapGestureRecognizer.delaysTouchesBegan = YES;
+////    self.leftTapGestureRecognizer.delaysTouchesEnded = NO;
+//    [self.view addGestureRecognizer:self.leftTapGestureRecognizer];
+//    
+//    self.rightTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightTapFrom:)];
+//    self.rightTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeRightArrow)];
+//    self.rightTapGestureRecognizer.cancelsTouchesInView = NO;
+////    self.rightTapGestureRecognizer.delaysTouchesBegan = YES;
+////    self.rightTapGestureRecognizer.delaysTouchesEnded = NO;
+//    [self.view addGestureRecognizer:self.rightTapGestureRecognizer];
+//    
+//    self.upTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpTapFrom:)];
+//    self.upTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeUpArrow)];
+//    self.upTapGestureRecognizer.cancelsTouchesInView = NO;
+////    self.upTapGestureRecognizer.delaysTouchesBegan = YES;
+////    self.upTapGestureRecognizer.delaysTouchesEnded = NO;
+//    [self.view addGestureRecognizer:self.upTapGestureRecognizer];
+//    
+//    self.downTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDownTapFrom:)];
+//    self.downTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeDownArrow)];
+//    self.downTapGestureRecognizer.cancelsTouchesInView = NO;
+////    self.downTapGestureRecognizer.delaysTouchesBegan = YES;
+////    self.downTapGestureRecognizer.delaysTouchesEnded = NO;
+//    [self.view addGestureRecognizer:self.downTapGestureRecognizer];
 }
 
 - (void)sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorId)sensorId {
@@ -208,25 +210,25 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeDown];
 }
 
-- (void)handleLeftTapFrom:(UITapGestureRecognizer *)recognizer {
-    NSLog(@"Left tap.");
-    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdLeftArrow)];
-}
-
-- (void)handleRightTapFrom:(UITapGestureRecognizer *)recognizer {
-    NSLog(@"Right tap.");
-    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdRightArrow)];
-}
-
-- (void)handleUpTapFrom:(UITapGestureRecognizer *)recognizer {
-    NSLog(@"Up tap.");
-    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdUpArrow)];
-}
-
-- (void)handleDownTapFrom:(UITapGestureRecognizer *)recognizer {
-    NSLog(@"Down tap.");
-    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdDownArrow)];
-}
+//- (void)handleLeftTapFrom:(UITapGestureRecognizer *)recognizer {
+//    NSLog(@"Left tap.");
+//    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdLeftArrow)];
+//}
+//
+//- (void)handleRightTapFrom:(UITapGestureRecognizer *)recognizer {
+//    NSLog(@"Right tap.");
+//    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdRightArrow)];
+//}
+//
+//- (void)handleUpTapFrom:(UITapGestureRecognizer *)recognizer {
+//    NSLog(@"Up tap.");
+//    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdUpArrow)];
+//}
+//
+//- (void)handleDownTapFrom:(UITapGestureRecognizer *)recognizer {
+//    NSLog(@"Down tap.");
+//    [self sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorIdDownArrow)];
+//}
 
 
 #pragma mark - Newer Bluetooth
@@ -535,14 +537,14 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
         return (otherGestureRecognizer != self.downSwipeGestureRecognizer);
     } else if (gestureRecognizer == self.downSwipeGestureRecognizer) {
         return (otherGestureRecognizer != self.upSwipeGestureRecognizer);
-    } else if (gestureRecognizer == self.leftTapGestureRecognizer) {
-        return (otherGestureRecognizer != self.rightTapGestureRecognizer);
-    } else if (gestureRecognizer == self.rightTapGestureRecognizer) {
-        return (otherGestureRecognizer != self.leftTapGestureRecognizer);
-    } else if (gestureRecognizer == self.upTapGestureRecognizer) {
-        return (otherGestureRecognizer != self.downTapGestureRecognizer);
-    } else if (gestureRecognizer == self.downTapGestureRecognizer) {
-        return (otherGestureRecognizer != self.upTapGestureRecognizer);
+//    } else if (gestureRecognizer == self.leftTapGestureRecognizer) {
+//        return (otherGestureRecognizer != self.rightTapGestureRecognizer);
+//    } else if (gestureRecognizer == self.rightTapGestureRecognizer) {
+//        return (otherGestureRecognizer != self.leftTapGestureRecognizer);
+//    } else if (gestureRecognizer == self.upTapGestureRecognizer) {
+//        return (otherGestureRecognizer != self.downTapGestureRecognizer);
+//    } else if (gestureRecognizer == self.downTapGestureRecognizer) {
+//        return (otherGestureRecognizer != self.upTapGestureRecognizer);
     } else {
         return NO;
     }
