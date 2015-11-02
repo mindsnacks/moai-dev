@@ -35,26 +35,12 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //================================================================//
 @interface MoaiVC ()
 {
-//    UISwipeGestureRecognizer *_leftSwipeGestureRecognizer;
-//    UISwipeGestureRecognizer *_rightSwipeGestureRecognizer;
-//    UISwipeGestureRecognizer *_upSwipeGestureRecognizer;
-//    UISwipeGestureRecognizer *_downSwipeGestureRecognizer;
 }
 
 @property (strong, nonatomic) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
 @property (strong, nonatomic) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 @property (strong, nonatomic) UISwipeGestureRecognizer *upSwipeGestureRecognizer;
 @property (strong, nonatomic) UISwipeGestureRecognizer *downSwipeGestureRecognizer;
-
-//@property (strong, nonatomic) UITapGestureRecognizer *leftTapGestureRecognizer;
-//@property (strong, nonatomic) UITapGestureRecognizer *rightTapGestureRecognizer;
-//@property (strong, nonatomic) UITapGestureRecognizer *upTapGestureRecognizer;
-//@property (strong, nonatomic) UITapGestureRecognizer *downTapGestureRecognizer;
-
-//@property (strong, nonatomic) UITapGestureRecognizer *leftTapGestureRecognizer;
-//@property (strong, nonatomic) UITapGestureRecognizer *rightTapGestureRecognizer;
-//@property (strong, nonatomic) UITapGestureRecognizer *upTapGestureRecognizer;
-//@property (strong, nonatomic) UITapGestureRecognizer *downTapGestureRecognizer;
 
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
@@ -64,11 +50,6 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 
 	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation;
-
-//- (void)handleLeftTapFrom:(UITapGestureRecognizer *)recognizer;
-//- (void)handleRightTapFrom:(UITapGestureRecognizer *)recognizer;
-//- (void)handleUpTapFrom:(UITapGestureRecognizer *)recognizer;
-//- (void)handleDownTapFrom:(UITapGestureRecognizer *)recognizer;
 
 @end
 
@@ -138,77 +119,49 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //#pragma mark - Swipe Gestures
 
 - (void)addSwipeAndTapGestureRecognizers {
-    self.leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipeFrom:)];
-    [self.leftSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [self.view addGestureRecognizer:self.leftSwipeGestureRecognizer];
-    
-    self.rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipeFrom:)];
-    [self.rightSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self.view addGestureRecognizer:self.rightSwipeGestureRecognizer];
-    
-    self.upSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpSwipeFrom:)];
-    [self.upSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
-    [self.view addGestureRecognizer:self.upSwipeGestureRecognizer];
-    
-    self.downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleDownSwipeFrom:)];
-    [self.downSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    [self.view addGestureRecognizer:self.downSwipeGestureRecognizer];
-    
-//    self.leftTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftTapFrom:)];
-//    self.leftTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeLeftArrow)];
-//    self.leftTapGestureRecognizer.cancelsTouchesInView = NO;
-////    self.leftTapGestureRecognizer.delaysTouchesBegan = YES;
-////    self.leftTapGestureRecognizer.delaysTouchesEnded = NO;
-//    [self.view addGestureRecognizer:self.leftTapGestureRecognizer];
+//    self.leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipeFrom:)];
+//    [self.leftSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+//    [self.view addGestureRecognizer:self.leftSwipeGestureRecognizer];
 //    
-//    self.rightTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightTapFrom:)];
-//    self.rightTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeRightArrow)];
-//    self.rightTapGestureRecognizer.cancelsTouchesInView = NO;
-////    self.rightTapGestureRecognizer.delaysTouchesBegan = YES;
-////    self.rightTapGestureRecognizer.delaysTouchesEnded = NO;
-//    [self.view addGestureRecognizer:self.rightTapGestureRecognizer];
+//    self.rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipeFrom:)];
+//    [self.rightSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+//    [self.view addGestureRecognizer:self.rightSwipeGestureRecognizer];
 //    
-//    self.upTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpTapFrom:)];
-//    self.upTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeUpArrow)];
-//    self.upTapGestureRecognizer.cancelsTouchesInView = NO;
-////    self.upTapGestureRecognizer.delaysTouchesBegan = YES;
-////    self.upTapGestureRecognizer.delaysTouchesEnded = NO;
-//    [self.view addGestureRecognizer:self.upTapGestureRecognizer];
+//    self.upSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpSwipeFrom:)];
+//    [self.upSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+//    [self.view addGestureRecognizer:self.upSwipeGestureRecognizer];
 //    
-//    self.downTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDownTapFrom:)];
-//    self.downTapGestureRecognizer.allowedPressTypes = @[@(UIPressTypeDownArrow)];
-//    self.downTapGestureRecognizer.cancelsTouchesInView = NO;
-////    self.downTapGestureRecognizer.delaysTouchesBegan = YES;
-////    self.downTapGestureRecognizer.delaysTouchesEnded = NO;
-//    [self.view addGestureRecognizer:self.downTapGestureRecognizer];
+//    self.downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleDownSwipeFrom:)];
+//    [self.downSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+//    [self.view addGestureRecognizer:self.downSwipeGestureRecognizer];
 }
 
-- (void)sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorId)sensorId {
-    bool buttonPressed = true;
-    AKUEnqueueButtonEvent(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, sensorId, buttonPressed);
-    buttonPressed = false;
-    AKUEnqueueButtonEvent(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, sensorId, buttonPressed);
-}
-
-- (void)handleLeftSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-    NSLog(@"Left Swipe");
-    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeLeft];
-}
-
-- (void)handleRightSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-    NSLog(@"Right Swipe");
-    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeRight];
-}
-
-- (void)handleUpSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-    NSLog(@"Up Swipe");
-    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeUp];
-}
-
-- (void)handleDownSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-    NSLog(@"Down Swipe");
-    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeDown];
-}
+//- (void)sendDirectionSignalWithSensorId:(MoaiInputDeviceSensorId)sensorId {
+//    bool buttonPressed = true;
+//    AKUEnqueueButtonEvent(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, sensorId, buttonPressed);
+//    buttonPressed = false;
+//    AKUEnqueueButtonEvent(MoaiInputDeviceId::MoaiInputDeviceIdTvRemote, sensorId, buttonPressed);
+//}
+//
+//- (void)handleLeftSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+//    NSLog(@"Left Swipe");
+//    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeLeft];
+//}
+//
+//- (void)handleRightSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+//    NSLog(@"Right Swipe");
+//    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeRight];
+//}
+//
+//- (void)handleUpSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+//    NSLog(@"Up Swipe");
+//    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeUp];
+//}
+//
+//- (void)handleDownSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
+//    NSLog(@"Down Swipe");
+//    [self sendDirectionSignalWithSensorId:MoaiInputDeviceSensorIdSwipeDown];
+//}
 
 //- (void)handleLeftTapFrom:(UITapGestureRecognizer *)recognizer {
 //    NSLog(@"Left tap.");
@@ -528,26 +481,18 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     lua_pop(l, 1);
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if (gestureRecognizer == self.leftSwipeGestureRecognizer) {
-        return (otherGestureRecognizer != self.rightSwipeGestureRecognizer);
-    } else if (gestureRecognizer == self.rightSwipeGestureRecognizer) {
-        return (otherGestureRecognizer != self.leftSwipeGestureRecognizer);
-    } else if (gestureRecognizer == self.upSwipeGestureRecognizer) {
-        return (otherGestureRecognizer != self.downSwipeGestureRecognizer);
-    } else if (gestureRecognizer == self.downSwipeGestureRecognizer) {
-        return (otherGestureRecognizer != self.upSwipeGestureRecognizer);
-//    } else if (gestureRecognizer == self.leftTapGestureRecognizer) {
-//        return (otherGestureRecognizer != self.rightTapGestureRecognizer);
-//    } else if (gestureRecognizer == self.rightTapGestureRecognizer) {
-//        return (otherGestureRecognizer != self.leftTapGestureRecognizer);
-//    } else if (gestureRecognizer == self.upTapGestureRecognizer) {
-//        return (otherGestureRecognizer != self.downTapGestureRecognizer);
-//    } else if (gestureRecognizer == self.downTapGestureRecognizer) {
-//        return (otherGestureRecognizer != self.upTapGestureRecognizer);
-    } else {
-        return NO;
-    }
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    if (gestureRecognizer == self.leftSwipeGestureRecognizer) {
+//        return (otherGestureRecognizer != self.rightSwipeGestureRecognizer);
+//    } else if (gestureRecognizer == self.rightSwipeGestureRecognizer) {
+//        return (otherGestureRecognizer != self.leftSwipeGestureRecognizer);
+//    } else if (gestureRecognizer == self.upSwipeGestureRecognizer) {
+//        return (otherGestureRecognizer != self.downSwipeGestureRecognizer);
+//    } else if (gestureRecognizer == self.downSwipeGestureRecognizer) {
+//        return (otherGestureRecognizer != self.upSwipeGestureRecognizer);
+//    } else {
+//        return NO;
+//    }
+//}
 
 @end
