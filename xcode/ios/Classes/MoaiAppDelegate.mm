@@ -88,9 +88,9 @@ extern "C" {
         NSString *assetsPath = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"assets"];
         [self addAssetsPath:assetsPath];
         
-        [self setupSoundCallbacks];
+        [self setupHostTable];
+        [self setupGameSessionTable];
         
-//        [self addSourcePath:sourcePath];
 		
 		// run scripts
 		[mMoaiView run:@"buzz_main.lua"];
@@ -229,15 +229,25 @@ static int _MSMOAILoadSoundHandler(lua_State *l)
     return 0;
 }
 
+- (void)setupGameSessionTable {
+    lua_State *l = AKUGetLuaState();
+    
+    // create GameSession
+    lua_newtable(l);
+    
+    lua_pushstring(l, [@"" UTF8String]);
+    lua_setfield(l, -2, "configJSON");
+    
+    // set GameSession
+    lua_setglobal(l, "GameSession");
+}
 
-- (void)setupSoundCallbacks {
+
+- (void)setupHostTable {
     lua_State *l = AKUGetLuaState();
     
     // create Host
     lua_newtable(l);
-    
-//    lua_pushlightuserdata(l, &soundIntegration);
-//    lua_pushcclosure(l, SoundIntegration::_MSMOAIPlaySoundHandler, 1);
     
     lua_pushcfunction(l, _MSMOAIPlaySoundHandler);
     lua_setfield(l, -2, "playSound");
@@ -245,10 +255,17 @@ static int _MSMOAILoadSoundHandler(lua_State *l)
     lua_pushcfunction(l, _MSMOAILoadSoundHandler);
     lua_setfield(l, -2, "loadSound");
     
-//    lua_register(l, "playSound", _MSMOAIPlaySoundHandler);
+    lua_pushnumber(l, 3.0f);
+    lua_setfield(l, -2, "contentScale");
     
-//    PUSH_LUA_CALLBACK_HANDLER(l, playSound, _MSMOAIPlaySoundHandler);
-//    lua_setfield(l, -2, "playSound");
+    lua_pushstring(l, [@"@3x" UTF8String]);
+    lua_setfield(l, -2, "assetSuffix");
+    
+    lua_pushstring(l, [@".caf" UTF8String]);
+    lua_setfield(l, -2, "soundEffectFileExtension");
+    
+    lua_pushboolean(l, true);
+    lua_setfield(l, -2, "environmentIsAppleTv");
     
     // set Host
     lua_setglobal(l, "Host");
