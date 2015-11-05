@@ -37,4 +37,6 @@ typedef enum MoaiInputDeviceId {
 - (void)addSwipeAndTapGestureRecognizers;
 - (void)addBluetoothStuff;
 
+- (void)addGameCenterStuff;
+
 @end

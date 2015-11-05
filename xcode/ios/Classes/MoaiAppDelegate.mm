@@ -64,6 +64,8 @@ extern "C" {
         [mMoaiVC addSwipeAndTapGestureRecognizers];
 //        [mMoaiVC addSwipeGestureRecognizer];
         [mMoaiVC addBluetoothStuff];
+        
+        [mMoaiVC addGameCenterStuff];
 		
 		mWindow = [[ UIWindow alloc ] initWithFrame:[ UIScreen mainScreen ].bounds ];
 		[ mWindow setUserInteractionEnabled:YES ];

@@ -14,6 +14,8 @@ extern "C" {
     #include <lualib.h>
 }
 
+#import "BuzzGameKitManager.h"
+
 #define TRANSFER_SERVICE_UUID @"F457370D-61BC-47A5-8272-99A5584FC554"
 #define TRANSFER_CHARACTERISTIC_UUID @"38224EC1-942E-419D-8068-985ED77392D2"
 
@@ -494,5 +496,29 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //        return NO;
 //    }
 //}
+
+#pragma mark - GameCenter
+
+- (void)addGameCenterStuff {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showAuthenticationViewController)
+                                                 name:PresentAuthenticationViewController
+                                               object:nil];
+    
+    [[BuzzGameKitManager sharedBuzzGameKitManager] authenticateLocalPlayer];
+}
+
+- (void)showAuthenticationViewController {
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    
+    [self presentViewController:buzzGameKitManager.authenticationViewController
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
+}
 
 @end
