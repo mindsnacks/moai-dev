@@ -35,8 +35,9 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //================================================================//
 // MoaiVC ()
 //================================================================//
-@interface MoaiVC ()
+@interface MoaiVC() <BuzzGameKitManagerDelegate>
 {
+    
 }
 
 @property (strong, nonatomic) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
@@ -506,6 +507,13 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
                                                object:nil];
     
     [[BuzzGameKitManager sharedBuzzGameKitManager] authenticateLocalPlayer];
+    
+    //
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerAuthenticated)
+                                                 name:LocalPlayerIsAuthenticated
+                                               object:nil];
 }
 
 - (void)showAuthenticationViewController {
@@ -516,9 +524,28 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
                      completion:nil];
 }
 
+- (void)playerAuthenticated {
+    [[BuzzGameKitManager sharedBuzzGameKitManager] findMatchWithMinPlayers:2
+                                                                maxPlayers:2
+                                                            viewController:self
+                                                                  delegate:self];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
+}
+
+- (void)matchStarted {
+    NSLog(@"Match started");
+}
+
+- (void)matchEnded {
+    NSLog(@"Match ended");
+}
+
+- (void)match:(GKMatch *)match didReceiveData:(NSData *)data forRecipient:(GKPlayer *)recipient fromRemotePlayer:(GKPlayer *)player {
+    NSLog(@"Recieved data");
 }
 
 @end

@@ -385,6 +385,8 @@
 		EBEF1CC21BC8883F008D0B2F /* buzz */ = {
 			isa = PBXGroup;
 			children = (
+				EB95118E1BEBFE6600BBB4DE /* BuzzGameKitManager.h */,
+				EB95118F1BEBFE6600BBB4DE /* BuzzGameKitManager.m */,
 				EBEF1CC61BC8883F008D0B2F /* AppDelegate.h */,
 				EBEF1CC71BC8883F008D0B2F /* AppDelegate.m */,
 				EBEF1CC91BC8883F008D0B2F /* ViewController.h */,
@@ -393,8 +395,6 @@
 				EBEF1CCF1BC88840008D0B2F /* Assets.xcassets */,
 				EBEF1CD11BC88840008D0B2F /* Info.plist */,
 				EBEF1CC31BC8883F008D0B2F /* Supporting Files */,
-				EB95118E1BEBFE6600BBB4DE /* BuzzGameKitManager.h */,
-				EB95118F1BEBFE6600BBB4DE /* BuzzGameKitManager.m */,
 			);
 			path = buzz;
 			sourceTree = "<group>";
