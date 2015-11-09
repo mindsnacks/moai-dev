@@ -25,6 +25,7 @@ extern NSString *const LocalPlayerIsAuthenticated;
 @property (nonatomic, readonly) NSError *lastError;
 @property (nonatomic, strong) GKMatch *match;
 @property (nonatomic, assign) id <BuzzGameKitManagerDelegate> delegate;
+@property (nonatomic, strong) NSMutableDictionary *playersById;
 
 + (instancetype)sharedBuzzGameKitManager;
 

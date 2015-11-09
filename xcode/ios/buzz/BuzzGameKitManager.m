@@ -72,6 +72,42 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
     }
 }
 
+- (NSArray *)identifiersForPlayers {
+    NSMutableArray *identifiers = [NSMutableArray array];
+    for (GKPlayer *player in _match.players) {
+        NSString *identifier = player.playerID;
+        [identifiers addObject:identifier];
+    }
+    return identifiers;
+}
+
+- (void)lookupPlayers {
+    NSLog(@"Looking up %lu players...", (unsigned long)_match.players.count);
+    
+    NSArray *identifiers = [self identifiersForPlayers];
+    
+    [GKPlayer loadPlayersForIdentifiers:identifiers withCompletionHandler:^(NSArray *players, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Error retrieving player info: %@", error.localizedDescription);
+            _matchStarted = NO;
+            [_delegate matchEnded];
+        } else {
+            //Populate players dictionary
+            _playersById = [NSMutableDictionary dictionaryWithCapacity:players.count];
+            for (GKPlayer *player in players) {
+                NSLog(@"Found player: %@", player.alias);
+                _playersById[player.playerID] = player;
+            }
+            _playersById[GKLocalPlayer.localPlayer.playerID] = GKLocalPlayer.localPlayer;
+            
+            //Notify delegate match can begin.
+            _matchStarted = YES;
+            [_delegate matchStarted];
+        }
+        
+    }];
+}
+
 - (void)findMatchWithMinPlayers:(NSUInteger)minPlayersCount
                      maxPlayers:(NSUInteger)maxPlayersCount
                  viewController:(UIViewController *)viewController
@@ -110,6 +146,7 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
     match.delegate = self;
     if ((!_matchStarted) && (match.expectedPlayerCount == 0)) {
         NSLog(@"Ready to start match!");
+        [self lookupPlayers];
     }
 }
 
@@ -132,6 +169,7 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
         
         if ((!_matchStarted) && (match.expectedPlayerCount == 0)) {
             NSLog(@"Ready to start match!");
+            [self lookupPlayers];
         }
         
     } else if (state == GKPlayerStateDisconnected) {
