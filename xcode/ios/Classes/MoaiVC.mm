@@ -15,6 +15,7 @@ extern "C" {
 }
 
 #import "BuzzGameKitManager.h"
+#import "MultiplayerNetworking.h"
 
 #define TRANSFER_SERVICE_UUID @"F457370D-61BC-47A5-8272-99A5584FC554"
 #define TRANSFER_CHARACTERISTIC_UUID @"38224EC1-942E-419D-8068-985ED77392D2"
@@ -37,7 +38,7 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //================================================================//
 @interface MoaiVC() <BuzzGameKitManagerDelegate>
 {
-    
+    MultiplayerNetworking *_networkingEngine;
 }
 
 @property (strong, nonatomic) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
@@ -525,10 +526,38 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 }
 
 - (void)playerAuthenticated {
+    _networkingEngine = [[MultiplayerNetworking alloc] init];
+    _networkingEngine.delegate = self;
+    
     [[BuzzGameKitManager sharedBuzzGameKitManager] findMatchWithMinPlayers:2
                                                                 maxPlayers:2
                                                             viewController:self
-                                                                  delegate:self];
+                                                                  delegate:_networkingEngine];
+}
+
+- (void)matchEnded {
+    NSLog(@"MoaiVC thinks the match ended.");
+}
+
+- (void)setCurrentPlayerIndex:(NSUInteger)index {
+    NSLog(@"MoaiVC should set the current player index to: %lu", index);
+}
+
+- (void)movePlayerAtIndex:(NSUInteger)index {
+    NSLog(@"MoaiVC should move the player at index: %lu", index);
+}
+
+- (void)gameOver:(BOOL)player1Won {
+    NSLog(@"MoaiVC thinks the game ended and...");
+    if (player1Won) {
+        NSLog(@"player1Won equals YES");
+    } else {
+        NSLog(@"player1Won equals NO");
+    }
+}
+
+- (void)setPlayerAliases:(NSArray*)playerAliases {
+    NSLog(@"MoaiVC should set the player aliases.");
 }
 
 - (void)dealloc {
@@ -536,16 +565,16 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     [super dealloc];
 }
 
-- (void)matchStarted {
-    NSLog(@"Match started");
-}
-
-- (void)matchEnded {
-    NSLog(@"Match ended");
-}
-
-- (void)match:(GKMatch *)match didReceiveData:(NSData *)data forRecipient:(GKPlayer *)recipient fromRemotePlayer:(GKPlayer *)player {
-    NSLog(@"Recieved data");
-}
+//- (void)matchStarted {
+//    NSLog(@"Match started");
+//}
+//
+//- (void)matchEnded {
+//    NSLog(@"Match ended");
+//}
+//
+//- (void)match:(GKMatch *)match didReceiveData:(NSData *)data forRecipient:(GKPlayer *)recipient fromRemotePlayer:(GKPlayer *)player {
+//    NSLog(@"Recieved data");
+//}
 
 @end
