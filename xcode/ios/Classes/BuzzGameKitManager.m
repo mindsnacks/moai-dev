@@ -14,6 +14,8 @@
 @property (nonatomic) BOOL matchStarted;
 @property (nonatomic, strong) GKMatch *match;
 
+@property (nonatomic, strong) NSMutableDictionary *playersByPlayerId;
+
 @end
 
 
@@ -32,6 +34,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.gameCenterEnabled = YES;
+        self.playersByPlayerId = nil;
     }
     return self;
 }
@@ -84,6 +87,68 @@
     [viewController presentViewController:matchmakerViewController animated:YES completion:nil];
 }
 
++ (NSArray *)playerIdsForPlayers:(NSArray *)players {
+    NSMutableArray *playerIds = [NSMutableArray array];
+    
+    for (GKPlayer *player in players) {
+        NSString *playerId = player.playerID;
+        [playerIds addObject:playerId];
+    }
+    
+    return playerIds;
+}
+
+- (void)lookupPlayers {
+    NSLog(@"Looking up players.  There is %lu of them.", (unsigned long)self.match.players.count);
+    
+    NSArray *playerIds = [BuzzGameKitManager playerIdsForPlayers:self.match.players];
+    [GKPlayer loadPlayersForIdentifiers:playerIds withCompletionHandler:^(NSArray *players, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Error retrieving player info: %@", error.localizedDescription);
+            self.matchStarted = NO;
+            //[_delegate matchEnded];
+        } else {
+            self.playersByPlayerId = [NSMutableDictionary dictionaryWithCapacity:players.count];
+            
+            for (GKPlayer *player in players) {
+                NSLog(@"Found player: %@ alias: %@", player.playerID, player.alias);
+                self.playersByPlayerId[player.playerID] = player;
+            }
+            
+            GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+            self.playersByPlayerId[localPlayer.playerID] = localPlayer;
+            
+            NSLog(@"The match is starting.");
+            self.matchStarted = YES;
+        }
+    }];
+    
+    
+//    NSLog(@"Looking up %lu players...", (unsigned long)_match.playerIDs.count);
+//    
+//    [GKPlayer loadPlayersForIdentifiers:_match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
+//        
+//        if (error != nil) {
+//            NSLog(@"Error retrieving player info: %@", error.localizedDescription);
+//            _matchStarted = NO;
+//            [_delegate matchEnded];
+//        } else {
+//            
+//            // Populate players dict
+//            _playersDict = [NSMutableDictionary dictionaryWithCapacity:players.count];
+//            for (GKPlayer *player in players) {
+//                NSLog(@"Found player: %@", player.alias);
+//                [_playersDict setObject:player forKey:player.playerID];
+//            }
+//            [_playersDict setObject:[GKLocalPlayer localPlayer] forKey:[GKLocalPlayer localPlayer].playerID];
+//            
+//            // Notify delegate match can begin
+//            _matchStarted = YES;
+//            [_delegate matchStarted];
+//        }
+//    }];
+}
+
 #pragma mark GKMatchmakerViewControllerDelegate
 
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
@@ -101,6 +166,12 @@
     [viewController dismissViewControllerAnimated:YES completion:nil];
     
     self.match = match;
+    match.delegate = self;
+    
+    if (!self.matchStarted && match.expectedPlayerCount == 0) {
+        NSLog(@"Match not yet started and expectedPlayerCount == 0, so starting match!");
+        [self lookupPlayers];
+    }
     
 }
 
