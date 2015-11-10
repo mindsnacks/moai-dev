@@ -6,7 +6,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "MultiplayerNetworking.h"
 
 typedef enum MoaiInputDeviceSensorId {
     MoaiInputDeviceSensorIdTouch,
@@ -32,7 +31,7 @@ typedef enum MoaiInputDeviceId {
 //================================================================//
 // MoaiVC
 //================================================================//
-@interface MoaiVC : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate, MultiplayerNetworkingProtocol> {
+@interface MoaiVC : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate> {
 }
 
 - (void)addSwipeAndTapGestureRecognizers;
