@@ -11,6 +11,7 @@
 @interface BuzzGameKitManager ()
 
 @property (nonatomic) BOOL gameCenterEnabled;
+@property (nonatomic) BOOL matchStarted;
 @property (nonatomic, strong) GKMatch *match;
 
 @end
@@ -18,6 +19,15 @@
 
 
 @implementation BuzzGameKitManager
+
++ (instancetype)sharedBuzzGameKitManager {
+    static BuzzGameKitManager *buzzGameKitManager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        buzzGameKitManager = [[BuzzGameKitManager alloc] init];
+    });
+    return buzzGameKitManager;
+}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -52,6 +62,26 @@
             self.gameCenterEnabled = NO;
         }
     };
+}
+
+- (void)findMatchWithMinPlayers:(NSUInteger)minPlayersCount maxPlayers:(NSUInteger)maxPlayersCount viewController:(UIViewController *)viewController {
+    if (!self.gameCenterEnabled) {
+        return;
+    }
+    
+    self.matchStarted = NO;
+    self.match = nil;
+    
+    [viewController dismissViewControllerAnimated:NO completion:nil];
+    
+    GKMatchRequest *request = [[GKMatchRequest alloc] init];
+    request.minPlayers = minPlayersCount;
+    request.maxPlayers = maxPlayersCount;
+    
+    GKMatchmakerViewController *matchmakerViewController = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
+    matchmakerViewController.matchmakerDelegate = self;
+    
+    [viewController presentViewController:matchmakerViewController animated:YES completion:nil];
 }
 
 #pragma mark GKMatchmakerViewControllerDelegate

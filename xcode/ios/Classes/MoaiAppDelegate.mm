@@ -17,6 +17,7 @@ extern "C" {
 #import "LocationObserver.h"
 #import "MoaiVC.h"
 #import "MoaiView.h"
+#import "BuzzGameKitManager.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -92,6 +93,7 @@ extern "C" {
         
         [self setupHostTable];
         [self setupGameSessionTable];
+        [self setupGameCenterManagerTable];
         
 		
 		// run scripts
@@ -272,6 +274,35 @@ static int _MSMOAILoadSoundHandler(lua_State *l)
     // set Host
     lua_setglobal(l, "Host");
 }
+
+#pragma mark GameCenter
+
+- (void)setupGameCenterManagerTable {
+    lua_State *l = AKUGetLuaState();
+    
+    // create GameCenterManager table
+    lua_newtable(l);
+    
+    lua_pushcfunction(l, _MSMOAIShowDefaultMatchmakerViewController);
+    lua_setfield(l, -2, "showDefaultMatchmakerViewController");
+    
+    // set Host
+    lua_setglobal(l, "GameCenterManager");
+}
+
+static int _MSMOAIShowDefaultMatchmakerViewController(lua_State *l) {
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    
+    MoaiAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    MoaiVC *moaiVC = delegate.moaiVC;
+    [buzzGameKitManager findMatchWithMinPlayers:2 maxPlayers:2 viewController:moaiVC];
+}
+
+- (MoaiVC *)moaiVC {
+    return mMoaiVC;
+}
+
+#pragma mark More Leftover Moai Stuff
 
 
 	//----------------------------------------------------------------//

@@ -15,6 +15,12 @@ NSString *const NOTIFICATION_LOCAL_PLAYER_IS_AUTHENTICATED = @"NOTIFICATION_LOCA
 
 @property (nonatomic, strong) UIViewController *authenticationViewController;
 
++ (instancetype)sharedBuzzGameKitManager;
+
 - (void)authenticateLocalPlayer;
+
+- (void)findMatchWithMinPlayers:(NSUInteger)minPlayersCount
+                     maxPlayers:(NSUInteger)maxPlayersCount
+                 viewController:(UIViewController *)viewController;
 
 @end

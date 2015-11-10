@@ -50,11 +50,6 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 
 @property (strong, nonatomic) NSMutableArray *discoveredPeripherals;
 
-
-//// GameKit
-
-@property (strong, nonatomic) BuzzGameKitManager *gameKitManager;
-
 	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation;
 
@@ -510,12 +505,13 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
     // Note: need to remove self from notifications.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameCenterAuthenticationViewController) name:NOTIFICATION_PRESENT_AUTHENTICATION_VIEW_CONTROLLER object:nil];
     
-    self.gameKitManager = [[BuzzGameKitManager alloc] init];
-    [self.gameKitManager authenticateLocalPlayer];
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    [buzzGameKitManager authenticateLocalPlayer];
 }
 
 - (void)showGameCenterAuthenticationViewController {
-    [self presentViewController:self.gameKitManager.authenticationViewController animated:YES completion:nil];
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    [self presentViewController:buzzGameKitManager.authenticationViewController animated:YES completion:nil];
 }
 
 
