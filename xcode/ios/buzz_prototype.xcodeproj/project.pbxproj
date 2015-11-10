@@ -36,6 +36,7 @@
 		EB7A63881BCDD39E00AC76A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7A63871BCDD39E00AC76A1 /* CoreBluetooth.framework */; };
 		EB7A63891BCDE1A900AC76A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6026001BCC218300879013 /* CoreLocation.framework */; };
 		EBACF4EC1BDAA2B7003C86F7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBACF4EB1BDAA2B7003C86F7 /* AVFoundation.framework */; };
+		EBC0C4591BF27FD10034C987 /* BuzzGameKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC0C4581BF27FD10034C987 /* BuzzGameKitManager.m */; };
 		EBEF21481BC88D05008D0B2F /* liblibmoai-tvos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEF213B1BC88CCC008D0B2F /* liblibmoai-tvos.a */; };
 		EBEF21491BC88D0D008D0B2F /* liblibmoai-tvos-3rdparty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEF213D1BC88CCC008D0B2F /* liblibmoai-tvos-3rdparty.a */; };
 		EBEF214A1BC88D13008D0B2F /* liblibmoai-tvos-luaext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEF213F1BC88CCC008D0B2F /* liblibmoai-tvos-luaext.a */; };
@@ -204,6 +205,8 @@
 		EB7A63871BCDD39E00AC76A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		EBACF4E61BDA9A85003C86F7 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
 		EBACF4EB1BDAA2B7003C86F7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		EBC0C4571BF27FD10034C987 /* BuzzGameKitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuzzGameKitManager.h; sourceTree = "<group>"; };
+		EBC0C4581BF27FD10034C987 /* BuzzGameKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuzzGameKitManager.m; sourceTree = "<group>"; };
 		EBEF1CC41BC8883F008D0B2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EBEF1CC61BC8883F008D0B2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EBEF1CC71BC8883F008D0B2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 				03CC909C13B3C37200B2724C /* MoaiAppDelegate.mm */,
 				078D62FF13BA9EA30072F273 /* MoaiVC.h */,
 				078D630013BA9EA30072F273 /* MoaiVC.mm */,
+				EBC0C4571BF27FD10034C987 /* BuzzGameKitManager.h */,
+				EBC0C4581BF27FD10034C987 /* BuzzGameKitManager.m */,
 				03CC909F13B3C37200B2724C /* MoaiView.h */,
 				03CC90A013B3C37200B2724C /* MoaiView.mm */,
 				03CC90A113B3C37200B2724C /* OpenGLView.h */,
@@ -583,6 +588,7 @@
 				03CC90A713B3C37200B2724C /* OpenGLView.mm in Sources */,
 				03CC90A913B3C37C00B2724C /* main.mm in Sources */,
 				078D630113BA9EA30072F273 /* MoaiVC.mm in Sources */,
+				EBC0C4591BF27FD10034C987 /* BuzzGameKitManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

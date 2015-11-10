@@ -8,6 +8,8 @@
 #import "MoaiVC.h"
 #import "MoaiView.h"
 
+#import "BuzzGameKitManager.h"
+
 extern "C" {
     #include <lua.h>
     #include <lauxlib.h>
@@ -47,6 +49,11 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 //@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
 
 @property (strong, nonatomic) NSMutableArray *discoveredPeripherals;
+
+
+//// GameKit
+
+@property (strong, nonatomic) BuzzGameKitManager *gameKitManager;
 
 	//----------------------------------------------------------------//
 	-( void ) updateOrientation :( UIInterfaceOrientation )orientation;
@@ -497,6 +504,19 @@ const UInt8 BLUETOOTH_CODE_HELLO = 254;
 
 # pragma mark GameCenter
 
+- (void)addGameCenterStuff {
+    NSLog(@"Adding GameCenter stuff");
+    
+    // Note: need to remove self from notifications.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameCenterAuthenticationViewController) name:NOTIFICATION_PRESENT_AUTHENTICATION_VIEW_CONTROLLER object:nil];
+    
+    self.gameKitManager = [[BuzzGameKitManager alloc] init];
+    [self.gameKitManager authenticateLocalPlayer];
+}
+
+- (void)showGameCenterAuthenticationViewController {
+    [self presentViewController:self.gameKitManager.authenticationViewController animated:YES completion:nil];
+}
 
 
 @end
