@@ -36,4 +36,6 @@
 - (int)playSoundAtPath:(NSString *)path volume:(double)volume pitch:(double)pitch pan:(double)pan looping:(BOOL)looping;
 - (void)loadSoundAtPath:(NSString *)path;
 
+- (void)onGameCenterMatchStartedWithPlayers:(NSArray *)players;
+
 @end

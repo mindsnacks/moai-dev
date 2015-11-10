@@ -8,6 +8,9 @@
 
 #import "BuzzGameKitManager.h"
 
+@class MoaiAppDelegate;
+
+
 @interface BuzzGameKitManager ()
 
 @property (nonatomic) BOOL gameCenterEnabled;
@@ -120,33 +123,11 @@
             
             NSLog(@"The match is starting.");
             self.matchStarted = YES;
+            
+            MoaiAppDelegate *delegate = (MoaiAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [delegate onGameCenterMatchStartedWithPlayers:players];
         }
     }];
-    
-    
-//    NSLog(@"Looking up %lu players...", (unsigned long)_match.playerIDs.count);
-//    
-//    [GKPlayer loadPlayersForIdentifiers:_match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
-//        
-//        if (error != nil) {
-//            NSLog(@"Error retrieving player info: %@", error.localizedDescription);
-//            _matchStarted = NO;
-//            [_delegate matchEnded];
-//        } else {
-//            
-//            // Populate players dict
-//            _playersDict = [NSMutableDictionary dictionaryWithCapacity:players.count];
-//            for (GKPlayer *player in players) {
-//                NSLog(@"Found player: %@", player.alias);
-//                [_playersDict setObject:player forKey:player.playerID];
-//            }
-//            [_playersDict setObject:[GKLocalPlayer localPlayer] forKey:[GKLocalPlayer localPlayer].playerID];
-//            
-//            // Notify delegate match can begin
-//            _matchStarted = YES;
-//            [_delegate matchStarted];
-//        }
-//    }];
 }
 
 #pragma mark GKMatchmakerViewControllerDelegate
