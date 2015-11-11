@@ -192,6 +192,9 @@ typedef struct {
     UInt32 diceRoll = arc4random();
     NSLog(@"Rolled: %iu", diceRoll);
     
+    //send our own dice roll to Lua.
+    [[[UIApplication sharedApplication] delegate] onReceivedDiceRoll:diceRoll fromPlayer:[GKLocalPlayer localPlayer]];
+    
     GameCenterMessageDetermineRoundOwner message;
     message.messageType = MESSAGE_TYPE_DETERMINE_ROUND_OWNER;
     message.diceRoll = diceRoll;
