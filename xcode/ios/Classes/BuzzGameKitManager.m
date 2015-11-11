@@ -10,7 +10,6 @@
 
 @class MoaiAppDelegate;
 
-
 @interface BuzzGameKitManager ()
 
 @property (nonatomic) BOOL gameCenterEnabled;
@@ -111,21 +110,26 @@
             self.matchStarted = NO;
             //[_delegate matchEnded];
         } else {
-            self.playersByPlayerId = [NSMutableDictionary dictionaryWithCapacity:players.count];
+            NSUInteger totalPlayersCount = players.count + 1;
+            
+            self.playersByPlayerId = [NSMutableDictionary dictionaryWithCapacity:totalPlayersCount];
+            NSMutableArray *playersToPassToLua = [NSMutableArray arrayWithCapacity:totalPlayersCount];
+            
+            GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+            self.playersByPlayerId[localPlayer.playerID] = localPlayer;
+            [playersToPassToLua addObject:localPlayer];
             
             for (GKPlayer *player in players) {
                 NSLog(@"Found player: %@ alias: %@", player.playerID, player.alias);
                 self.playersByPlayerId[player.playerID] = player;
+                [playersToPassToLua addObject:player];
             }
-            
-            GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-            self.playersByPlayerId[localPlayer.playerID] = localPlayer;
             
             NSLog(@"The match is starting.");
             self.matchStarted = YES;
             
             MoaiAppDelegate *delegate = (MoaiAppDelegate *)[[UIApplication sharedApplication] delegate];
-            [delegate onGameCenterMatchStartedWithPlayers:players];
+            [delegate onGameCenterMatchStartedWithPlayers:playersToPassToLua];
         }
     }];
 }

@@ -299,35 +299,6 @@ static int _MSMOAIShowDefaultMatchmakerViewController(lua_State *l) {
     return mMoaiVC;
 }
 
-static int _MSMOAINotifyGameCenterMatchStartedWithPlayers(lua_State *l) {
-    //    MOAIIntegration *integration = getMOAIIntegration(l);
-    
-    int args = lua_gettop(l);
-    
-    if (args == 0) lua_error(l);
-    
-    const std::string &effect = _ms_lua_to_string(l, -args);
-    
-    float volume = 1.0f;
-    float pitch = 1.0f;
-    float pan = 0.0f;
-    bool looping = false;
-    
-    if (args > 1) volume  = lua_tonumber(l, -args + 1);
-    if (args > 2) pitch   = lua_tonumber(l, -args + 2);
-    if (args > 3) pan     = lua_tonumber(l, -args + 3);
-    if (args > 4) looping = lua_toboolean(l, -args + 4);
-    
-    
-    //    if (integration->getDelegate() != NULL)
-    //    {
-    MoaiAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    int audioID = [delegate playSoundAtPath:[NSString stringWithUTF8String:effect.c_str()] volume:volume pitch:pitch pan:pan looping:looping];
-    //        long audioID = integration->getDelegate()->moaiIntegrationPlaySoundAtPath(effect, volume, pitch, pan, looping);
-    lua_pushinteger(l, audioID);
-    return 1;
-}
-
 - (void)onGameCenterMatchStartedWithPlayers:(NSArray *)players {
     lua_State *l = AKUGetLuaState();
     
