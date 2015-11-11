@@ -8,6 +8,21 @@
 
 #import "BuzzGameKitManager.h"
 
+typedef NS_ENUM(NSUInteger, GameCenterMessageType) {
+    MESSAGE_TYPE_HEY = 3,
+    MESSAGE_TYPE_YO,
+    MESSAGE_TYPE_WHATS_UP
+};
+
+typedef struct {
+    GameCenterMessageType messageType;
+} GameCenterMessage;
+
+typedef struct {
+    GameCenterMessageType messageType;
+    UInt32 diceRoll;
+} GameCenterMessageHey;
+
 @class MoaiAppDelegate;
 
 @interface BuzzGameKitManager ()
@@ -19,7 +34,6 @@
 @property (nonatomic, strong) NSMutableDictionary *playersByPlayerId;
 
 @end
-
 
 
 @implementation BuzzGameKitManager
@@ -130,8 +144,32 @@
             
             MoaiAppDelegate *delegate = (MoaiAppDelegate *)[[UIApplication sharedApplication] delegate];
             [delegate onGameCenterMatchStartedWithPlayers:playersToPassToLua];
+            
+            //
+            [self sendHey];
         }
     }];
+}
+
+- (void)sendData:(NSData *)data {
+    NSError *error;
+    BOOL dataSentSuccessfully = [self.match sendDataToAllPlayers:data withDataMode:GKMatchSendDataReliable error:&error];
+    if (!dataSentSuccessfully) {
+        NSLog(@"Error sending data: %@", error.localizedDescription);
+        //[self matchEnded];
+    }
+}
+
+- (void)sendHey {
+    UInt32 diceRoll = arc4random();
+    NSLog(@"Rolled: %iu", diceRoll);
+    
+    GameCenterMessageHey message;
+    message.messageType = MESSAGE_TYPE_HEY;
+    message.diceRoll = diceRoll;
+    
+    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessageHey)];
+    [self sendData:dataToSend];
 }
 
 #pragma mark GKMatchmakerViewControllerDelegate
@@ -164,6 +202,28 @@
 
 - (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromRemotePlayer:(GKPlayer *)player {
     NSLog(@"The match received data.");
+    
+    if (match != self.match) {
+        NSLog(@"It's getting data from a match that is not self.match");
+        return;
+    }
+    
+    GameCenterMessage *message = (GameCenterMessage *)[data bytes];
+    if (message->messageType == MESSAGE_TYPE_HEY) {
+        NSLog(@"Received HEY");
+        
+        GameCenterMessageHey *messageHey = (GameCenterMessageHey *)[data bytes];
+        UInt32 diceRoll = messageHey->diceRoll;
+        NSLog(@"The dice roll was: %iu", diceRoll);
+        
+    } else if (message->messageType == MESSAGE_TYPE_YO) {
+        NSLog(@"Received YO");
+    } else if (message->messageType == MESSAGE_TYPE_WHATS_UP) {
+        NSLog(@"Received WHATS UP");
+    } else {
+        NSAssert(NO, @"Unhandled message type");
+    }
+    
 }
 
 - (void)match:(GKMatch *)match player:(GKPlayer *)player didChangeConnectionState:(GKPlayerConnectionState)state {
