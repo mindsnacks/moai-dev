@@ -11,6 +11,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+#import <GameKit/GameKit.h>
 
 @class MoaiVC;
 @class MoaiView;
@@ -37,5 +38,6 @@
 - (void)loadSoundAtPath:(NSString *)path;
 
 - (void)onGameCenterMatchStartedWithPlayers:(NSArray *)players;
+- (void)onReceivedDiceRoll:(UInt32)diceRoll fromPlayer:(GKPlayer *)player;
 
 @end

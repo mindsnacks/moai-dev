@@ -9,9 +9,12 @@
 #import "BuzzGameKitManager.h"
 
 typedef NS_ENUM(NSUInteger, GameCenterMessageType) {
-    MESSAGE_TYPE_HEY = 3,
-    MESSAGE_TYPE_YO,
-    MESSAGE_TYPE_WHATS_UP
+    MESSAGE_TYPE_DETERMINE_ROUND_OWNER = 3,
+    MESSAGE_TYPE_START_ROUND,
+    MESSAGE_TYPE_START_QUESTION,
+    MESSAGE_TYPE_BUZZED,
+    MESSAGE_TYPE_END_QUESTION,
+    MESSAGE_TYPE_END_GAME
 };
 
 typedef struct {
@@ -21,7 +24,32 @@ typedef struct {
 typedef struct {
     GameCenterMessageType messageType;
     UInt32 diceRoll;
-} GameCenterMessageHey;
+} GameCenterMessageDetermineRoundOwner;
+
+typedef struct {
+    GameCenterMessageType messageType;
+    UInt32 nounIndex;
+} GameCenterMessageStartRound;
+
+typedef struct {
+    GameCenterMessageType messageType;
+    UInt32 adjectiveIndex;
+} GameCenterMessageStartQuestion;
+
+typedef struct {
+    GameCenterMessageType messageType;
+    BOOL swipedLeft;
+    Float32 remainingProportion;
+} GameCenterMessageBuzzed;
+
+typedef struct {
+    GameCenterMessageType messageType;
+} GameCenterMessageEndQuestion;
+
+typedef struct {
+    GameCenterMessageType messageType;
+    UInt32 winnerIndex;
+} GameCenterMessageEndGame;
 
 @class MoaiAppDelegate;
 
@@ -146,7 +174,7 @@ typedef struct {
             [delegate onGameCenterMatchStartedWithPlayers:playersToPassToLua];
             
             //
-            [self sendHey];
+            [self sendDetermineContentPicker];
         }
     }];
 }
@@ -160,15 +188,15 @@ typedef struct {
     }
 }
 
-- (void)sendHey {
+- (void)sendDetermineContentPicker {
     UInt32 diceRoll = arc4random();
     NSLog(@"Rolled: %iu", diceRoll);
     
-    GameCenterMessageHey message;
-    message.messageType = MESSAGE_TYPE_HEY;
+    GameCenterMessageDetermineRoundOwner message;
+    message.messageType = MESSAGE_TYPE_DETERMINE_ROUND_OWNER;
     message.diceRoll = diceRoll;
     
-    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessageHey)];
+    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessageDetermineRoundOwner)];
     [self sendData:dataToSend];
 }
 
@@ -209,17 +237,14 @@ typedef struct {
     }
     
     GameCenterMessage *message = (GameCenterMessage *)[data bytes];
-    if (message->messageType == MESSAGE_TYPE_HEY) {
-        NSLog(@"Received HEY");
+    if (message->messageType == MESSAGE_TYPE_DETERMINE_ROUND_OWNER) {
+        NSLog(@"Received Determine Round Owner");
         
-        GameCenterMessageHey *messageHey = (GameCenterMessageHey *)[data bytes];
-        UInt32 diceRoll = messageHey->diceRoll;
+        GameCenterMessageDetermineRoundOwner *messageDetermineRoundOwner = (GameCenterMessageDetermineRoundOwner *)[data bytes];
+        UInt32 diceRoll = messageDetermineRoundOwner->diceRoll;
         NSLog(@"The dice roll was: %iu", diceRoll);
         
-    } else if (message->messageType == MESSAGE_TYPE_YO) {
-        NSLog(@"Received YO");
-    } else if (message->messageType == MESSAGE_TYPE_WHATS_UP) {
-        NSLog(@"Received WHATS UP");
+        [[[UIApplication sharedApplication] delegate] onReceivedDiceRoll:diceRoll fromPlayer:player];
     } else {
         NSAssert(NO, @"Unhandled message type");
     }

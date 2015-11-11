@@ -334,6 +334,25 @@ static int _MSMOAIShowDefaultMatchmakerViewController(lua_State *l) {
     lua_pop(l, 1);
 }
 
+- (void)onReceivedDiceRoll:(UInt32)diceRoll fromPlayer:(GKPlayer *)player {
+    NSLog(@"Calling received dice roll: %@ , %iu", player.playerID, diceRoll);
+    
+    lua_State *l = AKUGetLuaState();
+    
+    // Get the event receiver
+    lua_getglobal(l, "GameCenterManager");
+    lua_getfield(l, -1, "onReceivedDiceRoll");
+    
+    // Push arguments on the stack
+    unsigned int argumentsCount = 2;
+    
+    lua_pushstring(l, player.playerID.UTF8String);
+    lua_pushinteger(l, diceRoll);
+    
+    lua_pcall(l, argumentsCount, 0, 0);
+    lua_pop(l, 1);
+}
+
 #pragma mark More Leftover Moai Stuff
 
 
