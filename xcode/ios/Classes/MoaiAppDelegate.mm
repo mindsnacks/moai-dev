@@ -353,7 +353,7 @@ static int _MSMOAISendAnswerToAllPlayers(lua_State *l) {
         return 0;
     }
     
-    long answer = lua_tointeger(l, -2);
+    NSInteger answer = (NSInteger)lua_tointeger(l, -2);
     double proportionRemaining = lua_tonumber(l, -1);
     
     [buzzGameKitManager sendAnswerToAllPlayers:answer withProportionRemaining:proportionRemaining];
