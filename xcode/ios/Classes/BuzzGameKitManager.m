@@ -119,6 +119,7 @@ typedef struct {
     NSLog(@"Attempting to authenticate local player.");
     
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    [localPlayer registerListener:self];
     
     if (localPlayer.isAuthenticated) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOCAL_PLAYER_IS_AUTHENTICATED object:nil];
@@ -349,5 +350,20 @@ typedef struct {
 - (void)match:(GKMatch *)match didFailWithError:(NSError *)error {
     NSLog(@"The match failed with error: %@", error.localizedDescription);
 }
+
+#pragma mark GKLocalPlayerListener
+
+- (void)player:(GKPlayer *)player didAcceptInvite:(GKInvite *)invite {
+    NSLog(@"Player accepted an invite.");
+}
+
+- (void)player:(GKPlayer *)player didRequestMatchWithRecipients:(NSArray<GKPlayer *> *)recipientPlayers {
+    NSLog(@"The player requested a match with 'Recipients'.");
+}
+
+- (void)player:(GKPlayer *)player didRequestMatchWithOtherPlayers:(NSArray<GKPlayer *> *)playersToInvite {
+    NSLog(@"The player requested a match with other players.");
+}
+
 
 @end

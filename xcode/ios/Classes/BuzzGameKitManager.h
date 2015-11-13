@@ -11,7 +11,7 @@
 NSString *const NOTIFICATION_PRESENT_AUTHENTICATION_VIEW_CONTROLLER = @"NOTIFICATION_PRESENT_AUTHENTICATION_VIEW_CONTROLLER";
 NSString *const NOTIFICATION_LOCAL_PLAYER_IS_AUTHENTICATED = @"NOTIFICATION_LOCAL_PLAYER_IS_AUTHENTICATED";
 
-@interface BuzzGameKitManager : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate>
+@interface BuzzGameKitManager : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate, GKLocalPlayerListener>
 
 @property (nonatomic, strong) UIViewController *authenticationViewController;
 
