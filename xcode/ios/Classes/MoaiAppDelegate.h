@@ -38,6 +38,10 @@
 - (void)loadSoundAtPath:(NSString *)path;
 
 - (void)onGameCenterMatchStartedWithPlayers:(NSArray *)players;
-- (void)onReceivedDiceRoll:(UInt32)diceRoll fromPlayer:(GKPlayer *)player;
+
+- (void)onReceivedDiceRoll:(NSInteger)diceRoll fromPlayer:(GKPlayer *)player;
+- (void)onReceivedNounIndex:(NSInteger)nounIndex fromPlayer:(GKPlayer *)player;
+- (void)onReceivedAdjectiveIndex:(NSInteger)adjectiveIndex fromPlayer:(GKPlayer *)player;
+- (void)onReceivedAnswer:(NSInteger)answer withProportionRemaining:(double)proportionRemaining fromPlayer:(GKPlayer *)player;
 
 @end

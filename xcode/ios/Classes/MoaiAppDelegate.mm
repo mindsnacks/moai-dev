@@ -283,6 +283,18 @@ static int _MSMOAILoadSoundHandler(lua_State *l) {
     lua_pushcfunction(l, _MSMOAIShowDefaultMatchmakerViewController);
     lua_setfield(l, -2, "showDefaultMatchmakerViewController");
     
+    lua_pushcfunction(l, _MSMOAISendDiceRollToAllPlayers);
+    lua_setfield(l, -2, "sendDiceRollToAllPlayers");
+    
+    lua_pushcfunction(l, _MSMOAISendNounIndexToAllPlayers);
+    lua_setfield(l, -2, "sendNounIndexToAllPlayers");
+    
+    lua_pushcfunction(l, _MSMOAISendAdjectiveIndexToAllPlayers);
+    lua_setfield(l, -2, "sendAdjectiveIndexToAllPlayers");
+    
+    lua_pushcfunction(l, _MSMOAISendAnswerToAllPlayers);
+    lua_setfield(l, -2, "sendAnswerToAllPlayers");
+    
     // set Host
     lua_setglobal(l, "GameCenterManager");
 }
@@ -293,6 +305,60 @@ static int _MSMOAIShowDefaultMatchmakerViewController(lua_State *l) {
     MoaiAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     MoaiVC *moaiVC = delegate.moaiVC;
     [buzzGameKitManager findMatchWithMinPlayers:2 maxPlayers:2 viewController:moaiVC];
+    
+    return 0;
+}
+
+static int _MSMOAISendDiceRollToAllPlayers(lua_State *l) {
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    
+    [buzzGameKitManager sendDiceRollToAllPlayers];
+    
+    return 0;
+}
+
+static int _MSMOAISendNounIndexToAllPlayers(lua_State *l) {
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    
+    int argumentsCount = lua_gettop(l);
+    if (argumentsCount != 1) {
+        return 0;
+    }
+    NSInteger nounIndex = (NSInteger)lua_tointeger(l, -1);
+    
+    [buzzGameKitManager sendNounIndexToAllPlayers:nounIndex];
+    
+    return 0;
+}
+
+static int _MSMOAISendAdjectiveIndexToAllPlayers(lua_State *l) {
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    
+    int argumentsCount = lua_gettop(l);
+    if (argumentsCount != 1) {
+        return 0;
+    }
+    NSInteger adjectiveIndex = (NSInteger)lua_tointeger(l, -1);
+    
+    [buzzGameKitManager sendAdjectiveIndexToAllPlayers:adjectiveIndex];
+    
+    return 0;
+}
+
+static int _MSMOAISendAnswerToAllPlayers(lua_State *l) {
+    BuzzGameKitManager *buzzGameKitManager = [BuzzGameKitManager sharedBuzzGameKitManager];
+    
+    int argumentsCount = lua_gettop(l);
+    if (argumentsCount != 2) {
+        return 0;
+    }
+    
+    long answer = lua_tointeger(l, -2);
+    double proportionRemaining = lua_tonumber(l, -1);
+    
+    [buzzGameKitManager sendAnswerToAllPlayers:answer withProportionRemaining:proportionRemaining];
+    
+    return 0;
 }
 
 - (MoaiVC *)moaiVC {
@@ -334,8 +400,8 @@ static int _MSMOAIShowDefaultMatchmakerViewController(lua_State *l) {
     lua_pop(l, 1);
 }
 
-- (void)onReceivedDiceRoll:(UInt32)diceRoll fromPlayer:(GKPlayer *)player {
-    NSLog(@"Calling received dice roll: %@ , %iu", player.playerID, diceRoll);
+- (void)onReceivedDiceRoll:(NSInteger)diceRoll fromPlayer:(GKPlayer *)player {
+    NSLog(@"Calling received dice roll: %@ , %li", player.playerID, (long int)diceRoll);
     
     lua_State *l = AKUGetLuaState();
     
@@ -348,6 +414,64 @@ static int _MSMOAIShowDefaultMatchmakerViewController(lua_State *l) {
     
     lua_pushstring(l, player.playerID.UTF8String);
     lua_pushinteger(l, diceRoll);
+    
+    lua_pcall(l, argumentsCount, 0, 0);
+    lua_pop(l, 1);
+}
+
+- (void)onReceivedNounIndex:(NSInteger)nounIndex fromPlayer:(GKPlayer *)player {
+    NSLog(@"Calling received noun index: %@ , %li", player.playerID, (long int)nounIndex);
+    
+    lua_State *l = AKUGetLuaState();
+    
+    // Get the event receiver
+    lua_getglobal(l, "GameCenterManager");
+    lua_getfield(l, -1, "onReceivedNounIndex");
+    
+    // Push arguments on the stack
+    unsigned int argumentsCount = 2;
+    
+    lua_pushstring(l, player.playerID.UTF8String);
+    lua_pushinteger(l, nounIndex);
+    
+    lua_pcall(l, argumentsCount, 0, 0);
+    lua_pop(l, 1);
+}
+
+- (void)onReceivedAdjectiveIndex:(NSInteger)adjectiveIndex fromPlayer:(GKPlayer *)player {
+    NSLog(@"Calling received adjective index: %@ , %li", player.playerID, (long int)adjectiveIndex);
+    
+    lua_State *l = AKUGetLuaState();
+    
+    // Get the event receiver
+    lua_getglobal(l, "GameCenterManager");
+    lua_getfield(l, -1, "onReceivedAdjectiveIndex");
+    
+    // Push arguments on the stack
+    unsigned int argumentsCount = 2;
+    
+    lua_pushstring(l, player.playerID.UTF8String);
+    lua_pushinteger(l, adjectiveIndex);
+    
+    lua_pcall(l, argumentsCount, 0, 0);
+    lua_pop(l, 1);
+}
+
+- (void)onReceivedAnswer:(NSInteger)answer withProportionRemaining:(double)proportionRemaining fromPlayer:(GKPlayer *)player {
+     NSLog(@"Calling received answer: %li withProportionRemaining: %f fromPlayer: %@ ", (long int)answer, proportionRemaining, player.playerID);
+    
+    lua_State *l = AKUGetLuaState();
+    
+    // Get the event receiver
+    lua_getglobal(l, "GameCenterManager");
+    lua_getfield(l, -1, "onReceivedAnswer");
+    
+    // Push arguments on the stack
+    unsigned int argumentsCount = 3;
+    
+    lua_pushstring(l, player.playerID.UTF8String);
+    lua_pushinteger(l, answer);
+    lua_pushnumber(l, proportionRemaining);
     
     lua_pcall(l, argumentsCount, 0, 0);
     lua_pop(l, 1);

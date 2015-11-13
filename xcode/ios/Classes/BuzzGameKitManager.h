@@ -23,4 +23,9 @@ NSString *const NOTIFICATION_LOCAL_PLAYER_IS_AUTHENTICATED = @"NOTIFICATION_LOCA
                      maxPlayers:(NSUInteger)maxPlayersCount
                  viewController:(UIViewController *)viewController;
 
+- (void)sendDiceRollToAllPlayers;
+- (void)sendNounIndexToAllPlayers:(NSInteger)nounIndex;
+- (void)sendAdjectiveIndexToAllPlayers:(NSInteger)adjectiveIndex;
+- (void)sendAnswerToAllPlayers:(NSInteger)answer withProportionRemaining:(double)proportionRemaining;
+
 @end

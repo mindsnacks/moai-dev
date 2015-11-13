@@ -9,12 +9,10 @@
 #import "BuzzGameKitManager.h"
 
 typedef NS_ENUM(NSUInteger, GameCenterMessageType) {
-    MESSAGE_TYPE_DETERMINE_ROUND_OWNER = 3,
-    MESSAGE_TYPE_START_ROUND,
-    MESSAGE_TYPE_START_QUESTION,
-    MESSAGE_TYPE_BUZZED,
-    MESSAGE_TYPE_END_QUESTION,
-    MESSAGE_TYPE_END_GAME
+    MESSAGE_TYPE_ROLLED_DICE = 3,
+    MESSAGE_TYPE_PICKED_NOUN,
+    MESSAGE_TYPE_PICKED_ADJECTIVE,
+    MESSAGE_TYPE_SUBMITTED_ANSWER
 };
 
 typedef struct {
@@ -23,33 +21,67 @@ typedef struct {
 
 typedef struct {
     GameCenterMessageType messageType;
-    UInt32 diceRoll;
-} GameCenterMessageDetermineRoundOwner;
+    int32_t rolledNumber;
+} GameCenterMessageRolledDice;
 
 typedef struct {
     GameCenterMessageType messageType;
-    UInt32 nounIndex;
-} GameCenterMessageStartRound;
+    int32_t nounIndex;
+} GameCenterMessagePickedNoun;
 
 typedef struct {
     GameCenterMessageType messageType;
-    UInt32 adjectiveIndex;
-} GameCenterMessageStartQuestion;
+    int32_t adjectiveIndex;
+} GameCenterMessagePickedAdjective;
 
 typedef struct {
     GameCenterMessageType messageType;
-    BOOL swipedLeft;
-    Float32 remainingProportion;
-} GameCenterMessageBuzzed;
+    int32_t answer;
+    double proportionRemaining;
+} GameCenterMessageSubmittedAnswer;
 
-typedef struct {
-    GameCenterMessageType messageType;
-} GameCenterMessageEndQuestion;
-
-typedef struct {
-    GameCenterMessageType messageType;
-    UInt32 winnerIndex;
-} GameCenterMessageEndGame;
+//typedef NS_ENUM(NSUInteger, GameCenterMessageType) {
+//    MESSAGE_TYPE_DETERMINE_ROUND_OWNER = 3,
+//    MESSAGE_TYPE_START_ROUND,
+//    MESSAGE_TYPE_START_QUESTION,
+//    MESSAGE_TYPE_BUZZED,
+//    MESSAGE_TYPE_END_QUESTION,
+//    MESSAGE_TYPE_END_GAME
+//};
+//
+//typedef struct {
+//    GameCenterMessageType messageType;
+//} GameCenterMessage;
+//
+//typedef struct {
+//    GameCenterMessageType messageType;
+//    UInt32 diceRoll;
+//} GameCenterMessageDetermineRoundOwner;
+//
+//typedef struct {
+//    GameCenterMessageType messageType;
+//    UInt32 nounIndex;
+//} GameCenterMessageStartRound;
+//
+//typedef struct {
+//    GameCenterMessageType messageType;
+//    UInt32 adjectiveIndex;
+//} GameCenterMessageStartQuestion;
+//
+//typedef struct {
+//    GameCenterMessageType messageType;
+//    BOOL swipedLeft;
+//    Float32 remainingProportion;
+//} GameCenterMessageBuzzed;
+//
+//typedef struct {
+//    GameCenterMessageType messageType;
+//} GameCenterMessageEndQuestion;
+//
+//typedef struct {
+//    GameCenterMessageType messageType;
+//    UInt32 winnerIndex;
+//} GameCenterMessageEndGame;
 
 @class MoaiAppDelegate;
 
@@ -174,7 +206,7 @@ typedef struct {
             [delegate onGameCenterMatchStartedWithPlayers:playersToPassToLua];
             
             //
-            [self sendDetermineContentPicker];
+//            [self sendDetermineContentPicker];
         }
     }];
 }
@@ -188,18 +220,52 @@ typedef struct {
     }
 }
 
-- (void)sendDetermineContentPicker {
-    UInt32 diceRoll = arc4random();
-    NSLog(@"Rolled: %iu", diceRoll);
+- (void)sendDiceRollToAllPlayers {
+    int32_t rolledNumber = arc4random();
+    NSLog(@"Rolled: %i", rolledNumber);
     
     //send our own dice roll to Lua.
-    [[[UIApplication sharedApplication] delegate] onReceivedDiceRoll:diceRoll fromPlayer:[GKLocalPlayer localPlayer]];
+    [[[UIApplication sharedApplication] delegate] onReceivedDiceRoll:rolledNumber fromPlayer:[GKLocalPlayer localPlayer]];
     
-    GameCenterMessageDetermineRoundOwner message;
-    message.messageType = MESSAGE_TYPE_DETERMINE_ROUND_OWNER;
-    message.diceRoll = diceRoll;
+    GameCenterMessageRolledDice message;
+    message.messageType = MESSAGE_TYPE_ROLLED_DICE;
+    message.rolledNumber = rolledNumber;
     
-    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessageDetermineRoundOwner)];
+    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessageRolledDice)];
+    [self sendData:dataToSend];
+}
+
+- (void)sendNounIndexToAllPlayers:(NSInteger)nounIndex {
+    NSLog(@"About to send noun index: %li", nounIndex);
+    
+    GameCenterMessagePickedNoun message;
+    message.messageType = MESSAGE_TYPE_PICKED_NOUN;
+    message.nounIndex = (int32_t)nounIndex;
+    
+    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessagePickedNoun)];
+    [self sendData:dataToSend];
+}
+
+- (void)sendAdjectiveIndexToAllPlayers:(NSInteger)adjectiveIndex {
+    NSLog(@"About to send adjective index: %li", adjectiveIndex);
+    
+    GameCenterMessagePickedAdjective message;
+    message.messageType = MESSAGE_TYPE_PICKED_ADJECTIVE;
+    message.adjectiveIndex = (int32_t)adjectiveIndex;
+    
+    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessagePickedAdjective)];
+    [self sendData:dataToSend];
+}
+
+- (void)sendAnswerToAllPlayers:(NSInteger)answer withProportionRemaining:(double)proportionRemaining {
+    NSLog(@"About to send answer: %li with proportion remaining: %f", answer, proportionRemaining);
+    
+    GameCenterMessageSubmittedAnswer message;
+    message.messageType = MESSAGE_TYPE_SUBMITTED_ANSWER;
+    message.answer = (int32_t)answer;
+    message.proportionRemaining = (double)proportionRemaining;
+    
+    NSData *dataToSend = [NSData dataWithBytes:&message length:sizeof(GameCenterMessageSubmittedAnswer)];
     [self sendData:dataToSend];
 }
 
@@ -240,14 +306,36 @@ typedef struct {
     }
     
     GameCenterMessage *message = (GameCenterMessage *)[data bytes];
-    if (message->messageType == MESSAGE_TYPE_DETERMINE_ROUND_OWNER) {
-        NSLog(@"Received Determine Round Owner");
+    if (message->messageType == MESSAGE_TYPE_ROLLED_DICE) {
+        NSLog(@"Received Dice Roll");
         
-        GameCenterMessageDetermineRoundOwner *messageDetermineRoundOwner = (GameCenterMessageDetermineRoundOwner *)[data bytes];
-        UInt32 diceRoll = messageDetermineRoundOwner->diceRoll;
-        NSLog(@"The dice roll was: %iu", diceRoll);
+        GameCenterMessageRolledDice *messageRolledDice = (GameCenterMessageRolledDice *)[data bytes];
+        int32_t rolledNumber = messageRolledDice->rolledNumber;
+        NSLog(@"The dice roll was: %iu", rolledNumber);
         
-        [[[UIApplication sharedApplication] delegate] onReceivedDiceRoll:diceRoll fromPlayer:player];
+        [(MoaiAppDelegate *)[[UIApplication sharedApplication] delegate] onReceivedDiceRoll:rolledNumber fromPlayer:player];
+    } else if (message->messageType == MESSAGE_TYPE_PICKED_NOUN) {
+        NSLog(@"Received Picked Noun");
+        
+        GameCenterMessagePickedNoun *messagePickedNoun = (GameCenterMessagePickedNoun *)[data bytes];
+        int32_t nounIndex = messagePickedNoun->nounIndex;
+        
+        [(MoaiAppDelegate *)[[UIApplication sharedApplication] delegate] onReceivedNounIndex:nounIndex fromPlayer:player];
+    } else if (message->messageType == MESSAGE_TYPE_PICKED_ADJECTIVE) {
+        NSLog(@"Received Picked Adjective");
+        
+        GameCenterMessagePickedAdjective *messagePickedAdjective = (GameCenterMessagePickedAdjective *)[data bytes];
+        int32_t adjectiveIndex = messagePickedAdjective->adjectiveIndex;
+        
+        [(MoaiAppDelegate *)[[UIApplication sharedApplication] delegate] onReceivedAdjectiveIndex:adjectiveIndex fromPlayer:player];
+    } else if (message->messageType == MESSAGE_TYPE_SUBMITTED_ANSWER) {
+        NSLog(@"Received Submitted Answer");
+        
+        GameCenterMessageSubmittedAnswer *messageSubmittedAnswer = (GameCenterMessageSubmittedAnswer *)[data bytes];
+        int32_t answer = messageSubmittedAnswer->answer;
+        double proportionRemaining = messageSubmittedAnswer->proportionRemaining;
+        
+        [(MoaiAppDelegate *)[[UIApplication sharedApplication] delegate] onReceivedAnswer:answer withProportionRemaining:proportionRemaining fromPlayer:player];
     } else {
         NSAssert(NO, @"Unhandled message type");
     }
