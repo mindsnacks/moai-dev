@@ -14,7 +14,7 @@
 
 		# build libcrypto-a, libcrypto-b, and libcrypto-c
 		pushd jni > /dev/null
-			ndk-build
+			$ANDROID_NDK_HOME/ndk-build
 		popd > /dev/null
 
 		# combine libs into final libcrypto
@@ -36,7 +36,7 @@
 		
 		# build libcrypto
 		pushd jni > /dev/null
-			ndk-build
+			$ANDROID_NDK_HOME/ndk-build
 		popd > /dev/null
 	fi
 
