@@ -864,6 +864,80 @@ int MOAIDraw::_fillCircularSliceGradient(lua_State *L){
 }
 
 //----------------------------------------------------------------//
+/** @name	fillCircularSliceVerticalGradient
+	
+	@overload
+	@in		number x		x-coordinate of circle
+	@in		number y		y-coordinate of circle
+	@in		number radius
+	@in		number angle		angle of the slice of the circle in degrees
+	@in		number offset		the offset clockwise from positive y axis in degrees.
+	@in		number blurMargin	default to zero
+	@in		number steps
+	@in		number centerR	red of starting color
+	@in		number centerG	green of starting color
+	@in		number centerB  blue of starting color
+	@in		number centerA	alpha of starting color
+	@in		number edgeR	red of ending color
+	@in		number edgeG	green of ending color
+	@in		number edgeB	blue of ending color
+	@in		number edgeA	alpha of ending color
+	@out	nil
+ 
+	@overload
+	@in		number x		x-coordinate of circle
+	@in		number y		y-coordinate of circle
+	@in		number radius
+	@in		number angle		angle of the slice of the circle in degrees
+	@in		number offset		the offset clockwise from positive y axis in degrees.
+	@in		number blurMargin	default to zero
+	@in		number steps
+	@in		MOAIColor startColor
+	@in		MOAIColor endColor
+	@out	nil
+ */
+int MOAIDraw::_fillCircularSliceVerticalGradient(lua_State *L){
+	
+	MOAILuaState state ( L );
+	
+	float x				= state.GetValue < float >( 1, 0.0f );
+	float y				= state.GetValue < float >( 2, 0.0f );
+	float radius		= state.GetValue < float >( 3, 0.0f );
+	float angle			= state.GetValue < float >( 4, 0.0f );
+	float offset		= state.GetValue < float >( 5, 0.0f );
+	float blurMargin	= state.GetValue < float >( 6, 0.0f );
+	
+	u32	steps			= state.GetValue < u32 > ( 7, DEFAULT_ELLIPSE_STEPS );
+	
+	USColorVec startColor, endColor;
+	MOAIColor *color1, *color2;
+	
+	if ( ( color1 = state.GetLuaObject < MOAIColor > ( 8, false ) ) &&
+		( color2 = state.GetLuaObject < MOAIColor > ( 9, false ) ) ) {
+		startColor = color1->GetColorTrait();
+		endColor = color2->GetColorTrait();
+	}
+	else {
+		float centerR = state.GetValue < float > (8, 1.0f);
+		float centerG = state.GetValue < float > (9, 1.0f);
+		float centerB = state.GetValue < float > (10, 1.0f);
+		float centerA = state.GetValue < float > (11, 1.0f);
+		
+		float edgeR = state.GetValue < float > (12, 1.0f);
+		float edgeG = state.GetValue < float > (13, 1.0f);
+		float edgeB = state.GetValue < float > (14, 1.0f);
+		float edgeA = state.GetValue < float > (15, 1.0f);
+		
+		startColor.Set(centerR, centerG, centerB, centerA);
+		endColor.Set(edgeR, edgeG, edgeB, edgeA);
+	}
+	
+	MOAIDraw::DrawEllipticalSliceVerticalGradientFill(x, y, radius, radius, angle, offset, blurMargin, steps, startColor, endColor);
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@name	fillEllipse
 	@text	Draw a filled ellipse.
 	
@@ -3050,6 +3124,84 @@ void MOAIDraw::DrawEllipticalSliceGradientFill(float x, float y, float xRad, flo
 		gfxDevice.EndPrim();
 		
 	}
+	gfxDevice.SetPenColor(penColor);
+	
+}
+
+//----------------------------------------------------------------//
+// NOTE: This function only works for angle values up to and including 90 degrees
+void MOAIDraw::DrawEllipticalSliceVerticalGradientFill(float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps, const USColorVec &startColor, const USColorVec &endColor){
+	
+	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
+	
+	bool renderBlur = blurMargin > 0.0f;
+	
+	float theta = angle * ( float )D2R / ( float )steps;
+	float thetaStep = offset * (float)D2R;
+	
+	USColorVec penColor = gfxDevice.GetPenColor();
+	
+	gfxDevice.BeginPrim( GL_TRIANGLE_FAN );
+	
+	gfxDevice.SetPenColor(startColor);
+	gfxDevice.WriteVtx(x, y, 0.0f);
+	gfxDevice.WriteFinalColor4b();
+	
+	float t = 0;
+	USColorVec interpolatedColor = startColor;
+	
+	gfxDevice.SetPenColor(interpolatedColor);
+	u32 i;
+	for (i = 0; i <= steps; ++i, thetaStep += theta) {
+		t = Cos ( thetaStep );
+		gfxDevice.WriteVtx (
+							x + ( Sin ( thetaStep ) * xRad ),
+							y + ( t * yRad ),
+							0.0f
+							);
+		interpolatedColor.Lerp ( startColor, endColor, t );
+		gfxDevice.SetPenColor(interpolatedColor);
+		gfxDevice.WriteFinalColor4b ();
+	}
+	
+	gfxDevice.EndPrim();
+
+//	TODO: Implement blur code
+//	if (renderBlur) {
+//		USColorVec transColor(edgeColor);
+//		transColor.mA = 0.0f;
+//		if (gfxDevice.GetColorPremultiply()) {
+//			transColor.Set(0.0f, 0.0f, 0.0f, 0.0f);
+//		}
+//		
+//		thetaStep = offset * (float)D2R;
+//		// render the arc section
+//		gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
+//		for (i = 0; i <= steps; ++i, thetaStep += theta ) {
+//			
+//			// point at blur margin
+//			gfxDevice.SetPenColor(transColor);
+//			gfxDevice.WriteVtx (
+//								x + ( Sin ( thetaStep ) * (xRad + blurMargin) ),
+//								y + ( Cos ( thetaStep ) * (yRad + blurMargin) ),
+//								0.0f
+//								);
+//			gfxDevice.WriteFinalColor4b ();
+//			
+//			
+//			gfxDevice.SetPenColor(edgeColor);
+//			gfxDevice.WriteVtx (
+//								x + ( Sin ( thetaStep ) * xRad ),
+//								y + ( Cos ( thetaStep ) * yRad ),
+//								0.0f
+//								);
+//			gfxDevice.WriteFinalColor4b ();
+//			
+//		}
+//		
+//		gfxDevice.EndPrim();
+//		
+//	}
 	gfxDevice.SetPenColor(penColor);
 	
 }
@@ -5821,6 +5973,7 @@ void MOAIDraw::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "fillCircularGradient",	_fillCircularGradient },
 		{ "fillCircularSlice",		_fillCircularSlice },
 		{ "fillCircularSliceGradient", _fillCircularSliceGradient },
+		{ "fillCircularSliceVerticalGradient", _fillCircularSliceVerticalGradient},
 		{ "fillEllipse",			_fillEllipse },
 		{ "fillEllipticalGradient",	_fillEllipticalGradient },
 		{ "fillEllipticalSlice",	_fillEllipticalSlice },

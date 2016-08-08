@@ -51,6 +51,7 @@ private:
 	static int				_fillCircularGradient ( lua_State* L );
 	static int				_fillCircularSlice	( lua_State* L );
 	static int				_fillCircularSliceGradient	( lua_State* L );
+	static int				_fillCircularSliceVerticalGradient	( lua_State* L );
 	static int				_fillEllipse		( lua_State* L );
 	static int				_fillEllipticalGradient	( lua_State* L );
 	static int				_fillEllipticalSlice( lua_State* L );
@@ -96,6 +97,7 @@ public:
 	static void			DrawEllipticalGradientFill ( float x, float y, float xRad, float yRad, u32 steps, const USColorVec &centerColor, const USColorVec &edgeColor );
 	static void			DrawEllipticalSliceFill		( float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps );
 	static void			DrawEllipticalSliceGradientFill ( float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps, const USColorVec &centerColor, const USColorVec &edgeColor );
+	static void			DrawEllipticalSliceVerticalGradientFill ( float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps, const USColorVec &startColor, const USColorVec &endColor );
 	static void			DrawGrid				( const USRect& rect, u32 xCells, u32 yCells );
 	static void			DrawJoinedCorner		( float x0, float y0, float x1, float y1, float x2, float y2, float lineWidth, float blurMargin );
 	static void			DrawJoinedLine			( lua_State* L, float lineWidth, float blurMargin );
