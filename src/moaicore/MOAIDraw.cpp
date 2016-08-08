@@ -3225,9 +3225,8 @@ void MOAIDraw::DrawEllipticalSliceVerticalGradientFill(float x, float y, float x
 	
 	float s = 0;
 	float t = 0;
-	USColorVec interpolatedColor = startColor;
+	USColorVec interpolatedColor;
 	
-	gfxDevice.SetPenColor(interpolatedColor);
 	u32 i;
 	for (i = 0; i <= steps; ++i, thetaStep += theta) {
 		s = Sin ( thetaStep );
@@ -3237,7 +3236,8 @@ void MOAIDraw::DrawEllipticalSliceVerticalGradientFill(float x, float y, float x
 							y + ( t * yRad ),
 							0.0f
 							);
-		
+		printf("t: %f \n", t);
+		t = fabs (t);
 		interpolatedColor.Lerp ( startColor, endColor, t );
 		
 		gfxDevice.SetPenColor(interpolatedColor);
