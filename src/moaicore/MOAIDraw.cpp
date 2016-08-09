@@ -3236,7 +3236,7 @@ void MOAIDraw::DrawEllipticalSliceVerticalGradientFill(float x, float y, float x
 							y + ( t * yRad ),
 							0.0f
 							);
-		printf("t: %f \n", t);
+
 		t = fabs (t);
 		interpolatedColor.Lerp ( startColor, endColor, t );
 		
@@ -6041,11 +6041,11 @@ void MOAIDraw::DrawRoundedRectVerticalGradientFill(float left, float top, float 
 		cornerTopColor.Lerp (bottomColor, topColor, t);
 		cornerBottomColor = bottomColor;
 		offset += angle;
-		MOAIDraw::DrawEllipticalSliceVerticalGradientFill(right - cornerRadius, bottom + cornerRadius, cornerRadius, cornerRadius, angle, offset, blurMargin, steps, cornerBottomColor, cornerTopColor);
+		MOAIDraw::DrawEllipticalSliceVerticalGradientFill(right - cornerRadius, bottom + cornerRadius, cornerRadius, cornerRadius, angle, offset, blurMargin, steps, cornerTopColor, cornerBottomColor);
 		
 		// draw lower left corner
 		offset += angle;
-		MOAIDraw::DrawEllipticalSliceVerticalGradientFill(left + cornerRadius, bottom + cornerRadius, cornerRadius, cornerRadius, angle, offset, blurMargin, steps, cornerBottomColor, cornerTopColor);
+		MOAIDraw::DrawEllipticalSliceVerticalGradientFill(left + cornerRadius, bottom + cornerRadius, cornerRadius, cornerRadius, angle, offset, blurMargin, steps, cornerTopColor, cornerBottomColor);
 	}
 	
 	// restor pen color
