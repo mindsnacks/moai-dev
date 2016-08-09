@@ -1461,14 +1461,14 @@ int MOAIDraw::_fillRoundedRectangularGradient ( lua_State *L ) {
 	@in		cornerRadius
 	@in		blurMargin
 	@in		steps			The number of steps to make each corner.
-	@in		number centerR		red of central color
-	@in		number centerG		green of central color
-	@in		number centerB		blue of central color
-	@in		number centerA		alpha of central color
-	@in		number edgeR		red of outer color
-	@in		number edgeG		green of outer color
-	@in		number edgeB		blue of outer color
-	@in		number edgeA		alpha of outer color
+	@in		number centerR		red of left color
+	@in		number centerG		green of left color
+	@in		number centerB		blue of left color
+	@in		number centerA		alpha of left color
+	@in		number edgeR		red of right color
+	@in		number edgeG		green of right color
+	@in		number edgeB		blue of right color
+	@in		number edgeA		alpha of right color
 	
 	@overload
 	@in		number x0
@@ -1537,14 +1537,14 @@ int MOAIDraw::_fillRoundedRectangularHorizontalGradient ( lua_State *L ) {
 	@in		cornerRadius
 	@in		blurMargin
 	@in		steps			The number of steps to make each corner.
-	@in		number centerR		red of central color
-	@in		number centerG		green of central color
-	@in		number centerB		blue of central color
-	@in		number centerA		alpha of central color
-	@in		number edgeR		red of outer color
-	@in		number edgeG		green of outer color
-	@in		number edgeB		blue of outer color
-	@in		number edgeA		alpha of outer color
+	@in		number centerR		red of top color
+	@in		number centerG		green of top color
+	@in		number centerB		blue of top color
+	@in		number centerA		alpha of top color
+	@in		number edgeR		red of bottom color
+	@in		number edgeG		green of bottom color
+	@in		number edgeB		blue of bottom color
+	@in		number edgeA		alpha of bottom color
 	
 	@overload
 	@in		number x0
@@ -3359,8 +3359,6 @@ void MOAIDraw::DrawEllipticalSliceHorizontalGradientFill(float x, float y, float
 	
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 	
-	bool renderBlur = blurMargin > 0.0f;
-	
 	float theta = angle * ( float )D2R / ( float )steps;
 	float thetaStep = offset * (float)D2R;
 	
@@ -3396,41 +3394,6 @@ void MOAIDraw::DrawEllipticalSliceHorizontalGradientFill(float x, float y, float
 	gfxDevice.EndPrim();
 	
 	//	TODO: Implement blur code
-	//	if (renderBlur) {
-	//		USColorVec transColor(edgeColor);
-	//		transColor.mA = 0.0f;
-	//		if (gfxDevice.GetColorPremultiply()) {
-	//			transColor.Set(0.0f, 0.0f, 0.0f, 0.0f);
-	//		}
-	//
-	//		thetaStep = offset * (float)D2R;
-	//		// render the arc section
-	//		gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
-	//		for (i = 0; i <= steps; ++i, thetaStep += theta ) {
-	//
-	//			// point at blur margin
-	//			gfxDevice.SetPenColor(transColor);
-	//			gfxDevice.WriteVtx (
-	//								x + ( Sin ( thetaStep ) * (xRad + blurMargin) ),
-	//								y + ( Cos ( thetaStep ) * (yRad + blurMargin) ),
-	//								0.0f
-	//								);
-	//			gfxDevice.WriteFinalColor4b ();
-	//
-	//
-	//			gfxDevice.SetPenColor(edgeColor);
-	//			gfxDevice.WriteVtx (
-	//								x + ( Sin ( thetaStep ) * xRad ),
-	//								y + ( Cos ( thetaStep ) * yRad ),
-	//								0.0f
-	//								);
-	//			gfxDevice.WriteFinalColor4b ();
-	//
-	//		}
-	//
-	//		gfxDevice.EndPrim();
-	//
-	//	}
 	gfxDevice.SetPenColor(penColor);
 	
 }
@@ -3440,8 +3403,6 @@ void MOAIDraw::DrawEllipticalSliceHorizontalGradientFill(float x, float y, float
 void MOAIDraw::DrawEllipticalSliceVerticalGradientFill(float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps, const USColorVec &startColor, const USColorVec &endColor){
 
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
-	
-	bool renderBlur = blurMargin > 0.0f;
 	
 	float theta = angle * ( float )D2R / ( float )steps;
 	float thetaStep = offset * (float)D2R;
@@ -3477,42 +3438,7 @@ void MOAIDraw::DrawEllipticalSliceVerticalGradientFill(float x, float y, float x
 	
 	gfxDevice.EndPrim();
 
-//	TODO: Implement blur code
-//	if (renderBlur) {
-//		USColorVec transColor(edgeColor);
-//		transColor.mA = 0.0f;
-//		if (gfxDevice.GetColorPremultiply()) {
-//			transColor.Set(0.0f, 0.0f, 0.0f, 0.0f);
-//		}
-//		
-//		thetaStep = offset * (float)D2R;
-//		// render the arc section
-//		gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
-//		for (i = 0; i <= steps; ++i, thetaStep += theta ) {
-//			
-//			// point at blur margin
-//			gfxDevice.SetPenColor(transColor);
-//			gfxDevice.WriteVtx (
-//								x + ( Sin ( thetaStep ) * (xRad + blurMargin) ),
-//								y + ( Cos ( thetaStep ) * (yRad + blurMargin) ),
-//								0.0f
-//								);
-//			gfxDevice.WriteFinalColor4b ();
-//			
-//			
-//			gfxDevice.SetPenColor(edgeColor);
-//			gfxDevice.WriteVtx (
-//								x + ( Sin ( thetaStep ) * xRad ),
-//								y + ( Cos ( thetaStep ) * yRad ),
-//								0.0f
-//								);
-//			gfxDevice.WriteFinalColor4b ();
-//			
-//		}
-//		
-//		gfxDevice.EndPrim();
-//		
-//	}
+	//	TODO: Implement blur code
 	gfxDevice.SetPenColor(penColor);
 	
 }
@@ -6054,7 +5980,6 @@ void MOAIDraw::DrawRoundedRectHorizontalGradientFill(float left, float top, floa
 	
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 	
-	bool renderBlur = blurMargin > 0.0f;
 	// make sure left is less than right
 	if (left > right) {
 		float temp = left;
@@ -6075,15 +6000,9 @@ void MOAIDraw::DrawRoundedRectHorizontalGradientFill(float left, float top, floa
 	
 	float width = right - left;
 	
+	// TODO: Implement blur code
 	USColorVec penColor = gfxDevice.GetPenColor();
 	USColorVec workingColor = penColor;
-	//	USColorVec transColor(edgeColor);
-	
-	//	transColor.mA = 0.0f;
-	//	if (gfxDevice.GetColorPremultiply()) {
-	//		transColor.Set(0.0f, 0.0f, 0.0f, 0.0f);
-	//	}
-	
 	
 	// draw rect in center (left + cornerRadius, bottom + cornerRadius, right - cornerRadius, top - cornerRadius)
 	gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
@@ -6134,30 +6053,10 @@ void MOAIDraw::DrawRoundedRectHorizontalGradientFill(float left, float top, floa
 		gfxDevice.WriteVtx(right - cornerRadius, top);
 		gfxDevice.WriteFinalColor4b();
 		
-		//		if (renderBlur) {
-		//			gfxDevice.SetPenColor(transColor);
-		//			gfxDevice.WriteVtx(left + cornerRadius, top + blurMargin);
-		//			gfxDevice.WriteFinalColor4b();
-		//
-		//			gfxDevice.WriteVtx(right - cornerRadius, top + blurMargin);
-		//			gfxDevice.WriteFinalColor4b();
-		//
-		//		}
-		
 		gfxDevice.EndPrim();
 		
 		// draw bottom rect (left + cornerRadius, bottom , right - cornerRadius, bottom + cornerRadius)
 		gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
-		
-		//		if (renderBlur) {
-		//			gfxDevice.SetPenColor(transColor);
-		//			gfxDevice.WriteVtx(left + cornerRadius, bottom - blurMargin);
-		//			gfxDevice.WriteFinalColor4b();
-		//
-		//			gfxDevice.WriteVtx(right - cornerRadius, bottom - blurMargin);
-		//			gfxDevice.WriteFinalColor4b();
-		//
-		//		}
 		
 		t = cornerRadius / width;
 		workingColor.Lerp(leftColor, rightColor, t);
@@ -6183,15 +6082,6 @@ void MOAIDraw::DrawRoundedRectHorizontalGradientFill(float left, float top, floa
 		
 		// draw left rect (left, bottom + cornerRadius, left + cornerRadius, top - cornerRadius)
 		gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
-		
-		//		if (renderBlur) {
-		//			gfxDevice.SetPenColor(transColor);
-		//			gfxDevice.WriteVtx(left - blurMargin, bottom + cornerRadius);
-		//			gfxDevice.WriteFinalColor4b();
-		//
-		//			gfxDevice.WriteVtx(left - blurMargin, top - cornerRadius);
-		//			gfxDevice.WriteFinalColor4b();
-		//		}
 		
 		workingColor = leftColor;
 		gfxDevice.SetPenColor(workingColor);
@@ -6236,16 +6126,6 @@ void MOAIDraw::DrawRoundedRectHorizontalGradientFill(float left, float top, floa
 		gfxDevice.WriteVtx(right, top - cornerRadius);
 		gfxDevice.WriteFinalColor4b();
 		
-		//		if (renderBlur) {
-		//			gfxDevice.SetPenColor(transColor);
-		//			gfxDevice.WriteVtx(right + blurMargin, bottom + cornerRadius);
-		//			gfxDevice.WriteFinalColor4b();
-		//
-		//			gfxDevice.WriteVtx(right + blurMargin, top - cornerRadius);
-		//			gfxDevice.WriteFinalColor4b();
-		//
-		//		}
-		
 		gfxDevice.EndPrim();
 		
 		float angle = 90.0f;
@@ -6285,7 +6165,6 @@ void MOAIDraw::DrawRoundedRectVerticalGradientFill(float left, float top, float 
 	
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 	
-	bool renderBlur = blurMargin > 0.0f;
 	// make sure left is less than right
 	if (left > right) {
 		float temp = left;
@@ -6306,15 +6185,10 @@ void MOAIDraw::DrawRoundedRectVerticalGradientFill(float left, float top, float 
 	
 	float height = top - bottom;
 	
+	// TODO: Implement blur code
+	
 	USColorVec penColor = gfxDevice.GetPenColor();
 	USColorVec workingColor = penColor;
-//	USColorVec transColor(edgeColor);
-	
-//	transColor.mA = 0.0f;
-//	if (gfxDevice.GetColorPremultiply()) {
-//		transColor.Set(0.0f, 0.0f, 0.0f, 0.0f);
-//	}
-	
 	
 	// draw rect in center (left + cornerRadius, bottom + cornerRadius, right - cornerRadius, top - cornerRadius)
 	gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
@@ -6364,30 +6238,10 @@ void MOAIDraw::DrawRoundedRectVerticalGradientFill(float left, float top, float 
 		gfxDevice.WriteVtx(right - cornerRadius, top);
 		gfxDevice.WriteFinalColor4b();
 		
-//		if (renderBlur) {
-//			gfxDevice.SetPenColor(transColor);
-//			gfxDevice.WriteVtx(left + cornerRadius, top + blurMargin);
-//			gfxDevice.WriteFinalColor4b();
-//			
-//			gfxDevice.WriteVtx(right - cornerRadius, top + blurMargin);
-//			gfxDevice.WriteFinalColor4b();
-//			
-//		}
-		
 		gfxDevice.EndPrim();
 		
 		// draw bottom rect (left + cornerRadius, bottom , right - cornerRadius, bottom + cornerRadius)
 		gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
-		
-//		if (renderBlur) {
-//			gfxDevice.SetPenColor(transColor);
-//			gfxDevice.WriteVtx(left + cornerRadius, bottom - blurMargin);
-//			gfxDevice.WriteFinalColor4b();
-//			
-//			gfxDevice.WriteVtx(right - cornerRadius, bottom - blurMargin);
-//			gfxDevice.WriteFinalColor4b();
-//			
-//		}
 		
 		workingColor = bottomColor;
 		
@@ -6412,15 +6266,6 @@ void MOAIDraw::DrawRoundedRectVerticalGradientFill(float left, float top, float 
 		
 		// draw left rect (left, bottom + cornerRadius, left + cornerRadius, top - cornerRadius)
 		gfxDevice.BeginPrim( GL_TRIANGLE_STRIP );
-		
-//		if (renderBlur) {
-//			gfxDevice.SetPenColor(transColor);
-//			gfxDevice.WriteVtx(left - blurMargin, bottom + cornerRadius);
-//			gfxDevice.WriteFinalColor4b();
-//			
-//			gfxDevice.WriteVtx(left - blurMargin, top - cornerRadius);
-//			gfxDevice.WriteFinalColor4b();
-//		}
 		
 		t = cornerRadius / height;
 		workingColor.Lerp (bottomColor, topColor, t);
@@ -6466,16 +6311,6 @@ void MOAIDraw::DrawRoundedRectVerticalGradientFill(float left, float top, float 
 		
 		gfxDevice.WriteVtx(right, top - cornerRadius);
 		gfxDevice.WriteFinalColor4b();
-		
-//		if (renderBlur) {
-//			gfxDevice.SetPenColor(transColor);
-//			gfxDevice.WriteVtx(right + blurMargin, bottom + cornerRadius);
-//			gfxDevice.WriteFinalColor4b();
-//			
-//			gfxDevice.WriteVtx(right + blurMargin, top - cornerRadius);
-//			gfxDevice.WriteFinalColor4b();
-//			
-//		}
 		
 		gfxDevice.EndPrim();
 		
