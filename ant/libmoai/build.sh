@@ -223,7 +223,7 @@
 	
 	# build libmoai
 	pushd jni > /dev/null
-		ndk-build $verbose NDK_DEBUG=$NDK_DEBUG -j 4
+		$ANDROID_NDK_HOME/ndk-build $verbose NDK_DEBUG=$NDK_DEBUG -j 4
 	popd > /dev/null
 
 	# remove temp files
