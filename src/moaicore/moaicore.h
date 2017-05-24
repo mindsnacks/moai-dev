@@ -52,6 +52,7 @@
 #include <moaicore/MOAIFont.h>
 #include <moaicore/MOAIFontReader.h>
 #include <moaicore/MOAIFrameBuffer.h>
+#include <moaicore/MOAIFrameBufferTexture.h>
 #include <moaicore/MOAIFreeTypeFontReader.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIGfxQuad2D.h>
@@ -82,6 +83,7 @@
 #include <moaicore/MOAILocationSensor.h>
 #include <moaicore/MOAILogMgr.h>
 #include <moaicore/MOAILogMessages.h>
+#include <moaicore/MOAIMath.h>
 #include <moaicore/MOAIMemStream.h>
 #include <moaicore/MOAIMesh.h>
 #include <moaicore/MOAIMotionSensor.h>
@@ -112,6 +114,13 @@
 #include <moaicore/MOAIPathFinder.h>
 #include <moaicore/MOAIPathTerrainDeck.h>
 #include <moaicore/MOAIPointerSensor.h>
+#include <moaicore/MOAIProfiler.h>
+#include <moaicore/MOAIProfilerAutoScope.h>
+#include <moaicore/MOAIProfilerContext.h>
+#include <moaicore/MOAIProfilerReport.h>
+#include <moaicore/MOAIProfilerReportBase.h>
+#include <moaicore/MOAIProfilerReportBox.h>
+#include <moaicore/MOAIProfilerScope.h>
 #include <moaicore/MOAIProp.h>
 #include <moaicore/MOAIPvrHeader.h>
 #include <moaicore/MOAIQuadBrush.h>
@@ -151,6 +160,7 @@
 #include <moaicore/MOAITileDeck2D.h>
 #include <moaicore/MOAITileFlags.h>
 #include <moaicore/MOAITimer.h>
+#include <moaicore/MOAITimerCoroutine.h>
 #include <moaicore/MOAITouchSensor.h>
 #include <moaicore/MOAITransform.h>
 #include <moaicore/MOAITransformBase.h>

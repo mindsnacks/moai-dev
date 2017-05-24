@@ -24,6 +24,7 @@ u32 USBinarySearch ( const TYPE* buffer, const TYPE& key, u32 total ) {
 	while ( s ) {
 		
 		u32 c = i + ( s >> 1 );
+		if ( i == c ) c = j;
 		const TYPE& test = buffer [ c ];
 		
 		if ( test < key ) {
@@ -56,22 +57,15 @@ u32 USBinarySearchNearest ( const TYPE* buffer, const TYPE& key, u32 total ) {
 	if ( key < buffer [ i ]) return NO_MATCH;
 	if ( buffer [ j ] < key ) return NO_MATCH;
 	
-	while ( s ) {
+	while ( s > 1 ) {
 		
 		u32 c = i + ( s >> 1 );
 		const TYPE& test = buffer [ c ];
 		
-		
 		if ( test < key ) {
-		
-			if ( i == c ) break;
-			
 			i = c;
 		}
 		else if ( key < test ) {
-			
-			if ( j == c ) break;
-			
 			j = c;
 		}
 		else {
@@ -80,11 +74,11 @@ u32 USBinarySearchNearest ( const TYPE* buffer, const TYPE& key, u32 total ) {
 		s = j - i;
 	}
 	
-	if ( key < buffer [ i ] ) {
-		return i - 1;
+	if ( key < buffer [ j ] ) {
+		return i;
 	}
 	else {
-		return i;
+		return j;
 	}
 }
 

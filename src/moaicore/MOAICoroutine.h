@@ -26,17 +26,17 @@ private:
 	bool			mIsActive;
 	bool			mIsFirstRun;
 	
-	//----------------------------------------------------------------//
-	static int		_blockOnAction			( lua_State* L );
-	static int		_currentThread			( lua_State* L );
-	static int		_run					( lua_State* L );
+
 	
 	//----------------------------------------------------------------//
 	void			OnStop					();
 
 protected:
 	STLString		GetDebugInfo			() const;
-
+		//----------------------------------------------------------------//
+		static int		_blockOnAction			( lua_State* L );
+		static int		_currentThread			( lua_State* L );
+		static int		_run					( lua_State* L );
 public:
 	
 	DECL_LUA_FACTORY ( MOAICoroutine )
