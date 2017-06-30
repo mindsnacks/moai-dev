@@ -226,6 +226,20 @@ int MOAIImage::_fillRect ( lua_State* L ) {
 	return 0;
 }
 
+int MOAIImage::_fillLine ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIImage, "UNNNNNNNN" )
+
+	int x0 = state.GetValue < int >( 2, 0 );
+	int y0 = state.GetValue < int >( 3, 0 );
+	int x1 = state.GetValue < int >( 4, 0 );
+	int y1 = state.GetValue < int >( 5, 0 );
+	u32 color = state.GetColor32 ( 6, 0.0f, 0.0f, 0.0f, 0.0f );
+
+	self->DrawLine(x0, y0, x1, y1, color);
+
+	return 0;
+}
+
 //----------------------------------------------------------------//
 /**	@name	getColor32
 	@text	Returns a 32-bit packed RGBA value from the image for a
@@ -1742,6 +1756,7 @@ void MOAIImage::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "copyRect",			_copyRect },
 		{ "fillCircle",			_fillCircle },
 		{ "fillRect",			_fillRect },
+		{ "fillLine",			_fillLine },
 		{ "getColor32",			_getColor32 },
 		{ "getFormat",			_getFormat },
 		{ "getRGBA",			_getRGBA },
