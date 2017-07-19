@@ -64,6 +64,7 @@ private:
 	static int		_copy				( lua_State* L );
 	static int		_copyBits			( lua_State* L );
 	static int		_copyRect			( lua_State* L );
+	static int		_copyRectCustom		( lua_State* L );
 	static int		_fillCircle			( lua_State* L );
 	static int		_fillRect			( lua_State* L );
 	static int		_fillLine			( lua_State* L );

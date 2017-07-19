@@ -175,6 +175,55 @@ int MOAIImage::_copyRect ( lua_State* L ) {
 	return 0;
 }
 
+int MOAIImage::_copyRectCustom ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIImage, "UUNNNNNN" )
+
+	MOAIImage* image = state.GetLuaObject < MOAIImage >( 2, true );
+	if ( !image ) {
+		return 0;
+	}
+
+	USIntRect srcRect;
+	srcRect.mXMin = state.GetValue < int >( 3, 0 );
+	srcRect.mYMin = state.GetValue < int >( 4, 0 );
+	srcRect.mXMax = state.GetValue < int >( 5, 0 );
+	srcRect.mYMax = state.GetValue < int >( 6, 0 );
+
+	USIntRect destRect;
+	destRect.mXMin = state.GetValue < int >( 7, 0 );
+	destRect.mYMin = state.GetValue < int >( 8, 0 );
+	destRect.mXMax = state.GetValue < int >( 9, destRect.mXMin + srcRect.Width ());
+	destRect.mYMax = state.GetValue < int >( 10, destRect.mYMin + srcRect.Height ());
+
+	//u32 filter = state.GetValue < u32 >( 11, MOAIImage::FILTER_LINEAR );
+
+	// double check this...
+
+	// _copyRectCustom was added to support the "outsideRegion" approach
+	// to brushing and erasing outside the lines. this method lets us
+	// overwrite the pixels in a region w/ the *non-empty* pixels in the
+	// corresponding subrectangle in outsideRegion (i.e. the pixels that
+	// were brushed, erased, filled, etc during outside the lines mode)
+
+	for (int row = srcRect.mYMin; row < srcRect.mYMax; row++) {
+		for (int column = srcRect.mXMin; column < srcRect.mXMax; column++) {
+			u32 sourcePixel = image->GetPixel(column, row);
+
+			u32 rowOffset = row - srcRect.mYMin;
+			u32 columnOffset = column - srcRect.mXMin;
+			u32 destinationRow = destRect.mYMin + rowOffset;
+			u32 destinationColumn = destRect.mXMin + columnOffset;
+			u32 destinationPixel = self->GetPixel(destinationColumn, destinationRow);
+
+			// don't overwrite destinationPixel when source pixel empty
+			u32 resultPixel = sourcePixel ? sourcePixel : destinationPixel;
+			self->SetPixel(destinationColumn, destinationRow, resultPixel);
+		}
+	}
+
+	return 0;
+}
+
 //----------------------------------------------------------------//
 /**	@name	fillCircle
 	@text	Draw a filled circle.
@@ -1754,6 +1803,7 @@ void MOAIImage::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "copy",				_copy },
 		{ "copyBits",			_copyBits },
 		{ "copyRect",			_copyRect },
+		{ "copyRectCustom",		_copyRectCustom },
 		{ "fillCircle",			_fillCircle },
 		{ "fillRect",			_fillRect },
 		{ "fillLine",			_fillLine },
