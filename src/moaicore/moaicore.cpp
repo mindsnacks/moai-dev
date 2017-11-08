@@ -22,7 +22,7 @@ static void _typeCheck () {
 	assert ( sizeof ( u16 )	== 2 );
 	assert ( sizeof ( u32 )	== 4 );
 	assert ( sizeof ( u64 )	== 8 );
-	
+
 	assert ( sizeof ( s8 )	== 1 );
 	assert ( sizeof ( s16 )	== 2 );
 	assert ( sizeof ( s32 )	== 4 );
@@ -41,11 +41,11 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 	MOAILuaRuntime::Affirm ();
 	MOAILogMgr::Affirm ();
 	MOAIGfxDevice::Affirm ();
-	
+
 	#if MOAI_OS_NACL
 		MOAIUrlMgrNaCl::Affirm ();
 	#endif
-	
+
 	MOAIMath::Affirm ();
 	MOAIXmlParser::Affirm ();
 	MOAIActionMgr::Affirm ();
@@ -58,14 +58,14 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 	MOAIPartitionResultMgr::Affirm ();
 	MOAISim::Affirm ();
 	MOAIRenderMgr::Affirm ();
-	
+
 	// Start Lua
 	MOAILuaRuntime& luaRuntime = MOAILuaRuntime::Get ();
 	luaRuntime.Open ();
 	luaRuntime.LoadLibs ( "moai" );
-	
+
 	MOAILogMessages::RegisterDefaultLogMessages ();
-	
+
 	// MOAI
 	REGISTER_LUA_CLASS ( MOAIAction )
 	REGISTER_LUA_CLASS ( MOAIActionMgr )
@@ -175,6 +175,7 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 	REGISTER_LUA_CLASS ( MOAITextStyle )
 	REGISTER_LUA_CLASS ( MOAITextRenderer )
 	REGISTER_LUA_CLASS ( MOAITexture )
+	REGISTER_LUA_CLASS ( MOAITextureRaw )
 	REGISTER_LUA_CLASS ( MOAITileDeck2D )
 	REGISTER_LUA_CLASS ( MOAITimer )
 	REGISTER_LUA_CLASS ( MOAITouchSensor )
@@ -184,7 +185,7 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 	REGISTER_LUA_CLASS ( MOAIViewport )
 	REGISTER_LUA_CLASS ( MOAIWheelSensor )
 	REGISTER_LUA_CLASS ( MOAIXmlParser )
-	
+
 	#if USE_BOX2D
 		REGISTER_LUA_CLASS ( MOAIBox2DArbiter )
 		REGISTER_LUA_CLASS ( MOAIBox2DBody )
@@ -201,11 +202,11 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 		REGISTER_LUA_CLASS ( MOAIBox2DWheelJoint )
 		REGISTER_LUA_CLASS ( MOAIBox2DWorld )
 	#endif
-	
+
 	#if USE_CHIPMUNK
-	
+
 		MOAICp::Affirm ();
-	
+
 		REGISTER_LUA_CLASS ( MOAICp )
 		REGISTER_LUA_CLASS ( MOAICpArbiter )
 		REGISTER_LUA_CLASS ( MOAICpBody )
@@ -213,7 +214,7 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 		REGISTER_LUA_CLASS ( MOAICpShape )
 		REGISTER_LUA_CLASS ( MOAICpSpace )
 	#endif
-	
+
 	#if USE_FREETYPE
 		REGISTER_LUA_CLASS ( MOAIFreeTypeFontReader )
 	#endif
@@ -221,7 +222,7 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 	#if MOAI_OS_NACL
 		REGISTER_LUA_CLASS ( MOAIHttpTaskNaCl )
 	#endif
-	
+
 	MOAIEnvironment::Get ().DetectEnvironment ();
 }
 
@@ -229,7 +230,7 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 void moaicore::SystemFinalize () {
 
 	MOAIGlobalsMgr::Finalize ();
-	
+
 	zl_cleanup ();
 }
 
@@ -237,10 +238,10 @@ void moaicore::SystemFinalize () {
 void moaicore::SystemInit () {
 
 	_typeCheck ();
-		
+
 	srand (( u32 )time ( 0 ));
 	zl_init ();
-	
+
 	#if USE_CHIPMUNK
 		cpInitChipmunk ();
 	#endif

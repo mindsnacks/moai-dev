@@ -234,6 +234,53 @@ void MOAITextureBase::CreateTextureFromImage ( MOAIImage& image ) {
 }
 
 //----------------------------------------------------------------//
+void MOAITextureBase::CreateTextureFromRaw ( void* data, size_t width, size_t height ) {
+	if ( !MOAIGfxDevice::Get ().GetHasContext ()) {
+		return;
+	}
+
+	MOAIGfxDevice::Get ().ClearErrors ();
+
+	this->mGLInternalFormat = GL_RGBA;
+	this->mGLPixelType = GL_UNSIGNED_BYTE;
+
+
+	glGenTextures ( 1, &this->mGLTexID );
+	if ( !this->mGLTexID ) {
+		return;
+	}
+
+	glBindTexture ( GL_TEXTURE_2D, this->mGLTexID );
+
+	this->mTextureSize = 0;
+
+	char* imageData = (char*)data;
+
+	GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * 32 / 8) );
+	this->mTextureSize += currentSize;
+
+	glTexImage2D(GL_TEXTURE_2D,
+				 0,
+				 GL_RGBA,
+				 (int)width,
+				 (int)height,
+				 0,
+				 GL_BGRA,
+				 this->mGLPixelType,
+				 imageData);
+
+	if ( glGetError () != 0 ) {
+		this->Clear ();
+		return;
+	}
+
+	if ( this->mGLTexID ) {
+		MOAIGfxDevice::Get ().ReportTextureAlloc ( this->mDebugName, this->mTextureSize );
+		this->mIsDirty = true;
+	}
+}
+
+//----------------------------------------------------------------//
 void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 	UNUSED ( data );
 	UNUSED ( size );
