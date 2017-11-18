@@ -95,7 +95,7 @@ void MOAITextureRaw::OnClear () {
 //----------------------------------------------------------------//
 void MOAITextureRaw::OnCreate () {
 	if ( this->mData ) {
-		this->CreateTextureFromRaw ( this->mData, this->mFrameWidth, this->mFrameHeight );
+		this->CreateTextureFromRaw ( (uint8_t *)this->mData, this->mFrameWidth, this->mFrameHeight );
 	}
 }
 

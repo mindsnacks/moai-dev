@@ -234,7 +234,7 @@ void MOAITextureBase::CreateTextureFromImage ( MOAIImage& image ) {
 }
 
 //----------------------------------------------------------------//
-void MOAITextureBase::CreateTextureFromRaw ( void* data, size_t width, size_t height ) {
+void MOAITextureBase::CreateTextureFromRaw ( uint8_t *data, size_t width, size_t height ) {
 	if ( !MOAIGfxDevice::Get ().GetHasContext ()) {
 		return;
 	}
@@ -244,7 +244,6 @@ void MOAITextureBase::CreateTextureFromRaw ( void* data, size_t width, size_t he
 	this->mGLInternalFormat = GL_RGBA;
 	this->mGLPixelType = GL_UNSIGNED_BYTE;
 
-
 	glGenTextures ( 1, &this->mGLTexID );
 	if ( !this->mGLTexID ) {
 		return;
@@ -252,22 +251,18 @@ void MOAITextureBase::CreateTextureFromRaw ( void* data, size_t width, size_t he
 
 	glBindTexture ( GL_TEXTURE_2D, this->mGLTexID );
 
-	this->mTextureSize = 0;
-
-	char* imageData = (char*)data;
-
-	GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * 32 / 8) );
-	this->mTextureSize += currentSize;
+	GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * 4) );
+	this->mTextureSize = currentSize;
 
 	glTexImage2D(GL_TEXTURE_2D,
 				 0,
 				 GL_RGBA,
-				 (int)width,
-				 (int)height,
+				 (GLsizei)width,
+				 (GLsizei)height,
 				 0,
 				 GL_BGRA,
 				 this->mGLPixelType,
-				 imageData);
+				 data);
 
 	if ( glGetError () != 0 ) {
 		this->Clear ();
