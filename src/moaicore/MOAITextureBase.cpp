@@ -257,7 +257,7 @@ void MOAITextureBase::CreateTextureFromRaw ( uint8_t *data, size_t width, size_t
 	#ifdef MOAI_OS_ANDROID
 		GLenum format = GL_RGBA;
 	#else
-		GLenum format = GL_BRGA;
+		GLenum format = GL_BGRA;
 	#endif
 
 	glTexImage2D(GL_TEXTURE_2D,
