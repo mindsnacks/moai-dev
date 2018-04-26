@@ -429,8 +429,8 @@ int MOAIWebViewIOS::_openUrlInSafari ( lua_State* L ) {
 	cc8* urlStr = lua_tostring ( state, 1 );
 	NSString* urlString = [[ NSString alloc ] initWithCString:urlStr encoding:[ NSString defaultCStringEncoding ]];
 	NSURL* url = [ NSURL URLWithString:urlString ];
-	
-	[[ UIApplication sharedApplication ] openURL:url ];
+
+	[UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
 	
 	return 0;
 }
