@@ -733,6 +733,22 @@
 		07D1A8A913EDFD8300604979 /* MOAIFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1A8A113EDFD8300604979 /* MOAIFrameBuffer.h */; };
 		07FAC91613B8F1CA00AFD0B3 /* moaicore-pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07FAC91513B8F1CA00AFD0B3 /* moaicore-pch.cpp */; };
 		07FAC91813B8F1E000AFD0B3 /* uslscore-pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07FAC91713B8F1E000AFD0B3 /* uslscore-pch.cpp */; };
+		34AB24DC2093A0DE00F97EBB /* MOAICamera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24D42093A0DC00F97EBB /* MOAICamera2D.cpp */; };
+		34AB24DD2093A0DE00F97EBB /* MOAICamera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24D42093A0DC00F97EBB /* MOAICamera2D.cpp */; };
+		34AB24DE2093A0DE00F97EBB /* MOAILayer2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24D52093A0DC00F97EBB /* MOAILayer2D.h */; };
+		34AB24DF2093A0DE00F97EBB /* MOAILayer2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24D52093A0DC00F97EBB /* MOAILayer2D.h */; };
+		34AB24E02093A0DE00F97EBB /* MOAIProp2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24D62093A0DC00F97EBB /* MOAIProp2D.cpp */; };
+		34AB24E12093A0DE00F97EBB /* MOAIProp2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24D62093A0DC00F97EBB /* MOAIProp2D.cpp */; };
+		34AB24E22093A0DE00F97EBB /* MOAICamera2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24D72093A0DD00F97EBB /* MOAICamera2D.h */; };
+		34AB24E32093A0DE00F97EBB /* MOAICamera2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24D72093A0DD00F97EBB /* MOAICamera2D.h */; };
+		34AB24E42093A0DE00F97EBB /* MOAITransform2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24D82093A0DD00F97EBB /* MOAITransform2D.h */; };
+		34AB24E52093A0DE00F97EBB /* MOAITransform2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24D82093A0DD00F97EBB /* MOAITransform2D.h */; };
+		34AB24E62093A0DE00F97EBB /* MOAITransform2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24D92093A0DD00F97EBB /* MOAITransform2D.cpp */; };
+		34AB24E72093A0DE00F97EBB /* MOAITransform2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24D92093A0DD00F97EBB /* MOAITransform2D.cpp */; };
+		34AB24E82093A0DE00F97EBB /* MOAILayer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24DA2093A0DE00F97EBB /* MOAILayer2D.cpp */; };
+		34AB24E92093A0DE00F97EBB /* MOAILayer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AB24DA2093A0DE00F97EBB /* MOAILayer2D.cpp */; };
+		34AB24EA2093A0DE00F97EBB /* MOAIProp2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24DB2093A0DE00F97EBB /* MOAIProp2D.h */; };
+		34AB24EB2093A0DE00F97EBB /* MOAIProp2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 34AB24DB2093A0DE00F97EBB /* MOAIProp2D.h */; };
 		357DE8D31BFA7EE300C4CE8D /* USUnique.h in Headers */ = {isa = PBXBuildFile; fileRef = CD19AA07151AF7E2006A1F9D /* USUnique.h */; };
 		4D4973461872370F00D46882 /* MOAIEase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4973441872370F00D46882 /* MOAIEase.cpp */; };
 		4D4973471872370F00D46882 /* MOAIEase.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4973451872370F00D46882 /* MOAIEase.h */; };
@@ -3622,6 +3638,14 @@
 		07F59343143E318B00C6D185 /* MOAIUntzSampleBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIUntzSampleBuffer.h; path = "moaiext-untz/MOAIUntzSampleBuffer.h"; sourceTree = "<group>"; };
 		07FAC91513B8F1CA00AFD0B3 /* moaicore-pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "moaicore-pch.cpp"; sourceTree = "<group>"; };
 		07FAC91713B8F1E000AFD0B3 /* uslscore-pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "uslscore-pch.cpp"; sourceTree = "<group>"; };
+		34AB24D42093A0DC00F97EBB /* MOAICamera2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICamera2D.cpp; sourceTree = "<group>"; };
+		34AB24D52093A0DC00F97EBB /* MOAILayer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAILayer2D.h; sourceTree = "<group>"; };
+		34AB24D62093A0DC00F97EBB /* MOAIProp2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIProp2D.cpp; sourceTree = "<group>"; };
+		34AB24D72093A0DD00F97EBB /* MOAICamera2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICamera2D.h; sourceTree = "<group>"; };
+		34AB24D82093A0DD00F97EBB /* MOAITransform2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAITransform2D.h; sourceTree = "<group>"; };
+		34AB24D92093A0DD00F97EBB /* MOAITransform2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAITransform2D.cpp; sourceTree = "<group>"; };
+		34AB24DA2093A0DE00F97EBB /* MOAILayer2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAILayer2D.cpp; sourceTree = "<group>"; };
+		34AB24DB2093A0DE00F97EBB /* MOAIProp2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIProp2D.h; sourceTree = "<group>"; };
 		4D4973441872370F00D46882 /* MOAIEase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIEase.cpp; sourceTree = "<group>"; };
 		4D4973451872370F00D46882 /* MOAIEase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIEase.h; sourceTree = "<group>"; };
 		4D497348187258FA00D46882 /* MOAIEaseLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIEaseLinear.cpp; sourceTree = "<group>"; };
@@ -4938,6 +4962,14 @@
 		0324E4F913564BC7000ADC60 /* moaicore */ = {
 			isa = PBXGroup;
 			children = (
+				34AB24D42093A0DC00F97EBB /* MOAICamera2D.cpp */,
+				34AB24D72093A0DD00F97EBB /* MOAICamera2D.h */,
+				34AB24DA2093A0DE00F97EBB /* MOAILayer2D.cpp */,
+				34AB24D52093A0DC00F97EBB /* MOAILayer2D.h */,
+				34AB24D62093A0DC00F97EBB /* MOAIProp2D.cpp */,
+				34AB24DB2093A0DE00F97EBB /* MOAIProp2D.h */,
+				34AB24D92093A0DD00F97EBB /* MOAITransform2D.cpp */,
+				34AB24D82093A0DD00F97EBB /* MOAITransform2D.h */,
 				E9A41AB9151AAB4600650276 /* render */,
 				CD148EFD1395AF4400A3F501 /* action */,
 				CD148EFC1395AF3900A3F501 /* anim */,
@@ -6636,10 +6668,12 @@
 				0324E83D13564BC8000ADC60 /* MOAIAnimCurve.h in Headers */,
 				0324E83F13564BC8000ADC60 /* MOAIBlocker.h in Headers */,
 				0324E84113564BC8000ADC60 /* MOAIBox2DArbiter.h in Headers */,
+				34AB24EB2093A0DE00F97EBB /* MOAIProp2D.h in Headers */,
 				0324E84313564BC8000ADC60 /* MOAIBox2DBody.h in Headers */,
 				EB70434118761FCB0057E450 /* MOAIEaseExponentialOut.h in Headers */,
 				0324E84513564BC8000ADC60 /* MOAIBox2DDebugDraw.h in Headers */,
 				0324E84713564BC8000ADC60 /* MOAIBox2DFixture.h in Headers */,
+				34AB24E32093A0DE00F97EBB /* MOAICamera2D.h in Headers */,
 				0324E84913564BC8000ADC60 /* MOAIBox2DJoint.h in Headers */,
 				0324E84B13564BC8000ADC60 /* MOAIBox2DWorld.h in Headers */,
 				0324E84D13564BC8000ADC60 /* MOAIButtonSensor.h in Headers */,
@@ -6690,6 +6724,7 @@
 				0324E8C313564BC8000ADC60 /* MOAIShader.h in Headers */,
 				0324E8C513564BC8000ADC60 /* MOAISim.h in Headers */,
 				0324E8C913564BC8000ADC60 /* MOAIStretchPatch2D.h in Headers */,
+				34AB24E52093A0DE00F97EBB /* MOAITransform2D.h in Headers */,
 				0324E8CB13564BC8000ADC60 /* MOAISurfaceDeck2D.h in Headers */,
 				0324E8CD13564BC8000ADC60 /* MOAISurfaceSampler2D.h in Headers */,
 				0324E8CF13564BC8000ADC60 /* MOAITextBox.h in Headers */,
@@ -6900,6 +6935,7 @@
 				66C5725E1575587400A486AB /* MOAIStreamReader.h in Headers */,
 				66C5726415756E4300A486AB /* MOAIFileStream.h in Headers */,
 				66C5726A1575700A00A486AB /* MOAIStream.h in Headers */,
+				34AB24DF2093A0DE00F97EBB /* MOAILayer2D.h in Headers */,
 				66C572721575703300A486AB /* MOAIMemStream.h in Headers */,
 				66C5727C1575709400A486AB /* USDeflateReader.h in Headers */,
 				66C57282157570A800A486AB /* USDeflateWriter.h in Headers */,
@@ -7267,12 +7303,14 @@
 				CDEFB3FE13E37F3C000A9523 /* MOAIGfxDevice.h in Headers */,
 				CDEFB40013E37F3C000A9523 /* MOAIGlyph.h in Headers */,
 				CDEFB40213E37F3C000A9523 /* MOAIGridSpace.h in Headers */,
+				34AB24EA2093A0DE00F97EBB /* MOAIProp2D.h in Headers */,
 				CDEFB40513E37F3C000A9523 /* MOAIPvrHeader.h in Headers */,
 				CDEFB40713E37F3C000A9523 /* MOAIQuadBrush.h in Headers */,
 				CDEFB40913E37F3C000A9523 /* MOAIShaderMgr.h in Headers */,
 				CDEFB40F13E37F3C000A9523 /* MOAITileFlags.h in Headers */,
 				CDEFB41113E37F3C000A9523 /* MOAIVertexFormatMgr.h in Headers */,
 				07D1A8A313EDFD8300604979 /* MOAIBlendMode.h in Headers */,
+				34AB24DE2093A0DE00F97EBB /* MOAILayer2D.h in Headers */,
 				07D1A8A513EDFD8300604979 /* MOAIFrameBuffer.h in Headers */,
 				CDE0AB2F13EE03E200CB9F35 /* MOAIDeck2DShader-fsh.h in Headers */,
 				CDE0AB3013EE03E200CB9F35 /* MOAIDeck2DShader-vsh.h in Headers */,
@@ -7408,10 +7446,12 @@
 				663703EA16128038002D0D27 /* USHashWriterMD5.h in Headers */,
 				663703EE16128038002D0D27 /* USHashWriterSHA1.h in Headers */,
 				663703F216128038002D0D27 /* USHashWriterSHA224.h in Headers */,
+				34AB24E42093A0DE00F97EBB /* MOAITransform2D.h in Headers */,
 				663703F616128038002D0D27 /* USHashWriterSHA256.h in Headers */,
 				663703FA16128038002D0D27 /* USHashWriterSHA384.h in Headers */,
 				663703FE16128038002D0D27 /* USHashWriterSHA512.h in Headers */,
 				6637040216128038002D0D27 /* USHashWriterWhirlpool.h in Headers */,
+				34AB24E22093A0DE00F97EBB /* MOAICamera2D.h in Headers */,
 				6637040616128038002D0D27 /* USHexReader.h in Headers */,
 				6637040E161280E1002D0D27 /* USHashWriter.h in Headers */,
 				66E62C0516AE2E12009B9C29 /* MOAIDataIOTask.h in Headers */,
@@ -8662,6 +8702,7 @@
 				0324E8B813564BC8000ADC60 /* MOAIProp.cpp in Sources */,
 				0324E8BC13564BC8000ADC60 /* MOAIScriptNode.cpp in Sources */,
 				0324E8BE13564BC8000ADC60 /* MOAISensor.cpp in Sources */,
+				34AB24DD2093A0DE00F97EBB /* MOAICamera2D.cpp in Sources */,
 				0324E8C013564BC8000ADC60 /* MOAISerializer.cpp in Sources */,
 				4D497364187270E600D46882 /* MOAIEaseSimpleOut.cpp in Sources */,
 				0324E8C213564BC8000ADC60 /* MOAIShader.cpp in Sources */,
@@ -8823,6 +8864,8 @@
 				66C57252157557FB00A486AB /* MOAIDataBufferStream.cpp in Sources */,
 				66C572561575582900A486AB /* MOAIStreamWriter.cpp in Sources */,
 				66C5725C1575587400A486AB /* MOAIStreamReader.cpp in Sources */,
+				34AB24E72093A0DE00F97EBB /* MOAITransform2D.cpp in Sources */,
+				34AB24E12093A0DE00F97EBB /* MOAIProp2D.cpp in Sources */,
 				66C5726215756E4300A486AB /* MOAIFileStream.cpp in Sources */,
 				EB70432D18761D9A0057E450 /* MOAIEaseSineOut.cpp in Sources */,
 				66C572681575700A00A486AB /* MOAIStream.cpp in Sources */,
@@ -8872,6 +8915,7 @@
 				B464B3B2187E07D0002E4E0C /* AKU.cpp in Sources */,
 				B408CA2018CE642900F9A780 /* AKU-test.cpp in Sources */,
 				B408CA2418CE643700F9A780 /* MOAITest.cpp in Sources */,
+				34AB24E92093A0DE00F97EBB /* MOAILayer2D.cpp in Sources */,
 				B408CA2718CE643E00F9A780 /* MOAITestMgr.cpp in Sources */,
 				B408CA2918CE645900F9A780 /* MOAIXmlWriter.cpp in Sources */,
 			);
@@ -9106,6 +9150,7 @@
 				F055A9921846B1A30031F295 /* md5.c in Sources */,
 				F055A9821846AD8D0031F295 /* mem_clr.c in Sources */,
 				F055A9801846AD530031F295 /* ldo.c in Sources */,
+				34AB24DC2093A0DE00F97EBB /* MOAICamera2D.cpp in Sources */,
 				F055A97E1846AD0D0031F295 /* MOAIGfxQuadDeck2D.cpp in Sources */,
 				F055A9721846ACCF0031F295 /* sha_dgst.c in Sources */,
 				F055A9731846ACCF0031F295 /* sha_one.c in Sources */,
@@ -9371,6 +9416,7 @@
 				CDF0E6C4155C90AA0028E770 /* MOAIFont_bmfont.cpp in Sources */,
 				E969155E1561B7C1007E977B /* MOAIBoundsDeck.cpp in Sources */,
 				669C056D155DB5D500A5CE7F /* fullluasocket.c in Sources */,
+				34AB24E02093A0DE00F97EBB /* MOAIProp2D.cpp in Sources */,
 				8DF743F71E4CEB9D003A62C4 /* ftglyph.c in Sources */,
 				8DF7441C1E4CED59003A62C4 /* ftmm.c in Sources */,
 				669C0571155DB5D500A5CE7F /* luasocketscripts.c in Sources */,
@@ -9404,6 +9450,7 @@
 				663703E016128038002D0D27 /* USHashWriterAdler32.cpp in Sources */,
 				663703E416128038002D0D27 /* USHashWriterCRC32.cpp in Sources */,
 				4D851D971873DDE6009DF1C4 /* MOAIEaseBackOut.cpp in Sources */,
+				34AB24E62093A0DE00F97EBB /* MOAITransform2D.cpp in Sources */,
 				663703E816128038002D0D27 /* USHashWriterMD5.cpp in Sources */,
 				663703EC16128038002D0D27 /* USHashWriterSHA1.cpp in Sources */,
 				663703F016128038002D0D27 /* USHashWriterSHA224.cpp in Sources */,
@@ -9430,6 +9477,7 @@
 				66E62C2E16AE3100009B9C29 /* MOAITaskThread.cpp in Sources */,
 				66E62C3816AE312A009B9C29 /* MOAIMutex_posix.cpp in Sources */,
 				66E62C3C16AE312A009B9C29 /* MOAIMutex_win32.cpp in Sources */,
+				34AB24E82093A0DE00F97EBB /* MOAILayer2D.cpp in Sources */,
 				66E62C4016AE312A009B9C29 /* MOAIMutex.cpp in Sources */,
 				EB92A50916B6671000FC326E /* MOAITakeCameraListener.mm in Sources */,
 				F153C20617FDE0AC00E9DC6A /* MOAIMath.cpp in Sources */,
