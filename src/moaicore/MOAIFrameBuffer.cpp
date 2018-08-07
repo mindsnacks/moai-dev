@@ -105,12 +105,19 @@ void MOAIClearableView::ClearSurface () {
 			clearColor.SetRGBA ( this->mClearColor );
 		}
 		
+//		glClearColor (
+//			clearColor.mR,
+//			clearColor.mG,
+//			clearColor.mB,
+//			clearColor.mA
+//		);
+
 		glClearColor (
-			clearColor.mR,
-			clearColor.mG,
-			clearColor.mB,
-			clearColor.mA
-		);
+		  0.1,
+		  0.2,
+		  0.8,
+		  1.0
+		  );
 	}
 
 	if ( this->mClearFlags ) {
