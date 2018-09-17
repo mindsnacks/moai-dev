@@ -733,6 +733,7 @@
 		07D1A8A913EDFD8300604979 /* MOAIFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1A8A113EDFD8300604979 /* MOAIFrameBuffer.h */; };
 		07FAC91613B8F1CA00AFD0B3 /* moaicore-pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07FAC91513B8F1CA00AFD0B3 /* moaicore-pch.cpp */; };
 		07FAC91813B8F1E000AFD0B3 /* uslscore-pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07FAC91713B8F1E000AFD0B3 /* uslscore-pch.cpp */; };
+		2DE3843E21502AA0002553CD /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DE3843B21502A9E002553CD /* Exception.cpp */; };
 		357DE8D31BFA7EE300C4CE8D /* USUnique.h in Headers */ = {isa = PBXBuildFile; fileRef = CD19AA07151AF7E2006A1F9D /* USUnique.h */; };
 		4D4973461872370F00D46882 /* MOAIEase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4973441872370F00D46882 /* MOAIEase.cpp */; };
 		4D4973471872370F00D46882 /* MOAIEase.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4973451872370F00D46882 /* MOAIEase.h */; };
@@ -3612,6 +3613,7 @@
 		07F59343143E318B00C6D185 /* MOAIUntzSampleBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIUntzSampleBuffer.h; path = "moaiext-untz/MOAIUntzSampleBuffer.h"; sourceTree = "<group>"; };
 		07FAC91513B8F1CA00AFD0B3 /* moaicore-pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "moaicore-pch.cpp"; sourceTree = "<group>"; };
 		07FAC91713B8F1E000AFD0B3 /* uslscore-pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "uslscore-pch.cpp"; sourceTree = "<group>"; };
+		2DE3843B21502A9E002553CD /* Exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Exception.cpp; path = ../../../sqlitecpp/src/Exception.cpp; sourceTree = "<group>"; };
 		4D4973441872370F00D46882 /* MOAIEase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIEase.cpp; sourceTree = "<group>"; };
 		4D4973451872370F00D46882 /* MOAIEase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIEase.h; sourceTree = "<group>"; };
 		4D497348187258FA00D46882 /* MOAIEaseLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIEaseLinear.cpp; sourceTree = "<group>"; };
@@ -4866,6 +4868,7 @@
 			children = (
 				579E367018CF8EEF00A3CE47 /* sqlite3.c */,
 				579E367118CF8EEF00A3CE47 /* sqlite3.h */,
+				2DE3843B21502A9E002553CD /* Exception.cpp */,
 				579E367218CF8EEF00A3CE47 /* sqlite3ext.h */,
 			);
 			name = sqlite;
@@ -9284,6 +9287,7 @@
 				EB7043141876030B0057E450 /* MOAIEaseElasticInOut.cpp in Sources */,
 				8DF744191E4CED59003A62C4 /* ftbbox.c in Sources */,
 				E9940DCE14B7A4A0006465CC /* USCurve.cpp in Sources */,
+				2DE3843E21502AA0002553CD /* Exception.cpp in Sources */,
 				E9940DDE14B7A4A0006465CC /* USDistance.cpp in Sources */,
 				E9940DE214B7A4A0006465CC /* USHexDump.cpp in Sources */,
 				4D49736A1872793400D46882 /* MOAIEaseCustom.cpp in Sources */,
