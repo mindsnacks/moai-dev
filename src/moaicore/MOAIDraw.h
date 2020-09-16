@@ -51,6 +51,8 @@ private:
 	static int				_fillCircularGradient ( lua_State* L );
 	static int				_fillCircularSlice	( lua_State* L );
 	static int				_fillCircularSliceGradient	( lua_State* L );
+	static int				_fillCircularSliceHorizontalGradient	( lua_State* L );
+	static int				_fillCircularSliceVerticalGradient	( lua_State* L );
 	static int				_fillEllipse		( lua_State* L );
 	static int				_fillEllipticalGradient	( lua_State* L );
 	static int				_fillEllipticalSlice( lua_State* L );
@@ -61,6 +63,8 @@ private:
 	static int				_fillRect			( lua_State* L );
 	static int				_fillRoundedRect	( lua_State* L );
 	static int				_fillRoundedRectangularGradient	( lua_State* L );
+	static int				_fillRoundedRectangularHorizontalGradient	( lua_State* L );
+	static int				_fillRoundedRectangularVerticalGradient	( lua_State* L );
 	static int				_fillTriangularGradient ( lua_State* L );
 	static int				_fillVerticalRectangularGradient ( lua_State* L );
 	static int				_drawTexture		( lua_State* L );
@@ -96,6 +100,8 @@ public:
 	static void			DrawEllipticalGradientFill ( float x, float y, float xRad, float yRad, u32 steps, const USColorVec &centerColor, const USColorVec &edgeColor );
 	static void			DrawEllipticalSliceFill		( float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps );
 	static void			DrawEllipticalSliceGradientFill ( float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps, const USColorVec &centerColor, const USColorVec &edgeColor );
+	static void			DrawEllipticalSliceHorizontalGradientFill ( float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps, const USColorVec &startColor, const USColorVec &endColor );
+	static void			DrawEllipticalSliceVerticalGradientFill ( float x, float y, float xRad, float yRad, float angle, float offset, float blurMargin, u32 steps, const USColorVec &startColor, const USColorVec &endColor );
 	static void			DrawGrid				( const USRect& rect, u32 xCells, u32 yCells );
 	static void			DrawJoinedCorner		( float x0, float y0, float x1, float y1, float x2, float y2, float lineWidth, float blurMargin );
 	static void			DrawJoinedLine			( lua_State* L, float lineWidth, float blurMargin );
@@ -119,6 +125,8 @@ public:
 	static void			DrawRoundBeveledLine	( lua_State* L, float lineWidth, float blurMargin, u32 steps );
 	static void			DrawRoundedRectFill		( float left, float top, float right, float bottom, float cornerRadius, float blurMargin, u32 steps );
 	static void			DrawRoundedRectGradientFill		( float left, float top, float right, float bottom, float cornerRadius, float blurMargin, u32 steps, const USColorVec &centerColor, const USColorVec &edgeColor );
+	static void			DrawRoundedRectHorizontalGradientFill		( float left, float top, float right, float bottom, float cornerRadius, float blurMargin, u32 steps, const USColorVec &leftColor, const USColorVec &rightColor );
+	static void			DrawRoundedRectVerticalGradientFill		( float left, float top, float right, float bottom, float cornerRadius, float blurMargin, u32 steps, const USColorVec &topColor, const USColorVec &bottomColor );
 	static void			DrawRoundedRectOutline	( float left, float top, float right, float bottom, float cornerRadius, u32 steps );
 	static void			DrawTexture				( float left, float top, float right, float bottom, MOAITexture* texture );
 	static void			DrawTriangularGradientFill (const USVec2D& v0, const USVec2D& v1, const USVec2D& v2, const USColorVec &color0, const USColorVec &color1, const USColorVec &color2);
