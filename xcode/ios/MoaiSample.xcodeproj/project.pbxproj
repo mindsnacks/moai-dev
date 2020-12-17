@@ -106,6 +106,34 @@
 			remoteGlobalIDString = CDD06A061398822500AB0420;
 			remoteInfo = "libmoai-iphone-luaext";
 		};
+		4D2019E4258C23140066DD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03CC90AE13B3C39D00B2724C /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9EE00B1BE9421B00E8938F;
+			remoteInfo = "libmoai-tvos";
+		};
+		4D2019E6258C23140066DD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03CC90AE13B3C39D00B2724C /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9EE1851BE9422800E8938F;
+			remoteInfo = "libmoai-tvos-3rdparty";
+		};
+		4D2019E8258C23140066DD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03CC90AE13B3C39D00B2724C /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9EE1B81BE9423500E8938F;
+			remoteInfo = "libmoai-tvos-luaext";
+		};
+		4D2019EA258C23140066DD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03CC90AE13B3C39D00B2724C /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9EE1F51BE9424500E8938F;
+			remoteInfo = "libmoai-tvos-zlcore";
+		};
 		CD04AF1114725736009C20E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 03CC90AE13B3C39D00B2724C /* libmoai.xcodeproj */;
@@ -213,6 +241,10 @@
 				03CC90C713B3C39D00B2724C /* libmoai-osx-3rdparty.a */,
 				03CC90C913B3C39D00B2724C /* libmoai-osx-luaext.a */,
 				CD04AF1414725736009C20E5 /* libmoai-osx-zlcore.a */,
+				4D2019E5258C23140066DD72 /* libmoai-tvos.a */,
+				4D2019E7258C23140066DD72 /* libmoai-tvos-3rdparty.a */,
+				4D2019E9258C23140066DD72 /* libmoai-tvos-luaext.a */,
+				4D2019EB258C23140066DD72 /* libmoai-tvos-zlcore.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -428,6 +460,34 @@
 			remoteRef = 03CC90C813B3C39D00B2724C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4D2019E5258C23140066DD72 /* libmoai-tvos.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libmoai-tvos.a";
+			remoteRef = 4D2019E4258C23140066DD72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4D2019E7258C23140066DD72 /* libmoai-tvos-3rdparty.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libmoai-tvos-3rdparty.a";
+			remoteRef = 4D2019E6258C23140066DD72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4D2019E9258C23140066DD72 /* libmoai-tvos-luaext.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libmoai-tvos-luaext.a";
+			remoteRef = 4D2019E8258C23140066DD72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4D2019EB258C23140066DD72 /* libmoai-tvos-zlcore.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libmoai-tvos-zlcore.a";
+			remoteRef = 4D2019EA258C23140066DD72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CD04AF1214725736009C20E5 /* libmoai-ios-zlcore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -525,13 +585,13 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../src\"/**";
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../3rdparty/crittercismiOS-3.3.3/CrittercismSDK-crashonly\"",
 					"\"$(SRCROOT)/../../3rdparty/facebookiOS-3.0.6.b\"",
@@ -554,14 +614,14 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../src\"/**";
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../3rdparty/crittercismiOS-3.3.3/CrittercismSDK-crashonly\"",
 					"\"$(SRCROOT)/../../3rdparty/facebookiOS-3.0.6.b\"",
