@@ -10381,7 +10381,7 @@
 					"\"../../3rdparty/facebookiOS-3.0.6.b/src\"",
 					"../../3rdparty/sfmt-1.4/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = (
 					"-include",
@@ -10605,7 +10605,7 @@
 					"\"../../3rdparty/facebookiOS-3.0.6.b/src\"",
 					"../../3rdparty/sfmt-1.4/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
