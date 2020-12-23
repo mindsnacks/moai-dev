@@ -604,10 +604,7 @@
 					"-include",
 					"\"zlcore/zl_replace.h\"",
 				);
-				OTHER_LDFLAGS = (
-					"-force_load",
-					"\"$(BUILT_PRODUCTS_DIR)/libmoai-ios-tapjoy.a\"",
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 armv7 armv7s";
@@ -634,10 +631,7 @@
 					"-include",
 					"\"zlcore/zl_replace.h\"",
 				);
-				OTHER_LDFLAGS = (
-					"-force_load",
-					"\"$(BUILT_PRODUCTS_DIR)/libmoai-ios-tapjoy.a\"",
-				);
+				OTHER_LDFLAGS = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
