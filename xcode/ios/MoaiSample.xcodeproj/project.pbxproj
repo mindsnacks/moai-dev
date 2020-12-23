@@ -24,7 +24,6 @@
 		03CC910C13B3C48400B2724C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CC910B13B3C48400B2724C /* AudioToolbox.framework */; };
 		03CC911C13B3C49400B2724C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CC911B13B3C49400B2724C /* SystemConfiguration.framework */; };
 		03CC912213B3C4A400B2724C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CC912113B3C4A400B2724C /* QuartzCore.framework */; };
-		03CC912C13B3C4C000B2724C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CC912B13B3C4C000B2724C /* StoreKit.framework */; };
 		0711070513C637F000EE7C53 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0711070413C637F000EE7C53 /* CoreTelephony.framework */; };
 		078D630113BA9EA30072F273 /* MoaiVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 078D630013BA9EA30072F273 /* MoaiVC.mm */; };
 		079530CE1447A0FF00143A72 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079530CD1447A0FF00143A72 /* MediaPlayer.framework */; };
@@ -183,7 +182,6 @@
 		03CC910B13B3C48400B2724C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		03CC911B13B3C49400B2724C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		03CC912113B3C4A400B2724C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		03CC912B13B3C4C000B2724C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0711070413C637F000EE7C53 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		074C469A14240A180066B1EB /* lua */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lua; sourceTree = "<group>"; };
 		078D62FF13BA9EA30072F273 /* MoaiVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoaiVC.h; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 				665383F7160A8466003D5529 /* MessageUI.framework in Frameworks */,
 				03CC90F813B3C45A00B2724C /* OpenGLES.framework in Frameworks */,
 				03CC912213B3C4A400B2724C /* QuartzCore.framework in Frameworks */,
-				03CC912C13B3C4C000B2724C /* StoreKit.framework in Frameworks */,
 				03CC911C13B3C49400B2724C /* SystemConfiguration.framework in Frameworks */,
 				07EF3E44147BAAA5006CFDCE /* Twitter.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -334,7 +331,6 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				03CC90F713B3C45A00B2724C /* OpenGLES.framework */,
 				03CC912113B3C4A400B2724C /* QuartzCore.framework */,
-				03CC912B13B3C4C000B2724C /* StoreKit.framework */,
 				03CC911B13B3C49400B2724C /* SystemConfiguration.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				07EF3E43147BAAA5006CFDCE /* Twitter.framework */,
@@ -391,6 +387,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = JG69W4K637;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MoaiSample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -565,9 +566,11 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = JG69W4K637;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elevate.moaisample;
 				PRODUCT_NAME = moai;
 			};
 			name = Debug;
@@ -575,9 +578,11 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = JG69W4K637;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elevate.moaisample;
 				PRODUCT_NAME = moai;
 			};
 			name = Release;
