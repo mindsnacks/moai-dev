@@ -508,7 +508,6 @@ add_library(moai_dev SHARED
         src/moaicore/MOAITextStyler.cpp
         src/moaicore/MOAITexture.cpp
         src/moaicore/MOAITextureBase.cpp
-        src/moaicore/MOAITextureRaw.cpp
         src/moaicore/MOAIThread.cpp
         src/moaicore/MOAIThread_posix.cpp
         src/moaicore/MOAIThread_win32.cpp
