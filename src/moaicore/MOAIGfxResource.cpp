@@ -47,6 +47,25 @@ int MOAIGfxResource::_getAge ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@name	getLastRenderCount
+	@text	Returns the 'lastRenderCount' of the graphics resource. This value
+			is copied from the MOAIRenderMgr each time that a MOAIGfxResource
+			is bound.  It indicates the number of times MOAIRenderMgr has rendered
+			a scene.
+ 
+	@in		MOAIGfxResource self
+	@out	number age
+*/
+int MOAIGfxResource::_getLastRenderCount ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIGfxResource, "U" )
+
+	u32 count = self->mLastRenderCount;
+	lua_pushnumber ( state, count );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@name	softRelease
 	@text	Attempt to release the resource. Generally this is used when
 			responding to a memory warning from the system. A resource
@@ -190,6 +209,7 @@ void MOAIGfxResource::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
 		{ "getAge",					_getAge },
+		{ "getLastRenderCount",		_getLastRenderCount },
 		{ "softRelease",			_softRelease },
 		{ NULL, NULL }
 	};
