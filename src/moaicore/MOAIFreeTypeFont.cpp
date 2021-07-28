@@ -12,10 +12,12 @@
 #include <moaicore/MOAIFont.h>
 #include <moaicore/MOAIGfxQuad2D.h>
 
+#include <algorithm>
 #include <exception>
 #include <stdexcept>
 
 #define BYTES_PER_PIXEL 4
+#define PEN_X_RESET 0
 
 
 #define CHECK_ERROR(error) if (error != 0) { throw_runtime_error(error, __LINE__); }
@@ -401,7 +403,7 @@ FT_Int MOAIFreeTypeFont::ComputeLineStart(FT_UInt unicode, size_t lineIndex, int
 	}
 	
 	FT_Int retValue = 0;
-	FT_Int adjustmentX = (FT_Int)-((this->mFreeTypeFace->glyph->metrics.horiBearingX) >> 6);
+	FT_Int adjustmentX = (FT_Int)-((this->mFreeTypeFace->glyph->metrics.horiBearingX) >> 6) + 1;
 	
 	FT_Int maxLineWidth = imageWidth;
 	
@@ -1070,204 +1072,180 @@ MOAIFreeTypeFont::~MOAIFreeTypeFont(){
 	@in		cc8* text			The string to query
 	@in		FT_Int imageWidth	The width of the text box in which to render the string
 	@in		int wordBreakMode	The word break mode to use.
-	@in		bool generateLines	Populate the line vector member variable with lines of 
-									text as well.
+	@in		bool shouldGenerateLines	Populate the line vector member variable with lines of
+										text as well.
 	@return int					The number of lines required to display the given text
 									without clipping any characters
  */
-int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
-												 int wordBreakMode, bool generateLines){
+// TODO REMOVE ME
+int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth, int wordBreakMode, bool shouldGenerateLines) {
 	FT_Error error = 0;
 	FT_Face face = this->mFreeTypeFace;
-	
-	bool useKerning = FT_HAS_KERNING(face);
-	
+	bool shouldUseKerning = FT_HAS_KERNING(face);
 	int numberOfLines = 1;
-	
-	u32 unicode; // the current unicode character
-	u32 lastCh = 0; // the previous unicode character
-	u32 lastTokenCh = 0; // the character before a word break
-	u32 wordBreakCharacter = 0; // the character used in the word break
-	
+	u32 currentCharacter = 0;
+	u32 previousCharacter = 0;
+	u32 wordBreakingCharacter = 0;
+	FT_Int penX = PEN_X_RESET;
+	FT_UInt currentGlyphIndex = 0;
 	FT_UInt previousGlyphIndex = 0;
-	FT_UInt glyphIndex = 0;
-	
-	FT_Int penXReset = 0; // the value to which to reset the x-location of the cursor on a new line
-	FT_Int penX = penXReset; // the current x-location of the cursor
-	FT_Int lastTokenX = 0; // the x-location of the cursor at the most recent word break
-	
-	int lineIndex = 0; // the index of the beginning of the current line
-	int tokenIndex = 0; // the index of the beginning of the current token
-	
-	int tokenN = 0; // the last value of n at the beginning of the token.
-	
-	u32 startIndex = 0; // the value for the final parameter of BuildLine()
-	
+	int currentLineStartIndex = 0;
+	int currentTokenStartIndex = 0;
+	int indexAtStartOfToken = 0;
+	u32 startIndexForBuildLine = 0;
 	size_t textLength = 0;
 	size_t lastTokenLength = 0;
-	
-	size_t glyphArrayIndex = 0;
+	int glyphArrayIndex = 0;
 	int rewindCount = 0;
-	
+
 	u32* textBuffer = NULL;
-	if (generateLines) {
+	if (shouldGenerateLines) {
 		textBuffer = (u32 *) calloc(strlen(text), sizeof(u32));
 	}
-	
-	int n = 0;
-	while ( (unicode = u8_nextchar(text, &n) ) ) {
-		
-		startIndex = (u32) lineIndex;
-		
-		// handle new line
-		if (unicode == '\n'){
-			numberOfLines++;
-			penX = penXReset;
-			lineIndex = tokenIndex = (int)glyphArrayIndex;
-			tokenN = n;
-			
-			if (generateLines) {
-				this->BuildLine(textBuffer, textLength, startIndex);
-				
-				error = FT_Load_Char(face, unicode, FT_LOAD_DEFAULT);
+
+	int characterIndex = 0;
+	while ((currentCharacter = u8_nextchar(text, &characterIndex))) {
+
+		bool isCurrentCharacterNewline = (currentCharacter == '\n');
+		bool isCurrentCharacterHyphen = (currentCharacter == '-');
+		bool isCurrentCharacterWordBreak = MOAIFreeTypeFont::IsWordBreak(currentCharacter, wordBreakMode);
+		startIndexForBuildLine = (u32)currentLineStartIndex;
+
+		if (isCurrentCharacterNewline) {
+			indexAtStartOfToken = characterIndex;
+			currentLineStartIndex = glyphArrayIndex;
+			currentTokenStartIndex = glyphArrayIndex;
+
+			if (shouldGenerateLines) {
+				this->BuildLine(textBuffer, textLength, startIndexForBuildLine);
+
+				error = FT_Load_Char(face, currentCharacter, FT_LOAD_DEFAULT);
 				CHECK_ERROR(error);
-				
-				if (rewindCount > 0){
+
+				if (rewindCount > 0) {
 					--rewindCount;
 				}
-				else{
-					this->StoreGlyphAndAdvanceAtIndex(glyphArrayIndex);
+				else {
+					this->StoreGlyphAndAdvanceAtIndex((size_t)glyphArrayIndex);
 					++glyphArrayIndex;
 				}
-				
-				
 			}
-			
-			textLength = lastTokenLength = 0;
+
+			++numberOfLines;
+			penX = PEN_X_RESET;
+			textLength = 0;
+			lastTokenLength = 0;
 			
 			continue;
 		}
-		// handle word breaking characters
-		else if ( MOAIFreeTypeFont::IsWordBreak(unicode, wordBreakMode) ){
-			tokenIndex = (int)glyphArrayIndex;
-			tokenN = n;
+		else if (isCurrentCharacterWordBreak) {
+			wordBreakingCharacter = currentCharacter;
+			currentTokenStartIndex = glyphArrayIndex;
+			indexAtStartOfToken = characterIndex;
 			lastTokenLength = textLength;
-			lastTokenCh = lastCh;
-			lastTokenX = penX;
-			wordBreakCharacter = unicode;
 		}
-		
-		error = FT_Load_Char(face, unicode, FT_LOAD_DEFAULT);
-		
+
+		error = FT_Load_Char(face, currentCharacter, FT_LOAD_DEFAULT);
 		CHECK_ERROR(error);
-		
-		
-		if (rewindCount > 0){
+
+		if (rewindCount > 0) {
 			--rewindCount;
 		}
-		else{
-			this->StoreGlyphAndAdvanceAtIndex(glyphArrayIndex);
+		else {
+			this->StoreGlyphAndAdvanceAtIndex((size_t)glyphArrayIndex);
 			++glyphArrayIndex;
 		}
-		
-		
-		glyphIndex = FT_Get_Char_Index(face, unicode);
-		
-		// take kerning into account
-		if (useKerning && previousGlyphIndex && glyphIndex) {
-			FT_Vector delta;
-			FT_Get_Kerning(face, previousGlyphIndex, glyphIndex, FT_KERNING_DEFAULT, &delta);
-			penX += (delta.x >> 6);
-		}
-		
-		// test for first character of line to adjust penX
-		
-		if (textLength == 0) {
-			penX += -((face->glyph->metrics.horiBearingX) >> 6);
-			// make sure value of penX does not go below zero
-			if (penX < 0){
-				penX = 0;
+
+		currentGlyphIndex = FT_Get_Char_Index(face, currentCharacter);
+
+		if (shouldUseKerning) {
+			bool hasTwoGlyphs = ((previousGlyphIndex != 0) && (currentGlyphIndex != 0));
+			if (hasTwoGlyphs) {
+				FT_Vector delta;
+				FT_Get_Kerning(face, previousGlyphIndex, currentGlyphIndex, FT_KERNING_DEFAULT, &delta);
+				penX += (delta.x >> 6);
 			}
 		}
-		
+
+		// test for first character of line to adjust penX
+		if (textLength == 0) {
+			FT_Int horiBearingX = (FT_Int)((face->glyph->metrics.horiBearingX) >> 6);
+			penX = std::max((FT_Int)0, penX - horiBearingX);
+		}
+
 		// determine if penX is outside the bounds of the box
 		FT_Pos glyphWidth = ((face->glyph->metrics.width) >> 6);
 		FT_Pos nextPenX = penX + glyphWidth;
 		bool isExceeding = (nextPenX > imageWidth);
-		if (isExceeding) { 
-			if (wordBreakMode == MOAITextBox::WORD_BREAK_CHAR) {
-				if (generateLines) {
-					this->BuildLine(textBuffer, textLength, startIndex);
+		if (isExceeding) {
+			bool isWordBreakModeChar = (wordBreakMode == MOAITextBox::WORD_BREAK_CHAR);
+			bool isWordBreakModeHyphen = (wordBreakMode == MOAITextBox::WORD_BREAK_HYPHEN);
+			bool isWordBreakingCharacterWhitespace = MOAIFont::IsWhitespace(wordBreakingCharacter);
+
+			if (isWordBreakModeChar) {
+				if (shouldGenerateLines) {
+					this->BuildLine(textBuffer, textLength, startIndexForBuildLine);
 				}
-				
-				// advance to next line
-				numberOfLines++;
+
+				++numberOfLines;
+				penX = PEN_X_RESET;
 				textLength = 0;
-				penX = penXReset;
-				lineIndex = tokenIndex = (int)glyphArrayIndex -1;
+				currentLineStartIndex = glyphArrayIndex - 1;
+				currentTokenStartIndex = glyphArrayIndex - 1;
 			}
-			else{ // WORD_BREAK_NONE and other modes
-				if (tokenIndex != lineIndex) {
-					
-					if (generateLines) {
-						// include the hyphen in WORD_BREAK_HYPHEN
-						if (wordBreakMode == MOAITextBox::WORD_BREAK_HYPHEN &&
-							!MOAIFont::IsWhitespace(wordBreakCharacter)) {
-							// add the word break character to the text buffer
-							textBuffer[lastTokenLength] = wordBreakCharacter;
-							lastTokenLength++;
+			else {
+				if (currentTokenStartIndex != currentLineStartIndex) {
+					if (shouldGenerateLines) {
+						if (isWordBreakModeHyphen && !isWordBreakingCharacterWhitespace) {
+							textBuffer[lastTokenLength] = wordBreakingCharacter;
+							++lastTokenLength;
 						}
-						
-						this->BuildLine(textBuffer, lastTokenLength, startIndex);
+
+						this->BuildLine(textBuffer, lastTokenLength, startIndexForBuildLine);
 					}
-					else if (wordBreakMode == MOAITextBox::WORD_BREAK_HYPHEN &&
-							 !MOAIFont::IsWhitespace(wordBreakCharacter)){
-						// test to see if the word break character is being cut off
-						if (unicode == wordBreakCharacter && n == tokenIndex) {
+					else if (isWordBreakModeHyphen && !isWordBreakingCharacterWhitespace) {
+						bool isWordBreakingCharacterCutOff = ((currentCharacter == wordBreakingCharacter) &&
+															  (characterIndex == currentTokenStartIndex));
+						if (isWordBreakingCharacterCutOff) {
 							return -1;
 						}
-						
 					}
-					// set the rewind count for skipping glyphs already loaded.
-					rewindCount =  ((int)glyphArrayIndex - (int)tokenIndex) - 2;
-					// set n back to the last index
-					n = tokenN;
-					// get the character after token index and update n
-					unicode = u8_nextchar(text, &n);
-					
+
+					// get the character after token index and update characterIndex
+					characterIndex = indexAtStartOfToken;
+					currentCharacter = u8_nextchar(text, &characterIndex);
+
 					// load the character after token index to get its width aka horiAdvance
-					error = FT_Load_Char(face, unicode, FT_LOAD_DEFAULT);
-					
+					error = FT_Load_Char(face, currentCharacter, FT_LOAD_DEFAULT);
 					CHECK_ERROR(error);
-					
-					//advance to next line
-					numberOfLines++;
-					penX = penXReset;
-					lineIndex = tokenIndex = (int)glyphArrayIndex - (rewindCount + 1);
-					
+
+					// set the rewind count for skipping glyphs already loaded.
+					rewindCount = (glyphArrayIndex - (int)currentTokenStartIndex) - 2;
 					if (rewindCount < 0) {
-						// put character in glyph array if rewindCount is negative
-						this->StoreGlyphAndAdvanceAtIndex(glyphArrayIndex);
-						
+						this->StoreGlyphAndAdvanceAtIndex((size_t)glyphArrayIndex);
 						++glyphArrayIndex;
-						
 					}
-					
-					// reset text length and last token length
-					textLength = lastTokenLength = 0;
+
+					++numberOfLines;
+					penX = PEN_X_RESET;
+					textLength = 0;
+					lastTokenLength = 0;
+					currentLineStartIndex = glyphArrayIndex - (rewindCount + 1);
+					currentTokenStartIndex = glyphArrayIndex - (rewindCount + 1);
 				}
-				else{
-					if (generateLines) {
+				else {
+					if (shouldGenerateLines) {
 						// put the rest of the token on the next line
-						this->BuildLine(textBuffer, textLength, penX, lastCh, startIndex);
-						textLength = lastTokenLength = 0;
-						
-						// advance to next line
-						numberOfLines++;
-						penX = penXReset;
-						lineIndex = tokenIndex = (int)glyphArrayIndex - 1;
+						this->BuildLine(textBuffer, textLength, penX, previousCharacter, startIndexForBuildLine);
+
+						++numberOfLines;
+						penX = PEN_X_RESET;
+						textLength = 0;
+						lastTokenLength = 0;
+						currentLineStartIndex = glyphArrayIndex - 1;
+						currentTokenStartIndex = glyphArrayIndex - 1;
 					}
-					else{
+					else {
 						// we don't words broken up when calculating optimal size
 						// return a failure code that is less than zero
 						return -1;
@@ -1275,24 +1253,24 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 				}
 			}
 		}
-		
-		lastCh = unicode;
-		previousGlyphIndex = glyphIndex;
-		
-		if (generateLines) {
-			textBuffer[textLength] = unicode;
+
+		previousCharacter = currentCharacter;
+		previousGlyphIndex = currentGlyphIndex;
+
+		if (shouldGenerateLines) {
+			textBuffer[textLength] = currentCharacter;
 		}
 		++textLength;
-		
-		// advance cursor
-		penX += ((face->glyph->metrics.horiAdvance) >> 6);
-		
+
+		FT_Pos horiAdvance = ((face->glyph->metrics.horiAdvance) >> 6);
+		penX += horiAdvance;
 	}
-	if (generateLines) {
-		this->BuildLine(textBuffer, textLength, startIndex);
+
+	if (shouldGenerateLines) {
+		this->BuildLine(textBuffer, textLength, startIndexForBuildLine);
 		free(textBuffer);
 	}
-	
+
 	return numberOfLines;
 }
 
@@ -1323,7 +1301,7 @@ float MOAIFreeTypeFont::OptimalSize(const MOAIOptimalSizeParameters& params ){
 	if (estimatedMaxSize < maxFontSize){
 		upperBoundSize  = ceilf(estimatedMaxSize) + 1.0f;
 	}
-	
+
 	
 	const FT_Int imageWidth = (FT_Int)width;
 	

@@ -354,6 +354,12 @@ bool MOAITextRenderer::TextFitsWithFontSize(cc8 *text, float fontSize){
 //----------------------------------------------------------------//
 float MOAITextRenderer::ProcessOptimalSize(cc8 *text){
 
+
+
+	// TODO GOTTA DEBUG THIS GUY RIGHT HERE!!!!
+
+
+
 	if (! (this->mFont->IsFreeTypeInitialized()) ) {
 		FT_Library library;
 		FT_Init_FreeType( &library );
