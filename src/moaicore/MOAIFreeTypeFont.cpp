@@ -403,7 +403,7 @@ FT_Int MOAIFreeTypeFont::ComputeLineStart(FT_UInt unicode, size_t lineIndex, int
 	}
 	
 	FT_Int retValue = 0;
-	FT_Int adjustmentX = (FT_Int)-((this->mFreeTypeFace->glyph->metrics.horiBearingX) >> 6) + 1;
+	FT_Int adjustmentX = (FT_Int)-((this->mFreeTypeFace->glyph->metrics.horiBearingX) >> 6);
 	
 	FT_Int maxLineWidth = imageWidth;
 	
