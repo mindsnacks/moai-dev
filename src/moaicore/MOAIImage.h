@@ -86,10 +86,13 @@ private:
 	void			Init				( void* bitmap, u32 width, u32 height, USColor::Format colorFmt, bool copy );
 	static bool		IsJpg				( USStream& stream );
 	static bool		IsPng				( USStream& stream );
+	static bool     IsWebP              ( USStream& stream );
 	void			LoadJpg				( USStream& stream, u32 transform );
 	void			LoadJpg				( void* jpgInfoParam, u32 transform );
 	void			LoadPng				( USStream& stream, u32 transform );
 	void			LoadPng				( void* pngParam, void* pngInfoParam, u32 transform );
+	void            LoadWebP            ( USStream& stream, u32 transform );
+	void            LoadWebP            ( u8 const* data, size_t dataSize, int width, int height, bool hasAlpha, u32 transform );
 
 public:
 	
