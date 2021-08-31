@@ -1,9 +1,5 @@
-//
-//  MOAIImage-webp.cpp
-//  libmoai
-//
-//  Created by Aaron Barrett on 8/30/21.
-//
+// Copyright (c) 2010-2017 Zipline Games, Inc. All Rights Reserved.
+// http://getmoai.com
 
 #include "pch.h"
 #include <moaicore/MOAILogMessages.h>
