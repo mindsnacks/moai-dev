@@ -1565,6 +1565,19 @@ bool MOAIImage::IsPng ( USStream& stream ) {
 }
 
 //----------------------------------------------------------------//
+bool MOAIImage::IsWebP( USStream &stream ) {
+	char buffer [ 12 ];
+	u32 size = (u32) stream.PeekBytes( buffer, 12 );
+	if ( size < 12 ) return false;
+	
+	const char *riffHeader = "RIFF";
+	const char *webpHeader = "WEBP";
+	
+	return ( memcmp( buffer, riffHeader, 4 ) == 0 ) &&
+		( memcmp( &(buffer[8]), webpHeader, 4 ) == 0) ;
+}
+
+//----------------------------------------------------------------//
 void MOAIImage::Load ( cc8* filename, u32 transform ) {
 
 	this->Clear ();
@@ -1588,6 +1601,9 @@ void MOAIImage::Load ( USStream& stream, u32 transform ) {
 	}
 	else if ( MOAIImage::IsJpg ( stream )) {
 		this->LoadJpg ( stream, transform );
+	}
+	else if ( MOAIImage::IsWebP( stream )) {
+		this->LoadWebP( stream, transform );
 	}
 }
 
