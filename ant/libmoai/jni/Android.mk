@@ -5,7 +5,7 @@
 #================================================================#
 
 	ORIGINAL_LOCAL_PATH := $(call my-dir)
-	
+
 	include ArmModeDefined.mk
 	include OptionalComponentsDefined.mk
 
@@ -40,7 +40,7 @@
 	LOCAL_ARM_MODE 	:= $(MY_ARM_MODE)
 	LOCAL_LDLIBS 	:= -llog -lGLESv1_CM -lGLESv2 crypto/libs/$(TARGET_ARCH_ABI)/libcrypto.a
 	LOCAL_CFLAGS	:= $(DISABLE_ADCOLONY) $(DISABLE_BILLING) $(DISABLE_CHARTBOOST) $(DISABLE_CRITTERCISM) $(DISABLE_FACEBOOK) $(DISABLE_NOTIFICATIONS) $(DISABLE_TAPJOY)
-	
+
 	ifeq ($(USE_FMOD),true)
 		LOCAL_CFLAGS	+= -DUSE_FMOD
 		LOCAL_SHARED_LIBRARIES := fmodex
@@ -51,11 +51,11 @@
 	else
     	LOCAL_CFLAGS += -Ofast
 	endif
-	
+
 #----------------------------------------------------------------#
 # header search paths
 #----------------------------------------------------------------#
-	
+
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/src
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/src/aku
@@ -90,6 +90,8 @@
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/freetype-2.7/config
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/jansson-2.1/src
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/jpeg-8c
+	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/libwebp
+	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/libwebp/src
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/lpng140
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/lua-5.1.3/src
 	MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/3rdparty/luacrypto-0.2.0/src
@@ -110,7 +112,7 @@
 		MY_HEADER_SEARCH_PATHS += $(MY_MOAI_ROOT)/src/moaiext-fmod-ex
 		MY_HEADER_SEARCH_PATHS += $(FMOD_ANDROID_SDK_ROOT)/api/inc
 	endif
-	
+
 #----------------------------------------------------------------#
 # source files
 #----------------------------------------------------------------#
@@ -146,6 +148,7 @@
 	LOCAL_STATIC_LIBRARIES += libsqlite
 	LOCAL_STATIC_LIBRARIES += libssl
 	LOCAL_STATIC_LIBRARIES += libtinyxml
+	LOCAL_STATIC_LIBRARIES += libwebp
 	LOCAL_STATIC_LIBRARIES += libzlcore
 	LOCAL_STATIC_LIBRARIES += libluatrace
 
@@ -165,16 +168,17 @@
 	include lua/Android.mk
 	include moaiext-android/Android.mk
 	include moaiext-luaext/Android.mk
-	
+
 	ifeq ($(USE_FMOD),true)
 		include moaiext-fmod-ex/Android.mk
 	endif
 
 	include png/Android.mk
-	include sfmt/Android.mk	
+	include sfmt/Android.mk
 	include sqlite/Android.mk
 	include ssl/Android.mk
 	include tinyxml/Android.mk
+	include webp/Android.mk
 	include zlcore/Android.mk
 
 	include aku/Android.mk
