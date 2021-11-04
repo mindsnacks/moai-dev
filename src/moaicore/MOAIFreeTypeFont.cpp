@@ -1649,7 +1649,7 @@ MOAITexture* MOAIFreeTypeFont::RenderTextureSingleLine(cc8 *text, float fontSize
 	FT_UInt numGlyphs;
 	FT_Error error;
 	
-	const size_t maxGlyphs = strlen(text);
+	const size_t maxGlyphs = glyphsInText(text);
 	
 	FT_Int maxDescender;
 	FT_Int maxAscender;
