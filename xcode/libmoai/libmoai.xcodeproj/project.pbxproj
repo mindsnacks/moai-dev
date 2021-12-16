@@ -11521,6 +11521,7 @@
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -11582,6 +11583,7 @@
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -11773,6 +11775,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -11817,6 +11820,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -12000,6 +12004,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zlcore";
 				SDKROOT = iphoneos;
@@ -12011,6 +12016,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zlcore";
 				SDKROOT = iphoneos;
@@ -12051,6 +12057,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -12082,6 +12089,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
