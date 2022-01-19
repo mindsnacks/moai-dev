@@ -499,6 +499,7 @@ add_library(moai_dev SHARED
         src/moaicore/MOAIHttpTaskNaCl.cpp
         src/moaicore/MOAIImage-jpg.cpp
         src/moaicore/MOAIImage-png.cpp
+		src/moaicore/MOAIImage-webp.cpp
         src/moaicore/MOAIImage.cpp
         src/moaicore/MOAIImageTexture.cpp
         src/moaicore/MOAIIndexBuffer.cpp
