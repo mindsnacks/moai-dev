@@ -32,6 +32,8 @@ include_directories(3rdparty/freetype-2.7/config)
 include_directories(3rdparty/glew-1.5.6/include)
 include_directories(3rdparty/jansson-2.1/src)
 include_directories(3rdparty/jpeg-8c)
+include_directories(3rdparty/libwebp)
+include_directories(3rdparty/libwebp/src)
 include_directories(3rdparty/lpng140)
 include_directories(3rdparty/lua-5.1.3/src)
 include_directories(3rdparty/luasocket-2.0.2/src)
@@ -232,6 +234,70 @@ add_library(moai_dev SHARED
         3rdparty/jpeg-8c/jquant1.c
         3rdparty/jpeg-8c/jquant2.c
         3rdparty/jpeg-8c/jutils.c
+		3rdparty/libwebp/src/dec/alpha_dec.c
+		3rdparty/libwebp/src/dec/buffer_dec.c
+		3rdparty/libwebp/src/dec/frame_dec.c
+		3rdparty/libwebp/src/dec/idec_dec.c
+		3rdparty/libwebp/src/dec/io_dec.c
+		3rdparty/libwebp/src/dec/quant_dec.c
+		3rdparty/libwebp/src/dec/tree_dec.c
+		3rdparty/libwebp/src/dec/vp8_dec.c
+		3rdparty/libwebp/src/dec/vp8l_dec.c
+		3rdparty/libwebp/src/dec/webp_dec.c
+		3rdparty/libwebp/src/demux/anim_decode.c
+		3rdparty/libwebp/src/demux/demux.c
+		3rdparty/libwebp/src/dsp/alpha_processing.c
+		3rdparty/libwebp/src/dsp/alpha_processing_mips_dsp_r2.c
+		3rdparty/libwebp/src/dsp/alpha_processing_neon.c
+		3rdparty/libwebp/src/dsp/alpha_processing_sse2.c
+		3rdparty/libwebp/src/dsp/alpha_processing_sse41.c
+		3rdparty/libwebp/src/dsp/cpu.c
+		3rdparty/libwebp/src/dsp/dec.c
+		3rdparty/libwebp/src/dsp/dec_clip_tables.c
+		3rdparty/libwebp/src/dsp/dec_mips32.c
+		3rdparty/libwebp/src/dsp/dec_mips_dsp_r2.c
+		3rdparty/libwebp/src/dsp/dec_msa.c
+		3rdparty/libwebp/src/dsp/dec_neon.c
+		3rdparty/libwebp/src/dsp/dec_sse2.c
+		3rdparty/libwebp/src/dsp/dec_sse41.c
+		3rdparty/libwebp/src/dsp/filters.c
+		3rdparty/libwebp/src/dsp/filters_mips_dsp_r2.c
+		3rdparty/libwebp/src/dsp/filters_msa.c
+		3rdparty/libwebp/src/dsp/filters_neon.c
+		3rdparty/libwebp/src/dsp/filters_sse2.c
+		3rdparty/libwebp/src/dsp/lossless.c
+		3rdparty/libwebp/src/dsp/lossless_mips_dsp_r2.c
+		3rdparty/libwebp/src/dsp/lossless_msa.c
+		3rdparty/libwebp/src/dsp/lossless_neon.c
+		3rdparty/libwebp/src/dsp/lossless_sse2.c
+		3rdparty/libwebp/src/dsp/lossless_sse41.c
+		3rdparty/libwebp/src/dsp/rescaler.c
+		3rdparty/libwebp/src/dsp/rescaler_mips32.c
+		3rdparty/libwebp/src/dsp/rescaler_mips_dsp_r2.c
+		3rdparty/libwebp/src/dsp/rescaler_msa.c
+		3rdparty/libwebp/src/dsp/rescaler_neon.c
+		3rdparty/libwebp/src/dsp/rescaler_sse2.c
+		3rdparty/libwebp/src/dsp/upsampling.c
+		3rdparty/libwebp/src/dsp/upsampling_mips_dsp_r2.c
+		3rdparty/libwebp/src/dsp/upsampling_msa.c
+		3rdparty/libwebp/src/dsp/upsampling_neon.c
+		3rdparty/libwebp/src/dsp/upsampling_sse2.c
+		3rdparty/libwebp/src/dsp/upsampling_sse41.c
+		3rdparty/libwebp/src/dsp/yuv.c
+		3rdparty/libwebp/src/dsp/yuv_mips32.c
+		3rdparty/libwebp/src/dsp/yuv_mips_dsp_r2.c
+		3rdparty/libwebp/src/dsp/yuv_neon.c
+		3rdparty/libwebp/src/dsp/yuv_sse2.c
+		3rdparty/libwebp/src/dsp/yuv_sse41.c
+		3rdparty/libwebp/src/utils/bit_reader_utils.c
+		3rdparty/libwebp/src/utils/color_cache_utils.c
+		3rdparty/libwebp/src/utils/filters_utils.c
+		3rdparty/libwebp/src/utils/huffman_utils.c
+		3rdparty/libwebp/src/utils/quant_levels_dec_utils.c
+		3rdparty/libwebp/src/utils/random_utils.c
+		3rdparty/libwebp/src/utils/rescaler_utils.c
+		3rdparty/libwebp/src/utils/thread_utils.c
+		3rdparty/libwebp/src/utils/utils.c
         3rdparty/lpng140/png.c
         3rdparty/lpng140/pngerror.c
         3rdparty/lpng140/pngget.c
@@ -433,6 +499,7 @@ add_library(moai_dev SHARED
         src/moaicore/MOAIHttpTaskNaCl.cpp
         src/moaicore/MOAIImage-jpg.cpp
         src/moaicore/MOAIImage-png.cpp
+		src/moaicore/MOAIImage-webp.cpp
         src/moaicore/MOAIImage.cpp
         src/moaicore/MOAIImageTexture.cpp
         src/moaicore/MOAIIndexBuffer.cpp
