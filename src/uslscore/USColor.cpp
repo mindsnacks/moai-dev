@@ -82,12 +82,17 @@ void USColor::Convert ( void* dest, Format destFmt, const void* src, Format srcF
 				
 				for ( u32 i = 0; i < copy; ++i ) {
 					
-					color = *( u32* )src;
-					src = ( void* )(( uintptr )src + 3 );
+					color = *( u8* )src;
+					src = ( void* )(( size_t )src + 1 );
 					
-					buffer [ i ]= color | 0xff000000;
+					color += *( u8* )src << 0x08;
+					src = ( void* )(( size_t )src + 1 );
+					
+					color += *( u8* )src << 0x10;
+					src = ( void* )(( size_t )src + 1 );
+					
+					buffer [ i ]= color | 0xFF000000;
 				}
-				bufferPtr = buffer;
 				break;
 				
 			case RGB_565:
