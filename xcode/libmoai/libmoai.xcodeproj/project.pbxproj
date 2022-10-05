@@ -1274,52 +1274,12 @@
 		579E367818CF8EEF00A3CE47 /* sqlite3ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 579E367218CF8EEF00A3CE47 /* sqlite3ext.h */; };
 		663703C916127FFD002D0D27 /* USHexWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703C816127FFD002D0D27 /* USHexWriter.h */; };
 		663703CA16127FFD002D0D27 /* USHexWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703C816127FFD002D0D27 /* USHexWriter.h */; };
-		663703E016128038002D0D27 /* USHashWriterAdler32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CB16128038002D0D27 /* USHashWriterAdler32.cpp */; };
-		663703E116128038002D0D27 /* USHashWriterAdler32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CB16128038002D0D27 /* USHashWriterAdler32.cpp */; };
-		663703E216128038002D0D27 /* USHashWriterAdler32.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703CC16128038002D0D27 /* USHashWriterAdler32.h */; };
-		663703E316128038002D0D27 /* USHashWriterAdler32.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703CC16128038002D0D27 /* USHashWriterAdler32.h */; };
-		663703E416128038002D0D27 /* USHashWriterCRC32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CD16128038002D0D27 /* USHashWriterCRC32.cpp */; };
-		663703E516128038002D0D27 /* USHashWriterCRC32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CD16128038002D0D27 /* USHashWriterCRC32.cpp */; };
-		663703E616128038002D0D27 /* USHashWriterCRC32.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703CE16128038002D0D27 /* USHashWriterCRC32.h */; };
-		663703E716128038002D0D27 /* USHashWriterCRC32.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703CE16128038002D0D27 /* USHashWriterCRC32.h */; };
-		663703E816128038002D0D27 /* USHashWriterMD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CF16128038002D0D27 /* USHashWriterMD5.cpp */; };
-		663703E916128038002D0D27 /* USHashWriterMD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CF16128038002D0D27 /* USHashWriterMD5.cpp */; };
-		663703EA16128038002D0D27 /* USHashWriterMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D016128038002D0D27 /* USHashWriterMD5.h */; };
-		663703EB16128038002D0D27 /* USHashWriterMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D016128038002D0D27 /* USHashWriterMD5.h */; };
-		663703EC16128038002D0D27 /* USHashWriterSHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D116128038002D0D27 /* USHashWriterSHA1.cpp */; };
-		663703ED16128038002D0D27 /* USHashWriterSHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D116128038002D0D27 /* USHashWriterSHA1.cpp */; };
-		663703EE16128038002D0D27 /* USHashWriterSHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D216128038002D0D27 /* USHashWriterSHA1.h */; };
-		663703EF16128038002D0D27 /* USHashWriterSHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D216128038002D0D27 /* USHashWriterSHA1.h */; };
-		663703F016128038002D0D27 /* USHashWriterSHA224.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D316128038002D0D27 /* USHashWriterSHA224.cpp */; };
-		663703F116128038002D0D27 /* USHashWriterSHA224.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D316128038002D0D27 /* USHashWriterSHA224.cpp */; };
-		663703F216128038002D0D27 /* USHashWriterSHA224.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D416128038002D0D27 /* USHashWriterSHA224.h */; };
-		663703F316128038002D0D27 /* USHashWriterSHA224.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D416128038002D0D27 /* USHashWriterSHA224.h */; };
-		663703F416128038002D0D27 /* USHashWriterSHA256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D516128038002D0D27 /* USHashWriterSHA256.cpp */; };
-		663703F516128038002D0D27 /* USHashWriterSHA256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D516128038002D0D27 /* USHashWriterSHA256.cpp */; };
-		663703F616128038002D0D27 /* USHashWriterSHA256.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D616128038002D0D27 /* USHashWriterSHA256.h */; };
-		663703F716128038002D0D27 /* USHashWriterSHA256.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D616128038002D0D27 /* USHashWriterSHA256.h */; };
-		663703F816128038002D0D27 /* USHashWriterSHA384.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D716128038002D0D27 /* USHashWriterSHA384.cpp */; };
-		663703F916128038002D0D27 /* USHashWriterSHA384.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D716128038002D0D27 /* USHashWriterSHA384.cpp */; };
-		663703FA16128038002D0D27 /* USHashWriterSHA384.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D816128038002D0D27 /* USHashWriterSHA384.h */; };
-		663703FB16128038002D0D27 /* USHashWriterSHA384.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D816128038002D0D27 /* USHashWriterSHA384.h */; };
-		663703FC16128038002D0D27 /* USHashWriterSHA512.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D916128038002D0D27 /* USHashWriterSHA512.cpp */; };
-		663703FD16128038002D0D27 /* USHashWriterSHA512.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D916128038002D0D27 /* USHashWriterSHA512.cpp */; };
-		663703FE16128038002D0D27 /* USHashWriterSHA512.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DA16128038002D0D27 /* USHashWriterSHA512.h */; };
-		663703FF16128038002D0D27 /* USHashWriterSHA512.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DA16128038002D0D27 /* USHashWriterSHA512.h */; };
-		6637040016128038002D0D27 /* USHashWriterWhirlpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DB16128038002D0D27 /* USHashWriterWhirlpool.cpp */; };
-		6637040116128038002D0D27 /* USHashWriterWhirlpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DB16128038002D0D27 /* USHashWriterWhirlpool.cpp */; };
-		6637040216128038002D0D27 /* USHashWriterWhirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DC16128038002D0D27 /* USHashWriterWhirlpool.h */; };
-		6637040316128038002D0D27 /* USHashWriterWhirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DC16128038002D0D27 /* USHashWriterWhirlpool.h */; };
 		6637040416128038002D0D27 /* USHexReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DD16128038002D0D27 /* USHexReader.cpp */; };
 		6637040516128038002D0D27 /* USHexReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DD16128038002D0D27 /* USHexReader.cpp */; };
 		6637040616128038002D0D27 /* USHexReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DE16128038002D0D27 /* USHexReader.h */; };
 		6637040716128038002D0D27 /* USHexReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DE16128038002D0D27 /* USHexReader.h */; };
 		6637040816128038002D0D27 /* USHexWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DF16128038002D0D27 /* USHexWriter.cpp */; };
 		6637040916128038002D0D27 /* USHexWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DF16128038002D0D27 /* USHexWriter.cpp */; };
-		6637040C161280E1002D0D27 /* USHashWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6637040A161280E1002D0D27 /* USHashWriter.cpp */; };
-		6637040D161280E1002D0D27 /* USHashWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6637040A161280E1002D0D27 /* USHashWriter.cpp */; };
-		6637040E161280E1002D0D27 /* USHashWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6637040B161280E1002D0D27 /* USHashWriter.h */; };
-		6637040F161280E1002D0D27 /* USHashWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6637040B161280E1002D0D27 /* USHashWriter.h */; };
 		663704171612813D002D0D27 /* whirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663704111612812C002D0D27 /* whirlpool.h */; };
 		663704191612813E002D0D27 /* whirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663704111612812C002D0D27 /* whirlpool.h */; };
 		66459FB41511638B0075BF13 /* AKU-audiosampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66459FB31511638B0075BF13 /* AKU-audiosampler.cpp */; };
@@ -1958,10 +1918,6 @@
 		CDBD3D3D1425DC2600BC33D4 /* MOAIBox2DRevoluteJoint.h in Headers */ = {isa = PBXBuildFile; fileRef = CDBD3D191425DC2600BC33D4 /* MOAIBox2DRevoluteJoint.h */; };
 		CDBD3D3E1425DC2600BC33D4 /* MOAIBox2DWeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDBD3D1A1425DC2600BC33D4 /* MOAIBox2DWeldJoint.cpp */; };
 		CDBD3D3F1425DC2600BC33D4 /* MOAIBox2DWeldJoint.h in Headers */ = {isa = PBXBuildFile; fileRef = CDBD3D1B1425DC2600BC33D4 /* MOAIBox2DWeldJoint.h */; };
-		CDD06D8A1398832300AB0420 /* lcrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D881398832300AB0420 /* lcrypto.c */; };
-		CDD06D8B1398832300AB0420 /* lcrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06D891398832300AB0420 /* lcrypto.h */; };
-		CDD06D8C1398832300AB0420 /* lcrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D881398832300AB0420 /* lcrypto.c */; };
-		CDD06D8D1398832300AB0420 /* lcrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06D891398832300AB0420 /* lcrypto.h */; };
 		CDD06DB01398838D00AB0420 /* auxiliar.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D8E1398838D00AB0420 /* auxiliar.c */; };
 		CDD06DB11398838D00AB0420 /* auxiliar.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06D8F1398838D00AB0420 /* auxiliar.h */; };
 		CDD06DB21398838D00AB0420 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D901398838D00AB0420 /* buffer.c */; };
@@ -2895,17 +2851,7 @@
 		EB9EDEAE1BE9421B00E8938F /* MOAIGridDeck2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 66C572AE1575717000A486AB /* MOAIGridDeck2D.h */; };
 		EB9EDEB01BE9421B00E8938F /* MOAIHashWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0755162515A6CA2B00161409 /* MOAIHashWriter.h */; };
 		EB9EDEB11BE9421B00E8938F /* USHexWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703C816127FFD002D0D27 /* USHexWriter.h */; };
-		EB9EDEB21BE9421B00E8938F /* USHashWriterAdler32.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703CC16128038002D0D27 /* USHashWriterAdler32.h */; };
-		EB9EDEB31BE9421B00E8938F /* USHashWriterCRC32.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703CE16128038002D0D27 /* USHashWriterCRC32.h */; };
-		EB9EDEB41BE9421B00E8938F /* USHashWriterMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D016128038002D0D27 /* USHashWriterMD5.h */; };
-		EB9EDEB51BE9421B00E8938F /* USHashWriterSHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D216128038002D0D27 /* USHashWriterSHA1.h */; };
-		EB9EDEB61BE9421B00E8938F /* USHashWriterSHA224.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D416128038002D0D27 /* USHashWriterSHA224.h */; };
-		EB9EDEB71BE9421B00E8938F /* USHashWriterSHA256.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D616128038002D0D27 /* USHashWriterSHA256.h */; };
-		EB9EDEB81BE9421B00E8938F /* USHashWriterSHA384.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703D816128038002D0D27 /* USHashWriterSHA384.h */; };
-		EB9EDEB91BE9421B00E8938F /* USHashWriterSHA512.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DA16128038002D0D27 /* USHashWriterSHA512.h */; };
-		EB9EDEBA1BE9421B00E8938F /* USHashWriterWhirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DC16128038002D0D27 /* USHashWriterWhirlpool.h */; };
 		EB9EDEBB1BE9421B00E8938F /* USHexReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 663703DE16128038002D0D27 /* USHexReader.h */; };
-		EB9EDEBC1BE9421B00E8938F /* USHashWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6637040B161280E1002D0D27 /* USHashWriter.h */; };
 		EB9EDEBD1BE9421B00E8938F /* MOAIDataIOTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 66E62C0216AE2E12009B9C29 /* MOAIDataIOTask.h */; };
 		EB9EDEBE1BE9421B00E8938F /* MOAIThread_posix.h in Headers */ = {isa = PBXBuildFile; fileRef = 66E62C0916AE30C0009B9C29 /* MOAIThread_posix.h */; };
 		EB9EDEBF1BE9421B00E8938F /* MOAIThread_win32.h in Headers */ = {isa = PBXBuildFile; fileRef = 66E62C0B16AE30C0009B9C29 /* MOAIThread_win32.h */; };
@@ -3174,20 +3120,10 @@
 		EB9EDFDE1BE9421B00E8938F /* USBase64Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66C572A71575714A00A486AB /* USBase64Encoder.cpp */; };
 		EB9EDFDF1BE9421B00E8938F /* MOAIGridDeck2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66C572AD1575717000A486AB /* MOAIGridDeck2D.cpp */; };
 		EB9EDFE11BE9421B00E8938F /* MOAIHashWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0755162415A6CA2B00161409 /* MOAIHashWriter.cpp */; };
-		EB9EDFE21BE9421B00E8938F /* USHashWriterAdler32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CB16128038002D0D27 /* USHashWriterAdler32.cpp */; };
-		EB9EDFE31BE9421B00E8938F /* USHashWriterCRC32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CD16128038002D0D27 /* USHashWriterCRC32.cpp */; };
 		EB9EDFE41BE9421B00E8938F /* MOAIEaseBackOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D851D951873DDE6009DF1C4 /* MOAIEaseBackOut.cpp */; };
-		EB9EDFE51BE9421B00E8938F /* USHashWriterMD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703CF16128038002D0D27 /* USHashWriterMD5.cpp */; };
-		EB9EDFE61BE9421B00E8938F /* USHashWriterSHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D116128038002D0D27 /* USHashWriterSHA1.cpp */; };
-		EB9EDFE71BE9421B00E8938F /* USHashWriterSHA224.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D316128038002D0D27 /* USHashWriterSHA224.cpp */; };
 		EB9EDFE81BE9421B00E8938F /* MOAIEaseElasticIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D851DA71873E760009DF1C4 /* MOAIEaseElasticIn.cpp */; };
-		EB9EDFE91BE9421B00E8938F /* USHashWriterSHA256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D516128038002D0D27 /* USHashWriterSHA256.cpp */; };
-		EB9EDFEA1BE9421B00E8938F /* USHashWriterSHA384.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D716128038002D0D27 /* USHashWriterSHA384.cpp */; };
-		EB9EDFEB1BE9421B00E8938F /* USHashWriterSHA512.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703D916128038002D0D27 /* USHashWriterSHA512.cpp */; };
-		EB9EDFEC1BE9421B00E8938F /* USHashWriterWhirlpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DB16128038002D0D27 /* USHashWriterWhirlpool.cpp */; };
 		EB9EDFED1BE9421B00E8938F /* USHexReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DD16128038002D0D27 /* USHexReader.cpp */; };
 		EB9EDFEE1BE9421B00E8938F /* USHexWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663703DF16128038002D0D27 /* USHexWriter.cpp */; };
-		EB9EDFEF1BE9421B00E8938F /* USHashWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6637040A161280E1002D0D27 /* USHashWriter.cpp */; };
 		EB9EDFF01BE9421B00E8938F /* MOAIDataIOTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66E62C0116AE2E12009B9C29 /* MOAIDataIOTask.cpp */; };
 		EB9EDFF11BE9421B00E8938F /* MOAIThread_posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66E62C0816AE30C0009B9C29 /* MOAIThread_posix.cpp */; };
 		EB9EDFF21BE9421B00E8938F /* MOAIThread_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66E62C0A16AE30C0009B9C29 /* MOAIThread_win32.cpp */; };
@@ -3534,7 +3470,6 @@
 		EB9EE17E1BE9422800E8938F /* MOAIMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD80D64816D8021D00C172D2 /* MOAIMath.cpp */; };
 		EB9EE17F1BE9422800E8938F /* MOAIFrameBufferTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD80D67016D8025000C172D2 /* MOAIFrameBufferTexture.cpp */; };
 		EB9EE1801BE9422800E8938F /* SFMT.c in Sources */ = {isa = PBXBuildFile; fileRef = DD80D69916D8029700C172D2 /* SFMT.c */; };
-		EB9EE1881BE9423500E8938F /* lcrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06D891398832300AB0420 /* lcrypto.h */; };
 		EB9EE1891BE9423500E8938F /* auxiliar.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06D8F1398838D00AB0420 /* auxiliar.h */; };
 		EB9EE18A1BE9423500E8938F /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06D911398838D00AB0420 /* buffer.h */; };
 		EB9EE18B1BE9423500E8938F /* except.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06D931398838D00AB0420 /* except.h */; };
@@ -3555,7 +3490,6 @@
 		EB9EE19A1BE9423500E8938F /* MOAICoroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940D6D14B7A414006465CC /* MOAICoroutine.h */; };
 		EB9EE19B1BE9423500E8938F /* MOAIMath.h in Headers */ = {isa = PBXBuildFile; fileRef = DD80D64916D8021D00C172D2 /* MOAIMath.h */; };
 		EB9EE19C1BE9423500E8938F /* MOAIFrameBufferTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = DD80D67116D8025000C172D2 /* MOAIFrameBufferTexture.h */; };
-		EB9EE19E1BE9423500E8938F /* lcrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D881398832300AB0420 /* lcrypto.c */; };
 		EB9EE19F1BE9423500E8938F /* auxiliar.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D8E1398838D00AB0420 /* auxiliar.c */; };
 		EB9EE1A01BE9423500E8938F /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D901398838D00AB0420 /* buffer.c */; };
 		EB9EE1A11BE9423500E8938F /* except.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06D921398838D00AB0420 /* except.c */; };
@@ -4253,29 +4187,9 @@
 		579E367118CF8EEF00A3CE47 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = ../../3rdparty/sqlite3/sqlite3.h; sourceTree = "<group>"; };
 		579E367218CF8EEF00A3CE47 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = ../../3rdparty/sqlite3/sqlite3ext.h; sourceTree = "<group>"; };
 		663703C816127FFD002D0D27 /* USHexWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHexWriter.h; sourceTree = "<group>"; };
-		663703CB16128038002D0D27 /* USHashWriterAdler32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterAdler32.cpp; sourceTree = "<group>"; };
-		663703CC16128038002D0D27 /* USHashWriterAdler32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterAdler32.h; sourceTree = "<group>"; };
-		663703CD16128038002D0D27 /* USHashWriterCRC32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterCRC32.cpp; sourceTree = "<group>"; };
-		663703CE16128038002D0D27 /* USHashWriterCRC32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterCRC32.h; sourceTree = "<group>"; };
-		663703CF16128038002D0D27 /* USHashWriterMD5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterMD5.cpp; sourceTree = "<group>"; };
-		663703D016128038002D0D27 /* USHashWriterMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterMD5.h; sourceTree = "<group>"; };
-		663703D116128038002D0D27 /* USHashWriterSHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterSHA1.cpp; sourceTree = "<group>"; };
-		663703D216128038002D0D27 /* USHashWriterSHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterSHA1.h; sourceTree = "<group>"; };
-		663703D316128038002D0D27 /* USHashWriterSHA224.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterSHA224.cpp; sourceTree = "<group>"; };
-		663703D416128038002D0D27 /* USHashWriterSHA224.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterSHA224.h; sourceTree = "<group>"; };
-		663703D516128038002D0D27 /* USHashWriterSHA256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterSHA256.cpp; sourceTree = "<group>"; };
-		663703D616128038002D0D27 /* USHashWriterSHA256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterSHA256.h; sourceTree = "<group>"; };
-		663703D716128038002D0D27 /* USHashWriterSHA384.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterSHA384.cpp; sourceTree = "<group>"; };
-		663703D816128038002D0D27 /* USHashWriterSHA384.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterSHA384.h; sourceTree = "<group>"; };
-		663703D916128038002D0D27 /* USHashWriterSHA512.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterSHA512.cpp; sourceTree = "<group>"; };
-		663703DA16128038002D0D27 /* USHashWriterSHA512.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterSHA512.h; sourceTree = "<group>"; };
-		663703DB16128038002D0D27 /* USHashWriterWhirlpool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriterWhirlpool.cpp; sourceTree = "<group>"; };
-		663703DC16128038002D0D27 /* USHashWriterWhirlpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriterWhirlpool.h; sourceTree = "<group>"; };
 		663703DD16128038002D0D27 /* USHexReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHexReader.cpp; sourceTree = "<group>"; };
 		663703DE16128038002D0D27 /* USHexReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHexReader.h; sourceTree = "<group>"; };
 		663703DF16128038002D0D27 /* USHexWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHexWriter.cpp; sourceTree = "<group>"; };
-		6637040A161280E1002D0D27 /* USHashWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USHashWriter.cpp; sourceTree = "<group>"; };
-		6637040B161280E1002D0D27 /* USHashWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHashWriter.h; sourceTree = "<group>"; };
 		663704111612812C002D0D27 /* whirlpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = whirlpool.h; path = ../../3rdparty/contrib/whirlpool.h; sourceTree = "<group>"; };
 		66459FB31511638B0075BF13 /* AKU-audiosampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AKU-audiosampler.cpp"; sourceTree = "<group>"; };
 		66459FB81511641F0075BF13 /* MOAIAudioSampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIAudioSampler.cpp; sourceTree = "<group>"; };
@@ -6545,26 +6459,6 @@
 		CD148F021395B26D00A3F501 /* stream */ = {
 			isa = PBXGroup;
 			children = (
-				6637040A161280E1002D0D27 /* USHashWriter.cpp */,
-				6637040B161280E1002D0D27 /* USHashWriter.h */,
-				663703CB16128038002D0D27 /* USHashWriterAdler32.cpp */,
-				663703CC16128038002D0D27 /* USHashWriterAdler32.h */,
-				663703CD16128038002D0D27 /* USHashWriterCRC32.cpp */,
-				663703CE16128038002D0D27 /* USHashWriterCRC32.h */,
-				663703CF16128038002D0D27 /* USHashWriterMD5.cpp */,
-				663703D016128038002D0D27 /* USHashWriterMD5.h */,
-				663703D116128038002D0D27 /* USHashWriterSHA1.cpp */,
-				663703D216128038002D0D27 /* USHashWriterSHA1.h */,
-				663703D316128038002D0D27 /* USHashWriterSHA224.cpp */,
-				663703D416128038002D0D27 /* USHashWriterSHA224.h */,
-				663703D516128038002D0D27 /* USHashWriterSHA256.cpp */,
-				663703D616128038002D0D27 /* USHashWriterSHA256.h */,
-				663703D716128038002D0D27 /* USHashWriterSHA384.cpp */,
-				663703D816128038002D0D27 /* USHashWriterSHA384.h */,
-				663703D916128038002D0D27 /* USHashWriterSHA512.cpp */,
-				663703DA16128038002D0D27 /* USHashWriterSHA512.h */,
-				663703DB16128038002D0D27 /* USHashWriterWhirlpool.cpp */,
-				663703DC16128038002D0D27 /* USHashWriterWhirlpool.h */,
 				663703DD16128038002D0D27 /* USHexReader.cpp */,
 				663703DE16128038002D0D27 /* USHexReader.h */,
 				663703DF16128038002D0D27 /* USHexWriter.cpp */,
@@ -7715,18 +7609,8 @@
 				66C572B21575717000A486AB /* MOAIGridDeck2D.h in Headers */,
 				0755162915A6CA2D00161409 /* MOAIHashWriter.h in Headers */,
 				663703CA16127FFD002D0D27 /* USHexWriter.h in Headers */,
-				663703E316128038002D0D27 /* USHashWriterAdler32.h in Headers */,
-				663703E716128038002D0D27 /* USHashWriterCRC32.h in Headers */,
-				663703EB16128038002D0D27 /* USHashWriterMD5.h in Headers */,
 				B4A3C43219930789006DEEB6 /* MOAICCParticle.h in Headers */,
-				663703EF16128038002D0D27 /* USHashWriterSHA1.h in Headers */,
-				663703F316128038002D0D27 /* USHashWriterSHA224.h in Headers */,
-				663703F716128038002D0D27 /* USHashWriterSHA256.h in Headers */,
-				663703FB16128038002D0D27 /* USHashWriterSHA384.h in Headers */,
-				663703FF16128038002D0D27 /* USHashWriterSHA512.h in Headers */,
-				6637040316128038002D0D27 /* USHashWriterWhirlpool.h in Headers */,
 				6637040716128038002D0D27 /* USHexReader.h in Headers */,
-				6637040F161280E1002D0D27 /* USHashWriter.h in Headers */,
 				66E62C0616AE2E12009B9C29 /* MOAIDataIOTask.h in Headers */,
 				66E62C1116AE30C0009B9C29 /* MOAIThread_posix.h in Headers */,
 				66E62C1516AE30C0009B9C29 /* MOAIThread_win32.h in Headers */,
@@ -8241,17 +8125,7 @@
 				E9DE4581157EA38800630A7D /* MOAIMoviePlayerIOS.h in Headers */,
 				0755162815A6CA2D00161409 /* MOAIHashWriter.h in Headers */,
 				663703C916127FFD002D0D27 /* USHexWriter.h in Headers */,
-				663703E216128038002D0D27 /* USHashWriterAdler32.h in Headers */,
-				663703E616128038002D0D27 /* USHashWriterCRC32.h in Headers */,
-				663703EA16128038002D0D27 /* USHashWriterMD5.h in Headers */,
-				663703EE16128038002D0D27 /* USHashWriterSHA1.h in Headers */,
-				663703F216128038002D0D27 /* USHashWriterSHA224.h in Headers */,
-				663703F616128038002D0D27 /* USHashWriterSHA256.h in Headers */,
-				663703FA16128038002D0D27 /* USHashWriterSHA384.h in Headers */,
-				663703FE16128038002D0D27 /* USHashWriterSHA512.h in Headers */,
-				6637040216128038002D0D27 /* USHashWriterWhirlpool.h in Headers */,
 				6637040616128038002D0D27 /* USHexReader.h in Headers */,
-				6637040E161280E1002D0D27 /* USHashWriter.h in Headers */,
 				66E62C0516AE2E12009B9C29 /* MOAIDataIOTask.h in Headers */,
 				66E62C1016AE30C0009B9C29 /* MOAIThread_posix.h in Headers */,
 				66E62C1416AE30C0009B9C29 /* MOAIThread_win32.h in Headers */,
@@ -8340,7 +8214,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD06D8B1398832300AB0420 /* lcrypto.h in Headers */,
 				CDD06DB11398838D00AB0420 /* auxiliar.h in Headers */,
 				CDD06DB31398838D00AB0420 /* buffer.h in Headers */,
 				CDD06DB51398838D00AB0420 /* except.h in Headers */,
@@ -8368,7 +8241,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD06D8D1398832300AB0420 /* lcrypto.h in Headers */,
 				CDD06DD11398838D00AB0420 /* auxiliar.h in Headers */,
 				CDD06DD31398838D00AB0420 /* buffer.h in Headers */,
 				CDD06DD51398838D00AB0420 /* except.h in Headers */,
@@ -8665,17 +8537,7 @@
 				357DE8D31BFA7EE300C4CE8D /* USUnique.h in Headers */,
 				EB9EDEB01BE9421B00E8938F /* MOAIHashWriter.h in Headers */,
 				EB9EDEB11BE9421B00E8938F /* USHexWriter.h in Headers */,
-				EB9EDEB21BE9421B00E8938F /* USHashWriterAdler32.h in Headers */,
-				EB9EDEB31BE9421B00E8938F /* USHashWriterCRC32.h in Headers */,
-				EB9EDEB41BE9421B00E8938F /* USHashWriterMD5.h in Headers */,
-				EB9EDEB51BE9421B00E8938F /* USHashWriterSHA1.h in Headers */,
-				EB9EDEB61BE9421B00E8938F /* USHashWriterSHA224.h in Headers */,
-				EB9EDEB71BE9421B00E8938F /* USHashWriterSHA256.h in Headers */,
-				EB9EDEB81BE9421B00E8938F /* USHashWriterSHA384.h in Headers */,
-				EB9EDEB91BE9421B00E8938F /* USHashWriterSHA512.h in Headers */,
-				EB9EDEBA1BE9421B00E8938F /* USHashWriterWhirlpool.h in Headers */,
 				EB9EDEBB1BE9421B00E8938F /* USHexReader.h in Headers */,
-				EB9EDEBC1BE9421B00E8938F /* USHashWriter.h in Headers */,
 				EB9EDEBD1BE9421B00E8938F /* MOAIDataIOTask.h in Headers */,
 				EB9EDEBE1BE9421B00E8938F /* MOAIThread_posix.h in Headers */,
 				EB9EDEBF1BE9421B00E8938F /* MOAIThread_win32.h in Headers */,
@@ -8908,7 +8770,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB9EE1881BE9423500E8938F /* lcrypto.h in Headers */,
 				EB9EE1891BE9423500E8938F /* auxiliar.h in Headers */,
 				EB9EE18A1BE9423500E8938F /* buffer.h in Headers */,
 				EB9EE18B1BE9423500E8938F /* except.h in Headers */,
@@ -9821,18 +9682,8 @@
 				66C572B01575717000A486AB /* MOAIGridDeck2D.cpp in Sources */,
 				4D851DA41873E5ED009DF1C4 /* MOAIEaseElasticBase.cpp in Sources */,
 				0755162715A6CA2D00161409 /* MOAIHashWriter.cpp in Sources */,
-				663703E116128038002D0D27 /* USHashWriterAdler32.cpp in Sources */,
-				663703E516128038002D0D27 /* USHashWriterCRC32.cpp in Sources */,
-				663703E916128038002D0D27 /* USHashWriterMD5.cpp in Sources */,
-				663703ED16128038002D0D27 /* USHashWriterSHA1.cpp in Sources */,
-				663703F116128038002D0D27 /* USHashWriterSHA224.cpp in Sources */,
-				663703F516128038002D0D27 /* USHashWriterSHA256.cpp in Sources */,
-				663703F916128038002D0D27 /* USHashWriterSHA384.cpp in Sources */,
-				663703FD16128038002D0D27 /* USHashWriterSHA512.cpp in Sources */,
-				6637040116128038002D0D27 /* USHashWriterWhirlpool.cpp in Sources */,
 				6637040516128038002D0D27 /* USHexReader.cpp in Sources */,
 				6637040916128038002D0D27 /* USHexWriter.cpp in Sources */,
-				6637040D161280E1002D0D27 /* USHashWriter.cpp in Sources */,
 				66E62C0416AE2E12009B9C29 /* MOAIDataIOTask.cpp in Sources */,
 				66E62C0F16AE30C0009B9C29 /* MOAIThread_posix.cpp in Sources */,
 				66E62C1316AE30C0009B9C29 /* MOAIThread_win32.cpp in Sources */,
@@ -10481,22 +10332,12 @@
 				8DF7442C1E4CEDFF003A62C4 /* psmodule.c in Sources */,
 				8DF743F51E4CEB9D003A62C4 /* ftfstype.c in Sources */,
 				0755162615A6CA2D00161409 /* MOAIHashWriter.cpp in Sources */,
-				663703E016128038002D0D27 /* USHashWriterAdler32.cpp in Sources */,
-				663703E416128038002D0D27 /* USHashWriterCRC32.cpp in Sources */,
 				4D851D971873DDE6009DF1C4 /* MOAIEaseBackOut.cpp in Sources */,
-				663703E816128038002D0D27 /* USHashWriterMD5.cpp in Sources */,
-				663703EC16128038002D0D27 /* USHashWriterSHA1.cpp in Sources */,
-				663703F016128038002D0D27 /* USHashWriterSHA224.cpp in Sources */,
 				8DF743E41E4CEB01003A62C4 /* autofit.c in Sources */,
 				8DF7441D1E4CED59003A62C4 /* ftotval.c in Sources */,
 				4D851DA91873E760009DF1C4 /* MOAIEaseElasticIn.cpp in Sources */,
-				663703F416128038002D0D27 /* USHashWriterSHA256.cpp in Sources */,
-				663703F816128038002D0D27 /* USHashWriterSHA384.cpp in Sources */,
-				663703FC16128038002D0D27 /* USHashWriterSHA512.cpp in Sources */,
-				6637040016128038002D0D27 /* USHashWriterWhirlpool.cpp in Sources */,
 				6637040416128038002D0D27 /* USHexReader.cpp in Sources */,
 				6637040816128038002D0D27 /* USHexWriter.cpp in Sources */,
-				6637040C161280E1002D0D27 /* USHashWriter.cpp in Sources */,
 				66E62C0316AE2E12009B9C29 /* MOAIDataIOTask.cpp in Sources */,
 				66E62C0E16AE30C0009B9C29 /* MOAIThread_posix.cpp in Sources */,
 				66E62C1216AE30C0009B9C29 /* MOAIThread_win32.cpp in Sources */,
@@ -10582,7 +10423,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD06D8A1398832300AB0420 /* lcrypto.c in Sources */,
 				CDD06DB01398838D00AB0420 /* auxiliar.c in Sources */,
 				CDD06DB21398838D00AB0420 /* buffer.c in Sources */,
 				CDD06DB41398838D00AB0420 /* except.c in Sources */,
@@ -10611,7 +10451,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD06D8C1398832300AB0420 /* lcrypto.c in Sources */,
 				CDD06DD01398838D00AB0420 /* auxiliar.c in Sources */,
 				CDD06DD21398838D00AB0420 /* buffer.c in Sources */,
 				CDD06DD41398838D00AB0420 /* except.c in Sources */,
@@ -10886,20 +10725,10 @@
 				EB9EDFDE1BE9421B00E8938F /* USBase64Encoder.cpp in Sources */,
 				EB9EDFDF1BE9421B00E8938F /* MOAIGridDeck2D.cpp in Sources */,
 				EB9EDFE11BE9421B00E8938F /* MOAIHashWriter.cpp in Sources */,
-				EB9EDFE21BE9421B00E8938F /* USHashWriterAdler32.cpp in Sources */,
-				EB9EDFE31BE9421B00E8938F /* USHashWriterCRC32.cpp in Sources */,
 				EB9EDFE41BE9421B00E8938F /* MOAIEaseBackOut.cpp in Sources */,
-				EB9EDFE51BE9421B00E8938F /* USHashWriterMD5.cpp in Sources */,
-				EB9EDFE61BE9421B00E8938F /* USHashWriterSHA1.cpp in Sources */,
-				EB9EDFE71BE9421B00E8938F /* USHashWriterSHA224.cpp in Sources */,
 				EB9EDFE81BE9421B00E8938F /* MOAIEaseElasticIn.cpp in Sources */,
-				EB9EDFE91BE9421B00E8938F /* USHashWriterSHA256.cpp in Sources */,
-				EB9EDFEA1BE9421B00E8938F /* USHashWriterSHA384.cpp in Sources */,
-				EB9EDFEB1BE9421B00E8938F /* USHashWriterSHA512.cpp in Sources */,
-				EB9EDFEC1BE9421B00E8938F /* USHashWriterWhirlpool.cpp in Sources */,
 				EB9EDFED1BE9421B00E8938F /* USHexReader.cpp in Sources */,
 				EB9EDFEE1BE9421B00E8938F /* USHexWriter.cpp in Sources */,
-				EB9EDFEF1BE9421B00E8938F /* USHashWriter.cpp in Sources */,
 				EB9EDFF01BE9421B00E8938F /* MOAIDataIOTask.cpp in Sources */,
 				EB9EDFF11BE9421B00E8938F /* MOAIThread_posix.cpp in Sources */,
 				EB9EDFF21BE9421B00E8938F /* MOAIThread_win32.cpp in Sources */,
@@ -11224,7 +11053,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB9EE19E1BE9423500E8938F /* lcrypto.c in Sources */,
 				EB9EE19F1BE9423500E8938F /* auxiliar.c in Sources */,
 				EB9EE1A01BE9423500E8938F /* buffer.c in Sources */,
 				EB9EE1A11BE9423500E8938F /* except.c in Sources */,
