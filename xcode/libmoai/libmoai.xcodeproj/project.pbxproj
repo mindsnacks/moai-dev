@@ -99,20 +99,6 @@
 		0324E6B313564BC8000ADC60 /* MOAICompassSensor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51313564BC7000ADC60 /* MOAICompassSensor.h */; };
 		0324E6B513564BC8000ADC60 /* moaicore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51513564BC7000ADC60 /* moaicore.cpp */; };
 		0324E6B613564BC8000ADC60 /* moaicore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51613564BC7000ADC60 /* moaicore.h */; };
-		0324E6B713564BC8000ADC60 /* MOAICp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51713564BC7000ADC60 /* MOAICp.cpp */; };
-		0324E6B813564BC8000ADC60 /* MOAICp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51813564BC7000ADC60 /* MOAICp.h */; };
-		0324E6B913564BC8000ADC60 /* MOAICpArbiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51913564BC7000ADC60 /* MOAICpArbiter.cpp */; };
-		0324E6BA13564BC8000ADC60 /* MOAICpArbiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51A13564BC7000ADC60 /* MOAICpArbiter.h */; };
-		0324E6BB13564BC8000ADC60 /* MOAICpBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51B13564BC7000ADC60 /* MOAICpBody.cpp */; };
-		0324E6BC13564BC8000ADC60 /* MOAICpBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51C13564BC7000ADC60 /* MOAICpBody.h */; };
-		0324E6BD13564BC8000ADC60 /* MOAICpConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51D13564BC7000ADC60 /* MOAICpConstraint.cpp */; };
-		0324E6BE13564BC8000ADC60 /* MOAICpConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51E13564BC7000ADC60 /* MOAICpConstraint.h */; };
-		0324E6BF13564BC8000ADC60 /* MOAICpDebugDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51F13564BC7000ADC60 /* MOAICpDebugDraw.cpp */; };
-		0324E6C013564BC8000ADC60 /* MOAICpDebugDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52013564BC7000ADC60 /* MOAICpDebugDraw.h */; };
-		0324E6C113564BC8000ADC60 /* MOAICpShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52113564BC7000ADC60 /* MOAICpShape.cpp */; };
-		0324E6C213564BC8000ADC60 /* MOAICpShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52213564BC7000ADC60 /* MOAICpShape.h */; };
-		0324E6C313564BC8000ADC60 /* MOAICpSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52313564BC7000ADC60 /* MOAICpSpace.cpp */; };
-		0324E6C413564BC8000ADC60 /* MOAICpSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52413564BC7000ADC60 /* MOAICpSpace.h */; };
 		0324E6C513564BC8000ADC60 /* MOAIDataBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52513564BC7000ADC60 /* MOAIDataBuffer.cpp */; };
 		0324E6C613564BC8000ADC60 /* MOAIDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52613564BC7000ADC60 /* MOAIDataBuffer.h */; };
 		0324E6C913564BC8000ADC60 /* MOAIDebugLines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52913564BC7000ADC60 /* MOAIDebugLines.cpp */; };
@@ -276,20 +262,6 @@
 		0324E85113564BC8000ADC60 /* MOAICompassSensor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51313564BC7000ADC60 /* MOAICompassSensor.h */; };
 		0324E85313564BC8000ADC60 /* moaicore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51513564BC7000ADC60 /* moaicore.cpp */; };
 		0324E85413564BC8000ADC60 /* moaicore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51613564BC7000ADC60 /* moaicore.h */; };
-		0324E85513564BC8000ADC60 /* MOAICp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51713564BC7000ADC60 /* MOAICp.cpp */; };
-		0324E85613564BC8000ADC60 /* MOAICp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51813564BC7000ADC60 /* MOAICp.h */; };
-		0324E85713564BC8000ADC60 /* MOAICpArbiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51913564BC7000ADC60 /* MOAICpArbiter.cpp */; };
-		0324E85813564BC8000ADC60 /* MOAICpArbiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51A13564BC7000ADC60 /* MOAICpArbiter.h */; };
-		0324E85913564BC8000ADC60 /* MOAICpBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51B13564BC7000ADC60 /* MOAICpBody.cpp */; };
-		0324E85A13564BC8000ADC60 /* MOAICpBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51C13564BC7000ADC60 /* MOAICpBody.h */; };
-		0324E85B13564BC8000ADC60 /* MOAICpConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51D13564BC7000ADC60 /* MOAICpConstraint.cpp */; };
-		0324E85C13564BC8000ADC60 /* MOAICpConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51E13564BC7000ADC60 /* MOAICpConstraint.h */; };
-		0324E85D13564BC8000ADC60 /* MOAICpDebugDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51F13564BC7000ADC60 /* MOAICpDebugDraw.cpp */; };
-		0324E85E13564BC8000ADC60 /* MOAICpDebugDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52013564BC7000ADC60 /* MOAICpDebugDraw.h */; };
-		0324E85F13564BC8000ADC60 /* MOAICpShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52113564BC7000ADC60 /* MOAICpShape.cpp */; };
-		0324E86013564BC8000ADC60 /* MOAICpShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52213564BC7000ADC60 /* MOAICpShape.h */; };
-		0324E86113564BC8000ADC60 /* MOAICpSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52313564BC7000ADC60 /* MOAICpSpace.cpp */; };
-		0324E86213564BC8000ADC60 /* MOAICpSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52413564BC7000ADC60 /* MOAICpSpace.h */; };
 		0324E86313564BC8000ADC60 /* MOAIDataBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52513564BC7000ADC60 /* MOAIDataBuffer.cpp */; };
 		0324E86413564BC8000ADC60 /* MOAIDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52613564BC7000ADC60 /* MOAIDataBuffer.h */; };
 		0324E86713564BC8000ADC60 /* MOAIDebugLines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52913564BC7000ADC60 /* MOAIDebugLines.cpp */; };
@@ -2464,17 +2436,10 @@
 		EB9EDDAD1BE9421B00E8938F /* MOAIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51113564BC7000ADC60 /* MOAIColor.h */; };
 		EB9EDDAE1BE9421B00E8938F /* MOAICompassSensor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51313564BC7000ADC60 /* MOAICompassSensor.h */; };
 		EB9EDDAF1BE9421B00E8938F /* moaicore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51613564BC7000ADC60 /* moaicore.h */; };
-		EB9EDDB01BE9421B00E8938F /* MOAICp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51813564BC7000ADC60 /* MOAICp.h */; };
 		EB9EDDB11BE9421B00E8938F /* MOAIEaseBackInOut.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D851D9C1873DED9009DF1C4 /* MOAIEaseBackInOut.h */; };
 		EB9EDDB21BE9421B00E8938F /* MOAIEaseSimpleIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49734D18725B5600D46882 /* MOAIEaseSimpleIn.h */; };
-		EB9EDDB31BE9421B00E8938F /* MOAICpArbiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51A13564BC7000ADC60 /* MOAICpArbiter.h */; };
-		EB9EDDB41BE9421B00E8938F /* MOAICpBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51C13564BC7000ADC60 /* MOAICpBody.h */; };
 		EB9EDDB51BE9421B00E8938F /* MOAIEaseBackBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D851D8A1873DAB7009DF1C4 /* MOAIEaseBackBase.h */; };
 		EB9EDDB61BE9421B00E8938F /* MOAIEaseSineIn.h in Headers */ = {isa = PBXBuildFile; fileRef = EB70432518761BDE0057E450 /* MOAIEaseSineIn.h */; };
-		EB9EDDB71BE9421B00E8938F /* MOAICpConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E51E13564BC7000ADC60 /* MOAICpConstraint.h */; };
-		EB9EDDB81BE9421B00E8938F /* MOAICpDebugDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52013564BC7000ADC60 /* MOAICpDebugDraw.h */; };
-		EB9EDDB91BE9421B00E8938F /* MOAICpShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52213564BC7000ADC60 /* MOAICpShape.h */; };
-		EB9EDDBA1BE9421B00E8938F /* MOAICpSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52413564BC7000ADC60 /* MOAICpSpace.h */; };
 		EB9EDDBB1BE9421B00E8938F /* MOAIDataBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52613564BC7000ADC60 /* MOAIDataBuffer.h */; };
 		EB9EDDBC1BE9421B00E8938F /* MOAIDebugLines.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52A13564BC7000ADC60 /* MOAIDebugLines.h */; };
 		EB9EDDBD1BE9421B00E8938F /* MOAIDeck.h in Headers */ = {isa = PBXBuildFile; fileRef = 0324E52C13564BC7000ADC60 /* MOAIDeck.h */; };
@@ -2776,13 +2741,6 @@
 		EB9EDF0B1BE9421B00E8938F /* MOAIEaseBackBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D851D891873DAB7009DF1C4 /* MOAIEaseBackBase.cpp */; };
 		EB9EDF0C1BE9421B00E8938F /* MOAICompassSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51213564BC7000ADC60 /* MOAICompassSensor.cpp */; };
 		EB9EDF0D1BE9421B00E8938F /* moaicore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51513564BC7000ADC60 /* moaicore.cpp */; };
-		EB9EDF0E1BE9421B00E8938F /* MOAICp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51713564BC7000ADC60 /* MOAICp.cpp */; };
-		EB9EDF0F1BE9421B00E8938F /* MOAICpArbiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51913564BC7000ADC60 /* MOAICpArbiter.cpp */; };
-		EB9EDF101BE9421B00E8938F /* MOAICpBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51B13564BC7000ADC60 /* MOAICpBody.cpp */; };
-		EB9EDF111BE9421B00E8938F /* MOAICpConstraint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51D13564BC7000ADC60 /* MOAICpConstraint.cpp */; };
-		EB9EDF121BE9421B00E8938F /* MOAICpDebugDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E51F13564BC7000ADC60 /* MOAICpDebugDraw.cpp */; };
-		EB9EDF131BE9421B00E8938F /* MOAICpShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52113564BC7000ADC60 /* MOAICpShape.cpp */; };
-		EB9EDF141BE9421B00E8938F /* MOAICpSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52313564BC7000ADC60 /* MOAICpSpace.cpp */; };
 		EB9EDF151BE9421B00E8938F /* MOAIDataBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52513564BC7000ADC60 /* MOAIDataBuffer.cpp */; };
 		EB9EDF161BE9421B00E8938F /* MOAIDebugLines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52913564BC7000ADC60 /* MOAIDebugLines.cpp */; };
 		EB9EDF171BE9421B00E8938F /* MOAIDeck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0324E52B13564BC7000ADC60 /* MOAIDeck.cpp */; };
@@ -3448,20 +3406,6 @@
 		0324E51313564BC7000ADC60 /* MOAICompassSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICompassSensor.h; sourceTree = "<group>"; };
 		0324E51513564BC7000ADC60 /* moaicore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moaicore.cpp; sourceTree = "<group>"; };
 		0324E51613564BC7000ADC60 /* moaicore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moaicore.h; sourceTree = "<group>"; };
-		0324E51713564BC7000ADC60 /* MOAICp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICp.cpp; sourceTree = "<group>"; };
-		0324E51813564BC7000ADC60 /* MOAICp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICp.h; sourceTree = "<group>"; };
-		0324E51913564BC7000ADC60 /* MOAICpArbiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICpArbiter.cpp; sourceTree = "<group>"; };
-		0324E51A13564BC7000ADC60 /* MOAICpArbiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICpArbiter.h; sourceTree = "<group>"; };
-		0324E51B13564BC7000ADC60 /* MOAICpBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICpBody.cpp; sourceTree = "<group>"; };
-		0324E51C13564BC7000ADC60 /* MOAICpBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICpBody.h; sourceTree = "<group>"; };
-		0324E51D13564BC7000ADC60 /* MOAICpConstraint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICpConstraint.cpp; sourceTree = "<group>"; };
-		0324E51E13564BC7000ADC60 /* MOAICpConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICpConstraint.h; sourceTree = "<group>"; };
-		0324E51F13564BC7000ADC60 /* MOAICpDebugDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICpDebugDraw.cpp; sourceTree = "<group>"; };
-		0324E52013564BC7000ADC60 /* MOAICpDebugDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICpDebugDraw.h; sourceTree = "<group>"; };
-		0324E52113564BC7000ADC60 /* MOAICpShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICpShape.cpp; sourceTree = "<group>"; };
-		0324E52213564BC7000ADC60 /* MOAICpShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICpShape.h; sourceTree = "<group>"; };
-		0324E52313564BC7000ADC60 /* MOAICpSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICpSpace.cpp; sourceTree = "<group>"; };
-		0324E52413564BC7000ADC60 /* MOAICpSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICpSpace.h; sourceTree = "<group>"; };
 		0324E52513564BC7000ADC60 /* MOAIDataBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIDataBuffer.cpp; sourceTree = "<group>"; };
 		0324E52613564BC7000ADC60 /* MOAIDataBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIDataBuffer.h; sourceTree = "<group>"; };
 		0324E52913564BC7000ADC60 /* MOAIDebugLines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIDebugLines.cpp; sourceTree = "<group>"; };
@@ -5032,7 +4976,6 @@
 				CD148EFC1395AF3900A3F501 /* anim */,
 				CD148EFB1395AF2600A3F501 /* box2d */,
 				CD148EFA1395AEE300A3F501 /* camera */,
-				CD148EF91395AEC900A3F501 /* chipmunk */,
 				E91A4C88151823520008F1A5 /* collision */,
 				CD148EF81395AEC100A3F501 /* deck */,
 				CD148EF71395AEBA00A3F501 /* events */,
@@ -5896,27 +5839,6 @@
 				0324E59713564BC8000ADC60 /* MOAITileDeck2D.h */,
 			);
 			name = deck;
-			sourceTree = "<group>";
-		};
-		CD148EF91395AEC900A3F501 /* chipmunk */ = {
-			isa = PBXGroup;
-			children = (
-				0324E51713564BC7000ADC60 /* MOAICp.cpp */,
-				0324E51813564BC7000ADC60 /* MOAICp.h */,
-				0324E51913564BC7000ADC60 /* MOAICpArbiter.cpp */,
-				0324E51A13564BC7000ADC60 /* MOAICpArbiter.h */,
-				0324E51B13564BC7000ADC60 /* MOAICpBody.cpp */,
-				0324E51C13564BC7000ADC60 /* MOAICpBody.h */,
-				0324E51D13564BC7000ADC60 /* MOAICpConstraint.cpp */,
-				0324E51E13564BC7000ADC60 /* MOAICpConstraint.h */,
-				0324E51F13564BC7000ADC60 /* MOAICpDebugDraw.cpp */,
-				0324E52013564BC7000ADC60 /* MOAICpDebugDraw.h */,
-				0324E52113564BC7000ADC60 /* MOAICpShape.cpp */,
-				0324E52213564BC7000ADC60 /* MOAICpShape.h */,
-				0324E52313564BC7000ADC60 /* MOAICpSpace.cpp */,
-				0324E52413564BC7000ADC60 /* MOAICpSpace.h */,
-			);
-			name = chipmunk;
 			sourceTree = "<group>";
 		};
 		CD148EFA1395AEE300A3F501 /* camera */ = {
@@ -6876,14 +6798,7 @@
 				0324E84F13564BC8000ADC60 /* MOAIColor.h in Headers */,
 				0324E85113564BC8000ADC60 /* MOAICompassSensor.h in Headers */,
 				0324E85413564BC8000ADC60 /* moaicore.h in Headers */,
-				0324E85613564BC8000ADC60 /* MOAICp.h in Headers */,
-				0324E85813564BC8000ADC60 /* MOAICpArbiter.h in Headers */,
 				EB70433518761E630057E450 /* MOAIEaseSineInOut.h in Headers */,
-				0324E85A13564BC8000ADC60 /* MOAICpBody.h in Headers */,
-				0324E85C13564BC8000ADC60 /* MOAICpConstraint.h in Headers */,
-				0324E85E13564BC8000ADC60 /* MOAICpDebugDraw.h in Headers */,
-				0324E86013564BC8000ADC60 /* MOAICpShape.h in Headers */,
-				0324E86213564BC8000ADC60 /* MOAICpSpace.h in Headers */,
 				4D497363187270E200D46882 /* MOAIEaseSimpleIn.h in Headers */,
 				0324E86413564BC8000ADC60 /* MOAIDataBuffer.h in Headers */,
 				0324E86813564BC8000ADC60 /* MOAIDebugLines.h in Headers */,
@@ -7354,17 +7269,10 @@
 				0324E6B113564BC8000ADC60 /* MOAIColor.h in Headers */,
 				0324E6B313564BC8000ADC60 /* MOAICompassSensor.h in Headers */,
 				0324E6B613564BC8000ADC60 /* moaicore.h in Headers */,
-				0324E6B813564BC8000ADC60 /* MOAICp.h in Headers */,
 				4D851D9F1873DED9009DF1C4 /* MOAIEaseBackInOut.h in Headers */,
 				4D49734F18725B5600D46882 /* MOAIEaseSimpleIn.h in Headers */,
-				0324E6BA13564BC8000ADC60 /* MOAICpArbiter.h in Headers */,
-				0324E6BC13564BC8000ADC60 /* MOAICpBody.h in Headers */,
 				4D851D8D1873DAB7009DF1C4 /* MOAIEaseBackBase.h in Headers */,
 				EB70432818761BDE0057E450 /* MOAIEaseSineIn.h in Headers */,
-				0324E6BE13564BC8000ADC60 /* MOAICpConstraint.h in Headers */,
-				0324E6C013564BC8000ADC60 /* MOAICpDebugDraw.h in Headers */,
-				0324E6C213564BC8000ADC60 /* MOAICpShape.h in Headers */,
-				0324E6C413564BC8000ADC60 /* MOAICpSpace.h in Headers */,
 				0324E6C613564BC8000ADC60 /* MOAIDataBuffer.h in Headers */,
 				0324E6CA13564BC8000ADC60 /* MOAIDebugLines.h in Headers */,
 				0324E6CC13564BC8000ADC60 /* MOAIDeck.h in Headers */,
@@ -7769,17 +7677,10 @@
 				EB9EDDAD1BE9421B00E8938F /* MOAIColor.h in Headers */,
 				EB9EDDAE1BE9421B00E8938F /* MOAICompassSensor.h in Headers */,
 				EB9EDDAF1BE9421B00E8938F /* moaicore.h in Headers */,
-				EB9EDDB01BE9421B00E8938F /* MOAICp.h in Headers */,
 				EB9EDDB11BE9421B00E8938F /* MOAIEaseBackInOut.h in Headers */,
 				EB9EDDB21BE9421B00E8938F /* MOAIEaseSimpleIn.h in Headers */,
-				EB9EDDB31BE9421B00E8938F /* MOAICpArbiter.h in Headers */,
-				EB9EDDB41BE9421B00E8938F /* MOAICpBody.h in Headers */,
 				EB9EDDB51BE9421B00E8938F /* MOAIEaseBackBase.h in Headers */,
 				EB9EDDB61BE9421B00E8938F /* MOAIEaseSineIn.h in Headers */,
-				EB9EDDB71BE9421B00E8938F /* MOAICpConstraint.h in Headers */,
-				EB9EDDB81BE9421B00E8938F /* MOAICpDebugDraw.h in Headers */,
-				EB9EDDB91BE9421B00E8938F /* MOAICpShape.h in Headers */,
-				EB9EDDBA1BE9421B00E8938F /* MOAICpSpace.h in Headers */,
 				EB9EDDBB1BE9421B00E8938F /* MOAIDataBuffer.h in Headers */,
 				EB9EDDBC1BE9421B00E8938F /* MOAIDebugLines.h in Headers */,
 				EB9EDDBD1BE9421B00E8938F /* MOAIDeck.h in Headers */,
@@ -8867,14 +8768,7 @@
 				0324E85013564BC8000ADC60 /* MOAICompassSensor.cpp in Sources */,
 				0324E85313564BC8000ADC60 /* moaicore.cpp in Sources */,
 				EB70430F187601CC0057E450 /* MOAIEaseElasticOut.cpp in Sources */,
-				0324E85513564BC8000ADC60 /* MOAICp.cpp in Sources */,
-				0324E85713564BC8000ADC60 /* MOAICpArbiter.cpp in Sources */,
-				0324E85913564BC8000ADC60 /* MOAICpBody.cpp in Sources */,
-				0324E85B13564BC8000ADC60 /* MOAICpConstraint.cpp in Sources */,
-				0324E85D13564BC8000ADC60 /* MOAICpDebugDraw.cpp in Sources */,
 				4D49736C18727DCC00D46882 /* MOAIEaseCustom.cpp in Sources */,
-				0324E85F13564BC8000ADC60 /* MOAICpShape.cpp in Sources */,
-				0324E86113564BC8000ADC60 /* MOAICpSpace.cpp in Sources */,
 				0324E86313564BC8000ADC60 /* MOAIDataBuffer.cpp in Sources */,
 				0324E86713564BC8000ADC60 /* MOAIDebugLines.cpp in Sources */,
 				0324E86913564BC8000ADC60 /* MOAIDeck.cpp in Sources */,
@@ -9490,15 +9384,8 @@
 				4D851D8B1873DAB7009DF1C4 /* MOAIEaseBackBase.cpp in Sources */,
 				0324E6B213564BC8000ADC60 /* MOAICompassSensor.cpp in Sources */,
 				0324E6B513564BC8000ADC60 /* moaicore.cpp in Sources */,
-				0324E6B713564BC8000ADC60 /* MOAICp.cpp in Sources */,
 				8DF7441A1E4CED59003A62C4 /* ftgxval.c in Sources */,
-				0324E6B913564BC8000ADC60 /* MOAICpArbiter.cpp in Sources */,
-				0324E6BB13564BC8000ADC60 /* MOAICpBody.cpp in Sources */,
 				8DF744381E4CEE70003A62C4 /* winfnt.c in Sources */,
-				0324E6BD13564BC8000ADC60 /* MOAICpConstraint.cpp in Sources */,
-				0324E6BF13564BC8000ADC60 /* MOAICpDebugDraw.cpp in Sources */,
-				0324E6C113564BC8000ADC60 /* MOAICpShape.cpp in Sources */,
-				0324E6C313564BC8000ADC60 /* MOAICpSpace.cpp in Sources */,
 				0324E6C513564BC8000ADC60 /* MOAIDataBuffer.cpp in Sources */,
 				0324E6C913564BC8000ADC60 /* MOAIDebugLines.cpp in Sources */,
 				0324E6CB13564BC8000ADC60 /* MOAIDeck.cpp in Sources */,
@@ -9912,13 +9799,6 @@
 				4DB1D11C26D736530034597F /* MOAIImage-webp.cpp in Sources */,
 				EB9EDF0C1BE9421B00E8938F /* MOAICompassSensor.cpp in Sources */,
 				EB9EDF0D1BE9421B00E8938F /* moaicore.cpp in Sources */,
-				EB9EDF0E1BE9421B00E8938F /* MOAICp.cpp in Sources */,
-				EB9EDF0F1BE9421B00E8938F /* MOAICpArbiter.cpp in Sources */,
-				EB9EDF101BE9421B00E8938F /* MOAICpBody.cpp in Sources */,
-				EB9EDF111BE9421B00E8938F /* MOAICpConstraint.cpp in Sources */,
-				EB9EDF121BE9421B00E8938F /* MOAICpDebugDraw.cpp in Sources */,
-				EB9EDF131BE9421B00E8938F /* MOAICpShape.cpp in Sources */,
-				EB9EDF141BE9421B00E8938F /* MOAICpSpace.cpp in Sources */,
 				EB9EDF151BE9421B00E8938F /* MOAIDataBuffer.cpp in Sources */,
 				EB9EDF161BE9421B00E8938F /* MOAIDebugLines.cpp in Sources */,
 				EB9EDF171BE9421B00E8938F /* MOAIDeck.cpp in Sources */,
