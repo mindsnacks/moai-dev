@@ -4,7 +4,6 @@
 #include "pch.h"
 #include <moaicore/MOAIBox2DWorld.h>
 #include <moaicore/MOAICamera.h>
-#include <moaicore/MOAICpSpace.h>
 #include <moaicore/MOAIDebugLines.h>
 #include <moaicore/MOAIDeck.h>
 #include <moaicore/MOAIFrameBufferTexture.h>
