@@ -2504,10 +2504,6 @@
 		E9940E4314B7A4A0006465CC /* USTypedPtr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940DB614B7A4A0006465CC /* USTypedPtr.cpp */; };
 		E9940E4414B7A4A0006465CC /* USTypedPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DB714B7A4A0006465CC /* USTypedPtr.h */; };
 		E9940E4514B7A4A0006465CC /* USTypedPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DB714B7A4A0006465CC /* USTypedPtr.h */; };
-		E9940E4614B7A4A0006465CC /* USXmlReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940DB814B7A4A0006465CC /* USXmlReader.cpp */; };
-		E9940E4714B7A4A0006465CC /* USXmlReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940DB814B7A4A0006465CC /* USXmlReader.cpp */; };
-		E9940E4814B7A4A0006465CC /* USXmlReader.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DB914B7A4A0006465CC /* USXmlReader.h */; };
-		E9940E4914B7A4A0006465CC /* USXmlReader.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DB914B7A4A0006465CC /* USXmlReader.h */; };
 		E9A41A95151A61A200650276 /* USRhombus.h in Headers */ = {isa = PBXBuildFile; fileRef = E91A4C9B151829070008F1A5 /* USRhombus.h */; };
 		E9A41A9A151A62FC00650276 /* USRhombus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E91A4C9A151829070008F1A5 /* USRhombus.cpp */; };
 		E9A41AB7151AAA5400650276 /* MOAICrittercismIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A41AB5151AAA5400650276 /* MOAICrittercismIOS.h */; };
@@ -2798,7 +2794,6 @@
 		EB9EDE7F1BE9421B00E8938F /* USSyntaxScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DAB14B7A4A0006465CC /* USSyntaxScanner.h */; };
 		EB9EDE801BE9421B00E8938F /* USTrig.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DB514B7A4A0006465CC /* USTrig.h */; };
 		EB9EDE811BE9421B00E8938F /* USTypedPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DB714B7A4A0006465CC /* USTypedPtr.h */; };
-		EB9EDE821BE9421B00E8938F /* USXmlReader.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940DB914B7A4A0006465CC /* USXmlReader.h */; };
 		EB9EDE831BE9421B00E8938F /* MOAIAudioSampler.h in Headers */ = {isa = PBXBuildFile; fileRef = 66459FB91511641F0075BF13 /* MOAIAudioSampler.h */; };
 		EB9EDE841BE9421B00E8938F /* MOAIHttpTaskNaCl.h in Headers */ = {isa = PBXBuildFile; fileRef = 075BA08A151949C50002E925 /* MOAIHttpTaskNaCl.h */; };
 		EB9EDE851BE9421B00E8938F /* MOAIUrlMgrNaCl.h in Headers */ = {isa = PBXBuildFile; fileRef = 075BA08E151949C50002E925 /* MOAIUrlMgrNaCl.h */; };
@@ -3068,7 +3063,6 @@
 		EB9EDFB11BE9421B00E8938F /* MOAIEaseSimpleInOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4973581872634A00D46882 /* MOAIEaseSimpleInOut.cpp */; };
 		EB9EDFB21BE9421B00E8938F /* USTrig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940DB414B7A4A0006465CC /* USTrig.cpp */; };
 		EB9EDFB31BE9421B00E8938F /* USTypedPtr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940DB614B7A4A0006465CC /* USTypedPtr.cpp */; };
-		EB9EDFB41BE9421B00E8938F /* USXmlReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940DB814B7A4A0006465CC /* USXmlReader.cpp */; };
 		EB9EDFB51BE9421B00E8938F /* AKU-audiosampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66459FB31511638B0075BF13 /* AKU-audiosampler.cpp */; };
 		EB9EDFB61BE9421B00E8938F /* MOAIAudioSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66459FB81511641F0075BF13 /* MOAIAudioSampler.cpp */; };
 		EB9EDFB71BE9421B00E8938F /* MOAIHttpTaskNaCl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 075BA089151949C50002E925 /* MOAIHttpTaskNaCl.cpp */; };
@@ -4823,8 +4817,6 @@
 		E9940DB514B7A4A0006465CC /* USTrig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USTrig.h; sourceTree = "<group>"; };
 		E9940DB614B7A4A0006465CC /* USTypedPtr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USTypedPtr.cpp; sourceTree = "<group>"; };
 		E9940DB714B7A4A0006465CC /* USTypedPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USTypedPtr.h; sourceTree = "<group>"; };
-		E9940DB814B7A4A0006465CC /* USXmlReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USXmlReader.cpp; sourceTree = "<group>"; };
-		E9940DB914B7A4A0006465CC /* USXmlReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USXmlReader.h; sourceTree = "<group>"; };
 		E9A41AB5151AAA5400650276 /* MOAICrittercismIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAICrittercismIOS.h; path = "moaiext-iphone/MOAICrittercismIOS.h"; sourceTree = "<group>"; };
 		E9A41AB6151AAA5400650276 /* MOAICrittercismIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAICrittercismIOS.mm; path = "moaiext-iphone/MOAICrittercismIOS.mm"; sourceTree = "<group>"; };
 		E9DE457F157EA38800630A7D /* MOAIMoviePlayerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIMoviePlayerIOS.h; path = "moaiext-iphone/MOAIMoviePlayerIOS.h"; sourceTree = "<group>"; };
@@ -5429,7 +5421,6 @@
 				CD148F011395B26700A3F501 /* templates */,
 				CD148F001395B26100A3F501 /* time */,
 				E9940E5314B7A89B006465CC /* util */,
-				E9940E5414B7A8C9006465CC /* xml */,
 				CD148EFE1395B25000A3F501 /* zip */,
 				0324E5AC13564BC8000ADC60 /* pch.h */,
 				0324E5DA13564BC8000ADC60 /* uslscore.h */,
@@ -7021,15 +7012,6 @@
 			name = util;
 			sourceTree = "<group>";
 		};
-		E9940E5414B7A8C9006465CC /* xml */ = {
-			isa = PBXGroup;
-			children = (
-				E9940DB814B7A4A0006465CC /* USXmlReader.cpp */,
-				E9940DB914B7A4A0006465CC /* USXmlReader.h */,
-			);
-			name = xml;
-			sourceTree = "<group>";
-		};
 		E9A41AB9151AAB4600650276 /* render */ = {
 			isa = PBXGroup;
 			children = (
@@ -7476,7 +7458,6 @@
 				E9940E2D14B7A4A0006465CC /* USSyntaxScanner.h in Headers */,
 				E9940E4114B7A4A0006465CC /* USTrig.h in Headers */,
 				E9940E4514B7A4A0006465CC /* USTypedPtr.h in Headers */,
-				E9940E4914B7A4A0006465CC /* USXmlReader.h in Headers */,
 				66459FBD1511641F0075BF13 /* MOAIAudioSampler.h in Headers */,
 				E91A4C3315181FDF0008F1A5 /* MOAILayer.h in Headers */,
 				E91A4C3515181FDF0008F1A5 /* MOAILayerBridge.h in Headers */,
@@ -8016,7 +7997,6 @@
 				E9940E2C14B7A4A0006465CC /* USSyntaxScanner.h in Headers */,
 				E9940E4014B7A4A0006465CC /* USTrig.h in Headers */,
 				E9940E4414B7A4A0006465CC /* USTypedPtr.h in Headers */,
-				E9940E4814B7A4A0006465CC /* USXmlReader.h in Headers */,
 				66459FBC1511641F0075BF13 /* MOAIAudioSampler.h in Headers */,
 				075BA095151949C50002E925 /* MOAIHttpTaskNaCl.h in Headers */,
 				075BA09D151949C50002E925 /* MOAIUrlMgrNaCl.h in Headers */,
@@ -8427,7 +8407,6 @@
 				EB9EDE7F1BE9421B00E8938F /* USSyntaxScanner.h in Headers */,
 				EB9EDE801BE9421B00E8938F /* USTrig.h in Headers */,
 				EB9EDE811BE9421B00E8938F /* USTypedPtr.h in Headers */,
-				EB9EDE821BE9421B00E8938F /* USXmlReader.h in Headers */,
 				EB9EDE831BE9421B00E8938F /* MOAIAudioSampler.h in Headers */,
 				EB9EDE841BE9421B00E8938F /* MOAIHttpTaskNaCl.h in Headers */,
 				EB9EDE851BE9421B00E8938F /* MOAIUrlMgrNaCl.h in Headers */,
@@ -9544,7 +9523,6 @@
 				E9940E2B14B7A4A0006465CC /* USSyntaxScanner.cpp in Sources */,
 				E9940E3F14B7A4A0006465CC /* USTrig.cpp in Sources */,
 				E9940E4314B7A4A0006465CC /* USTypedPtr.cpp in Sources */,
-				E9940E4714B7A4A0006465CC /* USXmlReader.cpp in Sources */,
 				66459FB51511638B0075BF13 /* AKU-audiosampler.cpp in Sources */,
 				66459FBB1511641F0075BF13 /* MOAIAudioSampler.cpp in Sources */,
 				E91A4C3215181FDF0008F1A5 /* MOAILayer.cpp in Sources */,
@@ -10204,7 +10182,6 @@
 				4D49735A1872634A00D46882 /* MOAIEaseSimpleInOut.cpp in Sources */,
 				E9940E3E14B7A4A0006465CC /* USTrig.cpp in Sources */,
 				E9940E4214B7A4A0006465CC /* USTypedPtr.cpp in Sources */,
-				E9940E4614B7A4A0006465CC /* USXmlReader.cpp in Sources */,
 				66459FB41511638B0075BF13 /* AKU-audiosampler.cpp in Sources */,
 				66459FBA1511641F0075BF13 /* MOAIAudioSampler.cpp in Sources */,
 				075BA093151949C50002E925 /* MOAIHttpTaskNaCl.cpp in Sources */,
@@ -10607,7 +10584,6 @@
 				EB9EDFB11BE9421B00E8938F /* MOAIEaseSimpleInOut.cpp in Sources */,
 				EB9EDFB21BE9421B00E8938F /* USTrig.cpp in Sources */,
 				EB9EDFB31BE9421B00E8938F /* USTypedPtr.cpp in Sources */,
-				EB9EDFB41BE9421B00E8938F /* USXmlReader.cpp in Sources */,
 				EB9EDFB51BE9421B00E8938F /* AKU-audiosampler.cpp in Sources */,
 				EB9EDFB61BE9421B00E8938F /* MOAIAudioSampler.cpp in Sources */,
 				EB9EDFB71BE9421B00E8938F /* MOAIHttpTaskNaCl.cpp in Sources */,
