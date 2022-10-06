@@ -9,7 +9,6 @@
 
 #include <aku/AKU.h>
 
-AKU_API void	AKUExtLoadLuafilesystem		();
 AKU_API void	AKUExtLoadLuasocket			();
 AKU_API void    AKUExtLoadLuatrace          ();
 

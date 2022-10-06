@@ -4,8 +4,7 @@
 #include <aku/AKU-luaext.h>
 #include <moaicore/moaicore.h>
 
-extern "C" {	
-	extern int luaopen_lfs				( lua_State *L );
+extern "C" {
 	extern int luapreload_fullluasocket ( lua_State *L );
 	extern int luaopen_luatrace_c_hook  ( lua_State *L );
 }
@@ -13,13 +12,6 @@ extern "C" {
 //================================================================//
 // AKU-luaext
 //================================================================//
-
-//----------------------------------------------------------------//
-void AKUExtLoadLuafilesystem () {
-
-	lua_State* state = AKUGetLuaState ();
-	luaopen_lfs ( state );
-}
 
 //----------------------------------------------------------------//
 void AKUExtLoadLuasocket () {
