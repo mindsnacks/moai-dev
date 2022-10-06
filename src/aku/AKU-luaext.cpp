@@ -6,7 +6,6 @@
 
 extern "C" {	
 	extern int luaopen_lfs				( lua_State *L );
-	extern int luaopen_luasql_sqlite3	( lua_State *L );
 	extern int luapreload_fullluasocket ( lua_State *L );
 	extern int luaopen_luatrace_c_hook  ( lua_State *L );
 }
@@ -27,13 +26,6 @@ void AKUExtLoadLuasocket () {
 
 	lua_State* state = AKUGetLuaState ();
 	luapreload_fullluasocket ( state );
-}
-
-//----------------------------------------------------------------//
-void AKUExtLoadLuasql () {
-
-	lua_State* state = AKUGetLuaState ();
-	luaopen_luasql_sqlite3 ( state );
 }
 
 //----------------------------------------------------------------//
