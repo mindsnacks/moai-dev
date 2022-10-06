@@ -80,7 +80,6 @@
 #include <uslscore/USVec2D.h>
 #include <uslscore/USVec3D.h>
 #include <uslscore/USVec4D.h>
-#include <uslscore/USXmlReader.h>
 #include <uslscore/USZip.h>
 #include <uslscore/USZipFile.h>
 
