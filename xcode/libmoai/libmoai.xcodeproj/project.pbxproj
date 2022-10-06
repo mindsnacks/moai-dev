@@ -2395,10 +2395,6 @@
 		E96915611561B7C1007E977B /* MOAIBoundsDeck.h in Headers */ = {isa = PBXBuildFile; fileRef = E969155D1561B7C1007E977B /* MOAIBoundsDeck.h */; };
 		E98DBDD71537A33100514387 /* AKU-chartboost.h in Headers */ = {isa = PBXBuildFile; fileRef = E98DBDD31537A33100514387 /* AKU-chartboost.h */; };
 		E98DBDD81537A33100514387 /* AKU-chartboost.mm in Sources */ = {isa = PBXBuildFile; fileRef = E98DBDD41537A33100514387 /* AKU-chartboost.mm */; };
-		E9940D6814B7A217006465CC /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6514B7A217006465CC /* lfs.c */; };
-		E9940D6914B7A217006465CC /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6514B7A217006465CC /* lfs.c */; };
-		E9940D6A14B7A217006465CC /* lfs.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940D6714B7A217006465CC /* lfs.h */; };
-		E9940D6B14B7A217006465CC /* lfs.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940D6714B7A217006465CC /* lfs.h */; };
 		E9940D6E14B7A414006465CC /* MOAICoroutine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6C14B7A414006465CC /* MOAICoroutine.cpp */; };
 		E9940D6F14B7A414006465CC /* MOAICoroutine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6C14B7A414006465CC /* MOAICoroutine.cpp */; };
 		E9940D7014B7A414006465CC /* MOAICoroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940D6D14B7A414006465CC /* MOAICoroutine.h */; };
@@ -3471,7 +3467,6 @@
 		EB9EE1961BE9423500E8938F /* unix.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06DAA1398838D00AB0420 /* unix.h */; };
 		EB9EE1971BE9423500E8938F /* usocket.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06DAD1398838D00AB0420 /* usocket.h */; };
 		EB9EE1981BE9423500E8938F /* AKU-luaext.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD06E531398B5A500AB0420 /* AKU-luaext.h */; };
-		EB9EE1991BE9423500E8938F /* lfs.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940D6714B7A217006465CC /* lfs.h */; };
 		EB9EE19A1BE9423500E8938F /* MOAICoroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940D6D14B7A414006465CC /* MOAICoroutine.h */; };
 		EB9EE19B1BE9423500E8938F /* MOAIMath.h in Headers */ = {isa = PBXBuildFile; fileRef = DD80D64916D8021D00C172D2 /* MOAIMath.h */; };
 		EB9EE19C1BE9423500E8938F /* MOAIFrameBufferTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = DD80D67116D8025000C172D2 /* MOAIFrameBufferTexture.h */; };
@@ -3491,7 +3486,6 @@
 		EB9EE1AC1BE9423500E8938F /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06DA91398838D00AB0420 /* unix.c */; };
 		EB9EE1AD1BE9423500E8938F /* usocket.c in Sources */ = {isa = PBXBuildFile; fileRef = CDD06DAC1398838D00AB0420 /* usocket.c */; };
 		EB9EE1AE1BE9423500E8938F /* AKU-luaext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD06E521398B5A500AB0420 /* AKU-luaext.cpp */; };
-		EB9EE1AF1BE9423500E8938F /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6514B7A217006465CC /* lfs.c */; };
 		EB9EE1B01BE9423500E8938F /* MOAICoroutine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6C14B7A414006465CC /* MOAICoroutine.cpp */; };
 		EB9EE1B11BE9423500E8938F /* MOAIMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD80D64816D8021D00C172D2 /* MOAIMath.cpp */; };
 		EB9EE1B21BE9423500E8938F /* MOAIFrameBufferTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD80D67016D8025000C172D2 /* MOAIFrameBufferTexture.cpp */; };
@@ -4774,8 +4768,6 @@
 		E98DBDC91537A2CB00514387 /* MOAIChartBoostIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIChartBoostIOS.mm; path = "moaiext-iphone/MOAIChartBoostIOS.mm"; sourceTree = "<group>"; };
 		E98DBDD31537A33100514387 /* AKU-chartboost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AKU-chartboost.h"; path = "aku/AKU-chartboost.h"; sourceTree = "<group>"; };
 		E98DBDD41537A33100514387 /* AKU-chartboost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "AKU-chartboost.mm"; path = "aku/AKU-chartboost.mm"; sourceTree = "<group>"; };
-		E9940D6514B7A217006465CC /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lfs.c; sourceTree = "<group>"; };
-		E9940D6714B7A217006465CC /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lfs.h; sourceTree = "<group>"; };
 		E9940D6C14B7A414006465CC /* MOAICoroutine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAICoroutine.cpp; sourceTree = "<group>"; };
 		E9940D6D14B7A414006465CC /* MOAICoroutine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICoroutine.h; sourceTree = "<group>"; };
 		E9940D7214B7A4A0006465CC /* USAdapterInfo_posix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USAdapterInfo_posix.cpp; sourceTree = "<group>"; };
@@ -4967,7 +4959,6 @@
 				03240B5813564CB0000ADC60 /* libpng */,
 				CB4B0B8D1858F1B80020381E /* luatrace */,
 				669C0566155DB5D500A5CE7F /* luasocket-embed */,
-				E9940D6414B7A217006465CC /* luafilesystem */,
 				CDD06BD11398824600AB0420 /* luasocket */,
 				03240BA213564CB0000ADC60 /* sqlite */,
 				03240BA613564CB0000ADC60 /* tinyxml */,
@@ -6925,16 +6916,6 @@
 			name = pathfinding;
 			sourceTree = "<group>";
 		};
-		E9940D6414B7A217006465CC /* luafilesystem */ = {
-			isa = PBXGroup;
-			children = (
-				E9940D6514B7A217006465CC /* lfs.c */,
-				E9940D6714B7A217006465CC /* lfs.h */,
-			);
-			name = luafilesystem;
-			path = "../../3rdparty/luafilesystem-1.5.0/src";
-			sourceTree = "<group>";
-		};
 		E9940E4D14B7A747006465CC /* gfxObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -8181,7 +8162,6 @@
 				CDD06DCB1398838D00AB0420 /* unix.h in Headers */,
 				CDD06DCD1398838D00AB0420 /* usocket.h in Headers */,
 				CDD06E551398B5A500AB0420 /* AKU-luaext.h in Headers */,
-				E9940D6A14B7A217006465CC /* lfs.h in Headers */,
 				E9940D7014B7A414006465CC /* MOAICoroutine.h in Headers */,
 				DD80D66416D8021D00C172D2 /* MOAIMath.h in Headers */,
 				DD80D68C16D8025000C172D2 /* MOAIFrameBufferTexture.h in Headers */,
@@ -8208,7 +8188,6 @@
 				CDD06DEB1398838D00AB0420 /* unix.h in Headers */,
 				CDD06DED1398838D00AB0420 /* usocket.h in Headers */,
 				CDD06E571398B5A500AB0420 /* AKU-luaext.h in Headers */,
-				E9940D6B14B7A217006465CC /* lfs.h in Headers */,
 				E9940D7114B7A414006465CC /* MOAICoroutine.h in Headers */,
 				DD80D66D16D8021D00C172D2 /* MOAIMath.h in Headers */,
 				DD80D69516D8025000C172D2 /* MOAIFrameBufferTexture.h in Headers */,
@@ -8735,7 +8714,6 @@
 				EB9EE1961BE9423500E8938F /* unix.h in Headers */,
 				EB9EE1971BE9423500E8938F /* usocket.h in Headers */,
 				EB9EE1981BE9423500E8938F /* AKU-luaext.h in Headers */,
-				EB9EE1991BE9423500E8938F /* lfs.h in Headers */,
 				EB9EE19A1BE9423500E8938F /* MOAICoroutine.h in Headers */,
 				EB9EE19B1BE9423500E8938F /* MOAIMath.h in Headers */,
 				EB9EE19C1BE9423500E8938F /* MOAIFrameBufferTexture.h in Headers */,
@@ -10382,7 +10360,6 @@
 				CDD06DCA1398838D00AB0420 /* unix.c in Sources */,
 				CDD06DCC1398838D00AB0420 /* usocket.c in Sources */,
 				CDD06E541398B5A500AB0420 /* AKU-luaext.cpp in Sources */,
-				E9940D6814B7A217006465CC /* lfs.c in Sources */,
 				E9940D6E14B7A414006465CC /* MOAICoroutine.cpp in Sources */,
 				DD80D65116D8021D00C172D2 /* MOAIMath.cpp in Sources */,
 				DD80D67916D8025000C172D2 /* MOAIFrameBufferTexture.cpp in Sources */,
@@ -10410,7 +10387,6 @@
 				CDD06DEA1398838D00AB0420 /* unix.c in Sources */,
 				CDD06DEC1398838D00AB0420 /* usocket.c in Sources */,
 				CDD06E561398B5A500AB0420 /* AKU-luaext.cpp in Sources */,
-				E9940D6914B7A217006465CC /* lfs.c in Sources */,
 				E9940D6F14B7A414006465CC /* MOAICoroutine.cpp in Sources */,
 				DD80D65A16D8021D00C172D2 /* MOAIMath.cpp in Sources */,
 				DD80D68216D8025000C172D2 /* MOAIFrameBufferTexture.cpp in Sources */,
@@ -11009,7 +10985,6 @@
 				EB9EE1AC1BE9423500E8938F /* unix.c in Sources */,
 				EB9EE1AD1BE9423500E8938F /* usocket.c in Sources */,
 				EB9EE1AE1BE9423500E8938F /* AKU-luaext.cpp in Sources */,
-				EB9EE1AF1BE9423500E8938F /* lfs.c in Sources */,
 				EB9EE1B01BE9423500E8938F /* MOAICoroutine.cpp in Sources */,
 				EB9EE1B11BE9423500E8938F /* MOAIMath.cpp in Sources */,
 				EB9EE1B21BE9423500E8938F /* MOAIFrameBufferTexture.cpp in Sources */,
