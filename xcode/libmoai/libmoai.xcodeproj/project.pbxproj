@@ -1725,12 +1725,6 @@
 		CD1D0BA513599FD200802A3C /* AKU-iphone.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1D0BA313599FD200802A3C /* AKU-iphone.mm */; };
 		CD218F7213A7FC79008337E7 /* USLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD218F7013A7FC79008337E7 /* USLog.cpp */; };
 		CD218F7313A7FC79008337E7 /* USLog.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F7113A7FC79008337E7 /* USLog.h */; };
-		CD218F8713A7FD6E008337E7 /* ls_sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8413A7FD6E008337E7 /* ls_sqlite3.c */; };
-		CD218F8813A7FD6E008337E7 /* luasql.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8513A7FD6E008337E7 /* luasql.c */; };
-		CD218F8913A7FD6E008337E7 /* luasql.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F8613A7FD6E008337E7 /* luasql.h */; };
-		CD218F8A13A7FD6E008337E7 /* ls_sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8413A7FD6E008337E7 /* ls_sqlite3.c */; };
-		CD218F8B13A7FD6E008337E7 /* luasql.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8513A7FD6E008337E7 /* luasql.c */; };
-		CD218F8C13A7FD6E008337E7 /* luasql.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F8613A7FD6E008337E7 /* luasql.h */; };
 		CD218FA013A7FDBA008337E7 /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9113A7FDBA008337E7 /* dump.c */; };
 		CD218FA113A7FDBA008337E7 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9213A7FDBA008337E7 /* error.c */; };
 		CD218FA213A7FDBA008337E7 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9313A7FDBA008337E7 /* hashtable.c */; };
@@ -3190,7 +3184,6 @@
 		EB9EE0431BE9422800E8938F /* pngpriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240B6013564CB0000ADC60 /* pngpriv.h */; };
 		EB9EE0441BE9422800E8938F /* tinyxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 03240BA813564CB0000ADC60 /* tinyxml.h */; };
 		EB9EE0451BE9422800E8938F /* MOAIISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = CD80F63D135BBCFF006B0683 /* MOAIISO8601DateFormatter.h */; };
-		EB9EE0461BE9422800E8938F /* luasql.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F8613A7FD6E008337E7 /* luasql.h */; };
 		EB9EE0471BE9422800E8938F /* hashtable.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F9413A7FDBA008337E7 /* hashtable.h */; };
 		EB9EE0481BE9422800E8938F /* jansson_config.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F9513A7FDBA008337E7 /* jansson_config.h */; };
 		EB9EE0491BE9422800E8938F /* jansson_private.h in Headers */ = {isa = PBXBuildFile; fileRef = CD218F9613A7FDBA008337E7 /* jansson_private.h */; };
@@ -3316,8 +3309,6 @@
 		EB9EE0E91BE9422800E8938F /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03240BA913564CB0000ADC60 /* tinyxmlerror.cpp */; };
 		EB9EE0EA1BE9422800E8938F /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03240BAA13564CB0000ADC60 /* tinyxmlparser.cpp */; };
 		EB9EE0EB1BE9422800E8938F /* MOAIISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CD80F63E135BBCFF006B0683 /* MOAIISO8601DateFormatter.m */; };
-		EB9EE0EC1BE9422800E8938F /* ls_sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8413A7FD6E008337E7 /* ls_sqlite3.c */; };
-		EB9EE0ED1BE9422800E8938F /* luasql.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F8513A7FD6E008337E7 /* luasql.c */; };
 		EB9EE0EE1BE9422800E8938F /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9113A7FDBA008337E7 /* dump.c */; };
 		EB9EE0EF1BE9422800E8938F /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9213A7FDBA008337E7 /* error.c */; };
 		EB9EE0F01BE9422800E8938F /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = CD218F9313A7FDBA008337E7 /* hashtable.c */; };
@@ -4396,9 +4387,6 @@
 		CD1D0BA313599FD200802A3C /* AKU-iphone.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "AKU-iphone.mm"; path = "aku/AKU-iphone.mm"; sourceTree = "<group>"; };
 		CD218F7013A7FC79008337E7 /* USLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = USLog.cpp; path = ../../src/uslscore/USLog.cpp; sourceTree = SOURCE_ROOT; };
 		CD218F7113A7FC79008337E7 /* USLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = USLog.h; path = ../../src/uslscore/USLog.h; sourceTree = SOURCE_ROOT; };
-		CD218F8413A7FD6E008337E7 /* ls_sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ls_sqlite3.c; path = "../../3rdparty/luasql-2.2.0/src/ls_sqlite3.c"; sourceTree = SOURCE_ROOT; };
-		CD218F8513A7FD6E008337E7 /* luasql.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = luasql.c; path = "../../3rdparty/luasql-2.2.0/src/luasql.c"; sourceTree = SOURCE_ROOT; };
-		CD218F8613A7FD6E008337E7 /* luasql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = luasql.h; path = "../../3rdparty/luasql-2.2.0/src/luasql.h"; sourceTree = SOURCE_ROOT; };
 		CD218F9113A7FDBA008337E7 /* dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dump.c; path = "../../3rdparty/jansson-2.1/src/dump.c"; sourceTree = SOURCE_ROOT; };
 		CD218F9213A7FDBA008337E7 /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = error.c; path = "../../3rdparty/jansson-2.1/src/error.c"; sourceTree = SOURCE_ROOT; };
 		CD218F9313A7FDBA008337E7 /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hashtable.c; path = "../../3rdparty/jansson-2.1/src/hashtable.c"; sourceTree = SOURCE_ROOT; };
@@ -4981,7 +4969,6 @@
 				669C0566155DB5D500A5CE7F /* luasocket-embed */,
 				E9940D6414B7A217006465CC /* luafilesystem */,
 				CDD06BD11398824600AB0420 /* luasocket */,
-				CD218F8313A7FD34008337E7 /* luasql */,
 				03240BA213564CB0000ADC60 /* sqlite */,
 				03240BA613564CB0000ADC60 /* tinyxml */,
 				07658749145CD04800723A7D /* tlsf */,
@@ -6545,16 +6532,6 @@
 			name = serializer;
 			sourceTree = "<group>";
 		};
-		CD218F8313A7FD34008337E7 /* luasql */ = {
-			isa = PBXGroup;
-			children = (
-				CD218F8413A7FD6E008337E7 /* ls_sqlite3.c */,
-				CD218F8513A7FD6E008337E7 /* luasql.c */,
-				CD218F8613A7FD6E008337E7 /* luasql.h */,
-			);
-			name = luasql;
-			sourceTree = "<group>";
-		};
 		CD218F9013A7FD8F008337E7 /* jansson */ = {
 			isa = PBXGroup;
 			children = (
@@ -7165,7 +7142,6 @@
 				4D08136226DD9121001BF800 /* bit_reader_utils.h in Headers */,
 				4D0813AD26DD9122001BF800 /* demux.h in Headers */,
 				03240D4E13564CB0000ADC60 /* tinyxml.h in Headers */,
-				CD218F8C13A7FD6E008337E7 /* luasql.h in Headers */,
 				CD218FB213A7FDBA008337E7 /* hashtable.h in Headers */,
 				4D08144926DD9123001BF800 /* lossless.h in Headers */,
 				CD218FB313A7FDBA008337E7 /* jansson_config.h in Headers */,
@@ -7690,7 +7666,6 @@
 				03240EF413564CB0000ADC60 /* tinyxml.h in Headers */,
 				4D08137C26DD9122001BF800 /* random_utils.h in Headers */,
 				CD80F63F135BBCFF006B0683 /* MOAIISO8601DateFormatter.h in Headers */,
-				CD218F8913A7FD6E008337E7 /* luasql.h in Headers */,
 				CD218FA313A7FDBA008337E7 /* hashtable.h in Headers */,
 				CD218FA413A7FDBA008337E7 /* jansson_config.h in Headers */,
 				CD218FA513A7FDBA008337E7 /* jansson_private.h in Headers */,
@@ -8611,7 +8586,6 @@
 				EB9EE0431BE9422800E8938F /* pngpriv.h in Headers */,
 				EB9EE0441BE9422800E8938F /* tinyxml.h in Headers */,
 				EB9EE0451BE9422800E8938F /* MOAIISO8601DateFormatter.h in Headers */,
-				EB9EE0461BE9422800E8938F /* luasql.h in Headers */,
 				EB9EE0471BE9422800E8938F /* hashtable.h in Headers */,
 				EB9EE0481BE9422800E8938F /* jansson_config.h in Headers */,
 				4D08136026DD9121001BF800 /* utils.h in Headers */,
@@ -9188,8 +9162,6 @@
 				03240D4F13564CB0000ADC60 /* tinyxmlerror.cpp in Sources */,
 				4D0814BE26DD9123001BF800 /* yuv_sse41.c in Sources */,
 				03240D5013564CB0000ADC60 /* tinyxmlparser.cpp in Sources */,
-				CD218F8A13A7FD6E008337E7 /* ls_sqlite3.c in Sources */,
-				CD218F8B13A7FD6E008337E7 /* luasql.c in Sources */,
 				CD218FAF13A7FDBA008337E7 /* dump.c in Sources */,
 				CD218FB013A7FDBA008337E7 /* error.c in Sources */,
 				CD218FB113A7FDBA008337E7 /* hashtable.c in Sources */,
@@ -9779,9 +9751,7 @@
 				03240EF613564CB0000ADC60 /* tinyxmlparser.cpp in Sources */,
 				CD80F641135BBCFF006B0683 /* MOAIISO8601DateFormatter.m in Sources */,
 				4D08143026DD9123001BF800 /* idec_dec.c in Sources */,
-				CD218F8713A7FD6E008337E7 /* ls_sqlite3.c in Sources */,
 				4D08138226DD9122001BF800 /* quant_levels_utils.c in Sources */,
-				CD218F8813A7FD6E008337E7 /* luasql.c in Sources */,
 				CD218FA013A7FDBA008337E7 /* dump.c in Sources */,
 				CD218FA113A7FDBA008337E7 /* error.c in Sources */,
 				CD218FA213A7FDBA008337E7 /* hashtable.c in Sources */,
@@ -10780,8 +10750,6 @@
 				EB9EE0E91BE9422800E8938F /* tinyxmlerror.cpp in Sources */,
 				EB9EE0EA1BE9422800E8938F /* tinyxmlparser.cpp in Sources */,
 				EB9EE0EB1BE9422800E8938F /* MOAIISO8601DateFormatter.m in Sources */,
-				EB9EE0EC1BE9422800E8938F /* ls_sqlite3.c in Sources */,
-				EB9EE0ED1BE9422800E8938F /* luasql.c in Sources */,
 				EB9EE0EE1BE9422800E8938F /* dump.c in Sources */,
 				EB9EE0EF1BE9422800E8938F /* error.c in Sources */,
 				EB9EE0F01BE9422800E8938F /* hashtable.c in Sources */,
