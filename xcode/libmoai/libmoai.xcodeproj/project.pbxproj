@@ -11420,7 +11420,7 @@
 			baseConfigurationReference = 5751E6D018565F8B00775234 /* libmoai-osx-debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -11456,7 +11456,7 @@
 			baseConfigurationReference = 5751E6D118565F8B00775234 /* libmoai-osx-release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
@@ -11494,7 +11494,7 @@
 			baseConfigurationReference = 5751E6D018565F8B00775234 /* libmoai-osx-debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
@@ -11511,7 +11511,7 @@
 			baseConfigurationReference = 5751E6D118565F8B00775234 /* libmoai-osx-release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
@@ -11529,7 +11529,7 @@
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
@@ -11592,7 +11592,7 @@
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -11785,7 +11785,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
@@ -11831,7 +11831,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -12016,7 +12016,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zlcore";
@@ -12029,7 +12029,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-ios-zlcore";
@@ -12043,7 +12043,7 @@
 			baseConfigurationReference = 5751E6D018565F8B00775234 /* libmoai-osx-debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -12060,7 +12060,7 @@
 			baseConfigurationReference = 5751E6D118565F8B00775234 /* libmoai-osx-release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -12075,7 +12075,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -12108,7 +12108,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -12142,7 +12142,7 @@
 			baseConfigurationReference = 5751E6D018565F8B00775234 /* libmoai-osx-debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -12178,7 +12178,7 @@
 			baseConfigurationReference = 5751E6D118565F8B00775234 /* libmoai-osx-release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -12213,7 +12213,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -12260,7 +12260,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -12304,7 +12304,7 @@
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -12368,7 +12368,7 @@
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -12426,7 +12426,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -12460,7 +12460,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -12494,7 +12494,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CE18565F8B00775234 /* libmoai-ios-debug.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-tvos-zlcore";
 				SDKROOT = appletvos;
@@ -12508,7 +12508,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5751E6CF18565F8B00775234 /* libmoai-ios-release.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-tvos-zlcore";
 				SDKROOT = appletvos;
