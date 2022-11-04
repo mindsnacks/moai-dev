@@ -11446,6 +11446,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "moai-osx-3rdparty";
 				WARNING_CFLAGS = "-w";
 			};
@@ -11484,6 +11485,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "moai-osx-3rdparty";
 				WARNING_CFLAGS = "-w";
 			};
@@ -11502,6 +11504,7 @@
 					"USE_CHIPMUNK=0",
 				);
 				GCC_VERSION = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "moai-osx";
 			};
 			name = Debug;
@@ -11520,6 +11523,7 @@
 					"USE_CHIPMUNK=0",
 				);
 				GCC_VERSION = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "moai-osx";
 			};
 			name = Release;
@@ -11766,7 +11770,6 @@
 					../../3rdparty/libwebp/src,
 					../../3rdparty/libwebp,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = (
 					"-include",
@@ -11996,7 +11999,6 @@
 					../../3rdparty/libwebp/src,
 					../../3rdparty/libwebp,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -12048,6 +12050,7 @@
 					"${inherited}",
 					MACOSX,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-osx-zlcore";
 				VALID_ARCHS = "i386 x86_64";
@@ -12065,6 +12068,7 @@
 					"${inherited}",
 					MACOSX,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "moai-osx-zlcore";
 				WARNING_CFLAGS = "-w";
@@ -12168,6 +12172,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "moai-osx-luaext";
 				WARNING_CFLAGS = "-w";
 			};
@@ -12204,6 +12209,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "moai-osx-luaext";
 				WARNING_CFLAGS = "-w";
 			};
