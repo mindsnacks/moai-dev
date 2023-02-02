@@ -89,7 +89,6 @@
 #include <moaicore/MOAIGridDeck2D.h>
 #include <moaicore/MOAIGridPathGraph.h>
 #include <moaicore/MOAIGridSpace.h>
-#include <moaicore/MOAIHashWriter.h>
 #include <moaicore/MOAIImage.h>
 #include <moaicore/MOAIImageTexture.h>
 #include <moaicore/MOAIIndexBuffer.h>
@@ -193,16 +192,6 @@
 	#include <moaicore/MOAIBox2DWeldJoint.h>
 	#include <moaicore/MOAIBox2DWheelJoint.h>
 	#include <moaicore/MOAIBox2DWorld.h>
-#endif
-
-#if USE_CHIPMUNK
-	#include <moaicore/MOAICp.h>
-	#include <moaicore/MOAICpArbiter.h>
-	#include <moaicore/MOAICpBody.h>
-	#include <moaicore/MOAICpConstraint.h>
-	#include <moaicore/MOAICpDebugDraw.h>
-	#include <moaicore/MOAICpShape.h>
-	#include <moaicore/MOAICpSpace.h>
 #endif
 
 #if MOAI_OS_NACL

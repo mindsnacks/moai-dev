@@ -2,7 +2,6 @@
 // http://getmoai.com
 
 #include "pch.h"
-#include <chipmunk/chipmunk.h>
 #include <moaicore/moaicore.h>
 
 extern "C" {
@@ -129,7 +128,6 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 	REGISTER_LUA_CLASS ( MOAIGridDeck2D )
 	REGISTER_LUA_CLASS ( MOAIGridSpace )
 	REGISTER_LUA_CLASS ( MOAIGridPathGraph )
-	REGISTER_LUA_CLASS ( MOAIHashWriter )
 	REGISTER_LUA_CLASS ( MOAIImage )
 	REGISTER_LUA_CLASS ( MOAIImageTexture )
 	REGISTER_LUA_CLASS ( MOAIIndexBuffer )
@@ -200,18 +198,6 @@ void moaicore::InitGlobals ( MOAIGlobals* globals ) {
 		REGISTER_LUA_CLASS ( MOAIBox2DWeldJoint )
 		REGISTER_LUA_CLASS ( MOAIBox2DWheelJoint )
 		REGISTER_LUA_CLASS ( MOAIBox2DWorld )
-	#endif
-	
-	#if USE_CHIPMUNK
-	
-		MOAICp::Affirm ();
-	
-		REGISTER_LUA_CLASS ( MOAICp )
-		REGISTER_LUA_CLASS ( MOAICpArbiter )
-		REGISTER_LUA_CLASS ( MOAICpBody )
-		REGISTER_LUA_CLASS ( MOAICpConstraint )
-		REGISTER_LUA_CLASS ( MOAICpShape )
-		REGISTER_LUA_CLASS ( MOAICpSpace )
 	#endif
 	
 	#if USE_FREETYPE
