@@ -5,7 +5,6 @@
 #import <moaiext-iphone/MOAICrittercismIOS.h>
 #import <moaiext-iphone/MOAIDialogIOS.h>
 #import <moaiext-iphone/MOAIKeyboardIOS.h>
-#import <moaiext-iphone/MOAIMoviePlayerIOS.h>
 
 #import <moaiext-iphone/NSArray+MOAILib.h>
 #import <moaiext-iphone/NSData+MOAILib.h>
