@@ -455,7 +455,6 @@ MOAITransform.extend (
 
 MOAIApp = MOAIAppAndroid or MOAIAppIOS
 MOAIDialog = MOAIDialogAndroid or MOAIDialogIOS
-MOAIMoviePlayer = MOAIMoviePlayerAndroid
 
 -- Optional 3rd party extensions
 MOAIAdColony = MOAIAdColonyAndroid or MOAIAdColonyIOS

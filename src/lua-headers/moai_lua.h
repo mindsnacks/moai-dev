@@ -458,7 +458,6 @@ end\n\
 \n\
 MOAIApp = MOAIAppAndroid or MOAIAppIOS\n\
 MOAIDialog = MOAIDialogAndroid or MOAIDialogIOS\n\
-MOAIMoviePlayer = MOAIMoviePlayerAndroid\n\
 \n\
 -- Optional 3rd party extensions\n\
 MOAIAdColony = MOAIAdColonyAndroid or MOAIAdColonyIOS\n\

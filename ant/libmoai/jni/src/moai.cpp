@@ -269,9 +269,6 @@
 		MOAIDialogAndroid::Affirm ();
 		REGISTER_LUA_CLASS ( MOAIDialogAndroid );
 
-		MOAIMoviePlayerAndroid::Affirm ();
-		REGISTER_LUA_CLASS ( MOAIMoviePlayerAndroid );
-
 		MOAIKeyboardAndroid::Affirm ();
 		REGISTER_LUA_CLASS ( MOAIKeyboardAndroid );
 		

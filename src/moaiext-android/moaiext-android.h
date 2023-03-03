@@ -9,6 +9,5 @@
 #include <moaiext-android/MOAICrittercismAndroid.h>
 #include <moaiext-android/MOAIFacebookAndroid.h>
 #include <moaiext-android/MOAIKeyboardAndroid.h>
-#include <moaiext-android/MOAIMoviePlayerAndroid.h>
 #include <moaiext-android/MOAINotificationsAndroid.h>
 #include <moaiext-android/MOAITapjoyAndroid.h>
