@@ -199,7 +199,6 @@ void MOAILayoutFrame::Fit ( u32 axis ) {
 	ChildLink* childIt;
 	
 	float fixSize = 0.0f;
-	float flexCount = 0.0f;
 	float totalWeight = 0.0f;
 	
 	childIt = this->mChildren.Head ();
@@ -209,7 +208,6 @@ void MOAILayoutFrame::Fit ( u32 axis ) {
 		float idealSize = child->mIdealSize [ axis ];
 		
 		if ( child->mFit [ axis ] == FIT_EXPAND ) {
-			flexCount += 1.0f;
 			totalWeight += child->mWeight [ axis ];
 		}
 		else {
