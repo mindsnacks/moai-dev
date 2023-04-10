@@ -1086,7 +1086,6 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 	
 	u32 unicode; // the current unicode character
 	u32 lastCh = 0; // the previous unicode character
-	u32 lastTokenCh = 0; // the character before a word break
 	u32 wordBreakCharacter = 0; // the character used in the word break
 	
 	FT_UInt previousGlyphIndex = 0;
@@ -1094,7 +1093,6 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 	
 	FT_Int penXReset = 0; // the value to which to reset the x-location of the cursor on a new line
 	FT_Int penX = penXReset; // the current x-location of the cursor
-	FT_Int lastTokenX = 0; // the x-location of the cursor at the most recent word break
 	
 	int lineIndex = 0; // the index of the beginning of the current line
 	int tokenIndex = 0; // the index of the beginning of the current token
@@ -1152,8 +1150,6 @@ int MOAIFreeTypeFont::NumberOfLinesToDisplayText(cc8 *text, FT_Int imageWidth,
 			tokenIndex = (int)glyphArrayIndex;
 			tokenN = n;
 			lastTokenLength = textLength;
-			lastTokenCh = lastCh;
-			lastTokenX = penX;
 			wordBreakCharacter = unicode;
 		}
 		

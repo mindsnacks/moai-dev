@@ -186,9 +186,6 @@ void MOAITimer::DoStep ( float step ) {
 	float t0 = this->mTime;
 	this->mTime += step * this->mSpeed * this->mDirection;
 	
-	float t1 = this->mTime;
-	float result = 0.0f;
-	
 	switch ( this->mMode ) {
 	
 		case NORMAL: {
@@ -204,7 +201,6 @@ void MOAITimer::DoStep ( float step ) {
 			else {
 				this->GenerateKeyframeCallbacks ( t0, this->mTime, false );
 			}
-			result = this->mTime - t0;
 			break;
 		}
 		
@@ -221,7 +217,6 @@ void MOAITimer::DoStep ( float step ) {
 			else {
 				this->GenerateKeyframeCallbacks ( t0, this->mTime, false );
 			}
-			result = this->mTime - t0;
 			break;
 		}
 		
@@ -251,7 +246,6 @@ void MOAITimer::DoStep ( float step ) {
 			else {
 				this->GenerateKeyframeCallbacks ( t0, this->mTime, false );
 			}
-			result = t1 - t0;
 			break;
 		}
 		
@@ -281,7 +275,6 @@ void MOAITimer::DoStep ( float step ) {
 			else {
 				this->GenerateKeyframeCallbacks ( t0, this->mTime, false );
 			}
-			result = t1 - t0;
 			break;
 		}
 		
@@ -313,7 +306,6 @@ void MOAITimer::DoStep ( float step ) {
 			else {
 				this->GenerateKeyframeCallbacks ( t0, this->mTime, false );
 			}
-			result = this->mTime - t0;
 			break;
 		}
 	}

@@ -47,7 +47,6 @@ void AKUIphoneInit ( UIApplication* application ) {
 	REGISTER_LUA_CLASS ( MOAIAppIOS )
 	REGISTER_LUA_CLASS ( MOAIDialogIOS )
 	REGISTER_LUA_CLASS ( MOAIKeyboardIOS )
-	REGISTER_LUA_CLASS ( MOAIMoviePlayerIOS )
 
 	#ifndef DISABLE_TWITTER
 		REGISTER_LUA_CLASS ( MOAITwitterIOS )

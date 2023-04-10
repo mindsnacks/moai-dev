@@ -208,8 +208,6 @@ void MOAIEnvironment::SetValue ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	int top = state.GetTop ();
-
 	this->PushLuaClassTable ( state );
 		
 	state.CopyToTop ( -3 ); // key
@@ -225,6 +223,4 @@ void MOAIEnvironment::SetValue ( lua_State* L ) {
 		
 		state.DebugCall ( 2, 0 );
 	}
-	
-	top = state.GetTop ();
 }
