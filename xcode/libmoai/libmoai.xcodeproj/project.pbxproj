@@ -2590,8 +2590,6 @@
 		E9C4063A1518643E00C7AB04 /* MOAILayerBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E91A4C3015181FDF0008F1A5 /* MOAILayerBridge.cpp */; };
 		E9C4063B1518645900C7AB04 /* MOAIMultiTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E91A4C61151820CE0008F1A5 /* MOAIMultiTexture.cpp */; };
 		E9C4063D151864A100C7AB04 /* MOAILayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E91A4C2E15181FDF0008F1A5 /* MOAILayer.cpp */; };
-		E9DE4581157EA38800630A7D /* MOAIMoviePlayerIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = E9DE457F157EA38800630A7D /* MOAIMoviePlayerIOS.h */; };
-		E9DE4582157EA38800630A7D /* MOAIMoviePlayerIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9DE4580157EA38800630A7D /* MOAIMoviePlayerIOS.mm */; };
 		EB665DEB1756B13B009A8F29 /* MOAIAnimCurveCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB665DE91756B13B009A8F29 /* MOAIAnimCurveCustom.cpp */; };
 		EB665DEC1756B13B009A8F29 /* MOAIAnimCurveCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB665DE91756B13B009A8F29 /* MOAIAnimCurveCustom.cpp */; };
 		EB665DED1756B13B009A8F29 /* MOAIAnimCurveCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = EB665DEA1756B13B009A8F29 /* MOAIAnimCurveCustom.h */; };
@@ -4987,8 +4985,6 @@
 		E9940DB914B7A4A0006465CC /* USXmlReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USXmlReader.h; sourceTree = "<group>"; };
 		E9A41AB5151AAA5400650276 /* MOAICrittercismIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAICrittercismIOS.h; path = "moaiext-iphone/MOAICrittercismIOS.h"; sourceTree = "<group>"; };
 		E9A41AB6151AAA5400650276 /* MOAICrittercismIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAICrittercismIOS.mm; path = "moaiext-iphone/MOAICrittercismIOS.mm"; sourceTree = "<group>"; };
-		E9DE457F157EA38800630A7D /* MOAIMoviePlayerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIMoviePlayerIOS.h; path = "moaiext-iphone/MOAIMoviePlayerIOS.h"; sourceTree = "<group>"; };
-		E9DE4580157EA38800630A7D /* MOAIMoviePlayerIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIMoviePlayerIOS.mm; path = "moaiext-iphone/MOAIMoviePlayerIOS.mm"; sourceTree = "<group>"; };
 		EB665DE91756B13B009A8F29 /* MOAIAnimCurveCustom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIAnimCurveCustom.cpp; sourceTree = "<group>"; };
 		EB665DEA1756B13B009A8F29 /* MOAIAnimCurveCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIAnimCurveCustom.h; sourceTree = "<group>"; };
 		EB70430C187601CC0057E450 /* MOAIEaseElasticOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIEaseElasticOut.cpp; sourceTree = "<group>"; };
@@ -6913,8 +6909,6 @@
 				CDF2C616151B146F0009D47D /* MOAIDialogIOS.mm */,
 				CD91E3FE15252E2F00AE1883 /* MOAIKeyboardIOS.h */,
 				CD91E3FF15252E2F00AE1883 /* MOAIKeyboardIOS.mm */,
-				E9DE457F157EA38800630A7D /* MOAIMoviePlayerIOS.h */,
-				E9DE4580157EA38800630A7D /* MOAIMoviePlayerIOS.mm */,
 				CDD06ECA1398BA6200AB0420 /* moaiext-iphone.h */,
 			);
 			name = "moaiext-iphone";
@@ -8330,7 +8324,6 @@
 				66C572A51575713C00A486AB /* USStreamReader.h in Headers */,
 				66C572AB1575714B00A486AB /* USBase64Encoder.h in Headers */,
 				66C572B11575717000A486AB /* MOAIGridDeck2D.h in Headers */,
-				E9DE4581157EA38800630A7D /* MOAIMoviePlayerIOS.h in Headers */,
 				0755162815A6CA2D00161409 /* MOAIHashWriter.h in Headers */,
 				663703C916127FFD002D0D27 /* USHexWriter.h in Headers */,
 				663703E216128038002D0D27 /* USHashWriterAdler32.h in Headers */,
@@ -10594,7 +10587,6 @@
 				66C572A31575713C00A486AB /* USStreamReader.cpp in Sources */,
 				66C572A91575714B00A486AB /* USBase64Encoder.cpp in Sources */,
 				66C572AF1575717000A486AB /* MOAIGridDeck2D.cpp in Sources */,
-				E9DE4582157EA38800630A7D /* MOAIMoviePlayerIOS.mm in Sources */,
 				8DF7442C1E4CEDFF003A62C4 /* psmodule.c in Sources */,
 				8DF743F51E4CEB9D003A62C4 /* ftfstype.c in Sources */,
 				0755162615A6CA2D00161409 /* MOAIHashWriter.cpp in Sources */,
@@ -11778,7 +11770,7 @@
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				WARNING_CFLAGS = "-Wall";
+				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
 		};
@@ -12006,7 +11998,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				WARNING_CFLAGS = "-Wall";
+				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
 		};

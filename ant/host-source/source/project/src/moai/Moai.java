@@ -368,8 +368,6 @@ public class Moai {
 
 		sActivity = activity;
 		
-		MoaiMoviePlayer.onCreate ( activity );
-
 		for ( Class < ? > theClass : sAvailableClasses ) {
 			
 			executeMethod ( theClass, null, "onCreate", new Class < ? > [] { Activity.class }, new Object [] { activity });

@@ -49,21 +49,14 @@ bool USZipEntry::SerializeIn ( USStream& stream ) {
 	stream.Seek ( this->mCompressedSize, SEEK_CUR );
 	
 	if ( this->mBitFlag & BIT_HAS_DESCRIPTOR ) {
-		
+
 		u32 sigOrCRC = stream.Read < u32 >( 0 );
-		u32 crc32;
-		
-		//crc-32						4 bytes
+
+		//crc-32 											4 bytes
 		if ( sigOrCRC == 0x04034b50 ) {
-			crc32 = stream.Read < u32 >( 0 );
+			stream.Read < u32 >( 0 );
 		}
-		else {
-			crc32 = sigOrCRC;
-		}
-		
-		//u32 compressedSize = stream.Read < u32 >(); //compressed size				4 bytes
-		//u32 uncompressedSize = stream.Read < u32 >(); //uncompressed size			4 bytes
-		
+
 		stream.Read < u32 >( 0 ); //compressed size			4 bytes
 		stream.Read < u32 >( 0 ); //uncompressed size		4 bytes
 	}
