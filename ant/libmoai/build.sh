@@ -53,7 +53,7 @@
 		exit 1		
 	fi
 
-	if [ x"$arm_arch" != arm64-v8a ] && [ x"$arm_arch" != xarmeabi-v7a ] && [ x"$arm_arch" != xall ]; then
+	if [ x"$arm_arch" != xarm64-v8a ] && [ x"$arm_arch" != xarmeabi-v7a ] && [ x"$arm_arch" != xall ]; then
 		echo $usage
 		exit 1
 	elif [ x"$arm_arch" = xall ]; then
