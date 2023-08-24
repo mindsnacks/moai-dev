@@ -66,7 +66,7 @@ int ZLFile::CloseProcess () {
 //----------------------------------------------------------------//
 int	ZLFile::Flush () {
 	
-	if ( !this->mIsZip ) {
+	if ( !this->mIsZip && this->mPtr.mFile != nullptr ) {
 		return fflush ( this->mPtr.mFile );
 	}
 	return 0;
