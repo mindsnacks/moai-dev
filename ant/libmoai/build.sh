@@ -53,11 +53,11 @@
 		exit 1		
 	fi
 
-	if [ x"$arm_arch" != xarm64-v8a ] && [ x"$arm_arch" != xarmeabi-v7a ] && [ x"$arm_arch" != xall ]; then
+	if [ x"$arm_arch" != arm64-v8a ] && [ x"$arm_arch" != xarmeabi-v7a ] && [ x"$arm_arch" != xall ]; then
 		echo $usage
 		exit 1
 	elif [ x"$arm_arch" = xall ]; then
-		arm_arch="armeabi-v7a arm64-v8a x86 x86_64"
+		arm_arch="armeabi-v7a arm64-v8a x86"
 	fi
 
 	# TODO: Validate app_platform
