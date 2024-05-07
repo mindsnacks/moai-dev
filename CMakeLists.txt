@@ -128,15 +128,6 @@ add_library(moai_dev SHARED
         3rdparty/chipmunk-5.3.4/src/constraints/cpSimpleMotor.c
         3rdparty/chipmunk-5.3.4/src/constraints/cpSlideJoint.c
         3rdparty/contrib/utf8.c
-        3rdparty/contrib/whirlpool.c
-        3rdparty/openssl-1.0.0d/crypto/mem_clr.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha1_one.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha1dgst.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha256.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha512.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha_dgst.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha_one.c
-        3rdparty/openssl-1.0.0d/crypto/md5/md5_dgst.c
         3rdparty/expat-2.0.1/lib/xmlparse.c
         3rdparty/expat-2.0.1/lib/xmlrole.c
         3rdparty/expat-2.0.1/lib/xmltok.c
