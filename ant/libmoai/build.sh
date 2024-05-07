@@ -13,7 +13,7 @@
 	verbose=
 	arm_mode="arm"
 	arm_arch="all"
-	app_platform="android-16"
+	app_platform="android-24"
 	use_fmod="false"
 	use_untz="true"
 	adcolony_flags=
