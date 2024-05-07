@@ -494,7 +494,6 @@ add_library(moai_dev SHARED
         src/moaicore/MOAIGridDeck2D.cpp
         src/moaicore/MOAIGridPathGraph.cpp
         src/moaicore/MOAIGridSpace.cpp
-        src/moaicore/MOAIHashWriter.cpp
         src/moaicore/MOAIHttpTaskBase.cpp
         src/moaicore/MOAIHttpTaskNaCl.cpp
         src/moaicore/MOAIImage-jpg.cpp
@@ -615,16 +614,6 @@ add_library(moai_dev SHARED
         src/uslscore/USFileStream.cpp
         src/uslscore/USFileSys.cpp
         src/uslscore/USFrustum.cpp
-        src/uslscore/USHashWriter.cpp
-        src/uslscore/USHashWriterAdler32.cpp
-        src/uslscore/USHashWriterCRC32.cpp
-        src/uslscore/USHashWriterMD5.cpp
-        src/uslscore/USHashWriterSHA1.cpp
-        src/uslscore/USHashWriterSHA224.cpp
-        src/uslscore/USHashWriterSHA256.cpp
-        src/uslscore/USHashWriterSHA384.cpp
-        src/uslscore/USHashWriterSHA512.cpp
-        src/uslscore/USHashWriterWhirlpool.cpp
         src/uslscore/USHexDump.cpp
         src/uslscore/USHexReader.cpp
         src/uslscore/USHexWriter.cpp
