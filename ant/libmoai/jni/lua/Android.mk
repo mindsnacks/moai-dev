@@ -8,7 +8,9 @@
 
 	LOCAL_MODULE 		:= lua
 	LOCAL_ARM_MODE 		:= $(MY_ARM_MODE)
-	LOCAL_CFLAGS		:= -include $(MY_MOAI_ROOT)/src/zlcore/zl_replace.h
+    # The flags -U_FORTIFY_SOURCE and -D_FORTIFY_SOURCE=0 disable the FORTIFY checks
+    # that cause a crash in Lua on Android NDK r21 and later.
+	LOCAL_CFLAGS		:= -include $(MY_MOAI_ROOT)/src/zlcore/zl_replace.h -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0
 
 	LOCAL_C_INCLUDES 	:= $(MY_HEADER_SEARCH_PATHS)
 	LOCAL_SRC_FILES 	+= $(MY_MOAI_ROOT)/3rdparty/lua-5.1.3/src/lapi.c
