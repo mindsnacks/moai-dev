@@ -89,7 +89,6 @@
 #include <moaicore/MOAIGridDeck2D.h>
 #include <moaicore/MOAIGridPathGraph.h>
 #include <moaicore/MOAIGridSpace.h>
-#include <moaicore/MOAIHashWriter.h>
 #include <moaicore/MOAIImage.h>
 #include <moaicore/MOAIImageTexture.h>
 #include <moaicore/MOAIIndexBuffer.h>

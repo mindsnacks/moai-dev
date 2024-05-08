@@ -216,11 +216,6 @@
 		rm -f OptionalComponentsDefined.mk.backup
 	popd > /dev/null
 	
-	# build libcrypto
-	pushd jni/crypto > /dev/null
-		bash build.sh
-	popd > /dev/null
-	
 	# build libmoai
 	pushd jni > /dev/null
 		ndk-build $verbose NDK_DEBUG=$NDK_DEBUG -j 4

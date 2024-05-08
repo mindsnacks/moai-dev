@@ -128,15 +128,6 @@ add_library(moai_dev SHARED
         3rdparty/chipmunk-5.3.4/src/constraints/cpSimpleMotor.c
         3rdparty/chipmunk-5.3.4/src/constraints/cpSlideJoint.c
         3rdparty/contrib/utf8.c
-        3rdparty/contrib/whirlpool.c
-        3rdparty/openssl-1.0.0d/crypto/mem_clr.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha1_one.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha1dgst.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha256.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha512.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha_dgst.c
-        3rdparty/openssl-1.0.0d/crypto/sha/sha_one.c
-        3rdparty/openssl-1.0.0d/crypto/md5/md5_dgst.c
         3rdparty/expat-2.0.1/lib/xmlparse.c
         3rdparty/expat-2.0.1/lib/xmlrole.c
         3rdparty/expat-2.0.1/lib/xmltok.c
@@ -494,7 +485,6 @@ add_library(moai_dev SHARED
         src/moaicore/MOAIGridDeck2D.cpp
         src/moaicore/MOAIGridPathGraph.cpp
         src/moaicore/MOAIGridSpace.cpp
-        src/moaicore/MOAIHashWriter.cpp
         src/moaicore/MOAIHttpTaskBase.cpp
         src/moaicore/MOAIHttpTaskNaCl.cpp
         src/moaicore/MOAIImage-jpg.cpp
@@ -615,16 +605,6 @@ add_library(moai_dev SHARED
         src/uslscore/USFileStream.cpp
         src/uslscore/USFileSys.cpp
         src/uslscore/USFrustum.cpp
-        src/uslscore/USHashWriter.cpp
-        src/uslscore/USHashWriterAdler32.cpp
-        src/uslscore/USHashWriterCRC32.cpp
-        src/uslscore/USHashWriterMD5.cpp
-        src/uslscore/USHashWriterSHA1.cpp
-        src/uslscore/USHashWriterSHA224.cpp
-        src/uslscore/USHashWriterSHA256.cpp
-        src/uslscore/USHashWriterSHA384.cpp
-        src/uslscore/USHashWriterSHA512.cpp
-        src/uslscore/USHashWriterWhirlpool.cpp
         src/uslscore/USHexDump.cpp
         src/uslscore/USHexReader.cpp
         src/uslscore/USHexWriter.cpp
