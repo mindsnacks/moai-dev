@@ -10,3 +10,4 @@
 	APP_ABI 		:= $(MY_ARM_ARCH)
 	APP_PLATFORM 	:= $(MY_APP_PLATFORM)
 	APP_MODULES 	:= libcrypto-a libcrypto-b libcrypto-c libcrypto-d
+	APP_SUPPORT_FLEXIBLE_PAGE_SIZES := true
