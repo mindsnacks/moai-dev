@@ -653,4 +653,5 @@ find_library( glesv1 GLESv1_CM )
 target_link_libraries( moai_dev PRIVATE ${glesv1} )
 
 find_library( glesv2 GLESv2 )
-target_link_libraries( moai_dev PRIVATE ${glesv2} )
+target_link_libraries( moai_dev PRIVATE ${glesv2})
+target_link_options( moai_dev PRIVATE "-Wl,-z,max-page-size=16384")
