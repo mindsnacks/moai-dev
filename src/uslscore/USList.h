@@ -135,13 +135,13 @@ public:
 	//----------------------------------------------------------------//
 	void InsertAfter ( USLeanLink < TYPE >& cursor, TYPE& element ) {
 	
-		this->mList.InsertAfter ( cursor, this->AssignLink ( element ));
+		this->mList.InsertAfter ( cursor, this->NextFreeLink ( element ));
 	}
 
 	//----------------------------------------------------------------//
 	void InsertBefore ( USLeanLink < TYPE >& cursor, TYPE& element ) {
 	
-		this->mList.InsertBefore ( cursor, this->AssignLink ( element ));
+		this->mList.InsertBefore ( cursor, this->NextFreeLink ( element ));
 	}
 
 	//----------------------------------------------------------------//
