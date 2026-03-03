@@ -7,7 +7,7 @@ on:
 
 jobs:
   ios:
-    runs-on: self-hosted
+    runs-on: ${{ MACOS_RUNNER }}
     permissions:
       contents: write
     steps:
@@ -42,7 +42,7 @@ jobs:
           path: build/*.zip
 
   android:
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+    runs-on: ${{ LINUX_RUNNER }}
     permissions:
       contents: write
     steps:
