@@ -7,7 +7,7 @@ on:
 
 jobs:
   ios:
-    runs-on: ${{ MACOS_RUNNER }}
+    runs-on: ${{ vars.MACOS_RUNNER }}
     permissions:
       contents: write
     steps:
@@ -42,7 +42,7 @@ jobs:
           path: build/*.zip
 
   android:
-    runs-on: ${{ LINUX_RUNNER }}
+    runs-on: ${{ vars.LINUX_RUNNER }}
     permissions:
       contents: write
     steps:
