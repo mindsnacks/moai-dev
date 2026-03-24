@@ -50,6 +50,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Set up Android NDK
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r27c
+
       - name: Build libmoai.so for all ABIs
         working-directory: ant/libmoai
         run: bash build.sh -a all
