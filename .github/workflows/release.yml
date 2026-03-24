@@ -4,10 +4,29 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. v1.0.0)"
+        required: true
 
 jobs:
+  create-release:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ${{ vars.LINUX_RUNNER }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ inputs.tag }}" --title "${{ inputs.tag }}" --target "${{ github.sha }}"
+
   ios:
     runs-on: ${{ vars.MACOS_RUNNER }}
+    needs: [create-release]
+    if: ${{ !cancelled() && (needs.create-release.result == 'success' || needs.create-release.result == 'skipped') }}
     permissions:
       contents: write
     steps:
@@ -26,23 +45,18 @@ jobs:
           done
 
       - name: Upload release assets
-        if: github.event_name == 'release'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          tag="${{ inputs.tag || github.event.release.tag_name }}"
           for zip in build/*.zip; do
-            gh release upload "${{ github.event.release.tag_name }}" "$zip"
+            gh release upload "$tag" "$zip"
           done
-
-      - name: Upload workflow artifacts
-        if: github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@v4
-        with:
-          name: MoaiSDK-XCFrameworks
-          path: build/*.zip
 
   android:
     runs-on: ${{ vars.LINUX_RUNNER }}
+    needs: [create-release]
+    if: ${{ !cancelled() && (needs.create-release.result == 'success' || needs.create-release.result == 'skipped') }}
     permissions:
       contents: write
     steps:
@@ -76,14 +90,8 @@ jobs:
           zip -r MoaiSDK-Android.zip MoaiSDK-Android
 
       - name: Upload release assets
-        if: github.event_name == 'release'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" build/MoaiSDK-Android.zip
-
-      - name: Upload workflow artifacts
-        if: github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@v4
-        with:
-          name: MoaiSDK-Android
-          path: build/MoaiSDK-Android.zip
+        run: |
+          tag="${{ inputs.tag || github.event.release.tag_name }}"
+          gh release upload "$tag" build/MoaiSDK-Android.zip
