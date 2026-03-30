@@ -3,12 +3,13 @@ set -e
 
 #----------------------------------------------------------------#
 # Build Moai XCFramework
-# Combines all libmoai iOS schemes into a single xcframework
+# Combines libmoai iOS and macOS schemes into a single xcframework
 # Supports both Debug and Release configurations
 #----------------------------------------------------------------#
 
-# All iOS schemes to include in the combined framework
+# Schemes to include in the combined framework, per platform
 ios_schemes="libmoai-ios libmoai-ios-3rdparty libmoai-ios-zlcore libmoai-ios-luaext"
+osx_schemes="libmoai-osx libmoai-osx-3rdparty libmoai-osx-zlcore libmoai-osx-luaext"
 
 usage() {
 	echo >&2 "usage: $0 [-v] [-d <dir>] [-c Debug|Release|all]"
@@ -119,6 +120,13 @@ for config in $configurations; do
 		build_scheme "$scheme" "iphonesimulator" "$config" "arm64 x86_64"
 	done
 
+	# Build all schemes for macOS (arm64 + x86_64)
+	echo ""
+	echo "Building for macOS (arm64, x86_64)..."
+	for scheme in $osx_schemes; do
+		build_scheme "$scheme" "macosx" "$config" "arm64 x86_64"
+	done
+
 	echo ""
 	echo "Creating combined libraries..."
 
@@ -146,16 +154,27 @@ for config in $configurations; do
 	libtool -static -o "${sim_dir}/libmoai-combined.a" $sim_libs
 	echo "✓"
 
-	# Copy headers from one of the schemes (they should all have similar headers)
-	# We'll use the first scheme's headers
-	first_scheme=$(echo $ios_schemes | awk '{print $1}')
-	device_headers="${basedir}/intermediates/${config}/iphoneos/${first_scheme}/include"
+	# Combine all scheme libraries for macOS
+	macos_dir="${basedir}/intermediates/${config}/macosx/combined"
+	mkdir -p "$macos_dir"
+	macos_libs=""
+	for scheme in $osx_schemes; do
+		macos_libs="$macos_libs ${basedir}/intermediates/${config}/macosx/${scheme}/${scheme}.a"
+	done
 
-	if [ -d "$device_headers" ]; then
-		cp -R "$device_headers" "${device_dir}/"
-		cp -R "$device_headers" "${sim_dir}/"
-		echo "  Headers copied ✓"
-	fi
+	printf "  Combining macOS libraries... "
+	libtool -static -o "${macos_dir}/libmoai-combined.a" $macos_libs
+	echo "✓"
+
+	# Copy headers from source tree, preserving directory structure
+	headers_dir="${basedir}/intermediates/${config}/headers"
+	mkdir -p "$headers_dir"
+	rsync -a --include='*/' --include='*.h' --exclude='*' ../../src/ "$headers_dir/"
+	rsync -a --include='*/' --include='*.h' --exclude='*' ../../3rdparty/lua-5.1.3/src/ "$headers_dir/"
+	cp -R "$headers_dir" "${device_dir}/include"
+	cp -R "$headers_dir" "${sim_dir}/include"
+	cp -R "$headers_dir" "${macos_dir}/include"
+	echo "  Headers copied ✓"
 
 	echo ""
 	echo "Creating XCFramework for ${config}..."
@@ -171,6 +190,10 @@ for config in $configurations; do
 	xcframework_args+=(-library "${sim_dir}/libmoai-combined.a")
 	if [ -d "${sim_dir}/include" ]; then
 		xcframework_args+=(-headers "${sim_dir}/include")
+	fi
+	xcframework_args+=(-library "${macos_dir}/libmoai-combined.a")
+	if [ -d "${macos_dir}/include" ]; then
+		xcframework_args+=(-headers "${macos_dir}/include")
 	fi
 	xcframework_args+=(-output "${basedir}/MoaiSDK-${config}.xcframework")
 

@@ -23,7 +23,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "${{ inputs.tag }}" --title "${{ inputs.tag }}" --target "${{ github.sha }}"
 
-  ios:
+  apple:
     runs-on: ${{ vars.MACOS_RUNNER }}
     needs: [create-release]
     if: ${{ !cancelled() && (needs.create-release.result == 'success' || needs.create-release.result == 'skipped') }}
@@ -37,12 +37,11 @@ jobs:
       - name: Build XCFrameworks
         run: bash xcode/libmoai/build-xcframework.sh -d "$GITHUB_WORKSPACE/build"
 
-      - name: Zip XCFrameworks
-        working-directory: build
+      - name: Zip XCFrameworks and update Package.swift
         run: |
-          for xcf in *.xcframework; do
-            zip -r "${xcf%.xcframework}.zip" "$xcf"
-          done
+          tag="${{ inputs.tag || github.event.release.tag_name }}"
+          version="${tag#v}"
+          bash xcode/libmoai/update-package-swift.sh "$version" build
 
       - name: Upload release assets
         env:
@@ -52,6 +51,17 @@ jobs:
           for zip in build/*.zip; do
             gh release upload "$tag" "$zip"
           done
+
+      - name: Commit and push Package.swift
+        run: |
+          tag="${{ inputs.tag || github.event.release.tag_name }}"
+          version="${tag#v}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Package.swift
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Update Package.swift for ${version}"
+          git push
 
   android:
     runs-on: ${{ vars.LINUX_RUNNER }}
