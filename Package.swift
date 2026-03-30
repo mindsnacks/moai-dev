@@ -1,10 +1,10 @@
 // swift-tools-version:5.9
 import PackageDescription
 
-let release = "2.0.2"
+let release = "2.0.3"
 let checksums: [String: String] = [
-    "MoaiSDK-Debug": "93440dbafb8e67584b2322ae46d699c3f0e91cdc4b3aecf4d4590df41b9ac58e",
-    "MoaiSDK-Release": "0e60d080346cd9fe2f21fd569562495dce04fe9c3769152ca0b9d6670fa37eb2",
+    "MoaiSDK-Debug": "55b4f26808baada28e7ca70f335c5b9a93c297c57ce9c20b37df10f9384fecea",
+    "MoaiSDK-Release": "48e192f2e9a2b5f662d83238ab7d294194700ac9d733d6beb648928ed178bd7a",
 ]
 
 let package = Package(
