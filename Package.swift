@@ -3,8 +3,8 @@ import PackageDescription
 
 let release = "2.0.3"
 let checksums: [String: String] = [
-    "MoaiSDK-Debug": "6008c203148f29ce4deaf6fa372a0fc4e0f54774951c8b851067cfc870e12c59",
-    "MoaiSDK-Release": "5d425ed0fadbebe93e37a564f416dc0e9e4369768f348483285b48b2e3733079",
+    "MoaiSDK-Debug": "1aeb7b7e498d6f81732fdd162428766d35e05dac48e0c574359626f75d79f45f",
+    "MoaiSDK-Release": "faae0f8d7ddaa62691f74bb2b4a5c37ea925ccd81da4e9ba145ab76ace640456",
 ]
 
 let package = Package(
