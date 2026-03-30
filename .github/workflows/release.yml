@@ -61,7 +61,7 @@ jobs:
           git add Package.swift
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Update Package.swift for ${version}"
-          git push
+          git push origin HEAD:mindsnacks-dev
 
   android:
     runs-on: ${{ vars.LINUX_RUNNER }}
@@ -93,6 +93,7 @@ jobs:
             cp "ant/libmoai/libs/$abi/libmoai.so" "$staging/lib/$abi/"
           done
 
+          mkdir -p "$staging/include/src" "$staging/include/3rdparty"
           rsync -a --include='*/' --include='*.h' --exclude='*' src/ "$staging/include/src/"
           rsync -a --include='*/' --include='*.h' --exclude='*' 3rdparty/ "$staging/include/3rdparty/"
 
