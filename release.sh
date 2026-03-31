@@ -5,8 +5,8 @@ usage() {
 	echo >&2 "usage: $0 <version>"
 	echo >&2 "  version  Release version (e.g. 2.0.3)"
 	echo >&2 ""
-	echo >&2 "Builds all release artifacts, updates Package.swift,"
-	echo >&2 "commits, tags, pushes, creates a GitHub release, and uploads assets."
+	echo >&2 "Builds all release artifacts, creates a GitHub release,"
+	echo >&2 "then updates Package.swift with checksums from the uploaded assets."
 	exit 1
 }
 
@@ -18,6 +18,8 @@ version="$1"
 tag="v${version}"
 repo_root="$(cd "$(dirname "$0")" && pwd)"
 build_dir="$repo_root/build"
+repo_name="$(gh repo view --json nameWithOwner --jq .nameWithOwner)"
+
 
 # Preflight checks
 for cmd in gh xcodebuild ndk-build rsync zip shasum; do
@@ -47,8 +49,12 @@ echo "Building Apple XCFrameworks..."
 bash "$repo_root/xcode/libmoai/build-xcframework.sh" -d "$build_dir"
 
 echo ""
-echo "Zipping XCFrameworks and updating Package.swift..."
-bash "$repo_root/xcode/libmoai/update-package-swift.sh" "$version" "$build_dir"
+echo "Zipping XCFrameworks..."
+for xcf in "$build_dir"/MoaiSDK-*.xcframework; do
+	name=$(basename "$xcf" .xcframework)
+	(cd "$build_dir" && zip -r "${name}.zip" "$(basename "$xcf")")
+	echo "  $build_dir/${name}.zip"
+done
 
 # --- Android ---
 echo ""
@@ -71,16 +77,8 @@ rsync -a --include='*/' --include='*.h' --exclude='*' "$repo_root/3rdparty/" "$s
 
 (cd "$build_dir" && zip -r MoaiSDK-Android.zip MoaiSDK-Android)
 
-# --- Commit, tag, push ---
+# --- Tag and push ---
 echo ""
-echo "Committing Package.swift..."
-git -C "$repo_root" add Package.swift
-if git -C "$repo_root" diff --cached --quiet; then
-	echo "  No changes to Package.swift (already up to date)"
-else
-	git -C "$repo_root" commit -m "Update Package.swift for ${version}"
-fi
-
 echo "Tagging ${tag}..."
 git -C "$repo_root" tag -f "$tag"
 
