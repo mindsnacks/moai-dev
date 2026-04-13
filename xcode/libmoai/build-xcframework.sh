@@ -113,18 +113,18 @@ for config in $configurations; do
 		build_scheme "$scheme" "iphoneos" "$config" "arm64"
 	done
 
-	# Build all schemes for iOS simulator (arm64 + x86_64)
+	# Build all schemes for iOS simulator (arm64)
 	echo ""
-	echo "Building for iOS Simulator (arm64, x86_64)..."
+	echo "Building for iOS Simulator (arm64)..."
 	for scheme in $ios_schemes; do
-		build_scheme "$scheme" "iphonesimulator" "$config" "arm64 x86_64"
+		build_scheme "$scheme" "iphonesimulator" "$config" "arm64"
 	done
 
-	# Build all schemes for macOS (arm64 + x86_64)
+	# Build all schemes for macOS (arm64)
 	echo ""
-	echo "Building for macOS (arm64, x86_64)..."
+	echo "Building for macOS (arm64)..."
 	for scheme in $osx_schemes; do
-		build_scheme "$scheme" "macosx" "$config" "arm64 x86_64"
+		build_scheme "$scheme" "macosx" "$config" "arm64"
 	done
 
 	echo ""
