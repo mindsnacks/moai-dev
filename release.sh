@@ -58,6 +58,15 @@ if ! gh auth status &>/dev/null; then
 	exit 1
 fi
 
+if $build_android; then
+	token_scopes="$(curl -s -I -H "Authorization: token $(gh auth token)" https://api.github.com | grep -i '^x-oauth-scopes:' | tr -d '\r')"
+	if ! echo "$token_scopes" | grep -q 'write:packages'; then
+		echo >&2 "error: GitHub token is missing 'write:packages' scope."
+		echo >&2 "Run: gh auth refresh --scopes write:packages"
+		exit 1
+	fi
+fi
+
 if [ -n "$(git status --porcelain)" ]; then
 	echo >&2 "error: working tree is not clean. Commit or stash changes first."
 	exit 1
