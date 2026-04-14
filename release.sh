@@ -119,7 +119,7 @@ if $build_apple; then
 	echo ""
 	echo "Updating Package.swift..."
 
-	sed -i '' "s/let release = \"[^\"]*\"/let release = \"${version}\"/" "$repo_root/Package.swift"
+	sed -i '' "s/let release = \"[^\"]*\"/let release = \"${tag}\"/" "$repo_root/Package.swift"
 
 	for xcf in "$build_dir"/MoaiSDK-*.xcframework; do
 		name=$(basename "$xcf" .xcframework)
