@@ -114,6 +114,24 @@ if $build_android; then
 	(cd "$build_dir" && zip -r MoaiSDK-Android.zip MoaiSDK-Android)
 fi
 
+# --- Update Package.swift ---
+if $build_apple; then
+	echo ""
+	echo "Updating Package.swift..."
+
+	sed -i '' "s/let release = \"[^\"]*\"/let release = \"${version}\"/" "$repo_root/Package.swift"
+
+	for xcf in "$build_dir"/MoaiSDK-*.xcframework; do
+		name=$(basename "$xcf" .xcframework)
+		checksum=$(shasum -a 256 "$build_dir/${name}.zip" | awk '{print $1}')
+		sed -i '' "s/\"${name}\": \"[^\"]*\"/\"${name}\": \"${checksum}\"/" "$repo_root/Package.swift"
+		echo "  ${name}: ${checksum}"
+	done
+
+	git -C "$repo_root" add Package.swift
+	git -C "$repo_root" commit -m "Update Package.swift for ${tag}"
+fi
+
 # --- Tag and push ---
 echo ""
 echo "Tagging ${tag}..."
