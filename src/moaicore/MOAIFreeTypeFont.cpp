@@ -590,7 +590,7 @@ USRect MOAIFreeTypeFont::DimensionsOfLine(cc8 *text, float fontSize, FT_Vector *
 	// Gather up the positions of each glyph
 	FT_Int penX = 0, penY = 0;
 	
-	for (size_t n = 0; n < maxGlyphs; ) {
+	for (size_t n = 0; numGlyphs < maxGlyphs; numGlyphs++) {
 		FT_UInt glyphIndex;
 		
 		int idx = (int)n;
@@ -625,7 +625,6 @@ USRect MOAIFreeTypeFont::DimensionsOfLine(cc8 *text, float fontSize, FT_Vector *
 		penX += glyphXAdvance;
 		
 		previousGlyphIndex = glyphIndex;
-		numGlyphs++;
 	}
 	
 	// compute the bounding box of the glyphs
@@ -1646,7 +1645,7 @@ MOAITexture* MOAIFreeTypeFont::RenderTextureSingleLine(cc8 *text, float fontSize
 	FT_UInt numGlyphs;
 	FT_Error error;
 	
-	const size_t maxGlyphs = strlen(text);
+	const size_t maxGlyphs = glyphsInText(text);
 	
 	FT_Int maxDescender;
 	FT_Int maxAscender;
