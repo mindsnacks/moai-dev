@@ -1,11 +1,16 @@
 // swift-tools-version:5.9
 import PackageDescription
 
-let release = "v2.0.6"
-let checksums: [String: String] = [
-    "MoaiSDK-Debug": "d7c13e03b6cfc9d575b8a63a82691e424ed523799f86fd1e01675f791db62c15",
-    "MoaiSDK-Release": "1518a2c38cd26b6a7f9a19bd7dc344c6c67090d4f193f219030b2fc51311b434",
-]
+// DEV OVERRIDE (metal-backend branch): both products resolve to the locally
+// built macOS xcframework produced by xcode/libmoai/build-dev-xcframework.sh.
+// Add this package directory to the Achilles workspace to override the
+// remote mindsnacks/moai-dev binary dependency while developing.
+//
+// Before releasing from this branch, restore the URL-based binaryTargets
+// (see the mindsnacks-dev version of this file); release.sh's checksum
+// patching expects that form.
+
+let devXCFramework = "xcode/libmoai/build-dev/MoaiSDK-Release.xcframework"
 
 let package = Package(
     name: "MoaiSDK",
@@ -16,13 +21,11 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "MoaiSDK-Debug",
-            url: "https://github.com/mindsnacks/moai-dev/releases/download/\(release)/MoaiSDK-Debug.zip",
-            checksum: checksums["MoaiSDK-Debug"]!
+            path: devXCFramework
         ),
         .binaryTarget(
             name: "MoaiSDK-Release",
-            url: "https://github.com/mindsnacks/moai-dev/releases/download/\(release)/MoaiSDK-Release.zip",
-            checksum: checksums["MoaiSDK-Release"]!
+            path: devXCFramework
         ),
     ]
 )
