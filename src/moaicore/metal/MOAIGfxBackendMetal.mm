@@ -325,12 +325,13 @@ struct MOAIMetalContext {
 		colorDesc.storageMode = MTLStorageModePrivate;
 		this->mCanvasColor = [ this->mDevice newTextureWithDescriptor:colorDesc ];
 
-		// GL default framebuffers come with depth (and usually stencil);
-		// give the canvas both so depth-tested content works
-		MTLTextureDescriptor* dsDesc = [ MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatDepth32Float_Stencil8 width:width height:height mipmapped:NO ];
-		dsDesc.usage = MTLTextureUsageRenderTarget;
-		dsDesc.storageMode = MTLStorageModePrivate;
-		this->mCanvasDepthStencil = [ this->mDevice newTextureWithDescriptor:dsDesc ];
+		// NO depth/stencil on the canvas: the host's MGLLayer never configured
+		// drawableDepthFormat/drawableStencilFormat, so the GL default
+		// framebuffer this replaces has no depth buffer and content depth
+		// tests are silently inert there (e.g. totem's 3D cubes render in
+		// painter's order). _applyDepth forces always-pass/no-write when the
+		// pass has no depth attachment, reproducing that exactly.
+		this->mCanvasDepthStencil = nil;
 
 		this->mCanvasWidth = width;
 		this->mCanvasHeight = height;
