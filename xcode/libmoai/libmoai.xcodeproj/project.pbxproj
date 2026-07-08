@@ -2273,6 +2273,30 @@
 		FAB1E0000000000000000C02 /* MOAIGfxBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F002 /* MOAIGfxBackend.h */; };
 		FAB1E0000000000000000C03 /* MOAIGfxBackendGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F003 /* MOAIGfxBackendGL.cpp */; };
 		FAB1E0000000000000000C04 /* MOAIGfxBackendGL.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F004 /* MOAIGfxBackendGL.h */; };
+		FAB1E000000000000000A11 /* MOAIGfxBackendMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F101 /* MOAIGfxBackendMetal.h */; };
+		FAB1E000000000000000A12 /* MOAIGfxBackendMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F102 /* MOAIGfxBackendMetal.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000A13 /* MOAIMetalPipelineCache.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F103 /* MOAIMetalPipelineCache.h */; };
+		FAB1E000000000000000A14 /* MOAIMetalPipelineCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F104 /* MOAIMetalPipelineCache.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000A15 /* MOAIMetalResources.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F105 /* MOAIMetalResources.h */; };
+		FAB1E000000000000000A16 /* MOAIMetalResources.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F106 /* MOAIMetalResources.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000A17 /* MOAIMetalRingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F107 /* MOAIMetalRingBuffer.h */; };
+		FAB1E000000000000000A18 /* MOAIMetalShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F108 /* MOAIMetalShaders.h */; };
+		FAB1E000000000000000B11 /* MOAIGfxBackendMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F101 /* MOAIGfxBackendMetal.h */; };
+		FAB1E000000000000000B12 /* MOAIGfxBackendMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F102 /* MOAIGfxBackendMetal.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000B13 /* MOAIMetalPipelineCache.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F103 /* MOAIMetalPipelineCache.h */; };
+		FAB1E000000000000000B14 /* MOAIMetalPipelineCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F104 /* MOAIMetalPipelineCache.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000B15 /* MOAIMetalResources.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F105 /* MOAIMetalResources.h */; };
+		FAB1E000000000000000B16 /* MOAIMetalResources.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F106 /* MOAIMetalResources.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000B17 /* MOAIMetalRingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F107 /* MOAIMetalRingBuffer.h */; };
+		FAB1E000000000000000B18 /* MOAIMetalShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F108 /* MOAIMetalShaders.h */; };
+		FAB1E000000000000000C11 /* MOAIGfxBackendMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F101 /* MOAIGfxBackendMetal.h */; };
+		FAB1E000000000000000C12 /* MOAIGfxBackendMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F102 /* MOAIGfxBackendMetal.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000C13 /* MOAIMetalPipelineCache.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F103 /* MOAIMetalPipelineCache.h */; };
+		FAB1E000000000000000C14 /* MOAIMetalPipelineCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F104 /* MOAIMetalPipelineCache.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000C15 /* MOAIMetalResources.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F105 /* MOAIMetalResources.h */; };
+		FAB1E000000000000000C16 /* MOAIMetalResources.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F106 /* MOAIMetalResources.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FAB1E000000000000000C17 /* MOAIMetalRingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F107 /* MOAIMetalRingBuffer.h */; };
+		FAB1E000000000000000C18 /* MOAIMetalShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F108 /* MOAIMetalShaders.h */; };
 		CDEFB3FF13E37F3C000A9523 /* MOAIGlyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDEFB3E413E37F3C000A9523 /* MOAIGlyph.cpp */; };
 		CDEFB40013E37F3C000A9523 /* MOAIGlyph.h in Headers */ = {isa = PBXBuildFile; fileRef = CDEFB3E513E37F3C000A9523 /* MOAIGlyph.h */; };
 		CDEFB40113E37F3C000A9523 /* MOAIGridSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDEFB3E613E37F3C000A9523 /* MOAIGridSpace.cpp */; };
@@ -4716,6 +4740,14 @@
 		FAB1E000000000000000F002 /* MOAIGfxBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxBackend.h; sourceTree = "<group>"; };
 		FAB1E000000000000000F003 /* MOAIGfxBackendGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGfxBackendGL.cpp; sourceTree = "<group>"; };
 		FAB1E000000000000000F004 /* MOAIGfxBackendGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxBackendGL.h; sourceTree = "<group>"; };
+		FAB1E000000000000000F101 /* MOAIGfxBackendMetal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxBackendMetal.h; sourceTree = "<group>"; };
+		FAB1E000000000000000F102 /* MOAIGfxBackendMetal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIGfxBackendMetal.mm; sourceTree = "<group>"; };
+		FAB1E000000000000000F103 /* MOAIMetalPipelineCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIMetalPipelineCache.h; sourceTree = "<group>"; };
+		FAB1E000000000000000F104 /* MOAIMetalPipelineCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIMetalPipelineCache.mm; sourceTree = "<group>"; };
+		FAB1E000000000000000F105 /* MOAIMetalResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIMetalResources.h; sourceTree = "<group>"; };
+		FAB1E000000000000000F106 /* MOAIMetalResources.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIMetalResources.mm; sourceTree = "<group>"; };
+		FAB1E000000000000000F107 /* MOAIMetalRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIMetalRingBuffer.h; sourceTree = "<group>"; };
+		FAB1E000000000000000F108 /* MOAIMetalShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIMetalShaders.h; sourceTree = "<group>"; };
 		CDEFB3E413E37F3C000A9523 /* MOAIGlyph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAIGlyph.cpp; path = ../../src/moaicore/MOAIGlyph.cpp; sourceTree = SOURCE_ROOT; };
 		CDEFB3E513E37F3C000A9523 /* MOAIGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIGlyph.h; path = ../../src/moaicore/MOAIGlyph.h; sourceTree = SOURCE_ROOT; };
 		CDEFB3E613E37F3C000A9523 /* MOAIGridSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGridSpace.cpp; sourceTree = "<group>"; };
@@ -6222,10 +6254,26 @@
 			name = grid;
 			sourceTree = "<group>";
 		};
+		FAB1E000000000000000F1A0 /* metal */ = {
+			isa = PBXGroup;
+			children = (
+				FAB1E000000000000000F101 /* MOAIGfxBackendMetal.h */,
+				FAB1E000000000000000F102 /* MOAIGfxBackendMetal.mm */,
+				FAB1E000000000000000F103 /* MOAIMetalPipelineCache.h */,
+				FAB1E000000000000000F104 /* MOAIMetalPipelineCache.mm */,
+				FAB1E000000000000000F105 /* MOAIMetalResources.h */,
+				FAB1E000000000000000F106 /* MOAIMetalResources.mm */,
+				FAB1E000000000000000F107 /* MOAIMetalRingBuffer.h */,
+				FAB1E000000000000000F108 /* MOAIMetalShaders.h */,
+			);
+			path = metal;
+			sourceTree = "<group>";
+		};
 		CD148EF51395AEA300A3F501 /* gfx */ = {
 			isa = PBXGroup;
 			children = (
 				CDEFB42D13E37FA6000A9523 /* shaders */,
+				FAB1E000000000000000F1A0 /* metal */,
 				07D1A89E13EDFD8300604979 /* MOAIBlendMode.cpp */,
 				07D1A89F13EDFD8300604979 /* MOAIBlendMode.h */,
 				0324E51013564BC7000ADC60 /* MOAIColor.cpp */,
@@ -7496,6 +7544,11 @@
 				CDEFB41513E37F3C000A9523 /* MOAIDraw.h in Headers */,
 				FAB1E0000000000000000B02 /* MOAIGfxBackend.h in Headers */,
 				FAB1E0000000000000000B04 /* MOAIGfxBackendGL.h in Headers */,
+				FAB1E000000000000000B11 /* MOAIGfxBackendMetal.h in Headers */,
+				FAB1E000000000000000B13 /* MOAIMetalPipelineCache.h in Headers */,
+				FAB1E000000000000000B15 /* MOAIMetalResources.h in Headers */,
+				FAB1E000000000000000B17 /* MOAIMetalRingBuffer.h in Headers */,
+				FAB1E000000000000000B18 /* MOAIMetalShaders.h in Headers */,
 				CDEFB41913E37F3C000A9523 /* MOAIGfxDevice.h in Headers */,
 				CDEFB41B13E37F3C000A9523 /* MOAIGlyph.h in Headers */,
 				CDEFB41D13E37F3C000A9523 /* MOAIGridSpace.h in Headers */,
@@ -8039,6 +8092,11 @@
 				CDEFB3FA13E37F3C000A9523 /* MOAIDraw.h in Headers */,
 				FAB1E0000000000000000A02 /* MOAIGfxBackend.h in Headers */,
 				FAB1E0000000000000000A04 /* MOAIGfxBackendGL.h in Headers */,
+				FAB1E000000000000000A11 /* MOAIGfxBackendMetal.h in Headers */,
+				FAB1E000000000000000A13 /* MOAIMetalPipelineCache.h in Headers */,
+				FAB1E000000000000000A15 /* MOAIMetalResources.h in Headers */,
+				FAB1E000000000000000A17 /* MOAIMetalRingBuffer.h in Headers */,
+				FAB1E000000000000000A18 /* MOAIMetalShaders.h in Headers */,
 				CDEFB3FE13E37F3C000A9523 /* MOAIGfxDevice.h in Headers */,
 				CDEFB40013E37F3C000A9523 /* MOAIGlyph.h in Headers */,
 				CDEFB40213E37F3C000A9523 /* MOAIGridSpace.h in Headers */,
@@ -8456,6 +8514,11 @@
 				EB9EDE271BE9421B00E8938F /* MOAIDraw.h in Headers */,
 				FAB1E0000000000000000C02 /* MOAIGfxBackend.h in Headers */,
 				FAB1E0000000000000000C04 /* MOAIGfxBackendGL.h in Headers */,
+				FAB1E000000000000000C11 /* MOAIGfxBackendMetal.h in Headers */,
+				FAB1E000000000000000C13 /* MOAIMetalPipelineCache.h in Headers */,
+				FAB1E000000000000000C15 /* MOAIMetalResources.h in Headers */,
+				FAB1E000000000000000C17 /* MOAIMetalRingBuffer.h in Headers */,
+				FAB1E000000000000000C18 /* MOAIMetalShaders.h in Headers */,
 				EB9EDE281BE9421B00E8938F /* MOAIGfxDevice.h in Headers */,
 				EB9EDE291BE9421B00E8938F /* MOAIGlyph.h in Headers */,
 				EB9EDE2A1BE9421B00E8938F /* MOAIGridSpace.h in Headers */,
@@ -9598,6 +9661,9 @@
 				CDEFB41413E37F3C000A9523 /* MOAIDraw.cpp in Sources */,
 				FAB1E0000000000000000B01 /* MOAIGfxBackend.cpp in Sources */,
 				FAB1E0000000000000000B03 /* MOAIGfxBackendGL.cpp in Sources */,
+				FAB1E000000000000000B12 /* MOAIGfxBackendMetal.mm in Sources */,
+				FAB1E000000000000000B14 /* MOAIMetalPipelineCache.mm in Sources */,
+				FAB1E000000000000000B16 /* MOAIMetalResources.mm in Sources */,
 				CDEFB41813E37F3C000A9523 /* MOAIGfxDevice.cpp in Sources */,
 				CDEFB41A13E37F3C000A9523 /* MOAIGlyph.cpp in Sources */,
 				CDEFB41C13E37F3C000A9523 /* MOAIGridSpace.cpp in Sources */,
@@ -10250,6 +10316,9 @@
 				CDEFB3F913E37F3C000A9523 /* MOAIDraw.cpp in Sources */,
 				FAB1E0000000000000000A01 /* MOAIGfxBackend.cpp in Sources */,
 				FAB1E0000000000000000A03 /* MOAIGfxBackendGL.cpp in Sources */,
+				FAB1E000000000000000A12 /* MOAIGfxBackendMetal.mm in Sources */,
+				FAB1E000000000000000A14 /* MOAIMetalPipelineCache.mm in Sources */,
+				FAB1E000000000000000A16 /* MOAIMetalResources.mm in Sources */,
 				CDEFB3FD13E37F3C000A9523 /* MOAIGfxDevice.cpp in Sources */,
 				CDEFB3FF13E37F3C000A9523 /* MOAIGlyph.cpp in Sources */,
 				CDEFB40113E37F3C000A9523 /* MOAIGridSpace.cpp in Sources */,
@@ -10667,6 +10736,9 @@
 				EB9EDF6B1BE9421B00E8938F /* MOAIDraw.cpp in Sources */,
 				FAB1E0000000000000000C01 /* MOAIGfxBackend.cpp in Sources */,
 				FAB1E0000000000000000C03 /* MOAIGfxBackendGL.cpp in Sources */,
+				FAB1E000000000000000C12 /* MOAIGfxBackendMetal.mm in Sources */,
+				FAB1E000000000000000C14 /* MOAIMetalPipelineCache.mm in Sources */,
+				FAB1E000000000000000C16 /* MOAIMetalResources.mm in Sources */,
 				EB9EDF6C1BE9421B00E8938F /* MOAIGfxDevice.cpp in Sources */,
 				EB9EDF6D1BE9421B00E8938F /* MOAIGlyph.cpp in Sources */,
 				EB9EDF6E1BE9421B00E8938F /* MOAIGridSpace.cpp in Sources */,

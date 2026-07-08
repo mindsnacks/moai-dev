@@ -18,6 +18,10 @@
 #include <moaicore/shaders/MOAIMeshShader-fsh.h>
 #include <moaicore/shaders/MOAIMeshShader-vsh.h>
 
+// MSL translations of the built-ins for the Metal backend (plain C strings;
+// stored on the shader unconditionally and ignored by the GL backend)
+#include <moaicore/metal/MOAIMetalShaders.h>
+
 //================================================================//
 // local
 //================================================================//
@@ -74,7 +78,8 @@ MOAIShader& MOAIShaderMgr::GetShader ( u32 shaderID ) {
 		switch ( shaderID ) {
 			
 			case DECK2D_SHADER:
-				
+
+				shader->SetSourceMSL ( _deck2DShaderVSHMSL, _deck2DShaderFSHMSL );
 				shader->SetSource ( _deck2DShaderVSH, _deck2DShaderFSH );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_POSITION, "position" );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_TEXCOORD, "uv" );
@@ -82,7 +87,8 @@ MOAIShader& MOAIShaderMgr::GetShader ( u32 shaderID ) {
 				break;
 			
 			case DECK2D_TEX_ONLY_SHADER:
-				
+
+				shader->SetSourceMSL ( _deck2DTexOnlyShaderVSHMSL, _deck2DTexOnlyShaderFSHMSL );
 				shader->SetSource ( _deck2DTexOnlyShaderVSH, _deck2DTexOnlyShaderFSH );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_POSITION, "position" );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_TEXCOORD, "uv" );
@@ -90,7 +96,8 @@ MOAIShader& MOAIShaderMgr::GetShader ( u32 shaderID ) {
 				break;
 			
 			case FONT_SHADER:
-				
+
+				shader->SetSourceMSL ( _fontShaderVSHMSL, _fontShaderFSHMSL );
 				shader->SetSource ( _fontShaderVSH, _fontShaderFSH );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_POSITION, "position" );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_TEXCOORD, "uv" );
@@ -98,7 +105,8 @@ MOAIShader& MOAIShaderMgr::GetShader ( u32 shaderID ) {
 				break;
 			
 			case LINE_SHADER:
-				
+
+				shader->SetSourceMSL ( _lineShaderVSHMSL, _lineShaderFSHMSL );
 				shader->SetSource ( _lineShaderVSH, _lineShaderFSH );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWC_POSITION, "position" );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWC_COLOR, "color" );
@@ -106,6 +114,7 @@ MOAIShader& MOAIShaderMgr::GetShader ( u32 shaderID ) {
 
 			case MESH_SHADER:
 
+				shader->SetSourceMSL ( _meshShaderVSHMSL, _meshShaderFSHMSL );
 				shader->SetSource ( _meshShaderVSH, _meshShaderFSH );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_POSITION, "position" );
 				shader->SetVertexAttribute ( MOAIVertexFormatMgr::XYZWUVC_TEXCOORD, "uv" );

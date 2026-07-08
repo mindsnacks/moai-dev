@@ -96,7 +96,11 @@ protected:
 	
 	STLString		mVertexShaderSource;
 	STLString		mFragmentShaderSource;
-	
+
+	// optional MSL sources for the Metal backend; ignored by the GL backend
+	STLString		mVertexShaderSourceMSL;
+	STLString		mFragmentShaderSourceMSL;
+
 	GLuint			mProgram;
 	GLuint			mVertexShader;
 	GLuint			mFragmentShader;
@@ -151,6 +155,7 @@ public:
 	void			ReserveAttributes		( u32 nAttributes );
 	void			ReserveUniforms			( u32 nUniforms );
 	void			SetSource				( cc8* vshSource, cc8* fshSource );
+	void			SetSourceMSL			( cc8* vshSource, cc8* fshSource );
 	void			SetVertexAttribute		( u32 idx, cc8* attribute );
 };
 

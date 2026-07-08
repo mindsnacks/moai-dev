@@ -7,6 +7,9 @@
 #include <cassert>
 #include <moaicore/moaicore.h>
 
+// C++-safe header; contents compiled only on Apple platforms
+#include <moaicore/metal/MOAIGfxBackendMetal.h>
+
 #define AKU_DEFINE_FUNC_CONTEXT(funcname) \
 AKU##funcname##Func m##funcname;
 
@@ -338,9 +341,15 @@ void AKUMetalSetLayer ( void* layer ) {
 void AKUSetGfxBackend ( int backend ) {
 
 	if ( backend == AKU_GFX_BACKEND_METAL ) {
-		// TODO: no Metal backend exists yet; fall back to OpenGL
-		USLog::Print ( "AKUSetGfxBackend: Metal backend not available; falling back to OpenGL\n" );
-		backend = AKU_GFX_BACKEND_OPENGL;
+
+		#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
+			gGfxBackend = backend;
+			MOAIGfx::Set ( new MOAIGfxBackendMetal ());
+			return;
+		#else
+			USLog::Print ( "AKUSetGfxBackend: Metal backend not available on this platform; falling back to OpenGL\n" );
+			backend = AKU_GFX_BACKEND_OPENGL;
+		#endif
 	}
 
 	gGfxBackend = backend;

@@ -14,6 +14,7 @@ private:
 
 	friend class MOAIVertexFormat;
 	friend class MOAIGfxBackendGL;
+	friend class MOAIGfxBackendMetal;
 
 	GLenum		mUse;
 	u32			mAttrID;
@@ -27,6 +28,7 @@ private:
 
 	friend class MOAIVertexFormat;
 	friend class MOAIGfxBackendGL;
+	friend class MOAIGfxBackendMetal;
 
 	GLint		mIndex;
 	GLint		mSize;
@@ -80,7 +82,8 @@ private:
 public:
 
 	friend class MOAIGfxDevice;
-	friend class MOAIGfxBackendGL;	// binds/unbinds the format around draw calls
+	friend class MOAIGfxBackendGL;		// binds/unbinds the format around draw calls
+	friend class MOAIGfxBackendMetal;	// snapshots the format into MTLVertexDescriptor layouts
 	
 	DECL_LUA_FACTORY ( MOAIVertexFormat )
 	

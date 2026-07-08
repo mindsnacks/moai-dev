@@ -470,16 +470,23 @@ int MOAIShader::_declareUniformSampler ( lua_State* L ) {
 	@in		MOAIShader self
 	@in		string vertexShaderSource
 	@in		string fragmentShaderSource
+	@opt	string vertexShaderSourceMSL		MSL vertex source for the Metal backend; ignored by the GL backend.
+	@opt	string fragmentShaderSourceMSL		MSL fragment source for the Metal backend; ignored by the GL backend.
 	@out	nil
 */
 int MOAIShader::_load ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIShader, "USS" )
-	
+
 	cc8* vtxSource	= state.GetValue < cc8* >( 2, 0 );
 	cc8* frgSource	= state.GetValue < cc8* >( 3, 0 );
-	
+
+	cc8* vtxSourceMSL	= state.GetValue < cc8* >( 4, 0 );
+	cc8* frgSourceMSL	= state.GetValue < cc8* >( 5, 0 );
+
+	// store the MSL sources first: SetSource may trigger the load
+	self->SetSourceMSL ( vtxSourceMSL, frgSourceMSL );
 	self->SetSource ( vtxSource, frgSource );
-	
+
 	return 0;
 }
 
@@ -654,10 +661,13 @@ void MOAIShader::OnBind () {
 
 //----------------------------------------------------------------//
 void MOAIShader::OnClear () {
-	
+
 	this->mVertexShaderSource.clear ();
 	this->mFragmentShaderSource.clear ();
-	
+
+	this->mVertexShaderSourceMSL.clear ();
+	this->mFragmentShaderSourceMSL.clear ();
+
 	this->mAttributeMap.clear ();
 	this->ClearUniforms ();
 }
@@ -687,8 +697,8 @@ void MOAIShader::OnCreate () {
 
 	desc.mVertexSource		= this->mVertexShaderSource;
 	desc.mFragmentSource	= this->mFragmentShaderSource;
-	desc.mVertexSourceMSL	= 0;
-	desc.mFragmentSourceMSL	= 0;
+	desc.mVertexSourceMSL	= this->mVertexShaderSourceMSL.size () ? this->mVertexShaderSourceMSL.str () : 0;
+	desc.mFragmentSourceMSL	= this->mFragmentShaderSourceMSL.size () ? this->mFragmentShaderSourceMSL.str () : 0;
 
 	desc.mAttributeCount	= attributeCount;
 	desc.mAttributeIndices	= attributeIndices;
@@ -798,6 +808,17 @@ void MOAIShader::SetSource ( cc8* vshSource, cc8* fshSource ) {
 		this->mVertexShaderSource = vshSource;
 		this->mFragmentShaderSource = fshSource;
 		this->Load ();
+	}
+}
+
+//----------------------------------------------------------------//
+// Store MSL sources for the Metal backend. Unlike SetSource this does not
+// trigger a load: call it BEFORE SetSource. The GL backend ignores these.
+void MOAIShader::SetSourceMSL ( cc8* vshSource, cc8* fshSource ) {
+
+	if ( vshSource && fshSource ) {
+		this->mVertexShaderSourceMSL = vshSource;
+		this->mFragmentShaderSourceMSL = fshSource;
 	}
 }
 
