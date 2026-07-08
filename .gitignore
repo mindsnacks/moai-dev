@@ -25,3 +25,4 @@ cmake_install.cmake
 src/moai/moai
 release
 tmp
+xcode/libmoai/build-dev/
