@@ -9,14 +9,6 @@
 //================================================================//
 
 //----------------------------------------------------------------//
-void MOAIBlendMode::Bind () {
-	
-	glEnable ( GL_BLEND );
-	glBlendEquation ( this->mEquation );
-	glBlendFunc ( this->mSourceFactor, this->mDestFactor );
-}
-
-//----------------------------------------------------------------//
 void MOAIBlendMode::GetBlendFactors ( u32 blend, int& srcFactor, int& dstFactor ) {
 
 	switch ( blend ) {

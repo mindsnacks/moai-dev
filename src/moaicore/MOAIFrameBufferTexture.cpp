@@ -2,6 +2,7 @@
 // http://getmoai.com
 
 #include "pch.h"
+#include <moaicore/MOAIGfxBackend.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAILogMessages.h>
 #include <moaicore/MOAIFrameBufferTexture.h>
@@ -108,53 +109,38 @@ void MOAIFrameBufferTexture::OnCreate () {
 	
 	this->mBufferWidth = this->mWidth;
 	this->mBufferHeight = this->mHeight;
-	
+
+	MOAIGfxResID colorTexture = 0;
+	MOAIGfxResID colorBuffer = 0;
+	MOAIGfxResID depthBuffer = 0;
+	MOAIGfxResID stencilBuffer = 0;
+	bool complete = false;
+
+	MOAIGfxResID frameBuffer = MOAIGfx::Get ().CreateFrameBuffer (
+		this->mWidth,
+		this->mHeight,
+		this->mColorFormat,
+		this->mDepthFormat,
+		this->mStencilFormat,
+		colorTexture,
+		colorBuffer,
+		depthBuffer,
+		stencilBuffer,
+		complete
+	);
+
 	// bail and retry (no error) if GL cannot generate buffer ID
-	glGenFramebuffers ( 1, &this->mGLFrameBufferID );
-	if ( !this->mGLFrameBufferID ) return;
-	
-	if ( this->mColorFormat ) {
-		glGenRenderbuffers( 1, &this->mGLColorBufferID );
-		glBindRenderbuffer ( GL_RENDERBUFFER, this->mGLColorBufferID );
-		glRenderbufferStorage ( GL_RENDERBUFFER, this->mColorFormat, this->mWidth, this->mHeight );
-	}
-	
-	if ( this->mDepthFormat ) {
-		glGenRenderbuffers ( 1, &this->mGLDepthBufferID );
-		glBindRenderbuffer ( GL_RENDERBUFFER, this->mGLDepthBufferID );
-		glRenderbufferStorage ( GL_RENDERBUFFER, this->mDepthFormat, this->mWidth, this->mHeight );
-	}
-	
-	if ( this->mStencilFormat ) {
-		glGenRenderbuffers ( 1, &this->mGLStencilBufferID );
-		glBindRenderbuffer ( GL_RENDERBUFFER, this->mGLStencilBufferID );
-		glRenderbufferStorage ( GL_RENDERBUFFER, this->mStencilFormat, this->mWidth, this->mHeight );
-	}
-	
-	glBindFramebuffer ( GL_FRAMEBUFFER, this->mGLFrameBufferID );
-	
-	if ( this->mGLColorBufferID ) {
-		glFramebufferRenderbuffer ( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, this->mGLColorBufferID );
-	}
-	
-	if ( this->mGLDepthBufferID ) {
-		glFramebufferRenderbuffer ( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this->mGLDepthBufferID );
-	}
-	
-	if ( this->mGLStencilBufferID ) {
-		glFramebufferRenderbuffer ( GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, this->mGLStencilBufferID );
-	}
-	
-	// TODO: handle error; clear
-	GLenum status = glCheckFramebufferStatus ( GL_FRAMEBUFFER );
-	
-	if ( status == GL_FRAMEBUFFER_COMPLETE ) {
-	
-		glGenTextures ( 1, &this->mGLTexID );
-		glBindTexture ( GL_TEXTURE_2D, this->mGLTexID );
-		glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGBA, this->mWidth, this->mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0 );
-		glFramebufferTexture2D ( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->mGLTexID, 0 );
-				
+	if ( !frameBuffer ) return;
+
+	this->mGLFrameBufferID		= ( GLuint )frameBuffer;
+	this->mGLColorBufferID		= ( GLuint )colorBuffer;
+	this->mGLDepthBufferID		= ( GLuint )depthBuffer;
+	this->mGLStencilBufferID	= ( GLuint )stencilBuffer;
+
+	if ( complete ) {
+
+		this->mGLTexID = ( GLuint )colorTexture;
+
 		// refresh tex params on next bind
 		this->mIsDirty = true;
 	}

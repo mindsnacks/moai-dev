@@ -119,73 +119,6 @@ int MOAIVertexFormat::_declareUV ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-bool MOAIVertexFormat::Bind ( void* buffer ) const {
-
-	if ( buffer ) {
-		if ( MOAIGfxDevice::Get ().IsProgrammable ()) {
-			this->BindProgrammable ( buffer );
-		}
-		else {
-			this->BindFixed ( buffer );
-		}
-		return true;
-	}
-	return false;
-}
-
-//----------------------------------------------------------------//
-void MOAIVertexFormat::BindFixed ( void* buffer ) const {
-
-#if USE_OPENGLES1
-	for ( u32 i = 0; i < TOTAL_ARRAY_TYPES; ++i ) {
-	
-		const MOAIVertexAttributeUse& attrUse = this->mAttributeUseTable [ i ];
-		
-		if ( attrUse.mAttrID == NULL_INDEX ) {
-			glDisableClientState ( attrUse.mUse );
-		}
-		else {
-		
-			MOAIVertexAttribute& attr = this->mAttributes [ attrUse.mAttrID ];
-			
-			void* addr = ( void* )(( size_t )buffer + attr.mOffset );
-			
-			switch ( attrUse.mUse ) {
-				case GL_COLOR_ARRAY:
-					glColorPointer ( attr.mSize, attr.mType, this->mVertexSize, addr );
-					break;
-				case GL_NORMAL_ARRAY:
-					glNormalPointer ( attr.mType, this->mVertexSize, addr );
-					break;
-				case GL_TEXTURE_COORD_ARRAY:
-					glTexCoordPointer ( attr.mSize, attr.mType, this->mVertexSize, addr );
-					break;
-				case GL_VERTEX_ARRAY:
-					glVertexPointer ( attr.mSize, attr.mType, this->mVertexSize, addr );
-					break;
-				default:
-					break;
-			}
-			glEnableClientState ( attrUse.mUse );
-		}
-	}
-#endif
-}
-
-//----------------------------------------------------------------//
-void MOAIVertexFormat::BindProgrammable ( void* buffer ) const {
-
-	for ( u32 i = 0; i < this->mTotalAttributes; ++i ) {
-		
-		MOAIVertexAttribute& attr = this->mAttributes [ i ];
-
-		void* addr = ( void* )(( size_t )buffer + attr.mOffset );
-		glVertexAttribPointer (	attr.mIndex, attr.mSize, attr.mType, attr.mNormalized, this->mVertexSize, addr );
-		glEnableVertexAttribArray ( attr.mIndex );
-	}
-}
-
-//----------------------------------------------------------------//
 bool MOAIVertexFormat::ComputeBounds ( void* buffer, u32 size, USBox& bounds ) {
 
 	u32 total = this->mVertexSize ? ( size / this->mVertexSize ) : 0;
@@ -342,35 +275,4 @@ void MOAIVertexFormat::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ NULL, NULL }
 	};
 	luaL_register ( state, 0, regTable );
-}
-
-//----------------------------------------------------------------//
-void MOAIVertexFormat::Unbind () const {
-
-	if ( MOAIGfxDevice::Get ().IsProgrammable ()) {
-		this->UnbindProgrammable ();
-	}
-	else {
-		this->UnbindFixed ();
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIVertexFormat::UnbindFixed () const {
-
-	#if USE_OPENGLES1
-		for ( u32 i = 0; i < TOTAL_ARRAY_TYPES; ++i ) {
-			glDisableClientState ( this->mAttributeUseTable [ i ].mUse );
-		}
-	#endif
-}
-
-//----------------------------------------------------------------//
-void MOAIVertexFormat::UnbindProgrammable () const {
-
-	for ( u32 i = 0; i < this->mTotalAttributes; ++i ) {
-		
-		MOAIVertexAttribute& attr = this->mAttributes [ i ];
-		glDisableVertexAttribArray ( attr.mIndex );
-	}
 }

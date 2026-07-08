@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <moaicore/MOAIColor.h>
 #include <moaicore/MOAIFrameBuffer.h>
+#include <moaicore/MOAIGfxBackend.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIImage.h>
 #include <moaicore/MOAILogMessages.h>
@@ -94,28 +95,20 @@ int MOAIClearableView::_setClearDepth ( lua_State* L ) {
 //----------------------------------------------------------------//
 void MOAIClearableView::ClearSurface () {
 
+	USColorVec clearColor;
+	clearColor.Set ( 0.0f, 0.0f, 0.0f, 0.0f );
+
 	if ( this->mClearFlags & GL_COLOR_BUFFER_BIT ) {
-	
-		USColorVec clearColor;
-		
+
 		if ( this->mClearColorNode ) {
 			clearColor = this->mClearColorNode->GetColorTrait ();
 		}
 		else {
 			clearColor.SetRGBA ( this->mClearColor );
 		}
-		
-		glClearColor (
-			clearColor.mR,
-			clearColor.mG,
-			clearColor.mB,
-			clearColor.mA
-		);
 	}
 
-	if ( this->mClearFlags ) {
-		glClear ( this->mClearFlags );
-	}
+	MOAIGfx::Get ().Clear ( this->mClearFlags, clearColor.mR, clearColor.mG, clearColor.mB, clearColor.mA );
 }
 
 //----------------------------------------------------------------//
@@ -266,23 +259,9 @@ void MOAIFrameBuffer::GrabImage ( MOAIImage* image ) {
 
 	unsigned char* buffer = ( unsigned char* ) malloc ( this->mBufferWidth * this->mBufferHeight * 4 );
 
-	glReadPixels ( 0, 0, this->mBufferWidth, this->mBufferHeight, GL_RGBA, GL_UNSIGNED_BYTE, buffer );
-
-	//image is flipped vertically, flip it back
-	int index,indexInvert;
-	for ( u32 y = 0; y < ( this->mBufferHeight / 2 ); ++y ) {
-		for ( u32 x = 0; x < this->mBufferWidth; ++x ) {
-			for ( u32 i = 0; i < 4; ++i ) {
-
-				index = i + ( x * 4 ) + ( y * this->mBufferWidth * 4 );
-				indexInvert = i + ( x * 4 ) + (( this->mBufferHeight - 1 - y ) * this->mBufferWidth * 4 );
-
-				unsigned char temp = buffer [ indexInvert ];
-				buffer [ indexInvert ] = buffer [ index ];
-				buffer [ index ] = temp;
-			}
-		}
-	}
+	// the backend delivers top-down rows; the GL implementation absorbs the
+	// bottom-up flip that used to live here
+	MOAIGfx::Get ().ReadPixelsRGBA8 ( this->mBufferWidth, this->mBufferHeight, buffer );
 
 	image->Init ( buffer, this->mBufferWidth, this->mBufferHeight, USColor::RGBA_8888 );
 	free ( buffer );

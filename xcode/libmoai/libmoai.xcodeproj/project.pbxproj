@@ -2261,6 +2261,18 @@
 		CDEFB3FA13E37F3C000A9523 /* MOAIDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = CDEFB3DF13E37F3C000A9523 /* MOAIDraw.h */; };
 		CDEFB3FD13E37F3C000A9523 /* MOAIGfxDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDEFB3E213E37F3C000A9523 /* MOAIGfxDevice.cpp */; };
 		CDEFB3FE13E37F3C000A9523 /* MOAIGfxDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = CDEFB3E313E37F3C000A9523 /* MOAIGfxDevice.h */; };
+		FAB1E0000000000000000A01 /* MOAIGfxBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F001 /* MOAIGfxBackend.cpp */; };
+		FAB1E0000000000000000A02 /* MOAIGfxBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F002 /* MOAIGfxBackend.h */; };
+		FAB1E0000000000000000A03 /* MOAIGfxBackendGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F003 /* MOAIGfxBackendGL.cpp */; };
+		FAB1E0000000000000000A04 /* MOAIGfxBackendGL.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F004 /* MOAIGfxBackendGL.h */; };
+		FAB1E0000000000000000B01 /* MOAIGfxBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F001 /* MOAIGfxBackend.cpp */; };
+		FAB1E0000000000000000B02 /* MOAIGfxBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F002 /* MOAIGfxBackend.h */; };
+		FAB1E0000000000000000B03 /* MOAIGfxBackendGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F003 /* MOAIGfxBackendGL.cpp */; };
+		FAB1E0000000000000000B04 /* MOAIGfxBackendGL.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F004 /* MOAIGfxBackendGL.h */; };
+		FAB1E0000000000000000C01 /* MOAIGfxBackend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F001 /* MOAIGfxBackend.cpp */; };
+		FAB1E0000000000000000C02 /* MOAIGfxBackend.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F002 /* MOAIGfxBackend.h */; };
+		FAB1E0000000000000000C03 /* MOAIGfxBackendGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F003 /* MOAIGfxBackendGL.cpp */; };
+		FAB1E0000000000000000C04 /* MOAIGfxBackendGL.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1E000000000000000F004 /* MOAIGfxBackendGL.h */; };
 		CDEFB3FF13E37F3C000A9523 /* MOAIGlyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDEFB3E413E37F3C000A9523 /* MOAIGlyph.cpp */; };
 		CDEFB40013E37F3C000A9523 /* MOAIGlyph.h in Headers */ = {isa = PBXBuildFile; fileRef = CDEFB3E513E37F3C000A9523 /* MOAIGlyph.h */; };
 		CDEFB40113E37F3C000A9523 /* MOAIGridSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDEFB3E613E37F3C000A9523 /* MOAIGridSpace.cpp */; };
@@ -4700,6 +4712,10 @@
 		CDEFB3DF13E37F3C000A9523 /* MOAIDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIDraw.h; sourceTree = "<group>"; };
 		CDEFB3E213E37F3C000A9523 /* MOAIGfxDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGfxDevice.cpp; sourceTree = "<group>"; };
 		CDEFB3E313E37F3C000A9523 /* MOAIGfxDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxDevice.h; sourceTree = "<group>"; };
+		FAB1E000000000000000F001 /* MOAIGfxBackend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGfxBackend.cpp; sourceTree = "<group>"; };
+		FAB1E000000000000000F002 /* MOAIGfxBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxBackend.h; sourceTree = "<group>"; };
+		FAB1E000000000000000F003 /* MOAIGfxBackendGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGfxBackendGL.cpp; sourceTree = "<group>"; };
+		FAB1E000000000000000F004 /* MOAIGfxBackendGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxBackendGL.h; sourceTree = "<group>"; };
 		CDEFB3E413E37F3C000A9523 /* MOAIGlyph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAIGlyph.cpp; path = ../../src/moaicore/MOAIGlyph.cpp; sourceTree = SOURCE_ROOT; };
 		CDEFB3E513E37F3C000A9523 /* MOAIGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIGlyph.h; path = ../../src/moaicore/MOAIGlyph.h; sourceTree = SOURCE_ROOT; };
 		CDEFB3E613E37F3C000A9523 /* MOAIGridSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGridSpace.cpp; sourceTree = "<group>"; };
@@ -6218,6 +6234,10 @@
 				0324E52A13564BC7000ADC60 /* MOAIDebugLines.h */,
 				CDEFB3DE13E37F3C000A9523 /* MOAIDraw.cpp */,
 				CDEFB3DF13E37F3C000A9523 /* MOAIDraw.h */,
+				FAB1E000000000000000F001 /* MOAIGfxBackend.cpp */,
+				FAB1E000000000000000F002 /* MOAIGfxBackend.h */,
+				FAB1E000000000000000F003 /* MOAIGfxBackendGL.cpp */,
+				FAB1E000000000000000F004 /* MOAIGfxBackendGL.h */,
 				CDEFB3E213E37F3C000A9523 /* MOAIGfxDevice.cpp */,
 				CDEFB3E313E37F3C000A9523 /* MOAIGfxDevice.h */,
 				CDF7130D141EBC5C00D650CA /* MOAIGfxResource.cpp */,
@@ -7474,6 +7494,8 @@
 				033B1E6313C4EC8A00CE21D2 /* MOAIActionMgr.h in Headers */,
 				03B2EC1713C503B400F8B3CF /* MOAIMotionSensor.h in Headers */,
 				CDEFB41513E37F3C000A9523 /* MOAIDraw.h in Headers */,
+				FAB1E0000000000000000B02 /* MOAIGfxBackend.h in Headers */,
+				FAB1E0000000000000000B04 /* MOAIGfxBackendGL.h in Headers */,
 				CDEFB41913E37F3C000A9523 /* MOAIGfxDevice.h in Headers */,
 				CDEFB41B13E37F3C000A9523 /* MOAIGlyph.h in Headers */,
 				CDEFB41D13E37F3C000A9523 /* MOAIGridSpace.h in Headers */,
@@ -8015,6 +8037,8 @@
 				033B1E6113C4EC8A00CE21D2 /* MOAIActionMgr.h in Headers */,
 				03B2EC1513C503B400F8B3CF /* MOAIMotionSensor.h in Headers */,
 				CDEFB3FA13E37F3C000A9523 /* MOAIDraw.h in Headers */,
+				FAB1E0000000000000000A02 /* MOAIGfxBackend.h in Headers */,
+				FAB1E0000000000000000A04 /* MOAIGfxBackendGL.h in Headers */,
 				CDEFB3FE13E37F3C000A9523 /* MOAIGfxDevice.h in Headers */,
 				CDEFB40013E37F3C000A9523 /* MOAIGlyph.h in Headers */,
 				CDEFB40213E37F3C000A9523 /* MOAIGridSpace.h in Headers */,
@@ -8430,6 +8454,8 @@
 				EB9EDE251BE9421B00E8938F /* MOAIActionMgr.h in Headers */,
 				EB9EDE261BE9421B00E8938F /* MOAIMotionSensor.h in Headers */,
 				EB9EDE271BE9421B00E8938F /* MOAIDraw.h in Headers */,
+				FAB1E0000000000000000C02 /* MOAIGfxBackend.h in Headers */,
+				FAB1E0000000000000000C04 /* MOAIGfxBackendGL.h in Headers */,
 				EB9EDE281BE9421B00E8938F /* MOAIGfxDevice.h in Headers */,
 				EB9EDE291BE9421B00E8938F /* MOAIGlyph.h in Headers */,
 				EB9EDE2A1BE9421B00E8938F /* MOAIGridSpace.h in Headers */,
@@ -9570,6 +9596,8 @@
 				B4352EAB1AA6CA0600E4AF3A /* MOAICCParticle.cpp in Sources */,
 				03B2EC1613C503B400F8B3CF /* MOAIMotionSensor.cpp in Sources */,
 				CDEFB41413E37F3C000A9523 /* MOAIDraw.cpp in Sources */,
+				FAB1E0000000000000000B01 /* MOAIGfxBackend.cpp in Sources */,
+				FAB1E0000000000000000B03 /* MOAIGfxBackendGL.cpp in Sources */,
 				CDEFB41813E37F3C000A9523 /* MOAIGfxDevice.cpp in Sources */,
 				CDEFB41A13E37F3C000A9523 /* MOAIGlyph.cpp in Sources */,
 				CDEFB41C13E37F3C000A9523 /* MOAIGridSpace.cpp in Sources */,
@@ -10220,6 +10248,8 @@
 				03B2EC1413C503B400F8B3CF /* MOAIMotionSensor.cpp in Sources */,
 				EB70430E187601CC0057E450 /* MOAIEaseElasticOut.cpp in Sources */,
 				CDEFB3F913E37F3C000A9523 /* MOAIDraw.cpp in Sources */,
+				FAB1E0000000000000000A01 /* MOAIGfxBackend.cpp in Sources */,
+				FAB1E0000000000000000A03 /* MOAIGfxBackendGL.cpp in Sources */,
 				CDEFB3FD13E37F3C000A9523 /* MOAIGfxDevice.cpp in Sources */,
 				CDEFB3FF13E37F3C000A9523 /* MOAIGlyph.cpp in Sources */,
 				CDEFB40113E37F3C000A9523 /* MOAIGridSpace.cpp in Sources */,
@@ -10635,6 +10665,8 @@
 				EB9EDF691BE9421B00E8938F /* MOAIMotionSensor.cpp in Sources */,
 				EB9EDF6A1BE9421B00E8938F /* MOAIEaseElasticOut.cpp in Sources */,
 				EB9EDF6B1BE9421B00E8938F /* MOAIDraw.cpp in Sources */,
+				FAB1E0000000000000000C01 /* MOAIGfxBackend.cpp in Sources */,
+				FAB1E0000000000000000C03 /* MOAIGfxBackendGL.cpp in Sources */,
 				EB9EDF6C1BE9421B00E8938F /* MOAIGfxDevice.cpp in Sources */,
 				EB9EDF6D1BE9421B00E8938F /* MOAIGlyph.cpp in Sources */,
 				EB9EDF6E1BE9421B00E8938F /* MOAIGridSpace.cpp in Sources */,

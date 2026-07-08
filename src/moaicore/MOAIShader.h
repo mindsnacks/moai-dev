@@ -10,9 +10,9 @@
 
 class MOAIColor;
 class MOAITransformBase;
-	
-#define		OPENGL_PREPROC		"#define LOWP\n #define MEDP\n #define HIGHP\n"
-#define		OPENGL_ES_PREPROC	"#define LOWP lowp\n #define MEDP mediump\n #define HIGHP highp\n"
+
+// NOTE: the OPENGL_PREPROC/OPENGL_ES_PREPROC shader source preamble now
+// lives in MOAIGfxBackendGL.cpp (it is GL-specific)
 
 //================================================================//
 // MOAIShaderUniform
@@ -117,10 +117,7 @@ protected:
 	static int		_setVertexAttribute		( lua_State* L );
 	
 	//----------------------------------------------------------------//
-	GLuint			CompileShader				( GLuint type,  cc8* source );
 	bool			IsRenewable					();
-	void			PrintProgramLog				( GLuint program );
-	void			PrintShaderLog				( GLuint shader );
 	void			OnBind						();
 	void			OnClear						();
 	void			OnCreate					();
@@ -129,7 +126,6 @@ protected:
 	void			OnLoad						();
 	void			UpdatePenColor				( float r, float g, float b, float a );
 	void			UpdatePipelineTransforms	( const USMatrix4x4& world, const USMatrix4x4& view, const USMatrix4x4& proj );
-	bool			Validate					();
 
 public:
 	

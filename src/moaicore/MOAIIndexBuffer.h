@@ -42,8 +42,9 @@ private:
 public:
 	
 	DECL_LUA_FACTORY ( MOAIIndexBuffer )
-	
+
 	GET ( u32, IndexCount, mIndexCount )
+	GET ( GLuint, GLBufferID, mGLBufferID )
 	
 	//----------------------------------------------------------------//
 	bool		LoadGfxState			();

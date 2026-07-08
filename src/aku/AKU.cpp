@@ -315,6 +315,39 @@ void AKUSetFrameBuffer ( unsigned int frameBuffer ) {
 }
 
 //----------------------------------------------------------------//
+// graphics backend selection. process-global; outlives AKU contexts.
+static int gGfxBackend = AKU_GFX_BACKEND_OPENGL;
+
+// layer pointer stored for the future Metal backend to read
+// (CAMetalLayer*); unused by the OpenGL backend.
+void* gAKUMetalLayer = 0;
+
+//----------------------------------------------------------------//
+int AKUGetGfxBackend () {
+
+	return gGfxBackend;
+}
+
+//----------------------------------------------------------------//
+void AKUMetalSetLayer ( void* layer ) {
+
+	gAKUMetalLayer = layer;
+}
+
+//----------------------------------------------------------------//
+void AKUSetGfxBackend ( int backend ) {
+
+	if ( backend == AKU_GFX_BACKEND_METAL ) {
+		// TODO: no Metal backend exists yet; fall back to OpenGL
+		USLog::Print ( "AKUSetGfxBackend: Metal backend not available; falling back to OpenGL\n" );
+		backend = AKU_GFX_BACKEND_OPENGL;
+	}
+
+	gGfxBackend = backend;
+	MOAIGfx::Set ( new MOAIGfxBackendGL ());
+}
+
+//----------------------------------------------------------------//
 void AKURender () {
 
 	MOAIRenderMgr::Get ().Render ();

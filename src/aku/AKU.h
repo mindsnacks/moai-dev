@@ -87,6 +87,16 @@ AKU_API int				AKUSetWorkingDirectory			( char const* path );
 AKU_API void			AKUUpdate						();
 AKU_API void			AKUSetArgv						( char **argv );
 
+// graphics backend api
+enum {
+	AKU_GFX_BACKEND_OPENGL,
+	AKU_GFX_BACKEND_METAL,
+};
+
+AKU_API void			AKUSetGfxBackend				( int backend );
+AKU_API int				AKUGetGfxBackend				();
+AKU_API void			AKUMetalSetLayer				( void* layer );
+
 // input device api
 AKU_API void			AKUReserveInputDevices			( int total );
 AKU_API void			AKUReserveInputDeviceSensors	( int deviceID, int total );

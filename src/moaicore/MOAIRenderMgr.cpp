@@ -2,6 +2,7 @@
 // http://getmoai.com
 
 #include "pch.h"
+#include <moaicore/MOAIGfxBackend.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIRenderMgr.h>
 
@@ -174,6 +175,8 @@ void MOAIRenderMgr::RegisterLuaFuncs ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 void MOAIRenderMgr::Render () {
 
+	MOAIGfx::Get ().BeginFrame ();
+
 	if (this->mPreRenderCallback) {
 		MOAILuaStateHandle state = this->mPreRenderCallback.GetSelf ();
 
@@ -187,11 +190,13 @@ void MOAIRenderMgr::Render () {
 		state.Push ( this->mBufferTable );
 		this->RenderTable ( state, -1 );
 		state.Pop ( 1 );
-	}	
-	
+	}
+
 	device.GetDefaultBuffer ()->Render ();
 	this->mLastDrawCount = MOAIGfxDevice::Get ().GetDrawCount ();
 	this->mRenderCounter++;
+
+	MOAIGfx::Get ().EndFrame ();
 }
 
 //----------------------------------------------------------------//

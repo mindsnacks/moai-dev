@@ -1,3 +1,6 @@
 ARCHS = $(NATIVE_ARCH_ACTUAL)
 VALID_ARCHS = i386 x86_64 arm64
 MACOSX_DEPLOYMENT_TARGET = 10.13
+
+// disable the GLES1 fixed-function code paths on desktop GL
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) USE_OPENGLES1=0

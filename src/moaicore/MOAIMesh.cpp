@@ -2,6 +2,7 @@
 // http://getmoai.com
 
 #include "pch.h"
+#include <moaicore/MOAIGfxBackend.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIGrid.h>
 #include <moaicore/MOAIIndexBuffer.h>
@@ -136,15 +137,17 @@ void MOAIMesh::DrawIndex ( u32 idx, float xOff, float yOff, float zOff, float xS
 		
 		gfxDevice.SetPenWidth ( this->mPenWidth );
 		gfxDevice.SetPointSize ( this->mPointSize );
-		
+
+		const MOAIVertexFormat& format = *this->mVertexBuffer->GetFormat ();
+
 		// TODO: use gfxDevice to cache buffers
 		if ( this->mIndexBuffer ) {
 			if ( this->mIndexBuffer->LoadGfxState ()) {
-				glDrawElements ( this->mPrimType, this->mIndexBuffer->GetIndexCount (), GL_UNSIGNED_SHORT, 0 );
+				MOAIGfx::Get ().DrawIndexed ( this->mPrimType, this->mIndexBuffer->GetIndexCount (), this->mIndexBuffer->GetGLBufferID (), format, this->mVertexBuffer->GetBuffer (), this->mVertexBuffer->GetSize ());
 			}
 		}
 		else {
-			glDrawArrays ( this->mPrimType, 0, this->mVertexBuffer->GetVertexCount ());
+			MOAIGfx::Get ().DrawArrays ( this->mPrimType, this->mVertexBuffer->GetVertexCount (), format, this->mVertexBuffer->GetBuffer (), this->mVertexBuffer->GetSize ());
 		}
 	}
 }

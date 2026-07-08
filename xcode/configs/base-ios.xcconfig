@@ -5,3 +5,6 @@ SDKROOT = iphoneos
 
 // Disable some noisy warnings
 GCC_WARN_64_TO_32_BIT_CONVERSION = NO
+
+// disable the GLES1 fixed-function code paths (ES2 contexts only)
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) USE_OPENGLES1=0

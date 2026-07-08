@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <moaicore/MOAIColor.h>
 #include <moaicore/MOAIEaseDriver.h>
+#include <moaicore/MOAIGfxBackend.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAILogMessages.h>
 #include <moaicore/MOAIShader.h>
@@ -45,37 +46,28 @@ void MOAIShaderUniform::AddValue ( const MOAIAttrOp& attrOp ) {
 void MOAIShaderUniform::Bind () {
 
 	if ( this->mIsDirty ) {
-		
+
 		this->mIsDirty = false;
 
 		switch ( this->mType ) {
-			
+
 			case UNIFORM_INT:
-				glUniform1i ( this->mAddr, this->mInt );
-				break;
-				
-			case UNIFORM_FLOAT:
-				glUniform1f ( this->mAddr, this->mFloat );
-				break;
-			
 			case UNIFORM_SAMPLER:
-				glUniform1i ( this->mAddr, this->mInt - 1 );
+				MOAIGfx::Get ().SetUniform ( this->mAddr, this->mType, &this->mInt );
 				break;
-			
+
+			case UNIFORM_FLOAT:
+				MOAIGfx::Get ().SetUniform ( this->mAddr, this->mType, &this->mFloat );
+				break;
+
 			case UNIFORM_COLOR:
 			case UNIFORM_PEN_COLOR:
-				glUniform4fv ( this->mAddr, 1, this->mBuffer );
-				break;
-			
 			case UNIFORM_NORMAL:
-				glUniformMatrix3fv ( this->mAddr, 1, false, this->mBuffer );
-				break;
-				
 			case UNIFORM_VIEW_PROJ:
 			case UNIFORM_WORLD:
 			case UNIFORM_WORLD_VIEW_PROJ:
 			case UNIFORM_TRANSFORM:
-				glUniformMatrix4fv ( this->mAddr, 1, false, this->mBuffer );
+				MOAIGfx::Get ().SetUniform ( this->mAddr, this->mType, ( const float* )this->mBuffer );
 				break;
 		}
 	}
@@ -580,34 +572,6 @@ void MOAIShader::ClearUniforms () {
 }
 
 //----------------------------------------------------------------//
-GLuint MOAIShader::CompileShader ( GLuint type, cc8* source ) {
-	
-	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
-
-	GLuint shader = glCreateShader ( type );
-	cc8* sources [ 2 ];
-
-	sources [ 0 ] = gfxDevice.IsOpenGLES () ? OPENGL_ES_PREPROC : OPENGL_PREPROC;
-	sources [ 1 ] = source;
-
-	glShaderSource ( shader, 2, sources, NULL );
-	glCompileShader ( shader );
-
-	this->PrintShaderLog ( shader );
-
-	GLint status;
-	glGetShaderiv ( shader, GL_COMPILE_STATUS, &status );
-
-	if ( status == 0 ) {
-		this->PrintShaderLog ( shader );
-		glDeleteShader ( shader );
-		return 0;
-	}
-
-	return shader;
-}
-
-//----------------------------------------------------------------//
 void MOAIShader::DeclareUniform ( u32 idx, cc8* name, u32 type ) {
 	
 	if ( idx < this->mUniforms.Size ()) {
@@ -680,7 +644,7 @@ MOAIShader::~MOAIShader () {
 void MOAIShader::OnBind () {
 
 	// use shader program.
-	glUseProgram ( this->mProgram );
+	MOAIGfx::Get ().UseProgram ( this->mProgram );
 
 	// reload the uniform values
 	for ( u32 i = 0; i < this->mUniforms.Size (); ++i ) {
@@ -701,54 +665,52 @@ void MOAIShader::OnClear () {
 //----------------------------------------------------------------//
 void MOAIShader::OnCreate () {
 
-	this->mVertexShader = this->CompileShader ( GL_VERTEX_SHADER, this->mVertexShaderSource );
-	this->mFragmentShader = this->CompileShader ( GL_FRAGMENT_SHADER, this->mFragmentShaderSource );
-	this->mProgram = glCreateProgram ();
-	
-	if ( !( this->mVertexShader && this->mFragmentShader && this->mProgram )) {
-		this->Clear ();
-		return;
-	}
-    
-	glAttachShader ( this->mProgram, this->mVertexShader );
-	glAttachShader ( this->mProgram, this->mFragmentShader );
-    
-	// bind attribute locations.
-	// this needs to be done prior to linking.
+	// assemble the program description for the backend; the backend compiles,
+	// applies the attribute bindings prior to linking, links and disposes of
+	// the intermediate shader objects
+	u32 attributeCount = ( u32 )this->mAttributeMap.size ();
+
+	USLeanArray < u32 > attributeIndices;
+	USLeanArray < cc8* > attributeNames;
+
+	attributeIndices.Init ( attributeCount );
+	attributeNames.Init ( attributeCount );
+
+	u32 attrIdx = 0;
 	AttributeMapIt attrMapIt = this->mAttributeMap.begin ();
-	for ( ; attrMapIt != this->mAttributeMap.end (); ++attrMapIt ) {
-		glBindAttribLocation ( this->mProgram, attrMapIt->first, attrMapIt->second.str ());
+	for ( ; attrMapIt != this->mAttributeMap.end (); ++attrMapIt, ++attrIdx ) {
+		attributeIndices [ attrIdx ] = attrMapIt->first;
+		attributeNames [ attrIdx ] = attrMapIt->second.str ();
 	}
-    
-    // link program.
-	glLinkProgram ( this->mProgram );
-	
-	this->PrintProgramLog ( this->mProgram );
-	
-	GLint status;
-	glGetProgramiv ( this->mProgram, GL_LINK_STATUS, &status );
-	
-	if ( status == 0 ) {
+
+	MOAIGfxShaderProgramDesc desc;
+
+	desc.mVertexSource		= this->mVertexShaderSource;
+	desc.mFragmentSource	= this->mFragmentShaderSource;
+	desc.mVertexSourceMSL	= 0;
+	desc.mFragmentSourceMSL	= 0;
+
+	desc.mAttributeCount	= attributeCount;
+	desc.mAttributeIndices	= attributeIndices;
+	desc.mAttributeNames	= attributeNames;
+
+	this->mProgram = ( GLuint )MOAIGfx::Get ().CreateProgram ( desc );
+
+	if ( !this->mProgram ) {
 		this->Clear ();
 		return;
 	}
-	
+
 	// get the uniform locations and clear out the names (no longer needed)
 	for ( u32 i = 0; i < this->mUniforms.Size (); ++i ) {
 		MOAIShaderUniform& uniform = this->mUniforms [ i ];
-		
+
 		if ( uniform.mType != MOAIShaderUniform::UNIFORM_NONE ) {
-			uniform.mAddr = glGetUniformLocation ( this->mProgram, uniform.mName );
+			uniform.mAddr = MOAIGfx::Get ().ResolveUniform ( this->mProgram, uniform.mName, uniform.mType );
 			uniform.mName.clear ();
 		}
 	}
 
-	glDeleteShader ( this->mVertexShader );
-	this->mVertexShader = 0;
-	
-	glDeleteShader ( this->mFragmentShader );
-	this->mFragmentShader = 0;
-	
 	//AJV TODO - does the attribute map ever need to be cleared?
 	//this->mAttributeMap.clear ();
 }
@@ -782,34 +744,6 @@ void MOAIShader::OnInvalidate () {
 
 //----------------------------------------------------------------//
 void MOAIShader::OnLoad () {
-}
-
-//----------------------------------------------------------------//
-void MOAIShader::PrintShaderLog ( GLuint shader ) {
-	
-	int logLength;
-	glGetShaderiv ( shader, GL_INFO_LOG_LENGTH, &logLength );
-	
-	if ( logLength > 1 ) {
-		char* log = ( char* )malloc ( logLength );
-		glGetShaderInfoLog ( shader, logLength, &logLength, log );
-		MOAILog ( 0, MOAILogMessages::MOAIShader_ShaderInfoLog_S, log );
-		free ( log );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIShader::PrintProgramLog ( GLuint shader ) {
-	
-	int logLength;
-	glGetProgramiv ( shader, GL_INFO_LOG_LENGTH, &logLength );
-	
-	if ( logLength > 1 ) {
-		char* log = ( char* )malloc ( logLength );
-		glGetProgramInfoLog ( shader, logLength, &logLength, log );
-		MOAILog ( 0, MOAILogMessages::MOAIShader_ShaderInfoLog_S, log );
-		free ( log );
-	}
 }
 
 //----------------------------------------------------------------//
@@ -891,27 +825,4 @@ void MOAIShader::UpdatePipelineTransforms ( const USMatrix4x4& world, const USMa
 	for ( u32 i = 0; i < this->mUniforms.Size (); ++i ) {
 		this->mUniforms [ i ].BindPipelineTransforms ( world, view, proj );
 	}
-}
-
-//----------------------------------------------------------------//
-bool MOAIShader::Validate () {
-
-    GLint logLength;
-    
-    glValidateProgram ( this->mProgram );
-    glGetProgramiv ( this->mProgram, GL_INFO_LOG_LENGTH, &logLength );
-	
-    if ( logLength > 0 ) {
-        char* log = ( char* )malloc ( logLength );
-        glGetProgramInfoLog ( this->mProgram, logLength, &logLength, log );
-        MOAILog ( 0, MOAILogMessages::MOAIShader_ShaderInfoLog_S, log );
-        free ( log );
-    }
-    
-	GLint status;
-    glGetProgramiv ( this->mProgram, GL_VALIDATE_STATUS, &status );
-    if ( status == 0 ) {
-		return false;
-	}
-	return true;
 }

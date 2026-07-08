@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <moaicore/MOAIDataBuffer.h>
 #include <moaicore/MOAIFrameBufferTexture.h>
+#include <moaicore/MOAIGfxBackend.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIImage.h>
 #include <moaicore/MOAILogMessages.h>
@@ -114,11 +115,6 @@ void MOAITextureBase::CreateTextureFromImage ( MOAIImage& image ) {
 		MOAILog ( 0, MOAILogMessages::MOAITexture_NonPowerOfTwo_SDD, ( cc8* )this->mDebugName, this->mWidth, this->mHeight );
 	}
 
-	glGenTextures ( 1, &this->mGLTexID );
-	if ( !this->mGLTexID ) return;
-
-	glBindTexture ( GL_TEXTURE_2D, this->mGLTexID );
-
 	USPixel::Format pixelFormat = image.GetPixelFormat ();
 	USColor::Format colorFormat = image.GetColorFormat ();
 
@@ -173,44 +169,34 @@ void MOAITextureBase::CreateTextureFromImage ( MOAIImage& image ) {
 		default: return;
 	}
 
-	glTexImage2D (
-		GL_TEXTURE_2D,
-		0,  
-		this->mGLInternalFormat,
-		this->mWidth,  
-		this->mHeight,  
-		0,
-		this->mGLInternalFormat,
-		this->mGLPixelType,  
-		image.GetBitmap ()
-	);
-	
+	MOAIGfxTextureDesc desc;
+
+	desc.mWidth				= this->mWidth;
+	desc.mHeight			= this->mHeight;
+	desc.mGLInternalFormat	= this->mGLInternalFormat;
+	desc.mGLPixelType		= this->mGLPixelType;
+	desc.mIsCompressed		= false;
+	desc.mHasMipmaps		= genMipMaps;
+
+	this->mGLTexID = ( GLuint )MOAIGfx::Get ().CreateTexture ( desc, image.GetBitmap (), image.GetBitmapSize ());
+	if ( !this->mGLTexID ) return;
+
 	this->mTextureSize = image.GetBitmapSize ();
-	
+
 	if ( MOAIGfxDevice::Get ().LogErrors ()) {
 		error = true;
 	}
 	else if ( genMipMaps ) {
-	
+
 		u32 mipLevel = 1;
-		
+
 		MOAIImage mipmap;
 		mipmap.Copy ( image );
-		
+
 		while ( mipmap.MipReduce ()) {
-			
-			glTexImage2D (
-				GL_TEXTURE_2D,
-				mipLevel++,  
-				this->mGLInternalFormat,
-				mipmap.GetWidth (),  
-				mipmap.GetHeight (),  
-				0,
-				this->mGLInternalFormat,
-				this->mGLPixelType,  
-				mipmap.GetBitmap ()
-			);
-			
+
+			MOAIGfx::Get ().UploadTextureMip ( this->mGLTexID, desc, mipLevel++, mipmap.GetWidth (), mipmap.GetHeight (), mipmap.GetBitmap (), mipmap.GetBitmapSize ());
+
 			if ( MOAIGfxDevice::Get ().LogErrors ()) {
 				error = true;
 				break;
@@ -218,15 +204,15 @@ void MOAITextureBase::CreateTextureFromImage ( MOAIImage& image ) {
 			this->mTextureSize += mipmap.GetBitmapSize ();
 		}
 	}
-	
+
 	if ( error ) {
 		this->mTextureSize = 0;
-		glDeleteTextures ( 1, &this->mGLTexID );
+		MOAIGfx::Get ().DeleteResource ( MOAIGfxDeleter::DELETE_TEXTURE, this->mGLTexID );
 		this->mGLTexID = 0;
 		this->Clear ();
 		return;
 	}
-	
+
 	if ( this->mGLTexID ) {
 		MOAIGfxDevice::Get ().ReportTextureAlloc ( this->mDebugName, this->mTextureSize );
 		this->mIsDirty = true;
@@ -323,31 +309,31 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 				break;
 			#endif
 		}
-		
-		
-		glGenTextures ( 1, &this->mGLTexID );
-		if ( !this->mGLTexID ) return;
 
-		glBindTexture ( GL_TEXTURE_2D, this->mGLTexID );
-		
+
+		MOAIGfxTextureDesc desc;
+
+		desc.mWidth				= header->mWidth;
+		desc.mHeight			= header->mHeight;
+		desc.mGLInternalFormat	= this->mGLInternalFormat;
+		desc.mGLPixelType		= this->mGLPixelType;
+		desc.mIsCompressed		= compressed;
+		desc.mHasMipmaps		= ( header->mMipMapCount != 0 );
+
 		this->mTextureSize = 0;
-		
+
 		int width = header->mWidth;
 		int height = header->mHeight;
 		char* imageData = (char*)(header->GetFileData ( data, size));
 		if ( header->mMipMapCount == 0 ) {
-			
+
 			GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * header->mBitCount / 8) );
 			this->mTextureSize += currentSize;
-			
-			if ( compressed ) {
-				glCompressedTexImage2D ( GL_TEXTURE_2D, 0, this->mGLInternalFormat, width, height, 0, currentSize, imageData );
-			}
-			else {
-				glTexImage2D( GL_TEXTURE_2D, 0, this->mGLInternalFormat, width, height, 0, this->mGLInternalFormat, this->mGLPixelType, imageData );	
-			}
-			
-			if ( glGetError () != 0 ) {
+
+			this->mGLTexID = ( GLuint )MOAIGfx::Get ().CreateTexture ( desc, imageData, currentSize );
+			if ( !this->mGLTexID ) return;
+
+			if ( MOAIGfx::Get ().GetError () != 0 ) {
 				this->Clear ();
 				return;
 			}
@@ -355,26 +341,27 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 		else {
 			for ( int level = 0; width > 0 && height > 0; ++level ) {
 				GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * header->mBitCount / 8) );
-			
-				if ( compressed ) {
-					glCompressedTexImage2D ( GL_TEXTURE_2D, level, this->mGLInternalFormat, width, height, 0, currentSize, imageData );
+
+				if ( level == 0 ) {
+					this->mGLTexID = ( GLuint )MOAIGfx::Get ().CreateTexture ( desc, imageData, currentSize );
+					if ( !this->mGLTexID ) return;
 				}
 				else {
-					glTexImage2D( GL_TEXTURE_2D, level, this->mGLInternalFormat, width, height, 0, this->mGLInternalFormat, this->mGLPixelType, imageData );
+					MOAIGfx::Get ().UploadTextureMip ( this->mGLTexID, desc, level, width, height, imageData, currentSize );
 				}
-				
-				if ( glGetError () != 0 ) {
+
+				if ( MOAIGfx::Get ().GetError () != 0 ) {
 					this->Clear ();
 					return;
 				}
-				
+
 				imageData += currentSize;
 				this->mTextureSize += currentSize;
-				
+
 				width >>= 1;
 				height >>= 1;
-			}	
-		}			
+			}
+		}
 
 		if ( this->mGLTexID ) {
 			MOAIGfxDevice::Get ().ReportTextureAlloc ( this->mDebugName, this->mTextureSize );
@@ -441,23 +428,25 @@ void MOAITextureBase::OnBind () {
 
 	if ( !this->mGLTexID ) return;
 
-	glBindTexture ( GL_TEXTURE_2D, this->mGLTexID );
-	
-	if ( this->mIsDirty ) {
-	
-		#if USE_OPENGLES1	
-			if ( !MOAIGfxDevice::Get ().IsProgrammable ()) {
-				glTexEnvf ( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-			}
-		#endif
+	// the unit was selected by MOAIGfxDevice::SetTexture before the resource
+	// state machine ran
+	u32 textureUnit = MOAIGfxDevice::Get ().mTextureUnitForBind;
 
-		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->mWrapS );
-		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this->mWrapT );
-		
-		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this->mMinFilter );
-		glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this->mMagFilter );
-		
+	if ( this->mIsDirty ) {
+
+		MOAIGfxSamplerDesc sampler;
+
+		sampler.mMinFilter	= this->mMinFilter;
+		sampler.mMagFilter	= this->mMagFilter;
+		sampler.mWrapS		= this->mWrapS;
+		sampler.mWrapT		= this->mWrapT;
+
+		MOAIGfx::Get ().BindTexture ( textureUnit, this->mGLTexID, &sampler );
+
 		this->mIsDirty = false;
+	}
+	else {
+		MOAIGfx::Get ().BindTexture ( textureUnit, this->mGLTexID, 0 );
 	}
 }
 
@@ -581,32 +570,29 @@ void MOAITextureBase::UpdateTextureFromImage ( MOAIImage& image, USIntRect rect 
 	// otherwise just update the sub-region
 	if ( this->mGLTexID ) {
 
-		glBindTexture ( GL_TEXTURE_2D, this->mGLTexID );
-
 		rect.Bless ();
 		USIntRect imageRect = image.GetRect ();
 		imageRect.Clip ( rect );
-		
+
 		void* buffer = image.GetBitmap ();
-		
+
 		if (( this->mWidth != ( u32 )rect.Width ()) || ( this->mHeight != ( u32 )rect.Height ())) {
 			u32 size = image.GetSubImageSize ( rect );
 			buffer = alloca ( size );
 			image.GetSubImage ( rect, buffer );
 		}
 
-		glTexSubImage2D (
-			GL_TEXTURE_2D,
-			0,
-			rect.mXMin,
-			rect.mYMin,
-			rect.Width (),
-			rect.Height (),
-			this->mGLInternalFormat,
-			this->mGLPixelType,  
-			buffer
-		);
-		
+		MOAIGfxTextureDesc desc;
+
+		desc.mWidth				= this->mWidth;
+		desc.mHeight			= this->mHeight;
+		desc.mGLInternalFormat	= this->mGLInternalFormat;
+		desc.mGLPixelType		= this->mGLPixelType;
+		desc.mIsCompressed		= false;
+		desc.mHasMipmaps		= false;
+
+		MOAIGfx::Get ().UpdateTextureRegion ( this->mGLTexID, desc, rect.mXMin, rect.mYMin, rect.Width (), rect.Height (), buffer );
+
 		MOAIGfxDevice::Get ().LogErrors ();
 	}
 	else {

@@ -774,7 +774,9 @@ void MOAICpSpace::DrawDebug () {
 
 		MOAIGfxDevice::Get ().SetTexture ();
 
-		glEnableClientState ( GL_VERTEX_ARRAY );
+		#if USE_OPENGLES1
+			glEnableClientState ( GL_VERTEX_ARRAY );
+		#endif
 		MOAICpDebugDraw::DrawSpace ( this->mSpace, &options );
 	}
 }

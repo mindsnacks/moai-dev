@@ -13,7 +13,8 @@ class MOAIVertexAttributeUse {
 private:
 
 	friend class MOAIVertexFormat;
-	
+	friend class MOAIGfxBackendGL;
+
 	GLenum		mUse;
 	u32			mAttrID;
 };
@@ -25,7 +26,8 @@ class MOAIVertexAttribute {
 private:
 
 	friend class MOAIVertexFormat;
-	
+	friend class MOAIGfxBackendGL;
+
 	GLint		mIndex;
 	GLint		mSize;
 	GLenum		mType;			// type of the element
@@ -71,19 +73,14 @@ private:
 	static int		_declareUV						( lua_State* L );
 	
 	//----------------------------------------------------------------//
-	bool			Bind							( void* buffer ) const;
-	void			BindFixed						( void* buffer ) const;
-	void			BindProgrammable				( void* buffer ) const;
 	static u32		GetComponentSize				( GLint size, GLenum type );
 	static u32		GetIndexForUse					( GLenum use );
 	static GLenum	GetUseForIndex					( u32 idx );
-	void			Unbind							() const;
-	void			UnbindFixed						() const;
-	void			UnbindProgrammable				() const;
-	
+
 public:
-	
+
 	friend class MOAIGfxDevice;
+	friend class MOAIGfxBackendGL;	// binds/unbinds the format around draw calls
 	
 	DECL_LUA_FACTORY ( MOAIVertexFormat )
 	

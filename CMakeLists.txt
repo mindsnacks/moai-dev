@@ -470,6 +470,8 @@ add_library(moai_dev SHARED
         src/moaicore/MOAIFrameBufferTexture.cpp
         src/moaicore/MOAIFreeTypeFont.cpp
         src/moaicore/MOAIFreeTypeFontReader.cpp
+        src/moaicore/MOAIGfxBackend.cpp
+        src/moaicore/MOAIGfxBackendGL.cpp
         src/moaicore/MOAIGfxDevice.cpp
         src/moaicore/MOAIGfxQuad2D.cpp
         src/moaicore/MOAIGfxQuadDeck2D.cpp

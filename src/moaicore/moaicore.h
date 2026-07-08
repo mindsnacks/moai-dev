@@ -75,6 +75,8 @@
 #include <moaicore/MOAIFrameBufferTexture.h>
 #include <moaicore/MOAIFreeTypeFont.h>
 #include <moaicore/MOAIFreeTypeFontReader.h>
+#include <moaicore/MOAIGfxBackend.h>
+#include <moaicore/MOAIGfxBackendGL.h>
 #include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIGfxQuad2D.h>
 #include <moaicore/MOAIGfxQuadDeck2D.h>

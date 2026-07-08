@@ -2,6 +2,8 @@
 // http://getmoai.com
 
 #include "pch.h"
+#include <moaicore/MOAIGfxBackend.h>
+#include <moaicore/MOAIGfxDevice.h>
 #include <moaicore/MOAIIndexBuffer.h>
 #include <moaicore/MOAILogMessages.h>
 
@@ -101,9 +103,7 @@ MOAIIndexBuffer::~MOAIIndexBuffer () {
 //----------------------------------------------------------------//
 void MOAIIndexBuffer::OnBind () {
 
-	if ( this->mGLBufferID ) {
-		glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, this->mGLBufferID );
-	}
+	// the index buffer is bound by the backend inside DrawIndexed
 }
 
 //----------------------------------------------------------------//
@@ -119,13 +119,8 @@ void MOAIIndexBuffer::OnClear () {
 void MOAIIndexBuffer::OnCreate () {
 
 	if ( this->mBuffer ) {
-		
-		glGenBuffers ( 1, &this->mGLBufferID );
-		if ( this->mGLBufferID ) {
-		
-			glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, this->mGLBufferID );
-			glBufferData ( GL_ELEMENT_ARRAY_BUFFER, this->mIndexCount * sizeof ( u16 ), this->mBuffer, this->mHint );
-		}
+
+		this->mGLBufferID = ( GLuint )MOAIGfx::Get ().CreateIndexBuffer ( this->mBuffer, this->mIndexCount );
 	}
 }
 
@@ -133,7 +128,7 @@ void MOAIIndexBuffer::OnCreate () {
 void MOAIIndexBuffer::OnDestroy () {
 
 	if ( this->mGLBufferID ) {
-		glDeleteBuffers ( 1, &this->mGLBufferID );
+		MOAIGfx::Get ().DeleteResource ( MOAIGfxDeleter::DELETE_BUFFER, this->mGLBufferID );
 		this->mGLBufferID = 0;
 	}
 }

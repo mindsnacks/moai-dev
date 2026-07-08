@@ -48,6 +48,16 @@ public:
 	GET ( MOAIVertexFormat*, Format, mFormat )
 	
 	//----------------------------------------------------------------//
+	// raw buffer access for the graphics backend draw calls
+	inline void* GetBuffer () {
+		return this->mBuffer;
+	}
+
+	inline size_t GetSize () {
+		return ( size_t )this->mStream.GetLength ();
+	}
+
+	//----------------------------------------------------------------//
 	bool			Bind					();
 	u32				GetVertexCount			();
 	bool			IsValid					();

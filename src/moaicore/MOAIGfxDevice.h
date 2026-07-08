@@ -138,6 +138,7 @@ private:
 	u32				mActiveTextures;
 	size_t			mTextureMemoryUsage;
 	u32				mMaxTextureSize;
+	u32				mTextureUnitForBind;	// unit being bound by SetTexture; read by MOAITextureBase::OnBind
 	u32				mTop;
 	
 	u32				mUVMtxInput;
