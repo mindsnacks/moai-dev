@@ -340,6 +340,11 @@ void AKUMetalSetLayer ( void* layer ) {
 //----------------------------------------------------------------//
 void AKUSetGfxBackend ( int backend ) {
 
+	// Idempotent: re-selecting the active backend keeps it (hosts recreate
+	// their game view per game load; replacing a live backend would destroy
+	// every GPU resource the engine still holds handles to).
+	if ( MOAIGfx::IsSet () && ( gGfxBackend == backend )) return;
+
 	if ( backend == AKU_GFX_BACKEND_METAL ) {
 
 		#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
