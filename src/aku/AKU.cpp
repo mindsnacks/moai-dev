@@ -319,7 +319,12 @@ void AKUSetFrameBuffer ( unsigned int frameBuffer ) {
 
 //----------------------------------------------------------------//
 // graphics backend selection. process-global; outlives AKU contexts.
-static int gGfxBackend = AKU_GFX_BACKEND_OPENGL;
+// Must match MOAIGfx::Get's lazy per-platform default.
+#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
+	static int gGfxBackend = AKU_GFX_BACKEND_METAL;
+#else
+	static int gGfxBackend = AKU_GFX_BACKEND_OPENGL;
+#endif
 
 // layer pointer stored for the future Metal backend to read
 // (CAMetalLayer*); unused by the OpenGL backend.
@@ -340,25 +345,32 @@ void AKUMetalSetLayer ( void* layer ) {
 //----------------------------------------------------------------//
 void AKUSetGfxBackend ( int backend ) {
 
+	#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
+		// OpenGL rendering (previously provided via MetalANGLE) is no longer
+		// supported on Apple platforms; Metal is the only backend.
+		if ( backend != AKU_GFX_BACKEND_METAL ) {
+			USLog::Print ( "AKUSetGfxBackend: OpenGL rendering is not supported on this platform; using Metal\n" );
+			backend = AKU_GFX_BACKEND_METAL;
+		}
+	#else
+		if ( backend == AKU_GFX_BACKEND_METAL ) {
+			USLog::Print ( "AKUSetGfxBackend: Metal backend not available on this platform; falling back to OpenGL\n" );
+			backend = AKU_GFX_BACKEND_OPENGL;
+		}
+	#endif
+
 	// Idempotent: re-selecting the active backend keeps it (hosts recreate
 	// their game view per game load; replacing a live backend would destroy
 	// every GPU resource the engine still holds handles to).
 	if ( MOAIGfx::IsSet () && ( gGfxBackend == backend )) return;
 
-	if ( backend == AKU_GFX_BACKEND_METAL ) {
-
-		#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
-			gGfxBackend = backend;
-			MOAIGfx::Set ( new MOAIGfxBackendMetal ());
-			return;
-		#else
-			USLog::Print ( "AKUSetGfxBackend: Metal backend not available on this platform; falling back to OpenGL\n" );
-			backend = AKU_GFX_BACKEND_OPENGL;
-		#endif
-	}
-
 	gGfxBackend = backend;
-	MOAIGfx::Set ( new MOAIGfxBackendGL ());
+
+	#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
+		MOAIGfx::Set ( new MOAIGfxBackendMetal ());
+	#else
+		MOAIGfx::Set ( new MOAIGfxBackendGL ());
+	#endif
 }
 
 //----------------------------------------------------------------//

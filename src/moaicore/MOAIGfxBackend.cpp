@@ -6,6 +6,10 @@
 #include <moaicore/MOAIGfxBackend.h>
 #include <moaicore/MOAIGfxBackendGL.h>
 
+#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
+	#include <moaicore/metal/MOAIGfxBackendMetal.h>
+#endif
+
 //================================================================//
 // MOAIGfx
 //================================================================//
@@ -20,10 +24,15 @@ namespace MOAIGfx {
 	//----------------------------------------------------------------//
 	MOAIGfxBackend& Get () {
 
-		// lazily install the OpenGL backend so all existing hosts keep
-		// working with zero changes
+		// Lazy default: native Metal on Apple platforms (OpenGL rendering,
+		// previously provided via MetalANGLE, is no longer supported there);
+		// OpenGL everywhere else (Android, desktop GL hosts).
 		if ( !sBackend ) {
-			sBackend = new MOAIGfxBackendGL ();
+			#if defined ( MOAI_OS_OSX ) || defined ( MOAI_OS_IPHONE )
+				sBackend = new MOAIGfxBackendMetal ();
+			#else
+				sBackend = new MOAIGfxBackendGL ();
+			#endif
 		}
 		return *sBackend;
 	}
