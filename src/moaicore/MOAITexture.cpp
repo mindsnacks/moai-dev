@@ -181,23 +181,31 @@ void MOAITexture::Init ( USStream& stream, u32 transform, cc8* debugname ) {
 	// if no image, check to see if the file is a PVR
 	if ( !this->mImage.IsOK ()) {
 		
-		MOAIPvrHeader header;
-		header.Load ( stream );
-		
-		// get file data, check if PVR		
-		if ( header.IsValid ()) {
-			
-			u32 size = (u32)header.GetTotalSize ();
-			
-			this->mData = malloc ( size );
-			this->mDataSize = size;		
-			
-			size = (u32)stream.ReadBytes ( this->mData, size );
-			
-			if ( size != this->mDataSize ) {
-				free ( this->mData );
-				this->mData = 0;
-				this->mDataSize = 0;
+		size_t cursor = stream.GetCursor ();
+		size_t length = stream.GetLength ();
+		if ( length != ( size_t )-1 && length >= cursor ) {
+			size_t size = length - cursor;
+			void* data = malloc ( size );
+			if ( data && stream.ReadBytes ( data, size ) == size ) {
+				MOAIPvrHeader::Info info;
+				if ( MOAIPvrHeader::GetInfo ( data, size, info )) {
+					this->mData = data;
+					this->mDataSize = size;
+				}
+			}
+			if ( !this->mData ) free ( data );
+		}
+		else {
+			MOAIPvrHeader header;
+			header.Load ( stream );
+			if ( header.IsValid ()) {
+				size_t size = header.GetTotalSize ();
+				void* data = malloc ( size );
+				if ( data && stream.ReadBytes ( data, size ) == size ) {
+					this->mData = data;
+					this->mDataSize = size;
+				}
+				if ( !this->mData ) free ( data );
 			}
 		}
 	}
@@ -307,7 +315,8 @@ void MOAITexture::OnLoad () {
 
 			stream.Close ();
 			
-			if ( MOAIPvrHeader::GetHeader ( data, size )) {
+			MOAIPvrHeader::Info info;
+			if ( MOAIPvrHeader::GetInfo ( data, size, info )) {
 				this->mData = data;
 				this->mDataSize = size;		
 			}
@@ -324,10 +333,10 @@ void MOAITexture::OnLoad () {
 	}
 	else if ( this->mData ) {
 	
-		MOAIPvrHeader* header = MOAIPvrHeader::GetHeader ( this->mData, this->mDataSize );
-		if ( header ) {
-			this->mWidth = header->mWidth;
-			this->mHeight = header->mHeight;
+		MOAIPvrHeader::Info info;
+		if ( MOAIPvrHeader::GetInfo ( this->mData, this->mDataSize, info )) {
+			this->mWidth = info.mWidth;
+			this->mHeight = info.mHeight;
 		}
 	}
 }
@@ -369,4 +378,3 @@ void MOAITexture::SerializeOut ( MOAILuaState& state, MOAISerializer& serializer
 	STLString path = USFileSys::GetRelativePath ( this->mFilename );
 	state.SetField ( -1, "mPath", path.str ());
 }
-

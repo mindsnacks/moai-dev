@@ -241,16 +241,20 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 		if ( !MOAIGfxDevice::Get ().GetHasContext ()) return;
 		MOAIGfxDevice::Get ().ClearErrors ();
 
-		MOAIPvrHeader* header = MOAIPvrHeader::GetHeader ( data, size );
-		if ( !header ) return;
+		MOAIPvrHeader::Info info;
+		if ( !MOAIPvrHeader::GetInfo ( data, size, info )) return;
 		
 		bool compressed = false;
 	
 		#ifdef MOAI_TEST_PVR
-		bool hasAlpha = header->mAlphaBitMask ? true : false;
+		bool hasAlpha = info.mAlphaBitMask ? true : false;
 		#endif
 		
-		switch ( header->mPFFlags & MOAIPvrHeader::PF_MASK ) {
+		if ( info.mIsPVR3 ) {
+			this->mGLInternalFormat = GL_RGBA;
+			this->mGLPixelType = GL_UNSIGNED_BYTE;
+		}
+		else switch ( info.mPFFlags & MOAIPvrHeader::PF_MASK ) {
 			
 			case MOAIPvrHeader::OGL_RGBA_4444:
 				compressed = false;
@@ -332,12 +336,12 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 		
 		this->mTextureSize = 0;
 		
-		int width = header->mWidth;
-		int height = header->mHeight;
-		char* imageData = (char*)(header->GetFileData ( data, size));
-		if ( header->mMipMapCount == 0 ) {
+		int width = info.mWidth;
+		int height = info.mHeight;
+		char* imageData = (char*)data + info.mDataOffset;
+		if ( info.mIsPVR3 || info.mMipMapCount == 0 ) {
 			
-			GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * header->mBitCount / 8) );
+			GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * info.mBitCount / 8) );
 			this->mTextureSize += currentSize;
 			
 			if ( compressed ) {
@@ -354,7 +358,7 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 		}
 		else {
 			for ( int level = 0; width > 0 && height > 0; ++level ) {
-				GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * header->mBitCount / 8) );
+				GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * info.mBitCount / 8) );
 			
 				if ( compressed ) {
 					glCompressedTexImage2D ( GL_TEXTURE_2D, level, this->mGLInternalFormat, width, height, 0, currentSize, imageData );
