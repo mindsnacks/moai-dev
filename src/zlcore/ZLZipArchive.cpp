@@ -9,9 +9,10 @@ using namespace std;
 
 #define SCAN_BUFFER_SIZE 256
 
-#define ARCHIVE_HEADER_SIGNATURE  0x06054b50
 #define ENTRY_HEADER_SIGNATURE  0x02014b50
 #define FILE_HEADER_SIGNATURE  0x04034b50
+
+static const char ARCHIVE_HEADER_SIGNATURE_BYTES [] = { 'P', 'K', 0x05, 0x06 };
 
 //================================================================//
 // ZLZipArchiveHeader
@@ -42,7 +43,7 @@ int ZLZipArchiveHeader::FindAndRead ( FILE* file ) {
 		for ( i = scansize - 4; i >= 0; --i ) {
 			
 			// maybe found it
-			if ( *( unsigned long* )&buffer [ i ] == ARCHIVE_HEADER_SIGNATURE ) {
+			if ( memcmp ( &buffer [ i ], ARCHIVE_HEADER_SIGNATURE_BYTES, 4 ) == 0 ) {
 
 				fseek ( file, cursor + i, SEEK_SET );
 				
