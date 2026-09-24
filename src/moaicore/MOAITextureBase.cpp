@@ -339,7 +339,7 @@ void MOAITextureBase::CreateTextureFromPVR ( void* data, size_t size ) {
 		int width = info.mWidth;
 		int height = info.mHeight;
 		char* imageData = (char*)data + info.mDataOffset;
-		if ( info.mIsPVR3 || info.mMipMapCount == 0 ) {
+		if ( info.mMipLevels <= 1 ) {
 			
 			GLsizei currentSize = (GLsizei) USFloat::Max ( (float)(32), (float)(width * height * info.mBitCount / 8) );
 			this->mTextureSize += currentSize;

@@ -14,7 +14,7 @@ public:
 	struct Info {
 		u32 mWidth;
 		u32 mHeight;
-		u32 mMipMapCount;
+		u32 mMipLevels;		// including the base level, so 1 means no mipmaps
 		u32 mPFFlags;
 		u32 mBitCount;
 		u32 mAlphaBitMask;
@@ -122,7 +122,7 @@ public:
 			if ( pvr2->mDataSize > size - HEADER_SIZE ) return false;
 			info.mWidth = pvr2->mWidth;
 			info.mHeight = pvr2->mHeight;
-			info.mMipMapCount = pvr2->mMipMapCount;
+			info.mMipLevels = pvr2->mMipMapCount + 1;
 			info.mPFFlags = pvr2->mPFFlags;
 			info.mBitCount = pvr2->mBitCount;
 			info.mAlphaBitMask = pvr2->mAlphaBitMask;
@@ -145,7 +145,7 @@ public:
 
 		info.mWidth = pvr3.mWidth;
 		info.mHeight = pvr3.mHeight;
-		info.mMipMapCount = 1;
+		info.mMipLevels = pvr3.mMipMapCount;
 		info.mPFFlags = 0;
 		info.mBitCount = 32;
 		info.mAlphaBitMask = 0xff000000;
