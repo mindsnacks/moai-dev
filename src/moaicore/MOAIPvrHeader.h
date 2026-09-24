@@ -40,7 +40,9 @@ public:
 	
 	static const u32 HEADER_SIZE		= 52;
 	static const u32 PVR_FILE_MAGIC		= 0x21525650; // 'P' 'V' 'R' '!'
-	static const u32 PVR3_FILE_MAGIC		= 0x03525650;
+	static const u32 PVR3_FILE_MAGIC	= 0x03525650; // 'P' 'V' 'R' 3
+	static const u64 PVR3_PF_RGBA8888	= 0x0808080861626772ULL; // 'r' 'g' 'b' 'a' 8 8 8 8
+	static const u32 PVR3_PREMULTIPLIED	= 0x02;
 	static const u32 PF_MASK			= 0xff;
 	
 	enum {
@@ -134,7 +136,8 @@ public:
 		PVR3Header pvr3;
 		memcpy ( &pvr3, data, HEADER_SIZE );
 		if ( pvr3.mVersion != PVR3_FILE_MAGIC ||
-			pvr3.mPixelFormat != 0x0808080861626772ULL ||
+			!( pvr3.mFlags & PVR3_PREMULTIPLIED ) ||
+			pvr3.mPixelFormat != PVR3_PF_RGBA8888 ||
 			pvr3.mColorSpace > 1 || pvr3.mChannelType != 0 ||
 			pvr3.mDepth != 1 || pvr3.mNumSurfs != 1 || pvr3.mNumFaces != 1 ||
 			pvr3.mMipMapCount != 1 || !pvr3.mWidth || !pvr3.mHeight ||
@@ -154,6 +157,26 @@ public:
 		return true;
 	}
 
+	//----------------------------------------------------------------//
+	// Size of the whole file described by the header at the start of data, or 0 if it isn't a loadable PVR.
+	static size_t GetFileSize ( const void* data, size_t size ) {
+		if ( !data || size < HEADER_SIZE ) return 0;
+
+		MOAIPvrHeader* pvr2 = GetHeader ( data, size );
+		if ( pvr2 ) return pvr2->GetTotalSize ();
+
+		PVR3Header pvr3;
+		memcpy ( &pvr3, data, HEADER_SIZE );
+		if ( pvr3.mVersion != PVR3_FILE_MAGIC || pvr3.mPixelFormat != PVR3_PF_RGBA8888 || !pvr3.mWidth || !pvr3.mHeight ) return 0;
+
+		size_t dataOffset = HEADER_SIZE + ( size_t )pvr3.mMetaDataSize;
+		if ( dataOffset < HEADER_SIZE ) return 0;
+		size_t maxPixels = (( size_t )-1 - dataOffset ) / 4;
+		if ( pvr3.mWidth > maxPixels / pvr3.mHeight ) return 0;
+		return dataOffset + ( size_t )pvr3.mWidth * pvr3.mHeight * 4;
+	}
+
+	//----------------------------------------------------------------//
 	MOAIPvrHeader () {
 		this->mPVR = 0;
 	}

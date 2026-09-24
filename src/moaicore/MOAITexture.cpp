@@ -181,31 +181,21 @@ void MOAITexture::Init ( USStream& stream, u32 transform, cc8* debugname ) {
 	// if no image, check to see if the file is a PVR
 	if ( !this->mImage.IsOK ()) {
 		
-		size_t cursor = stream.GetCursor ();
-		size_t length = stream.GetLength ();
-		if ( length != ( size_t )-1 && length >= cursor ) {
-			size_t size = length - cursor;
-			void* data = malloc ( size );
-			if ( data && stream.ReadBytes ( data, size ) == size ) {
-				MOAIPvrHeader::Info info;
-				if ( MOAIPvrHeader::GetInfo ( data, size, info )) {
-					this->mData = data;
-					this->mDataSize = size;
-				}
-			}
-			if ( !this->mData ) free ( data );
+		u8 header [ MOAIPvrHeader::HEADER_SIZE ];
+		size_t size = 0;
+		if ( stream.PeekBytes ( header, MOAIPvrHeader::HEADER_SIZE ) == MOAIPvrHeader::HEADER_SIZE ) {
+			size = MOAIPvrHeader::GetFileSize ( header, MOAIPvrHeader::HEADER_SIZE );
 		}
-		else {
-			MOAIPvrHeader header;
-			header.Load ( stream );
-			if ( header.IsValid ()) {
-				size_t size = header.GetTotalSize ();
-				void* data = malloc ( size );
-				if ( data && stream.ReadBytes ( data, size ) == size ) {
-					this->mData = data;
-					this->mDataSize = size;
-				}
-				if ( !this->mData ) free ( data );
+
+		if ( size ) {
+			void* data = malloc ( size );
+			MOAIPvrHeader::Info info;
+			if ( data && stream.ReadBytes ( data, size ) == size && MOAIPvrHeader::GetInfo ( data, size, info )) {
+				this->mData = data;
+				this->mDataSize = size;
+			}
+			else {
+				free ( data );
 			}
 		}
 	}
@@ -378,3 +368,4 @@ void MOAITexture::SerializeOut ( MOAILuaState& state, MOAISerializer& serializer
 	STLString path = USFileSys::GetRelativePath ( this->mFilename );
 	state.SetField ( -1, "mPath", path.str ());
 }
+
