@@ -4,14 +4,45 @@
 #ifndef MOAIPVRHEADER_H
 #define MOAIPVRHEADER_H
 
+#include <string.h>
+
 //================================================================//
 // MOAIPvrHeader
 //================================================================//
 class MOAIPvrHeader {
 public:
+	struct Info {
+		u32 mWidth;
+		u32 mHeight;
+		u32 mMipLevels;		// including the base level, so 1 means no mipmaps
+		u32 mPFFlags;
+		u32 mBitCount;
+		u32 mAlphaBitMask;
+		size_t mDataOffset;
+		bool mIsPVR3;
+	};
+
+	struct PVR3Header {
+		u32 mVersion;
+		u32 mFlags;
+		unsigned long long mPixelFormat;
+		u32 mColorSpace;
+		u32 mChannelType;
+		u32 mHeight;
+		u32 mWidth;
+		u32 mDepth;
+		u32 mNumSurfs;
+		u32 mNumFaces;
+		u32 mMipMapCount;
+		u32 mMetaDataSize;
+	};
+
 	
 	static const u32 HEADER_SIZE		= 52;
 	static const u32 PVR_FILE_MAGIC		= 0x21525650; // 'P' 'V' 'R' '!'
+	static const u32 PVR3_FILE_MAGIC	= 0x03525650; // 'P' 'V' 'R' 3
+	static const u64 PVR3_PF_RGBA8888	= 0x0808080861626772ULL; // 'r' 'g' 'b' 'a' 8 8 8 8
+	static const u32 PVR3_PREMULTIPLIED	= 0x02;
 	static const u32 PF_MASK			= 0xff;
 	
 	enum {
@@ -84,6 +115,67 @@ public:
 		return 0;
 	}
 	
+	//----------------------------------------------------------------//
+	static bool GetInfo ( const void* data, size_t size, Info& info ) {
+		if ( !data || size < HEADER_SIZE ) return false;
+
+		MOAIPvrHeader* pvr2 = GetHeader ( data, size );
+		if ( pvr2 ) {
+			if ( pvr2->mDataSize > size - HEADER_SIZE ) return false;
+			info.mWidth = pvr2->mWidth;
+			info.mHeight = pvr2->mHeight;
+			info.mMipLevels = pvr2->mMipMapCount + 1;
+			info.mPFFlags = pvr2->mPFFlags;
+			info.mBitCount = pvr2->mBitCount;
+			info.mAlphaBitMask = pvr2->mAlphaBitMask;
+			info.mDataOffset = HEADER_SIZE;
+			info.mIsPVR3 = false;
+			return true;
+		}
+
+		PVR3Header pvr3;
+		memcpy ( &pvr3, data, HEADER_SIZE );
+		if ( pvr3.mVersion != PVR3_FILE_MAGIC ||
+			!( pvr3.mFlags & PVR3_PREMULTIPLIED ) ||
+			pvr3.mPixelFormat != PVR3_PF_RGBA8888 ||
+			pvr3.mColorSpace > 1 || pvr3.mChannelType != 0 ||
+			pvr3.mDepth != 1 || pvr3.mNumSurfs != 1 || pvr3.mNumFaces != 1 ||
+			pvr3.mMipMapCount != 1 || !pvr3.mWidth || !pvr3.mHeight ||
+			pvr3.mMetaDataSize > size - HEADER_SIZE ) return false;
+
+		size_t dataOffset = HEADER_SIZE + pvr3.mMetaDataSize;
+		if ( pvr3.mWidth > ( size - dataOffset ) / 4 / pvr3.mHeight ) return false;
+
+		info.mWidth = pvr3.mWidth;
+		info.mHeight = pvr3.mHeight;
+		info.mMipLevels = pvr3.mMipMapCount;
+		info.mPFFlags = 0;
+		info.mBitCount = 32;
+		info.mAlphaBitMask = 0xff000000;
+		info.mDataOffset = dataOffset;
+		info.mIsPVR3 = true;
+		return true;
+	}
+
+	//----------------------------------------------------------------//
+	// Size of the whole file described by the header at the start of data, or 0 if it isn't a loadable PVR.
+	static size_t GetFileSize ( const void* data, size_t size ) {
+		if ( !data || size < HEADER_SIZE ) return 0;
+
+		MOAIPvrHeader* pvr2 = GetHeader ( data, size );
+		if ( pvr2 ) return pvr2->GetTotalSize ();
+
+		PVR3Header pvr3;
+		memcpy ( &pvr3, data, HEADER_SIZE );
+		if ( pvr3.mVersion != PVR3_FILE_MAGIC || pvr3.mPixelFormat != PVR3_PF_RGBA8888 || !pvr3.mWidth || !pvr3.mHeight ) return 0;
+
+		size_t dataOffset = HEADER_SIZE + ( size_t )pvr3.mMetaDataSize;
+		if ( dataOffset < HEADER_SIZE ) return 0;
+		size_t maxPixels = (( size_t )-1 - dataOffset ) / 4;
+		if ( pvr3.mWidth > maxPixels / pvr3.mHeight ) return 0;
+		return dataOffset + ( size_t )pvr3.mWidth * pvr3.mHeight * 4;
+	}
+
 	//----------------------------------------------------------------//
 	MOAIPvrHeader () {
 		this->mPVR = 0;
